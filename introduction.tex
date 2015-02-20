@@ -1,0 +1,27 @@
+\section{Introduction}
+
+Following the path introduced in \cite{clason2011duality,casas2012approximation}, we focus in this work on the optimal control problem
+\be
+\min_{q \in \M}J(y(q),q)=\frac{1}{2}\left(\norm{y - z_1}_{L^2(I\times \Omega_o)}^2+\|y(T)-z_2\|_{L^2(\Omega_o)}^2\right) + \alpha \norm{q}_{\M}
+\label{cost}
+\ee
+where $u$ is the solution of the Korteweg-de Vries-Burgers equation with Dirichlet boundary conditions on $\Omega = [0,L]$
+\begin{subequations}
+\begin{numcases}{}
+\partial_t y +\partial_x y + \partial_{xxx} y + y\partial_x y -\gamma \partial_{xx} y=  q \mbox{ in } I\times\Omega,\label{kdvcontrol1}\\
+y(.,0) = y(.,L) = \partial_x y (.,L) = 0\mbox{ in } I,\label{kdvcontrol2}\\
+y(0,.) = 0 \mbox{ in } \Omega\label{kdvcontrol3}.
+\end{numcases}
+\end{subequations}
+We consider that $\alpha > 0$ and $\gamma \geq 0$. Denoting by $I=[0,T]$ the time horizon considered, the control variable $q$ lies in the space of Borel measures with values in $L^2(I)$ that we will denote $\M$. A crucial feature of our mathematical analysis is based on the fact that this space can be identified with the topological dual of $C_{0}(\Omega,L^2(I))$ \cite{clason2011duality,casas2012approximation}, i.e. the space of continuous functions with compact support in $\Omega$ and values in $L^2(I)$. To give an insight, $\M$ is likely to contain functions of the type $u(t,x) = \sum_{i=1}^{N}{u_{i}(t)\delta_{x_{i}}(x)}$. But we want to stress that it does not include moving Dirac delta functions. Those functions would rather be elements of $L^2(I,\mathcal{M}(\Omega))$, with $\M \subset L^2(I,\mathcal{M}(\Omega))$. This setting has been studied already in the case of linear elliptic and parabolic equation \cite{pieper2013priori,clason2011duality,casas2012approximation} and is known to promote sparsity of the control while being analytically tractable, unlike what would provide an $L^1$ regularization term.
+
+The Korteweg-de Vries equation ($\gamma=0$ in \eqref{kdvcontrol1}) first appeared in 1895 in the context of water waves \cite{korteweg1895xli}. It was designed to model the evolution of long water waves in a channel of rectangular cross section when the effects of nonlinearity and dispersion balance. This phenomenon gives rise to the so-called solition, a solitary wave traveling at constant speed without losing its shape. Since then, many other applications were investigated that justify its intense study, and in particular, numerous works in environmental sciences but also life sciences - see \cite{dauxois2006physics,whitham2011linear,Crepeau2007594,yomosa1987} and the references therein. One that is of particular interest for us to motivate our work is the modeling of a flow over an obstacle \cite{milewski2004forced,shen1992forced,shen1996accuracy}, be it more particularly a water wave over rocks or an atmospheric flow over a topographic obstacle \cite{baines1997topographic}. In that case indeed, \eqref{kdvcontrol1} with $\gamma=0$ is the well-known forced Korteweg-de Vries equation, where the control $q$ shall be understood as the derivative of the topography under the flow. For the sake of generalization, we consider in this article that the effects of dissipation are also present, and that is why we study the whole Korteweg-de Vries-Burgers equation \cite{su2003korteweg}.
+
+Much work has been devoted to the derivation of both equations from Euler equations \cite{shen1992forced,constantin2008,su2003korteweg}, but also to the proof of their well-posedness in various contexts \cite{miura1976korteweg,kenig1993,bourgain1997periodic} - periodic domain, on the real line, bounded domain -, to their controllability \cite{rosier1997exact,glass2008some,coron2003exact,chapouly2009global}, or to the various methods to solve them efficiently numerically \cite{trefethen2000spectral,shen2003new,ma2000legendre}. But to the authors knowledge, optimal control of the Korteweg-de Vries-Burgers equation is still an open problem, especially in a sparsity promoting framework. From a mathematical point of view, the challenge is twofold: on the one hand we shall prove well-posedness of the forward problem in case of an irregular source term while on the other hand sparse optimal control of a nonlinear dispersive partial differential equation is also a novel question. Eventually, we point out that the quantities $y$, $x$, and $t$ can be rescaled to produce any desired coefficients for the terms of \eqref{kdvcontrol1} - \eqref{kdvcontrol3}. The choice we make here is convenient for the mathematical analysis of the problem.
+
+The outline is organized as follows. Section~\ref{secwellposedness} deals with the well-posedness of the optimal control problem in the space of measures. This includes a study of the forward PDE problem with irregular data but also the proof for the existence of an optimum. Section~\ref{secoptconditions} introduces the optimality conditions that will help solve the problem. Afterwards, we expose in Section~\ref{secnum} the various numerical strategies we adopt for either the simulation part or the optimization problem. We illustrate them with some numerical examples on the Korteweg-de Vries equation, from two points of view: an inverse problem - are we able to find the location and amplitude of a topographic bump from noisy observations ? -  and a control problem - is it possible to create a wave or make it vanish in finite time while acting on the topography ?
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "kdv.tex"
+%%% End:

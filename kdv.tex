@@ -1,0 +1,117 @@
+\documentclass[a4paper,10pt,reqno]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,dsfont}
+\usepackage[top = 3cm, bottom = 3cm, left = 2.5cm, right = 2.5cm]{geometry}
+\usepackage{graphicx}
+%\usepackage[notcite,notref]{showkeys}
+\usepackage{mathtools}
+\usepackage{cases}
+\usepackage{pgfplotstable}
+%MACROs
+
+
+
+\providecommand{\norm}[1]{\lVert#1\rVert}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+
+\def\beal{\begin{equation}\begin{aligned}}
+\def\eeal{\end{aligned}\end{equation}}
+
+\def\bea{\begin{equation*}\begin{aligned}}
+\def\eea{\end{aligned}\end{equation*}}
+
+\def\bealn{\begin{equation}\left\{\begin{aligned}}
+\def\eealn{\end{aligned}\right.\end{equation}}
+
+\def\bean{\begin{equation*}\left\{\begin{aligned}}
+\def\eean{\end{aligned}\right.\end{equation*}}
+
+\def\besn{\begin{subequations}\begin{numcases}{}}
+\def\eesn{\end{numcases}\end{subequations}}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+\providecommand{\megaabs}[1]{\left\lvert#1\right\rvert}
+\def\lspace{L^2(\Omega,L^2(I))}
+\def\M{\mathcal{M}_I}
+\def\C{\mathcal{C}_I}
+\def\R{\mathbb{R}}
+\def\B{\mathcal{B}}
+\def\Hm1{L^2(I,H^{-1}(\Omega))}
+\def\KdVB{Korteweg-de Vries-Burgers }
+\def\KdV{Korteweg-de Vries }
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+\def\bem{\begin{multline}}
+\def\endmult {\end{multline}}
+
+
+\newtheoremstyle{slplain}% name
+  {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space above
+  {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space below
+  {\itshape}% Body font
+  {}%Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}%  Thm head font
+  {.}%       Punctuation after thm head
+  { }%      Space after thm head: " " = normal interword space;
+        %       \newline = linebreak
+  {}%       Thm head spec
+
+
+\theoremstyle{slplain}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{Def}[thm]{Definition}
+\newtheorem{rmk}[thm]{Remark}
+
+
+% ===================================================================
+% Color
+% ===================================================================
+\usepackage{color}
+\definecolor{myorange}{rgb}{0.9568,0.4941,0.1961}
+\definecolor{myred}{rgb}{0.9098,0.1294,0.2078}
+\definecolor{myblue}{rgb}{0.0352,0.4981,0.6509}
+\definecolor{myhyperblue}{rgb}{0.1607,0.3922,0.9}
+\definecolor{mygreen}{rgb}{0.2235,0.6353,0.2588}
+\definecolor{mygrey}{rgb}{0.3,0.3,0.3}
+
+%====================================================================
+% HyperRef
+%====================================================================
+\usepackage{hyperref}
+\hypersetup{
+pdfborder=0 0 0,
+colorlinks=true,
+linkcolor=mygrey,
+citecolor=myhyperblue
+}
+
+
+%opening
+\title[Sparse optimal control of the KdVB equation]{Sparse optimal control of the Korteweg-de Vries-Burgers equation on a bounded domain}
+\author{Anne-Celine Boulanger, Philip Trautmann, Boris Vexler}
+
+\begin{document}
+
+\maketitle
+
+\input{introduction}
+
+\input{wellposedness}
+
+\input{optimalityconditions}
+
+\input{numerics}
+
+\input{appendix}
+
+\bibliographystyle{plain}
+\bibliography{kdvbib}
+\end{document}
+
+%%% Local Variables:
+%%% TeX-master: t
+%%% End: 

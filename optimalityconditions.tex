@@ -1,0 +1,313 @@
+%!TEX root = kdv.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{First order optimality conditions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{secoptconditions}
+For any $y_0\in L^2(\Omega)$  we introduce the non-linear control to state operator
+\[
+  S\colon Q_{ad}\subset \M\rightarrow \mathcal B,~~q\mapsto y
+\]
+where $y=\mathcal L(q-y\partial_xy,y_0)$ and discuss its differentiability.
+\begin{prop}
+  The control to state operator $S$ is continuously Fr\'echet-differentiable. Its derivative
+  \[
+  S'(q)\colon \M\rightarrow \mathcal B,~\delta q\mapsto
+  \delta y
+  \]
+  at $q\in Q_{ad}$ is the solution operator of the linear tangent equation
+  \begin{subequations}
+   \begin{numcases}{}
+      \partial_t \delta y +\partial_x \delta y -\gamma \partial_{xx} \delta y+ \partial_{xxx} \delta y + \partial_x (y \delta y)=\delta q \mbox{ in } \Omega,  \label{linearizedkdv1}\\
+      \delta y(.,0) = \delta y(.,L) = \partial_x \delta y (.,L) = 0 \mbox{ in } \Gamma,  \label{linearizedkdv2}\\
+      \delta y(0,.) = 0 \mbox{ on } \Omega  \label{linearizedkdv3}.
+   \end{numcases}
+  \end{subequations}
+  \label{propfrechet}
+\end{prop}
+\begin{proof}[Proof of Proposition~\ref{propfrechet}]
+We differentiate the fixed point equation $y=\mathcal L(q-y\partial_x y,y_0)$ with respect to $q$ in direction $\delta q\in\M$ and get
+\be\label{abstract_tangent_equation}
+\delta y=\mathcal L'(\delta q-\partial_x(y\delta y))
+\ee
+where $\mathcal L'(\cdot)=\mathcal L(\cdot,0)$. In the Appendix~\ref{appendixtangent} it is shown that \eqref{abstract_tangent_equation} has unique solution $\delta y\in \mathcal B$.  Actually $\delta y$ is the weak solution of \eqref{linearizedkdv1}-\eqref{linearizedkdv3} in the sense of \eqref{weakformkdv}. Next we show that $S'(q)\delta q:=\delta y$ is the Frechet derivative of $S$. This will result from the study of
+\[
+\frac{1}{\norm{\delta q}_{\M}} \norm{S(q + \delta q) - S(q)  -S'(q)\delta q}_{\mathcal B} = \frac{1}{\norm{\delta q}_{\M}} \norm{\tilde{y} - y  -\delta y}_{\mathcal B}.
+\]
+Calling $w = \tilde{y} - y - \delta y\in \mathcal B$ the function $w$ then satisfies
+\bean
+  &\partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \tilde{y}\partial_x \tilde{y}  - y\partial_x y - \partial_x(y\delta y)=  0 \mbox{ in } I\times\Omega,\nonumber\\
+  &w(.,0) = w(.,L) = \partial_x w (.,L) = 0 \mbox{ in } I,\nonumber\\
+  &w(0,x) = 0 \mbox{ in } \Omega\nonumber.
+\eean
+in the weak sense of \eqref{weakformkdv}. After rearranging the terms we end up with
+\besn
+\partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \partial_x(yw) =  -(\tilde{y} - y)\partial_x(\tilde{y} - y) \mbox{ in } I\times\Omega,\label{kdvw1}\\
+w(.,0) = w(.,L) = \partial_x w (.,L) = 0 \mbox{ in } I,\label{kdvw2}\\
+w(0,x) = 0\mbox{ in } \Omega\label{kdvw3}.
+\eesn
+According to Appendix~\ref{appendixtangent} and Lemma \ref{lemyyx2} it holds
+\[
+\norm{w}_{\mathcal{B}} \leq C\norm{-(\tilde{y} - y)\partial_x(\tilde{y} - y)}_{\Hm1}\leq C T^{1/4}\norm{\tilde{y} - y}_{\mathcal{B}}.
+\]
+Therefore the conclusion follows from Lipschitz continuity of $S$. Hence we provide the following lemma which concludes the proof.
+\end{proof}
+\begin{lem}
+Let $q\in Q_{ad}$ and $q+\delta q\in Q_{ad}$ for $\delta q\in \M$. The control-to-state operator $S$ satisfies the estimate
+\[\|S(q+\delta q)-S(q)\|_{\mathcal B}\leq C(\|q\|_{\M})\|\delta q\|_{\M}.\]
+ \label{lipschitzcontinuity}
+\end{lem}
+\begin{proof}[Proof of Lemma~\ref{lipschitzcontinuity}]
+We define $y = S(q) \in \mathcal{B}$ and $\tilde{y} = S(q+\delta q) \in \mathcal{B}$. Therefore, the difference $w = \tilde{y} - y$ satisfies the equation
+\begin{subequations}
+ \begin{numcases}{}
+    \partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \partial_x (\bar{y}w)=  \delta q \mbox{ in } I\times\Omega,\label{diffkdv4}\\
+    w(.,0) = w(.,L) = \partial_x w (.,L) = 0 \mbox{ in } I,\label{diffkdv5}\\
+    w(0,x) = 0 \mbox{ in } \Omega\label{diffkdv6},
+ \end{numcases}
+\end{subequations}
+with $\bar{y} = \frac{\tilde{y} + y}{2} \in \mathcal{B}$ in the weak sense of \eqref{weakformlinearkdv}. According to Appendix \ref{appendixtangent} $w \in \mathcal{B}$ satisfies the a priori estimates
+\[
+\norm{w}_{\mathcal{B}} \leq C(T,L,\|q\|_{\M})\norm{\delta q}_{\M}.
+\]
+% We have
+% \beal
+%   \norm{\bar y}_{\mathcal{B}} &\leq \frac{1}{2} \left( \norm{y}_{\mathcal{B}} + \norm{\tilde{y}}_{\mathcal{B}}\right)\\
+%   & \leq \frac{1}{2} C(T,L)\left( \norm{q+\delta q}_{L^2(I,H^{-1}(\Omega))} + \norm{q}_{L^2(I,H^{-1}(\Omega))} \right)\\
+%   & \leq C(T,L)\norm{q}_{L^2(I,H^{-1}(\Omega))} +\frac{C(T,L)}{2}\norm{\delta q}_{L^2(I,H^{-1}(\Omega))}
+% \eeal
+Therefore we can conclude that the solution operator $S$ is locally Lipschitz continuous.
+\end{proof}
+%   First we define the nonlinear operator \be E\colon S\times \mathcal
+%   U_{ad}\rightarrow L^2(I,H^{-2}(\Omega))\times L^2(\Omega) \ee wit
+%   $S:=\{y\in L^2(I,H^1_0(\Omega))\cap \mathcal C(\bar
+%   I,L^2(\Omega))\colon y_x(\cdot,L)=0\}\cap H^1(I,H^{-2}(\Omega))$
+%   which consists of \be E(y,q) = L(y,q)+H(y) \ee with \be
+%   L(y,q)=\left(
+%     \begin{array}{c}
+%       \partial_t y+\partial_x y-\gamma \partial_{xx}y+\partial_{xxx} y-q\\
+%       y(0,\cdot)
+%     \end{array}
+%   \right),~~ H(y)=\left(
+%     \begin{array}{c}
+%       y\partial_x y\\
+%       0
+%     \end{array}
+%   \right).  \ee The operator $E$ allows us to write the state-equation
+%   in the following form \be E(y,q)=0,~y\in S,~q\in U_{ad}.  \ee The
+%   linear terms in $L$ are continuously Fr\'echet-differentiable. The
+%   nonlinear term \be H_1\colon S\rightarrow
+%   L^2(I,H^{-1}(\Omega)),~y\mapsto y\partial_x y \ee is also
+%   continuously Fr\'echet-differentiable with the derivative
+%   $H'_1(y)\delta y=\partial_x(y\delta y)$. This is true since it holds
+%   \be \|H_1(y+\delta y)-H_1(y)-H'_1(y)\delta
+%   y\|_{L^2(I,H^{-1}(\Omega))}=\|\delta y\partial_x \delta
+%   y\|_{L^2(I,H^{-1}(\Omega))}\leq c\|\delta
+%   y\|_{L^2(I,H^1_0(\Omega))}\|\delta y\|_{\mathcal C(\bar
+%     I,L^2(\Omega))}, \ee for $y,\delta y\in S$ according to
+%   Lemma~\ref{lemyyx2}. This means that $E$ is continuously
+%   Fr\'echet-differentiable. The partial derivative of $E$ with respect
+%   to $y$ is given by \be E'_y(y,q)\delta y=\left(
+%     \begin{array}{c}
+%       \partial_t \delta y+\partial_x \delta y-\gamma \partial_{xx} \delta y+\partial_{xxx}\delta y + \partial_x(y\delta y)\\
+%       \delta y(0,\cdot)
+%     \end{array}
+%   \right) \ee and with respect to $q$ by $E'_q(y,q)\delta q=-\delta
+%   q\in \M$. Therefore it is enough that the operator $E'_y(y,q)\colon
+%   S\rightarrow L^2(I,H^{-2}(\Omega))\times L^2(\Omega)$ is
+%   continuously invertible from $S$ to $L^2(I,H^{-1}(\Omega))$. Indeed,
+%   the equation \be E'_y(y,q)\delta y=(f,y_0)^t \ee has a unique
+%   solution $\delta y\in S$ for any $(f,y_0)\in
+%   L^2(I,H^{-1}(\Omega))\times L^2(\Omega)$ and fulfills the following
+%   a priori estimate \be \|\delta y\|_{L^2(I,H^1_0(\Omega))}+\|\delta
+%   y\|_{\mathcal C(\bar I,L^2(\Omega))} \leq
+%   c(\|y\|_{L^2(I,H^1_0(\Omega))})\left(\|f\|_{L^2(I,H^{-2}(\Omega))}+\|y_0\|_{L^2(\Omega)}\right)
+%   \ee according to Theorem ??. So the implicit function theorem
+%   \cite{pinnau2008optimization} guarantees the existence of a
+%   continuously Fr\'echet differentiable mapping \be M\colon
+%   U_{ad}\rightarrow S,~~q\mapsto y \ee which fulfills \be E(M(q),q)=0.
+%   \ee Its derivative \be M'(q)\colon \M\rightarrow S,~~\delta q\mapsto
+%   \delta y,~q\in U_{ad} \ee is given by \be M'(q)\delta
+%   q=-E'_y(M(q),q)^{-1}\delta q,~~\delta q\in \M,~q\in U_{ad}.  \ee
+
+% \begin{rmk}
+%   \bealn
+%   &\partial_t \delta y +\partial_x \delta y - \gamma \partial_{x} \delta y+\partial_{xxx} \delta y + \partial_x(y\delta y)=\delta q \mbox{ in } \Omega,\\
+%   &\delta y(.,0) = \delta y(.,L) = \partial_x \delta y (.,L) = 0 \mbox{ in } \Gamma,\\
+%   &\delta y(0,.) = 0 \mbox{ on } \Omega.  \eealn is called linearized
+%   state equation or tangent equation.
+% \end{rmk}
+Next we introduce we adjoint control to state operator $S'^\star$. 
+\begin{prop}
+  Let $q\in Q_{ad}$. The linear operator
+  \[
+  S'^\star(q)\colon L^2(I\times\Omega)\times L^2(\Omega)\rightarrow \C, (\phi,p_T)\mapsto p
+  \]
+  which fulfills
+  \begin{multline}
+  (S'(q)\delta q,\phi)_{L^2(I\times \Omega)}+((S'(q)\delta q)(T),p_T)_{L^2(\Omega)}=\langle\delta q, S'^\star(q)(\phi,p_T)\rangle_{\M,\C}\\
+  \forall \delta q\in\M,~(\phi,p_T) \in L^2(I\times \Omega)\times L^2(\Omega)
+  \end{multline}
+  is the solution operator of
+  \begin{subequations}
+   \begin{numcases}{}
+      -\partial_t p -\partial_x  p -\gamma \partial_{xx} p - \partial_{xxx} p  - y\partial_x p=\phi \mbox{ in } I\times\Omega,\label{adjointKdV1}\\
+      p(.,0) = p(.,L) = \partial_x p(.,0) = 0 \mbox{ in } I,\label{adjointKdV2}\\
+      p(T,.) = p_T \mbox{ in } \Omega\label{adjointKdV3}
+   \end{numcases}
+  \end{subequations}
+  with $y=S(q)$.
+  \label{adjointKdV}
+\end{prop}
+\begin{proof}[Proof of Proposition~\ref{adjointKdV}]
+Let $\phi\in L^2(I\times\Omega)$, $q\in Q_{ad}$ and $\delta q\in M_I$, then we consider the weak formulation of the tangent equation
+\[
+(\delta y,\phi)_{L^2(I\times\Omega)}+(\delta y(T),p_T)_{L^2(\Omega)}=\langle \delta q,p\rangle_{\mathcal M_I,\mathcal C_I}+(\delta y,y\partial_x p)_{L^2(I\times\Omega)}
+\]
+with $y=S(q)$. Therefore we set $S'^\star(q)(\phi,p_T):=p$ where $p$ solves the fixed point equation
+\be\label{fixed_point_equation_adjoint}
+p(t)=W^*(t)p_T+\int_t^TW^*(t-s)(\phi(s)+y(s)\partial_xp(s))~\mathrm ds.
+\ee
+The fixed point equation \eqref{fixed_point_equation_adjoint} has an unique solution $p\in \mathcal B\hookrightarrow\C$, for a proof see Appendix \ref{appendixadjoint}.
+\end{proof}
+Next we derive first order optimality conditions using tools from convex analysis.
+\begin{prop}
+  Let $(\bar y,\bar q)\in \mathcal B\times Q_{ad}$ be the solution of \eqref{cost}. Then there
+  exists a unique $\bar p\in \C$ which is the solution of the adjoint state equation
+  \bean
+  &-\partial_t\bar p -\partial_x \bar p -\gamma \partial_{xx} \bar p -\partial_{xxx} \bar p - \bar y\partial_x \bar p=\bar y-z_1 \mbox{ in } \Omega,\\
+  &\bar p(.,0) = \bar p(.,L) = \partial_x \bar p(.,0) = 0 \mbox{ in } I,\\
+  &\bar p(T,.) = y(T)-z_2 \mbox{ in } \Omega.
+  \eean
+  and fulfills the following subgradient condition
+  \be
+  -\bar p\in \alpha \partial\|\bar q\|_{\M}\subset (\M)^*.
+  \label{subgradientcond}
+  \ee
+\end{prop}
+\begin{proof}
+  Using the nonlinear operator $S$ we can write \eqref{cost} in its
+  reduced form
+  \be \min_{q\in
+    \M}\frac{1}{2}\left(\|S(q)-z_1\|_{L^2(I\times\Omega)}^2+\|S(q)(T)-z_2\|_{L^2(\Omega)}^2\right)+\alpha\|q\|_{\M}=G(q)+F(q).
+  \label{reducedcost}
+  \ee
+  The directional derivative of $G$ can be expressed using the operator $S'^\star(\bar q)$
+  \[
+  \nabla G(\bar q)=S'^\star(\bar q)(S(\bar q)-z_1,S(\bar q)(T)-z_2)\in \C\subset(\M)^*.
+  \]
+  We define $\bar p := \nabla G(\bar q)$. An element $\bar q\in Q_{ad}$ is optimal if
+  \[
+  G(\bar q)+F(\bar q)\leq G(q)+F(q)~~\forall q\in Q_{ad}
+  \]
+  and in  particular
+  \[
+  G(\bar q)+F(\bar q)\leq G(\bar q + \varepsilon(q-\bar q))+F(\bar q+ \varepsilon(q-\bar q))
+  \]
+  for any $0<\varepsilon$ and $q\in \M$ such that $\bar q + \varepsilon(q-\bar q)\in Q_{ad}$ . Using the convexity of $F$ we get
+  \[
+    \frac{G(\bar q)-G(\bar q + \varepsilon(\delta q-\bar q))}{\varepsilon}+ F(\bar q)\leq F(q)
+  \]
+  which implies
+  \[
+  \langle-\bar p ,q-\bar q\rangle_{\C,\M} + F(\bar q)\leq F(q)~~\forall q\in \M
+  \]
+  or in other words
+  \[
+   -\bar p\in \partial F(\bar q).
+  \]
+
+\end{proof}
+\begin{rmk}
+  A vector measure $q\in \M=\mathcal M(\Omega,L^2(I))$ can be decomposed in a space dependent measure part $|q|\in \mathcal M(\Omega)^+$ and a space-time dependent function $q'\in  L^1((\Omega,|q|),L^2(I))$, in particular it holds
+  \[
+  \mathrm dq=q'~\mathrm d|q|.
+  \]
+  An element $q\in L^2(I,\mathcal M(\Omega))$ can be decomposed in $q=q^+-q^-$ with $q^+, q^-\in L^2(I,\mathcal M(\Omega)^+)$.
+\end{rmk}
+\begin{prop}
+  The subgradient condition \eqref{subgradientcond} is equivalent to
+  \besn
+  \|\bar q\|_{\M}+\langle\bar q,\bar p\rangle_{\M,\C}=0\label{subgradientconditionfenchel1}\\
+  \|\bar p\|_{\C}\leq\alpha \label{subgradientconditionfenchel2}
+  \eesn
+  which implies
+  \begin{itemize}
+    \item Case $\M=\mathcal M(\Omega,L^2(I))$: Let $\bar q'\in L^1((\Omega,|\bar q|),L^2(I))$ be the Radon-Nikodym-derivative of the optimal control $\bar q$ with respect to its total variation measure $|\bar q|$, then it holds
+    \begin{align*}
+    \bar q'&=-(1/\alpha)\,\bar p~\text{in}~L^1((\Omega,|\bar q|),L^2(I))\\
+    \operatorname{supp}|\bar q|&\subset \{x\in \Omega\colon \|\bar p(x)\|_{L^2(I)}=\alpha\}.
+    \end{align*}
+    \item Case $\M=L^2(I,\mathcal M(\Omega))$: Let $\bar q(t)=q^+(t)-q^-(t)$ a.e. $t\in I$ be the Jordan decomposition of the optimal control $q$, then it holds
+    \begin{align*}
+    \operatorname{supp}q^+(t)&\subset\{x\in\Omega\colon \bar p(t)=-\max_{x\in\Omega}\bar p(t)\}~~\text{a.e.}~t\in I\\
+    \operatorname{supp}q^-(t)&\subset\{x\in\Omega\colon \bar p(t)=\max_{x\in\Omega}\bar p(t)\}~~\text{a.e.}~t\in I.
+    \end{align*}
+  \end{itemize}
+  \label{propsubgcondition}
+\end{prop}
+%\begin{proof}[Proof of Proposition~\ref{propsubgcondition}]
+%
+%  %The subgradient condition \eqref{subgradientcond} is equivalent to
+%%  \be
+%%  \|\bar q\|_{\M}+(\|\cdot\|_{\M})^*(-\bar p)=\langle \bar q,-\bar p\rangle_{\M,\M^*}
+%%  \label{subgradientcondfenchel4}
+%%  \ee
+%%  where
+%%  \[
+%%  (\|\cdot\|_{\M})^*(-\bar p)=\begin{cases} 0~~&\|\bar p\|_{\M^*}\leq\alpha\\ \infty~~&\text{else}\end{cases}
+%%  \]
+%%  is the convex conjugate functional of $\|\cdot\|_{\M}$. Then
+%%  \eqref{subgradientcondfenchel4} is equivalent to
+%%  \bean
+%%  &\|\bar q\|_{\M}+\langle\bar q,\bar p\rangle_{\M,\M^*}=0 \\
+%%  &\|\bar p\|_{\M^*}\leq\alpha.
+%%  \eean
+%%  Recall that $\bar p=\nabla G(\bar q)\in \C\subset \M^*$. This and $C_0(\Omega,L^2(I))^* = \M$ imply
+%%  \[
+%%  \|\bar p\|_{\M^*}=\|\bar p\|_{\C}
+%%  \]
+%%  which yields the assertion.
+%\end{proof}
+
+
+%\begin{proof}[Proof of Theorem~\ref{supportcontrol}]
+%  Let $\bar q'$ be the density of $\bar q$ with resect to $|\bar
+%  q|$. From \eqref{subgradientconditionfenchel1} - \eqref{subgradientconditionfenchel2} follows
+%  \begin{equation}\label{supp_opt_control_estimate}
+%    \begin{aligned}
+%      \alpha \|\bar q\|_{\M} &= \langle \bar q,-\bar p \rangle_{\M,C_0(\Omega,L^2(I))}\\
+%      & = \int_{\Omega}{(\bar q'(x),-\bar p(x))_{L^2(I)}~\mathrm{d}|\bar q|} \\
+%      & \leq \int_{\Omega}{\|\bar q'(x)\|_{L^2(I)}\|\bar p(x)\|_{L^2(I)}~\mathrm d|\bar q}|\\
+%      & \leq \|\bar q\|_{\M} \|\bar p\|_{C_0(\Omega,L^2(I))}\\
+%      & \leq \alpha \|\bar q\|_{\M}.
+%    \end{aligned}
+%  \end{equation}
+%  This means that \eqref{supp_opt_control_estimate} holds with
+%  equality, in particular it holds
+%  \begin{equation}\label{complementarity_optimal_control}
+%    \int_\Omega \underbrace{\|\bar p(x)\|_{L^2(I)}-\alpha}_{\leq 0}~\mathrm d|q|=0
+%  \end{equation}
+%  which implies
+%  \begin{equation}\label{norm_alpha}
+%    \|\bar p(x)\|_{L^2(I)}=\alpha~~|\bar q|-\text{a.e.}~x\in \Omega
+%  \end{equation}
+%  and \eqref{support_optimal_control} due to the continuity of
+%  $\alpha-\|\bar p(\cdot)\|_{L^2(I)}$.  From equality in
+%  \eqref{supp_opt_control_estimate} also follows
+%  \begin{equation*}
+%    \int_\Omega\underbrace{\|\bar q'(x)\|_{L^2(I)}\|\bar p(x)\|_{L^2(I)}-(\bar q'(x),-\bar p(x))_{L^2(I)}}_{\geq0}~\mathrm{d}|\bar q|=0.
+%  \end{equation*}
+%  Due to the sign of the integrant it even holds
+%  \begin{equation*}
+%    \|\bar q'(x)\|_{L^2(I)}\|\bar p(x)\|_{L^2(I)}-(\bar q'(x),-\bar p(x))_{L^2(I)}=0~~|\bar u|-\text{a.e.}~x\in \Omega
+%  \end{equation*}
+%  which means that $q'$ and $-\bar p$ are colinear. In particular,
+%  $\|q'(\cdot)\|_{L^2(I)}\equiv1$ and \eqref{norm_alpha} imply
+%  \begin{equation}\label{supp_opt_control_representation}
+%    \bar q'(x,t)=-\frac{1}{\alpha}\bar p(x,t)~~|\bar q|-\text{a.e.}~x\in\Omega,~\text{a.e.}~t\in I.
+%  \end{equation}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "kdv.tex"
+%%% End:
