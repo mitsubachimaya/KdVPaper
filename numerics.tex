@@ -96,66 +96,68 @@ where $M$, $P$, $Q$ and $S$ are matrices of size $(N-2)\times(N-2)$ with coeffic
 %  \eealn
 
 \subsubsection{Discretization of the control $u$}
-The control is discretized with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentionned. It lies therefore in the space
+
+By $\left\{x_i \right\}, i = 1, 2 ..., N$, we denote the grid points of the spatial mesh (i.e. in our case the CGL points). The control is then discretized as follows
 \be
-\mathcal{U}_h := \left\{ u_h = \chi_{\Omega_c} v_h \,|\, v_h \in \mathcal{V}_h \right\},
+u_N = \sum_{j=1}^{N}{u_j(t)\delta_{x_j}}
 \ee
-where
+where the functions $u_j(t)$ are piecewise constant on each time step and $\delta_{x_j}$ are Dirac functionals located at the grid points. Hence, we clearly have $u_N \in \M$ and can easily define any inner product required in the resolution of the state equation
 \be
-\mathcal{V}_h = \left\{ v_h \in \mathcal{C}_0 (\Omega) \,|\, v_{h|K} \in \mathcal{P}_1(K) \mbox{ for all } K \in \mathcal{T}_h \mbox{ and } v_{h|\partial \Omega} = 0 \right\}.
+\langle u_N, \psi \rangle = \sum_{j=1}^{N}{u_j(t)\psi(x_j)},
 \ee
-More details on the computation of the inner product and various norms involved in the numerical optimization problem are to be found in section \ref{masslumping}.
+as well as the norm in the objective functional
+\be
+\|{u_N}\|_{\M} = \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\tau_i u_{ji}^2}\right)^{1/2}},
+\ee
+where $N_T$ is the number of time steps and $\tau_i$ is the size of the $i^{th}$ step. We point out that this precise control discretization was also used and analyzed in \cite{pieper2013priori, pieper2014,casas2013parabolic}.
 
 \subsubsection{Time stepping scheme and adjoint - Crank-Nicolson-Leap-Frog}
-We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable, though the resolution of the nonlinear system is computationally demanding. This scheme also has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian \cite{meidner2007adaptive}. Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. An alternative to the Crank Nicolson scheme is the two-steps Crank-Nicolson Leap Frog method. In this setting, the third derivative is treated implicitely and the nonlinear term is treated explicitely. This method has already been extensively used for the \KdV equation \cite{shen2003new,ma2000legendre,ma2001optimal}, showing for instance extended stability intervals with the Fourier spectral method \cite{chan1985fourier}. However, to the authors knowledge, this has never been used in the context of an optimal control problem. Commonly, this method is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-steps method in order to get a discrete adjoint that is consistent with the continuous adjoint in both the distributed control problem or the terminal observations problem. The forward scheme is as follows
+We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable. This scheme has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian \cite{meidner2007adaptive}. Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. However, the Crank Nicolson scheme is computationally demanding. An alternative is then the two-steps Crank-Nicolson Leap Frog method. In this setting, the third derivative is treated implicitely and the nonlinear term is treated explicitely. This method has already been extensively used for the \KdV equation \cite{shen2003new,ma2000legendre,ma2001optimal}, showing for instance extended stability intervals with the Fourier spectral method \cite{chan1985fourier}. However, to the authors knowledge, this has never been used in the context of an optimal control problem. Commonly, this method is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-steps method in order to get a discrete adjoint that is consistent with the continuous adjoint in both the distributed control problem or the terminal observations problem. The forward scheme is as follows
 \bealn
 & \frac{1}{2}\left( M+\Delta t S\right) y_1 = \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) y_0 + \frac{1}{2}\Delta t F(y_0) + \frac{1}{2}\Delta t M q_0 \\
 & \frac{1}{2}\left( M+\Delta t S\right) y_{n+1} = \frac{1}{2}\left( M - \Delta t S\right) y_{n-1} +  \Delta t \left( P + \gamma Q\right)y_n \\
 & \mbox{\hspace{0.5\textwidth}}+ \Delta t F(y_n) + \Delta t M q_n,  \, n=1..N-1\\
 & M y_{N+1} = \frac{1}{2}\left( M y_N + M y_{N-1} \right)+ \frac{1}{2}\Delta t P y_N + \frac{1}{2}\Delta t F(y_N) - \frac{1}{2}\Delta t S y_{N-1}
 \eealn
-The last step is not a regular well-known step but it is designed in such a way that the discrete adjoint shall be consistent with a CNLF discretization of the continuous adjoint. Notice that as $\Delta t$ vanishes, it becomes just a mean between the two preceding steps. The discrete adjoint in the case of terminal observations then writes
+The first step is semi-implicit. The interior steps are classical CNLF steps. The last step - due to our modification - is not a regular, well-known step, but it is designed in such a way that the discrete adjoint shall be consistent with a CNLF discretization of the continuous adjoint. Notice that as $\Delta t$ vanishes, it becomes just a mean between the two preceding steps. The discrete adjoint in the case of terminal observations then writes
  \bealn
  &M^t p_N = -A(y_{N+1} - y_d)\\
  &\frac{1}{2}\left( M^t+\Delta t S^t\right) p_{N-1} = \frac{1}{2}\left( M^t + \Delta t P^t + \gamma \Delta t Q^t \right) p_N + \frac{1}{2}\Delta t F^{'}(y_N)^t p_N \\
  &\frac{1}{2}\left( M^t + \Delta t S^t\right)p_{n-2} = \frac{1}{2}\left( M^t - \Delta t S^t\right)p_{n} + \Delta t \left( P^t + \gamma Q^t\right)p_{n-1} + \Delta t F^{'}(y_{n-1})^t p_{n-1}, \\
  &\mbox{\hspace{0.7\textwidth}}\quad n=2..N.
 \eealn
-\begin{proof}
-The lagrangian of the problem writes at the continuous level.
-\beal
-  \mathcal{L}(y,q,p) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{\M} + <p, By-q>
-\eeal
-Its (almost) discrete counterpart shall be
-\begin{multline}
-L(\bar y, \bar q, \bar p) = \frac{1}{2}(y_{N+1} - y_d)^t A (y_{N+1} - y_d) + \alpha \norm{q}_{\M} \\
-+ p_0^t\left[ \frac{1}{2}\left( M+\Delta t S\right) y_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) y_0 - \frac{1}{2}\Delta t F(y_0) - \frac{1}{2}\Delta t M q_0 \right]\\
-+\sum_{k=1}^{N-1}{p_k^t\left[
-\frac{1}{2}\left( M+\Delta t S\right) y_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) y_{k-1} - \Delta t \left( P + \gamma Q\right)y_k - \Delta t F(y_k) - \Delta t M q_k\right]}\\
-+p_N^t\left[ M y_{N+1} - \frac{1}{2}\left( M y_N + M y_{N-1} \right)- \frac{1}{2}\Delta t P y_N - \frac{1}{2}\Delta t F(y_N) +\frac{1}{2}\Delta t S y_{N-1}\right].
-\end{multline}
-Differentiating with respect to $\bar y$ leads
-\begin{multline}
-\delta L(\bar y, \bar q, \bar p)\delta \bar y = \delta y_{N+1}^t A (\delta y_{N+1} - y_d) \\
-+ p_0^t\left[ \frac{1}{2}\left( M+\Delta t S\right) \delta y_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \delta y_0 - \frac{1}{2}\Delta t F'(y_0)\delta y_0\right]\\
-+\sum_{k=1}^{N-1}{p_k^t\left[
-\frac{1}{2}\left( M+\Delta t S\right) \delta y_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \delta y_{k-1} - \Delta t \left( P + \gamma Q\right)y_k - \Delta t F'(y_k)\delta y_k \right]}\\
-+p_N^t\left[ M \delta y_{N+1} - \frac{1}{2}\left( M \delta y_N + M \delta y_{N-1} \right)- \frac{1}{2}\Delta t P \delta y_N - \frac{1}{2}\Delta t F'(y_N)\delta y_N + \frac{1}{2}\Delta tS\delta y_{N-1}\right]
-\end{multline}
-Symmetry of the scalar product yields, after re-indexing of the terms
-\beal
-\delta L(\bar y, \bar q, \bar p)\delta \bar y &= \delta y_{N+1}^t A (\delta y_{N+1} - y_d) \\
-&+ \left[ \delta y_1^t\frac{1}{2}\left( M+\Delta t S\right)  - \delta y_0^t\frac{1}{2} \left( M + \Delta t P + \gamma \Delta t Q \right) - \delta y_0^t\frac{1}{2}\Delta t F^{'}(y_0)\right]p_0\\
-&+\sum_{k=2}^{N}{\delta y_k^t\left[
-\frac{1}{2}\left( M+\Delta t S\right)^t \right]p_{k-1}}-\sum_{k=0}^{N-2}{\delta y_k^t\left[\frac{1}{2}\left( M+\Delta t S\right)^t \right]p_{k+1}}\\
-&-\sum_{k=1}^{N-1}{\left[ \delta y_k^t \Delta t\left(P^t + \gamma Q^t + F^{'}(y_k)^t\right)\right]p_k}\\
-&+\delta y_{N+1}^t M^t p_N - \delta y_{N-1}^t \frac{1}{2}(M^t - \Delta t S^t)p_N \\
-&-\delta y_{N}^t \left( \frac{1}{2}(M^t + \Delta t P^t + \Delta t F^{'}(y_N)^t) \right)p_N.
-\eeal
-The discrete adjoint scheme is obtained by imposing $\delta L(\bar y, \bar q, \bar p)\delta \bar y = 0$.
-\end{proof}
- 
- 
+The proof for the adjoint is done by standard calculations on the discrete Lagrangian of the problem. Classically, it starts with a projection of the tracking term in the state space into the adjoint space. Thi is followed by a unique semi-implicit step and regular CNLF steps.
+% The lagrangian of the problem writes at the continuous level.
+% \beal
+%   \mathcal{L}(y,q,p) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{\M} + <p, By-q>
+% \eeal
+% Its (almost) discrete counterpart shall be
+% \begin{multline}
+% L(\bar y, \bar q, \bar p) = \frac{1}{2}(y_{N+1} - y_d)^t A (y_{N+1} - y_d) + \alpha \norm{q}_{\M} \\
+% + p_0^t\left[ \frac{1}{2}\left( M+\Delta t S\right) y_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) y_0 - \frac{1}{2}\Delta t F(y_0) - \frac{1}{2}\Delta t M q_0 \right]\\
+% +\sum_{k=1}^{N-1}{p_k^t\left[
+% \frac{1}{2}\left( M+\Delta t S\right) y_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) y_{k-1} - \Delta t \left( P + \gamma Q\right)y_k - \Delta t F(y_k) - \Delta t M q_k\right]}\\
+% +p_N^t\left[ M y_{N+1} - \frac{1}{2}\left( M y_N + M y_{N-1} \right)- \frac{1}{2}\Delta t P y_N - \frac{1}{2}\Delta t F(y_N) +\frac{1}{2}\Delta t S y_{N-1}\right].
+% \end{multline}
+% Differentiating with respect to $\bar y$ leads
+% \begin{multline}
+% \delta L(\bar y, \bar q, \bar p)\delta \bar y = \delta y_{N+1}^t A (\delta y_{N+1} - y_d) \\
+% + p_0^t\left[ \frac{1}{2}\left( M+\Delta t S\right) \delta y_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \delta y_0 - \frac{1}{2}\Delta t F'(y_0)\delta y_0\right]\\
+% +\sum_{k=1}^{N-1}{p_k^t\left[
+% \frac{1}{2}\left( M+\Delta t S\right) \delta y_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \delta y_{k-1} - \Delta t \left( P + \gamma Q\right)y_k - \Delta t F'(y_k)\delta y_k \right]}\\
+% +p_N^t\left[ M \delta y_{N+1} - \frac{1}{2}\left( M \delta y_N + M \delta y_{N-1} \right)- \frac{1}{2}\Delta t P \delta y_N - \frac{1}{2}\Delta t F'(y_N)\delta y_N + \frac{1}{2}\Delta tS\delta y_{N-1}\right]
+% \end{multline}
+% Symmetry of the scalar product yields, after re-indexing of the terms
+% \beal
+% \delta L(\bar y, \bar q, \bar p)\delta \bar y &= \delta y_{N+1}^t A (\delta y_{N+1} - y_d) \\
+% &+ \left[ \delta y_1^t\frac{1}{2}\left( M+\Delta t S\right)  - \delta y_0^t\frac{1}{2} \left( M + \Delta t P + \gamma \Delta t Q \right) - \delta y_0^t\frac{1}{2}\Delta t F^{'}(y_0)\right]p_0\\
+% &+\sum_{k=2}^{N}{\delta y_k^t\left[
+% \frac{1}{2}\left( M+\Delta t S\right)^t \right]p_{k-1}}-\sum_{k=0}^{N-2}{\delta y_k^t\left[\frac{1}{2}\left( M+\Delta t S\right)^t \right]p_{k+1}}\\
+% &-\sum_{k=1}^{N-1}{\left[ \delta y_k^t \Delta t\left(P^t + \gamma Q^t + F^{'}(y_k)^t\right)\right]p_k}\\
+% &+\delta y_{N+1}^t M^t p_N - \delta y_{N-1}^t \frac{1}{2}(M^t - \Delta t S^t)p_N \\
+% &-\delta y_{N}^t \left( \frac{1}{2}(M^t + \Delta t P^t + \Delta t F^{'}(y_N)^t) \right)p_N.
+% \eeal
+% The discrete adjoint scheme is obtained by imposing $\delta L(\bar y, \bar q, \bar p)\delta \bar y = 0$.
  \begin{rmk}
  Without this modification of the last forward step, the discrete adjoint obtained in the case of terminal observation would be
  \bealn
@@ -166,6 +168,11 @@ The discrete adjoint scheme is obtained by imposing $\delta L(\bar y, \bar q, \b
  \eealn
  The major difference lies in the second step. It does not correspond to a consistent discretization of the continuous adjoint equation: the time derivative is not reconstructed. It results in practice in huge oscillations in time of the adjoint variable.
  \end{rmk}
+ 
+ \begin{rmk}
+  Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditionned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the mean space step.
+ \end{rmk}
+
 
 \subsection{Numerical treatment of the optimization problem}
 \subsubsection{The regularized problem}
@@ -196,7 +203,15 @@ F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}
 \ee
 In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$. 
 
-\subsubsection{Mass lumping}
+\subsubsection{Discretization of the control and mass lumping}
+The control is discretized with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentionned. It lies therefore in the space
+\be
+\mathcal{U}_h := \left\{ u_h = \chi_{\Omega_c} v_h \,|\, v_h \in \mathcal{V}_h \right\},
+\ee
+where
+\be
+\mathcal{V}_h = \left\{ v_h \in \mathcal{C}_0 (\Omega) \,|\, v_{h|K} \in \mathcal{P}_1(K) \mbox{ for all } K \in \mathcal{T}_h \mbox{ and } v_{h|\partial \Omega} = 0 \right\}.
+\ee
 
 
 \subsection{Numerical examples}
