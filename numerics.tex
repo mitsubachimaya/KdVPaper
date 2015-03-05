@@ -178,40 +178,63 @@ The proof for the adjoint is done by standard calculations on the discrete Lagra
 \subsubsection{The regularized problem}
 Numerically, the optimization problem is solved via a Newton type method. This requires an additional regularization term which we introduce as follows
 \be
-\min_{q \in \M} J(y) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{L^1(\Omega,L^2(I))} + \frac{1}{\gamma}\norm{q}_{L^2(\Omega,L^2(I))}.
+\min_{q \in \M} J(y) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{L^1(\Omega,L^2(I))} + \frac{\gamma}{2}\norm{u}_{L^2(\Omega,L^2(I))}.
 \label{costreg}
 \ee
-The parameter $\frac{1}{\gamma}$ shall be chosen sucht that it is small in comparison to $\alpha$. This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
+This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
 \be
 \norm{y}_{\M} = \norm{y}_{L^1(I,L^2(\Omega))} = \int_0^L{\norm{y}_{L^2(I)}dx}.
 \ee
-In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous and we can adapt it to state the following theorem
-\begin{thm}
- Let $\gamma > 0$. Problem \eqref{costreg} possesses a unique optimal solution  $q_{\gamma} \in L^2(I\times\Omega)$ with corresponding state $y_{\gamma} = S(y_0,q_{\gamma})$ and adjoint state $p_{\gamma} = S'^{\ast}(y_{\epsilon} - y_d)$. The first order optimality condition is the subgradient condition
- \be
- -<q - q_{\gamma}, \frac{1}{\gamma}q_{\gamma} + p_{\gamma}> +\alpha \norm{q_{\gamma}}_{L^1(I,L^2(\Omega))} \leq \alpha \norm{q}_{L^1(I,L^2(\Omega))}
- \ee
- for all $q \in L^1(I,L^2(\Omega))$. This is summed up in the formula
- \be
- q_{\gamma}(t,x) = \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
- \ee
- for almost all $(t,x)\in I\times\Omega$.
-\end{thm}
-The idea is then to solve with a semismooth Newton method \cite{ulbrich2002semismooth} the equation
+In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. We can express the optimality condition for \ref{costreg} by the pointwise projection formula
 \be
-F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
+\bar u_{\gamma} = \frac{1}{\gamma}\left( (-\chi_{\Omega_c}\bar p_{\gamma} - \alpha)^{+} - (-\chi_{\Omega_c}\bar p_{\gamma} + \alpha)\right).
 \ee
-In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$. 
+Notice that the previous formula is linked to the proximal map of the $L^1$ norm i.e. the soft-shrinkage operator.
+
+
+
+
+
+
+% and we can adapt it to state the following theorem
+% \begin{thm}
+%  Let $\gamma > 0$. Problem \eqref{costreg} possesses a unique optimal solution  $q_{\gamma} \in L^2(I\times\Omega)$ with corresponding state $y_{\gamma} = S(y_0,q_{\gamma})$ and adjoint state $p_{\gamma} = S'^{\ast}(y_{\epsilon} - y_d)$. The first order optimality condition is the subgradient condition
+%  \be
+%  -<q - q_{\gamma}, \frac{1}{\gamma}q_{\gamma} + p_{\gamma}> +\alpha \norm{q_{\gamma}}_{L^1(I,L^2(\Omega))} \leq \alpha \norm{q}_{L^1(I,L^2(\Omega))}
+%  \ee
+%  for all $q \in L^1(I,L^2(\Omega))$. This is summed up in the formula
+%  \be
+%  u_{\gamma}(t,x) = \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
+%  \ee
+%  for almost all $(t,x)\in I\times\Omega$.
+% \end{thm}
+% The idea is then to solve with a semismooth Newton method \cite{ulbrich2002semismooth} the equation
+% \be
+% F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
+% \ee
+% In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
+\begin{rmk}
+ 
+\end{rmk}
+
 
 \subsubsection{Discretization of the control and mass lumping}
-The control is discretized with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentionned. It lies therefore in the space
+In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, we want a discretization that is compatible with $L^2(\Omega_c \times I)$ functions that would also lead to an equivalent problem to \ref{} in the limiting case $\gamma \to 0$ (i.e. to obtain a Dirac measure like discretization). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentionned. The finite element space associated with this grid is
 \be
-\mathcal{U}_h := \left\{ u_h = \chi_{\Omega_c} v_h \,|\, v_h \in \mathcal{V}_h \right\},
+V_h = \left\{ u_h \in \mathcal{C}_0 (\Omega) \,|\, u_{h|K} \in \mathcal{P}_1(K) \mbox{ for all } K \in \mathcal{T}_h \mbox{ and } u_{h|\partial \Omega} = 0 \right\}.
 \ee
-where
+The discretization parameter h denotes the maximum length of the intervals defined by the CGL points. For the time discretization, we define for any Banach space $V$ the semi-discrete space
 \be
-\mathcal{V}_h = \left\{ v_h \in \mathcal{C}_0 (\Omega) \,|\, v_{h|K} \in \mathcal{P}_1(K) \mbox{ for all } K \in \mathcal{T}_h \mbox{ and } v_{h|\partial \Omega} = 0 \right\}.
+X_\tau^0 (I,V) = \left\{ v_{\tau} \in L^2(I,V) \, | \, v_{\tau|I_m} \in P_0(I_m,V), m=1..N_T\right\},  
 \ee
+where $I_m = (t_{m-1}, t_m]$ and $0 = t_0 < t_1....< t_m = T$. The time steps are denoted $\tau_m = t_m - t_{m-1}$ and by $\tau$ we designate the maximum of them. The full discrete space for the control is then $X_{\tau}^0(I,V_h)$.
+
+Moreover, the various norms involved in the optimization problem shall be computed via mass lumping, i.e, the trapezoidal rule is used for the evaluation of the contributions for each cell. Therefore, for $u_h = \chi_{\Omega_c}\sum_{j=1}^{N_T}{\chi_{I_j}\sum_n{u_{jn} e_n}}$, it holds
+\beal
+&\norm{u_h}_{L^1(\Omega_c, L^2(I))} = \sum_{n=1}^N{d_n\left(\sum_{j=1}^{N_T}{\tau_j u_{nj}^2}\right)^{1/2}}, \quad \norm{u_h}_{L^2(\Omega_c, L^2(I))}^2 = \sum_{n=1}^N{d_n\left(\sum_{j=1}^{N_T}{\tau_j u_{nj}^2}\right)},\\
+&\langle \chi_{\Omega_c} u_h,\varphi_h \rangle = \sum_{n=1}^N{d_n \sum_{j=1}^{N_T} \tau_j u_{jn}\varphi_{jn}}
+\eeal
+for all $\varphi_h = \chi_{\Omega_c}\sum_{j=1}^{N_T}{\chi_{I_j}\sum_n{\varphi_{jn} e_n}}$
 
 
 \subsection{Numerical examples}
@@ -227,6 +250,24 @@ We divide the domain $\Omega = [-L,L]$ into two subdomains. The domain $\Omega_c
 
 
 In the first example, we generate beforehand a wave on the time period $[0,T]$ with the following source term in a subcritical configuration ($f = -0.5$)
+
+\begin{numcases}
+{u(t,x) = }
+ \nonumber 5\delta_{\{x = 1.5\}}, \mbox{ when } 0 < t\leq 2.5 \\
+ 0 \delta_{\{x = 0\}}, \mbox{ when } 2.5 \leq t\leq 5
+ \label{forcingq}
+\end{numcases}
+The spacetime grid is parametrized with $T = 5$, $N = 256$ and $\Delta t = 0.01$ and the result is shown on Fig~\ref{waveobservation1}.
+
+\begin{figure}[!h]
+\includegraphics[width = 0.45\textwidth]{images/initcontrol.png}
+\includegraphics[width = 0.45\textwidth]{images/waveobservation.png}
+\caption{Left: forcing term as in \eqref{forcingq}. Right : wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow).}
+\label{waveobservation}
+\end{figure}
+
+
+The second example is a control example
 \begin{numcases}
 {u(t,x) = }
  \nonumber 2\delta_{\{x = -0.5\}}, \mbox{ when } 0 < t\leq 10 \\
