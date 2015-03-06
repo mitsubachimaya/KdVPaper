@@ -177,24 +177,34 @@ The proof for the adjoint is done by standard calculations on the discrete Lagra
 \subsection{Numerical treatment of the optimization problem}
 \subsubsection{The regularized problem}
 Numerically, the optimization problem is solved via a Newton type method. This requires an additional regularization term which we introduce as follows
-\be
-\min_{q \in \M} J(y) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{L^1(\Omega,L^2(I))} + \frac{\gamma}{2}\norm{u}_{L^2(\Omega,L^2(I))}.
+\beal
+\min_{q \in \M} J(y) &= \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\gamma}{2}\norm{u}_{L^2(\Omega,L^2(I))} \\
+& = f(y) + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\gamma}{2}\norm{u}_{L^2(\Omega,L^2(I))},
 \label{costreg}
-\ee
-This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
+\eeal
+where $u$ and $y$ are subject to Korteweg-de Vries Burgers equation. This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
 \be
 \norm{y}_{\M} = \norm{y}_{L^1(I,L^2(\Omega))} = \int_0^L{\norm{y}_{L^2(I)}dx}.
 \ee
-In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. We can express the optimality condition for \ref{costreg} by the pointwise projection formula
+In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. To obtain the optimality conditions, one introduces the proximal map of the $L^1$ norm, which is related to the soft-shrinkage operator:
 \be
-\bar u_{\gamma} = \frac{1}{\gamma}\left( (-\chi_{\Omega_c}\bar p_{\gamma} - \alpha)^{+} - (-\chi_{\Omega_c}\bar p_{\gamma} + \alpha)\right).
+P_{\gamma}(q) = \shrink_{\alpha/\gamma}(q) = \left(q - \frac{\alpha}{\gamma}\right)^+ - \left(q + \frac{\alpha}{\gamma}\right)^-.
 \ee
-Notice that the previous formula is linked to the proximal map of the $L^1$ norm i.e. the soft-shrinkage operator.
-
-
-
-
-
+We can then express the optimality condition for \eqref{costreg} by the pointwise projection formula
+\be
+\bar u_{\gamma} = \frac{1}{\gamma}\shrink_{\alpha}(-\chi_{\Omega_c} \bar p_{\gamma}) = \frac{1}{\gamma}\left( (-\chi_{\Omega_c}\bar p_{\gamma} - \alpha)^{+} - (-\chi_{\Omega_c}\bar p_{\gamma} + \alpha)\right).
+\ee
+It is then directly possible to solve via a Newton type method the equation 
+\be
+F(u_{\gamma}) = u_{\gamma} - \frac{1}{\gamma}\shrink_{\alpha}(-\chi_{\Omega_c} \bar p_{\gamma}) = 0 .
+\label{optcondition}
+\ee
+Following \cite{pieperthesis}, one can also reformulate this optimality condition thanks to the "normal map", due to Robinson:
+\be
+G(q_{\gamma}) = \gamma q_{\gamma} + \nabla f (P_{\gamma}(q_{\gamma})) = 0,
+\label{normalmap}
+\ee
+for an auxiliary variable $q_{\gamma}$ such that $u_{\gamma} = P_{\gamma}(q_{\gamma})$. One easily prove in that case that $q_{\gamma} = -\frac{1}{\gamma}B^* p_{\gamma}$. Equivalence between \eqref{optcondition} and \eqref{normalmap} is demonstrated in \cite{pieperthesis}.
 
 % and we can adapt it to state the following theorem
 % \begin{thm}
@@ -214,12 +224,12 @@ Notice that the previous formula is linked to the proximal map of the $L^1$ norm
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
 \begin{rmk}
- 
+ To solve problem \ref{normalmap}, we apply a Newton-type method, and since the shrinkage operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{}. An iterative method (conjugate gradient) is used to solve the Newton system. A globalization strategy is added via the Trust Region Steihaug's algorithm \cite{pieperthesis,steihaug1983}.
 \end{rmk}
 
 
 \subsubsection{Discretization of the control and mass lumping}
-In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, we want a discretization that is compatible with $L^2(\Omega_c \times I)$ functions that would also lead to an equivalent problem to \ref{} in the limiting case $\gamma \to 0$ (i.e. to obtain a Dirac measure like discretization). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentionned. The finite element space associated with this grid is
+In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, we want a discretization that is compatible with $L^2(\Omega_c \times I)$ functions that would also lead to an equivalent problem to \eqref{} in the limiting case $\gamma \to 0$ (i.e. to obtain a Dirac measure like discretization). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentionned. The finite element space associated with this grid is
 \be
 V_h = \left\{ u_h \in \mathcal{C}_0 (\Omega) \,|\, u_{h|K} \in \mathcal{P}_1(K) \mbox{ for all } K \in \mathcal{T}_h \mbox{ and } u_{h|\partial \Omega} = 0 \right\}.
 \ee
@@ -244,49 +254,64 @@ the design artificial surfing facilities. For that purpose, we use a more physic
 \partial_t y + f \partial_x y - \frac{1}{6}\partial_{xxx} y - \frac{3}{2}y \partial_x y = u
 \label{PhysicalKDV}
 \ee
-where the parameter $f$ is proportional to $F-1$ ($F$ is the Froude number). Its value determines if a flow is subcritical ($f\leq 0$) or supercritical ($f> 0 $). The forcing $u$ can be interpreted as the derivative of the bottom topography. Thus the idea that we can track a given wave by changing the bottom topography.
-
-We divide the domain $\Omega = [-L,L]$ into two subdomains. The domain $\Omega_c = [-L,0]$ is the control domain, while $\Omega_{obs} = [0,L]$ is the observation domain. The flow enters the domain from the right.
-
-
-In the first example, we generate beforehand a wave on the time period $[0,T]$ with the following source term in a subcritical configuration ($f = -0.5$)
+where the parameter $f$ is proportional to $F-1$ ($F$ is the Froude number). Its value determines if a flow is subcritical ($f\leq 0$) or supercritical ($f> 0 $). The forcing $u$ can be interpreted as the derivative of the bottom topography. In the first example, an inverse problem, we want to find what bottom topography created the waves we observe at a final time T. We generate beforehand a wave on the time period $[0,T]$ with the following source term in a subcritical configuration ($f = -0.5$)
 
 \begin{numcases}
 {u(t,x) = }
  \nonumber 5\delta_{\{x = 1.5\}}, \mbox{ when } 0 < t\leq 2.5 \\
- 0 \delta_{\{x = 0\}}, \mbox{ when } 2.5 \leq t\leq 5
+ 0, \mbox{ when } 2.5 \leq t\leq 5
  \label{forcingq}
 \end{numcases}
-The spacetime grid is parametrized with $T = 5$, $N = 256$ and $\Delta t = 0.01$ and the result is shown on Fig~\ref{waveobservation1}.
+The spacetime grid is parametrized with $T = 5$, $N = 256$ and $\Delta t = 0.01$ and the result is shown on Fig~\ref{waveobservation1}. One can see a series of downstream waves - note that the flow enters the domain from the right - generated by the bottom topography induced by $u$ (recall that $u$ is proportional to the derivative of the topography), while a solitary wave is going upstream, at constant speed and constant height, which is typical for the Korteweg-de Vries equation.. Afterwards, a white Gaussian noise is added to the $y$-profile at final time with a ratio of 20 (i.e. the magnitude of the noise is in average 5 percent of the magnitude of the original signal).
 
 \begin{figure}[!h]
-\includegraphics[width = 0.45\textwidth]{images/initcontrol.png}
-\includegraphics[width = 0.45\textwidth]{images/waveobservation.png}
-\caption{Left: forcing term as in \eqref{forcingq}. Right : wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow).}
-\label{waveobservation}
+\includegraphics[width = 0.45\textwidth]{images/observationIP2.pdf}
+\includegraphics[width = 0.45\textwidth]{images/observationIP.pdf}
+\caption{Left: wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow). Right: y-profile at final time with Gaussian white noise.}
+\label{supportcontrol1}
 \end{figure}
 
-
-The second example is a control example
-\begin{numcases}
-{u(t,x) = }
- \nonumber 2\delta_{\{x = -0.5\}}, \mbox{ when } 0 < t\leq 10 \\
- -2 \delta_{\{x = 0\}}, \mbox{ when } 0 < t\leq 10
- \label{forcingq}
-\end{numcases}
-The spacetime grid is parametrized with $T = 20$, $N = 256$ and $\Delta t = 0.01$ and the result is shown on Fig~\ref{waveobservation}.
+The results are shown on Fig.\ref{supportcontrol1} and Fig.\ref{reconstruction}. The support of the control is, according to \eqref{}, included in the domains where $\|q\|_{} \geq \frac{\alpha}{\gamma}$. The continuation strategy enables to compare the differences with a high $L^2$ regularization term (low sparsity, Fig.\ref{supportcontrol1} - left) and a low $L^2$ regularization (hight sparsity, Fig.\ref{supportcontrol1} - right).
 \begin{figure}[!h]
-\includegraphics[width = 0.45\textwidth]{images/initcontrol.png}
-\includegraphics[width = 0.45\textwidth]{images/waveobservation.png}
-\caption{Left: forcing term as in \eqref{forcingq}. Right : wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow).}
-\label{waveobservation}
+\includegraphics[width = 0.45\textwidth]{images/normq1.png}
+\includegraphics[width = 0.45\textwidth]{images/normq10000.png}
+\caption{Evolution of the support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$.}
+\label{reconstruction}
 \end{figure}
-One can see a series of downstream waves generated by the bottom topography induced by $u$ (recall that $u$ is proportional to the derivative of the topography), while a solitary wave is going upstream, at constant speed and constant height, which is typical for the Korteweg-de Vries equation. We want to track the shape of the water surface on $\Omega_{obs}$ while acting only on the control domain $\Omega_c$.
+
+\begin{figure}[!h]
+ \includegraphics[width = 0.8\textwidth]{images/gammma1res.png}
+ \caption{State y, adjoint state p and control at the end of the optimization procedure for $\gamma = 1$}
+\end{figure}
+
+\begin{figure}[!h]
+ \includegraphics[width = 0.8\textwidth]{images/gamma10000res.png}
+ \caption{State y, adjoint state p and control at the end of the optimization procedure for $\gamma = 10^{-4}$}
+\end{figure}
+
+The second example is a control example. We divide the domain $\Omega = [-L,L]$ into two subdomains. The domain $\Omega_c = [-L,0]$ is the control domain, while $\Omega_{obs} = [0,L]$ is the observation domain. The flow enters the domain from the right. We want to create the wave profile shown on Fig.\ref{}
+\begin{figure}[!h]
+\includegraphics[width = 0.45\textwidth]{images/objectivewave.png}
+\caption{Left: forcing term as in \eqref{forcingq}. Right : wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow).}
+\label{objectivewave}
+\end{figure}
+% \begin{numcases}
+% {u(t,x) = }
+%  \nonumber 2\delta_{\{x = -0.5\}}, \mbox{ when } 0 < t\leq 10 \\
+%  -2 \delta_{\{x = 0\}}, \mbox{ when } 0 < t\leq 10
+%  \label{forcingq}
+% \end{numcases}
+% The spacetime grid is parametrized with $T = 20$, $N = 256$ and $\Delta t = 0.01$ and the result is shown on Fig~\ref{waveobservation}.
+% \begin{figure}[!h]
+% \includegraphics[width = 0.45\textwidth]{images/initcontrol.png}
+% \includegraphics[width = 0.45\textwidth]{images/waveobservation.png}
+% \caption{Left: forcing term as in \eqref{forcingq}. Right : wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow).}
+% \label{waveobservation}
+% \end{figure}
+% One can see a series of downstream waves generated by the bottom topography induced by $u$ (recall that $u$ is proportional to the derivative of the topography), while a solitary wave is going upstream, at constant speed and constant height, which is typical for the Korteweg-de Vries equation. We want to track the shape of the water surface on $\Omega_{obs}$ while acting only on the control domain $\Omega_c$.
 
 \begin{figure}[!h]
 \includegraphics[width = 0.45\textwidth]{images/normq1.png}
-%\includegraphics[width = 0.45\textwidth]{images/normq100.png}
-%\includegraphics[width = 0.45\textwidth]{images/normq1000.png}
 \includegraphics[width = 0.45\textwidth]{images/normq10000.png}
 \caption{Evolution of the support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$.}
 \label{waveobservation}
@@ -297,26 +322,13 @@ One can see a series of downstream waves generated by the bottom topography indu
  \caption{State y, adjoint state p and control at the end of the optimization procedure for $\gamma = 1$}
 \end{figure}
 
-% \begin{figure}[!h]
-%  \includegraphics[width = 0.8\textwidth]{images/gamma100results.png}
-%  \caption{State y, adjoint state p and control at the end of the optimization procedure for $\gamma = 1$}
-% \end{figure}
-% 
-% \begin{figure}[!h]
-%  \includegraphics[width = 0.8\textwidth]{images/gamma1000results.png}
-%  \caption{State y, adjoint state p and control at the end of the optimization procedure for $\gamma = 1$}
-% \end{figure}
-
 \begin{figure}[!h]
  \includegraphics[width = 0.8\textwidth]{images/gamma10000results.png}
  \caption{State y, adjoint state p and control at the end of the optimization procedure for $\gamma = 10^{-4}$}
 \end{figure}
 
 
-
-
-
-
+\clearpage
 
 %%% Local Variables: 
 %%% mode: latex
