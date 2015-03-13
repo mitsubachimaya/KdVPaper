@@ -1,0 +1,7 @@
+*.aux
+*.blg
+kdv.log
+*.synctex
+*.out
+kdv.bbl
+kdv.pdf
