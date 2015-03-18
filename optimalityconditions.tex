@@ -25,7 +25,11 @@ where $y=\mathcal L(q-y\partial_xy,y_0)$ and discuss its differentiability.
   \label{propfrechet}
 \end{prop}
 \begin{proof}[Proof of Proposition~\ref{propfrechet}]
-We differentiate the fixed point equation $y=\mathcal L(q-y\partial_x y,y_0)$ with respect to $q$ in direction $\delta q\in\M$ and get
+First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),\quad y\mapsto y\partial_x y$ is Fr\'eceht differentiable since
+\[
+\|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2
+\] 
+with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B$. Then we differentiate the fixed point equation $y=\mathcal L(q-y\partial_x y,y_0)$ with respect to $(y,q)$ in direction $(\delta y,\delta q)\in \mathcal B\times \M$ and get
 \be\label{abstract_tangent_equation}
 \delta y=\mathcal L'(\delta q-\partial_x(y\delta y))
 \ee
@@ -136,36 +140,36 @@ Therefore we can conclude that the solution operator $S$ is locally Lipschitz co
 %   &\delta y(0,.) = 0 \mbox{ on } \Omega.  \eealn is called linearized
 %   state equation or tangent equation.
 % \end{rmk}
-Next we introduce we adjoint control to state operator $S'^\star$. 
+Next we introduce we adjoint control to state operator $S'^\star$.
 \begin{prop}
-  Let $q\in Q_{ad}$. The linear operator
+  Let $q\in Q_{ad}$. There exists a linear operator
   \[
   S'^\star(q)\colon L^2(I\times\Omega)\times L^2(\Omega)\rightarrow \C, (\phi,p_T)\mapsto p
   \]
   which fulfills
   \begin{multline}
   (S'(q)\delta q,\phi)_{L^2(I\times \Omega)}+((S'(q)\delta q)(T),p_T)_{L^2(\Omega)}=\langle\delta q, S'^\star(q)(\phi,p_T)\rangle_{\M,\C}\\
-  \forall \delta q\in\M,~(\phi,p_T) \in L^2(I\times \Omega)\times L^2(\Omega)
+  \forall \delta q\in\M,~(\phi,p_T) \in L^2(I\times \Omega)\times L^2(\Omega).
   \end{multline}
-  is the solution operator of
+  Moreover it is the solution operator of
   \begin{subequations}
    \begin{numcases}{}
       -\partial_t p -\partial_x  p -\gamma \partial_{xx} p - \partial_{xxx} p  - y\partial_x p=\phi \mbox{ in } I\times\Omega,\label{adjointKdV1}\\
-      p(.,0) = p(.,L) = \partial_x p(.,0) = 0 \mbox{ in } I,\label{adjointKdV2}\\
-      p(T,.) = p_T \mbox{ in } \Omega\label{adjointKdV3}
+      p(\cdot,0) = p(\cdot,L) = \partial_x p(\cdot,0) = 0 \mbox{ in } I,\label{adjointKdV2}\\
+      p(T,\cdot) = p_T \mbox{ in } \Omega\label{adjointKdV3}
    \end{numcases}
   \end{subequations}
   with $y=S(q)$.
   \label{adjointKdV}
 \end{prop}
 \begin{proof}[Proof of Proposition~\ref{adjointKdV}]
-Let $\phi\in L^2(I\times\Omega)$, $q\in Q_{ad}$ and $\delta q\in M_I$, then we consider the weak formulation of the tangent equation
+First of all we mention that $y\partial_x p\in L^1(I,L^2(\Omega))$ holds for $y\in \mathcal B$ and $p\in \mathcal B$, c.f., Lemma \ref{lemadjoint}. Then we consider the weak formulation of the tangent equation
 \[
-(\delta y,\phi)_{L^2(I\times\Omega)}+(\delta y(T),p_T)_{L^2(\Omega)}=\langle \delta q,p\rangle_{\mathcal M_I,\mathcal C_I}+(\delta y,y\partial_x p)_{L^2(I\times\Omega)}
+(\delta y,\phi)_{L^2(I\times\Omega)}+(\delta y(T),p_T)_{L^2(\Omega)}-(\delta y,y\partial_x p)_{L^2(I\times\Omega)}=\langle \delta q,p\rangle_{\mathcal M_I,\mathcal C_I},\quad\delta q\in \M
 \]
-with $y=S(q)$. Therefore we set $S'^\star(q)(\phi,p_T):=p$ where $p$ solves the fixed point equation
+with $y=S(q)\in\mathcal B$.  Therefore we set $S'^\star(q)(\phi,p_T):=p$ where $p$ solves the fixed point equation
 \be\label{fixed_point_equation_adjoint}
-p(t)=W^*(t)p_T+\int_t^TW^*(t-s)(\phi(s)+y(s)\partial_xp(s))~\mathrm ds.
+p(t)=W^*(T-t)p_T+\int_t^TW^*(s-t)(\phi(s)-y(s)\partial_xp(s))~\mathrm ds,~t\in I.
 \ee
 The fixed point equation \eqref{fixed_point_equation_adjoint} has an unique solution $p\in \mathcal B\hookrightarrow\C$, for a proof see Appendix \ref{appendixadjoint}.
 \end{proof}

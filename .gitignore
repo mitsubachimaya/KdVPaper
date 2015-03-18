@@ -5,3 +5,8 @@ kdv.log
 *.out
 kdv.bbl
 kdv.pdf
+*.sav
+wellposedness.tex.bak
+*.log
+optimalityconditions.tex.bak
+*.bak
