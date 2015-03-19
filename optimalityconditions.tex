@@ -3,24 +3,21 @@
 \section{First order optimality conditions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{secoptconditions}
-For any $y_0\in L^2(\Omega)$  we introduce the non-linear control to state operator
-\[
-  S\colon Q_{ad}\subset \M\rightarrow \mathcal B,~~q\mapsto y
-\]
-where $y=\mathcal L(q-y\partial_xy,y_0)$ and discuss its differentiability.
+Next we discuss the differentiability of $S$.
 \begin{prop}
   The control to state operator $S$ is continuously Fr\'echet-differentiable. Its derivative
   \[
   S'(q)\colon \M\rightarrow \mathcal B,~\delta q\mapsto
   \delta y
   \]
-  at $q\in Q_{ad}$ is the solution operator of the linear tangent equation
+  at $q\in Q_{ad}$ is given by the solution operator of the linear tangent equation
   \begin{subequations}
    \begin{numcases}{}
       \partial_t \delta y +\partial_x \delta y -\gamma \partial_{xx} \delta y+ \partial_{xxx} \delta y + \partial_x (y \delta y)=\delta q \mbox{ in } \Omega,  \label{linearizedkdv1}\\
       \delta y(.,0) = \delta y(.,L) = \partial_x \delta y (.,L) = 0 \mbox{ in } \Gamma,  \label{linearizedkdv2}\\
       \delta y(0,.) = 0 \mbox{ on } \Omega  \label{linearizedkdv3}.
    \end{numcases}
+   \label{tan eq}
   \end{subequations}
   \label{propfrechet}
 \end{prop}
@@ -29,7 +26,7 @@ First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\O
 \[
 \|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2
 \] 
-with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B$. Then we differentiate the fixed point equation $y=\mathcal L(q-y\partial_x y,y_0)$ with respect to $(y,q)$ in direction $(\delta y,\delta q)\in \mathcal B\times \M$ and get
+with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B\hookrightarrow L^4(I\times \Omega)$. Then we differentiate the fixed point equation $y=\mathcal L(q-y\partial_x y,y_0)$ with respect to $(y,q)$ in direction $(\delta y,\delta q)\in \mathcal B\times \M$ and get
 \be\label{abstract_tangent_equation}
 \delta y=\mathcal L'(\delta q-\partial_x(y\delta y))
 \ee
@@ -140,16 +137,18 @@ Therefore we can conclude that the solution operator $S$ is locally Lipschitz co
 %   &\delta y(0,.) = 0 \mbox{ on } \Omega.  \eealn is called linearized
 %   state equation or tangent equation.
 % \end{rmk}
-Next we introduce we adjoint control to state operator $S'^\star$.
+Therefore the control-to-observation operator $S_{obs}$ is also Fr\'echet differentiable and its derivative is given by 
+\[S_{obs}'(q)\colon \delta q\mapsto (\chi_{\Omega_o}\delta y,\chi_{\Omega_o}\delta y(T))\]
+where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we introduce we adjoint control to observation operator $S'^\star$.
 \begin{prop}
   Let $q\in Q_{ad}$. There exists a linear operator
   \[
-  S'^\star(q)\colon L^2(I\times\Omega)\times L^2(\Omega)\rightarrow \C, (\phi,p_T)\mapsto p
+  S'^\star(q)\colon L^2(I\times\Omega_o)\times L^2(\Omega_o)\rightarrow \C, (\phi,p_T)\mapsto p
   \]
   which fulfills
   \begin{multline}
-  (S'(q)\delta q,\phi)_{L^2(I\times \Omega)}+((S'(q)\delta q)(T),p_T)_{L^2(\Omega)}=\langle\delta q, S'^\star(q)(\phi,p_T)\rangle_{\M,\C}\\
-  \forall \delta q\in\M,~(\phi,p_T) \in L^2(I\times \Omega)\times L^2(\Omega).
+  (S'(q)\delta q,\phi)_{L^2(I\times \Omega_o)}+((S'(q)\delta q)(T),p_T)_{L^2(\Omega_o)}=\langle\delta q, S'^\star(q)(\phi,p_T)\rangle_{\M,\C}\\
+  \forall \delta q\in\M,~(\phi,p_T) \in L^2(I\times \Omega_o)\times L^2(\Omega_o).
   \end{multline}
   Moreover it is the solution operator of
   \begin{subequations}
@@ -178,13 +177,13 @@ Next we derive first order optimality conditions using tools from convex analysi
   Let $(\bar y,\bar q)\in \mathcal B\times Q_{ad}$ be the solution of \eqref{cost}. Then there
   exists a unique $\bar p\in \C$ which is the solution of the adjoint state equation
   \bean
-  &-\partial_t\bar p -\partial_x \bar p -\gamma \partial_{xx} \bar p -\partial_{xxx} \bar p - \bar y\partial_x \bar p=\bar y-z_1 \mbox{ in } \Omega,\\
-  &\bar p(.,0) = \bar p(.,L) = \partial_x \bar p(.,0) = 0 \mbox{ in } I,\\
-  &\bar p(T,.) = y(T)-z_2 \mbox{ in } \Omega.
+  &-\partial_t\bar p -\partial_x \bar p -\gamma \partial_{xx} \bar p -\partial_{xxx} \bar p - \bar y\partial_x \bar p=\chi_{\Omega_o}\bar y-z_1 \mbox{ in } \Omega,\\
+  &\bar p(\cdot,0) = \bar p(\cdot,L) = \partial_x \bar p(\cdot,0) = 0 \mbox{ in } I,\\
+  &\bar p(T,\cdot) =\chi_{\Omega_o}y(T)-z_2 \mbox{ in } \Omega.
   \eean
-  and fulfills the following subgradient condition
+  and fulfills the following variational inequality condition
   \be
-  -\bar p\in \alpha \partial\|\bar q\|_{\M}\subset (\M)^*.
+  \langle -\bar p,q-\bar q\rangle_{\C,\M}+\|\bar q\|_{\M}\leq\|q\|_{\M}\quad\forall q\in \M.
   \label{subgradientcond}
   \ee
 \end{prop}
