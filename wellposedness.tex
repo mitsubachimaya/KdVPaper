@@ -672,25 +672,26 @@ The constant in the estimate \eqref{globalestimate} explodes for $\gamma \righta
 
 \subsection{Well-posedness of the optimization problem. Existence of an optimum}
 We start by defining the admissible set of controls
-$$Q_{ad} = \begin{cases} q \in \M\colon \norm{y_0}_{L^2(\Omega)}+\norm{q}_{L^{2}(I,H^{-1}(\Omega))} \leq \frac{C}{T^{1/4}} &\quad\mbox{if } \gamma = 0 \\
+$$Q_{ad} = \begin{cases} q \in \M\colon \norm{q}_{\M} \leq \frac{C}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
-where $C$ is the constant from \eqref{ineqqnorm}. Moreover we introduce the non-linear control-to-state operator 
+where $C$ is the constant from \eqref{ineqqnorm} and 
+\begin{equation}\label{constr y0}
+\norm{y_0}_{L^2(\Omega)}< \frac{C}{T^{1/4}}.
+\end{equation}
+Moreover we introduce the non-linear control-to-state operator
 \[S\colon Q_{ad}\rightarrow \mathcal B\cap H^1(I,\mathcal V^\ast),\quad u\mapsto y\]
-where $y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for a given $y_0\in L^2(\Omega)$ which satisfies 
+where $y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for a given $y_0\in L^2(\Omega)$ which satisfies
+\eqref{constr y0} in the case $\gamma =0$. The control-to-observation operator is given by
 \[
-\norm{y_0}_{L^2(\Omega)}< \frac{C}{T^{1/4}}
+S_{obs}\colon Q_{ad}\rightarrow L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs}),\quad u\mapsto(\chi_{\Omega_{obs}}y,\chi_{\Omega_{obs}}y(T))
 \]
-in the case $\gamma =0$. The control-to-observation operator is given by 
-\[
-S_{obs}\colon Q_{ad}\rightarrow L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs}),\quad u\mapsto(\chi_{\Omega_{obs}}y,\chi_{\Omega_{obs}}y(T)) 
-\] 
-Thus we can rewrite problem \eqref{cost} in its reduced form given by 
+Thus we can rewrite problem \eqref{cost} in its reduced form given by
 \be
 \min_{u \in Q_{ad}}\frac{1}{2}\left(\norm{S_{obs}u - z}_{L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})}^2\right) + \alpha \norm{u}_{\M}.
 \label{red cost}
 \ee
-with $z\in L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$. 
+with $z\in L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$.
 \begin{prop}
 There exists a solution $(\bar y,\bar q) \in \mathcal B\times Q_{ad}$ to the optimal control problem \eqref{cost}.
 \end{prop}
