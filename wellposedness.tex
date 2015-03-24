@@ -77,14 +77,14 @@ For $(f,y_0)\in \Hm1\times L^2(\Omega)$ a function $y\in L^\infty(I,L^2(\Omega))
 \end{equation}
 for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{Def}
-The existence proof can be based on transposing of Proposition \ref{prop:ex smooth}, c.f., \cite[Part 2, section 2.2]{bensoussan07}, which would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$. In stead we use a strategy based on approximation of the data which yields higher regularity of the solution.
+The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f., \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$. We rather utilize here a strategy based on the approximation of the data which yields higher regularity of the solution.
 \begin{prop}
 Let $(f,y_0)\in \Hm1\times L^2(\Omega)$. Then, there exists a unique weak
 solution $y\in \mathcal B\cap H^1(I,\mathcal V^*)$  of \eqref{kdvlinnonhom1}-\eqref{kdvlinnonhom3}. Furthermore there exists a constant
 $C(T,L) > 0$ such that the following estimate holds
   \be
   \norm{y}_{\mathcal B}+\|\partial_ty\|_{L^2(I,\mathcal V^*)}
-  \leq C(T,L) \left(\norm{y_{0}}_{L^{2}(\Omega)} + \norm{q}_{\Hm1}\right).
+  \leq C(T,L) \left(\norm{y_{0}}_{L^{2}(\Omega)} + \norm{f}_{\Hm1}\right).
   \label{linestimate}
   \ee
 \label{propnonhomo}
@@ -672,7 +672,7 @@ The constant in the estimate \eqref{globalestimate} explodes for $\gamma \righta
 
 \subsection{Well-posedness of the optimization problem. Existence of an optimum}
 We start by defining the admissible set of controls
-$$Q_{ad} = \begin{cases} q \in \M\colon \norm{q}_{\M} \leq \frac{C}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
+$$U_{ad} = \begin{cases} q \in \M\colon \norm{q}_{\M} \leq \frac{C}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
 where $C$ is the constant from \eqref{ineqqnorm} and 
@@ -680,23 +680,23 @@ where $C$ is the constant from \eqref{ineqqnorm} and
 \norm{y_0}_{L^2(\Omega)}< \frac{C}{T^{1/4}}.
 \end{equation}
 Moreover we introduce the non-linear control-to-state operator
-\[S\colon Q_{ad}\rightarrow \mathcal B\cap H^1(I,\mathcal V^\ast),\quad u\mapsto y\]
+\[S\colon U_{ad}\rightarrow \mathcal B\cap H^1(I,\mathcal V^\ast),\quad u\mapsto y\]
 where $y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for a given $y_0\in L^2(\Omega)$ which satisfies
 \eqref{constr y0} in the case $\gamma =0$. The control-to-observation operator is given by
 \[
-S_{obs}\colon Q_{ad}\rightarrow L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs}),\quad u\mapsto(\chi_{\Omega_{obs}}y,\chi_{\Omega_{obs}}y(T))
+S_{obs}\colon U_{ad}\rightarrow L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs}),\quad u\mapsto(\chi_{\Omega_{obs}}y,\chi_{\Omega_{obs}}y(T))
 \]
 Thus we can rewrite problem \eqref{cost} in its reduced form given by
 \be
-\min_{u \in Q_{ad}}\frac{1}{2}\left(\norm{S_{obs}u - z}_{L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})}^2\right) + \alpha \norm{u}_{\M}.
+\min_{u \in U_{ad}}\frac{1}{2}\left(\norm{S_{obs}u - z}_{L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})}^2\right) + \alpha \norm{u}_{\M}.
 \label{red cost}
 \ee
 with $z\in L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$.
 \begin{prop}
-There exists a solution $(\bar y,\bar q) \in \mathcal B\times Q_{ad}$ to the optimal control problem \eqref{cost}.
+There exists a solution $(\bar y,\bar q) \in \mathcal B\times U_{ad}$ to the optimal control problem \eqref{cost}.
 \end{prop}
 \begin{proof}
-\underline{Case $\gamma > 0$}. The cost function $J$ is a positive function. Thus its infimum $\bar J$ exists and there exists a minimizing sequence $(q_n,y_n) \in Q_{ad} \times \mathcal B$ such that $J(q_n, y_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists a $\varepsilon>0$ such that
+\underline{Case $\gamma > 0$}. The cost function $J$ is a positive function. Thus its infimum $\bar J$ exists and there exists a minimizing sequence $(q_n,y_n) \in U_{ad} \times \mathcal B$ such that $J(q_n, y_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists a $\varepsilon>0$ such that
 \be
 \varepsilon+J(0,0)\geq \alpha \norm{q_n}_{\M}
 \ee
@@ -751,7 +751,7 @@ Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}
 % $$\partial_x y \in L^2(I,L^2(\Omega)), \quad  \partial_{xxx}y \in L^2(I,H^{-2}(\Omega)), \partial_{xx}y \in L^2(I,H^{-1}(\Omega)),\quad y\partial_x y \in L^1(I,L^2(\Omega)).$$
 % This naturally induces that $\partial_t y$ in bounded in $L^1(I,H^{-2}(\Omega))$.
 % \end{proof}
-\underline{Case $\gamma = 0$}. In this case we rely on the estimate \eqref{localestimate} and use that the set $Q_{ad}$ is weak-$*$ closed.
+\underline{Case $\gamma = 0$}. In this case we rely on the estimate \eqref{localestimate} and use that the set $U_{ad}$ is weak-$*$ closed.
 % It remains to show that $M(\bar q) = \bar y$ holds in the weak sense defined in \eqref{weakform}. Therefore we proceed with
 % \be\label{weakformtime}
 % \int_I (y_{n_k}, \partial_t\varphi)- (y_{n_k}, \partial_x \varphi) + (\partial_x y_{n_k}, \partial_{xx}\varphi)  - (\frac{y_{n_k}^2}{2}, \partial_x \varphi)~\mathds dt= \langle q_{n_k}, \varphi\rangle
