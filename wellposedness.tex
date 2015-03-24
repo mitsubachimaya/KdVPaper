@@ -672,7 +672,7 @@ The constant in the estimate \eqref{globalestimate} explodes for $\gamma \righta
 
 \subsection{Well-posedness of the optimization problem. Existence of an optimum}
 We start by defining the admissible set of controls
-$$U_{ad} = \begin{cases} q \in \M\colon \norm{q}_{\M} \leq \frac{C}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
+$$U_{ad} = \begin{cases} u \in \M\colon \norm{u}_{\M} \leq \frac{C}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
 where $C$ is the constant from \eqref{ineqqnorm} and 
@@ -693,24 +693,24 @@ Thus we can rewrite problem \eqref{cost} in its reduced form given by
 \ee
 with $z\in L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$.
 \begin{prop}
-There exists a solution $(\bar y,\bar q) \in \mathcal B\times U_{ad}$ to the optimal control problem \eqref{cost}.
+There exists a solution $(\bar y,\bar u) \in \mathcal B\times U_{ad}$ to the optimal control problem \eqref{cost}.
 \end{prop}
 \begin{proof}
-\underline{Case $\gamma > 0$}. The cost function $J$ is a positive function. Thus its infimum $\bar J$ exists and there exists a minimizing sequence $(q_n,y_n) \in U_{ad} \times \mathcal B$ such that $J(q_n, y_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists a $\varepsilon>0$ such that
+\underline{Case $\gamma > 0$}. The cost function $J$ is a positive function. Thus its infimum $\bar J$ exists and there exists a minimizing sequence $(u_n,y_n) \in U_{ad} \times \mathcal B$ such that $J(u_n, y_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists a $\varepsilon>0$ such that
 \be
-\varepsilon+J(0,0)\geq \alpha \norm{q_n}_{\M}
+\varepsilon+J(0,0)\geq \alpha \norm{u_n}_{\M}
 \ee
-for $n$ large enough. Therefore $q_n$ is bounded, which implies the existence of an element $\bar q\in\M$ and a subsequence $q_{n_k}$ converging in the weak-$*$ topology of $\M$ towards $\bar q$. For each $q_{n_k}$, we define $y_{n_k}\in \mathcal B\cap H^1(I,\mathcal V^*)$ as the weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for the control $q_{n_k}$. Thanks to the global estimate \eqref{globalestimate}, there exists a exists a $\bar y\in L^2(I,H^1_0(\Omega))\cap\,L^\infty(I,L^2(\Omega))\cap\,H^1(I,\mathcal V^\ast)$ such that
+for $n$ large enough. Therefore $u_n$ is bounded, which implies the existence of an element $\bar u\in\M$ and a subsequence $u_{n_k}$ converging in the weak-$*$ topology of $\M$ towards $\bar u$. For each $u_{n_k}$, we define $y_{n_k}\in \mathcal B\cap H^1(I,\mathcal V^*)$ as the weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for the control $u_{n_k}$. Thanks to the global estimate \eqref{globalestimate}, there exists a exists a $\bar y\in L^2(I,H^1_0(\Omega))\cap\,L^\infty(I,L^2(\Omega))\cap\,H^1(I,\mathcal V^\ast)$ such that
 \[y_{n_k}\rightharpoonup^\ast\bar y\quad\text{in}\quad L^2(I,H^1_0(\Omega))\cap L^{\infty}(I,L^2(\Omega))\cap H^1(I,\mathcal V^\ast)\]
 and a $\hat y\in L^2(\Omega)$ such that $y_{n_k}(T)\rightharpoonup \hat y$ in $L^2(\Omega)$. Moreover the Aubin-Lions-Lemma, c.f. \cite[Chapter 3, Proposition 1.3]{showalter97}, implies
 \[y_{n_k}\rightarrow\bar y\quad\text{in}\quad L^2(I,\mathcal C_0(\Omega)).\]
-It remains to show that the limit $\bar y$ is indeed a weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for the control $\bar q$. Due to the weak-to-weak continuity of time-point evaluation operator $y\mapsto y(T)$ from $H^1(I,\mathcal V^\ast)$ to $\mathcal V^\ast$ there holds $\hat y=y(T)$.  The convergence of the linear terms in \eqref{weakformkdv} is obvious. The nonlinear term converges due to the strong convergence of $y_{n_k}$, see
+It remains to show that the limit $\bar y$ is indeed a weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for the control $\bar u$. Due to the weak-to-weak continuity of time-point evaluation operator $y\mapsto y(T)$ from $H^1(I,\mathcal V^\ast)$ to $\mathcal V^\ast$ there holds $\hat y=y(T)$.  The convergence of the linear terms in \eqref{weakformkdv} is obvious. The nonlinear term converges due to the strong convergence of $y_{n_k}$, see
 \begin{multline*}
 \int_0^T\langle y_{n_k}\partial_xy_{n_k}-\bar y\partial_x\bar y,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt=-\int_0^T(y_{n_k}^2-\bar y^2,\partial_x p)_{L^2(\Omega)}~\mathrm dt\\
 \leq\|y_{n_k}-\bar y\|_{L^2(I,\mathcal C_0(\Omega))}\|y_{n_k}+\bar y\|_{\mathcal C(\bar I,L^2(\Omega))}\|\partial_x p\|_{L^2(I\times \Omega)}.
 \end{multline*}
-Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for the control $\bar q$ and it holds $\bar y\in \mathcal B\cap H^1(I,\mathcal V^*)$. Moreover there holds 
-\[S_{obs}(q_{n_k})\rightharpoonup S_{obs}(\bar q)\quad\text{in}~ L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs}).\] The tracking functional is weak continuous in $ L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$ and the control cost term is weak-$*$ lower semi continuous in $\M$ therefore $(\bar y,\bar q)$ is a solution of \eqref{cost}.\\
+Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for the control $\bar u$ and it holds $\bar y\in \mathcal B\cap H^1(I,\mathcal V^*)$. Moreover there holds 
+\[S_{obs}(u_{n_k})\rightharpoonup S_{obs}(\bar u)\quad\text{in}~ L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs}).\] The tracking functional is weak continuous in $ L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$ and the control cost term is weak-$*$ lower semi continuous in $\M$ therefore $(\bar y,\bar u)$ is a solution of \eqref{cost}.\\
 %\be
 %y_{n_k} = W_0(t)y_0 - \int_0^t{W_0(t-s)(y_{n_k}\partial_x y_{n_k})(s,.)ds} + \int_0^t{W_0(t-s)q_{n_{k}}(s,.)ds}.
 %\label{mildsubsequence}
@@ -780,9 +780,9 @@ Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}
 % So we conclude that $(\bar y,\bar q)$ are minimizers.
 \end{proof}
 \begin{rmk}
- We know for a minimizing sequence $(q_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon$ such that
+ We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon$ such that
  \[
-\norm{q}_{L^2(I,H^{-1})} \leq c\norm{q}_{\M} \leq \frac{c}{\alpha}\left(J(0,0) + \varepsilon \right).
+\norm{u}_{L^2(I,H^{-1})} \leq c\norm{u}_{\M} \leq \frac{c}{\alpha}\left(J(0,0) + \varepsilon \right).
  \]
  Therefore, we can always find a regularization parameter $\alpha>0$ such that the condition \eqref{ineqqnorm} is satisfied.
 \end{rmk}
