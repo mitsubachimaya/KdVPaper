@@ -7,13 +7,13 @@ Next we discuss the differentiability of $S$.
 \begin{prop}
   The control to state operator $S$ is continuously Fr\'echet-differentiable. Its derivative
   \[
-  S'(q)\colon \M\rightarrow \mathcal B,~\delta q\mapsto
+  S'(u)\colon \M\rightarrow \mathcal B,~\delta u\mapsto
   \delta y
   \]
-  at $q\in Q_{ad}$ is given by the solution operator of the linear tangent equation
+  at $u\in U_{ad}$ is given by the solution operator of the linear tangent equation
   \begin{subequations}
    \begin{numcases}{}
-      \partial_t \delta y +\partial_x \delta y -\gamma \partial_{xx} \delta y+ \partial_{xxx} \delta y + \partial_x (y \delta y)=\delta q \mbox{ in } \Omega,  \label{linearizedkdv1}\\
+      \partial_t \delta y +\partial_x \delta y -\gamma \partial_{xx} \delta y+ \partial_{xxx} \delta y + \partial_x (y \delta y)=\delta u \mbox{ in } \Omega,  \label{linearizedkdv1}\\
       \delta y(\cdot,0) = \delta y(\cdot,L) = \partial_x \delta y (\cdot,L) = 0 \mbox{ in } \Gamma,  \label{linearizedkdv2}\\
       \delta y(0,\cdot) = 0 \mbox{ on } \Omega  \label{linearizedkdv3}.
    \end{numcases}
@@ -22,17 +22,17 @@ Next we discuss the differentiability of $S$.
   \label{propfrechet}
 \end{prop}
 \begin{proof}[Proof of Proposition~\ref{propfrechet}]
-First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),\quad y\mapsto y\partial_x y$ is Fr\'eceht differentiable since
+First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),\quad y\mapsto y\partial_x y$ is Fr\'echet differentiable since
 \[
 \|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2
 \] 
-with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B\hookrightarrow L^4(I\times \Omega)$. Then we differentiate the fixed point equation $y=\mathcal L(q-y\partial_x y,y_0)$ with respect to $(y,q)$ in direction $(\delta y,\delta q)\in \mathcal B\times \M$ and get
+with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B\hookrightarrow L^4(I\times \Omega)$. Then we differentiate the fixed point equation $y=\mathcal L(u-y\partial_x y,y_0)$ with respect to $(y,u)$ in direction $(\delta y,\delta u)\in \mathcal B\times \M$ and get
 \be\label{abstract_tangent_equation}
-\delta y=\mathcal L'(\delta q-\partial_x(y\delta y))
+\delta y=\mathcal L'(\delta u-\partial_x(y\delta y))
 \ee
-where $\mathcal L'(\cdot)=\mathcal L(\cdot,0)$. In the Appendix~\ref{appendixtangent} it is shown that \eqref{abstract_tangent_equation} has unique solution $\delta y\in \mathcal B$.  Actually $\delta y$ is the weak solution of \eqref{linearizedkdv1}-\eqref{linearizedkdv3} in the sense of \eqref{weakformkdv}. Next we show that $S'(q)\delta q:=\delta y$ is the Frechet derivative of $S$. This will result from the study of
+where $\mathcal L'(\cdot)=\mathcal L(\cdot,0)$. In the Appendix~\ref{appendixtangent} it is shown that \eqref{abstract_tangent_equation} has a unique solution $\delta y\in \mathcal B$.  Actually $\delta y$ is the weak solution of \eqref{linearizedkdv1}-\eqref{linearizedkdv3} in the sense of \eqref{weakformkdv}. Next we show that $S'(u)\delta u:=\delta y$ is the Fr\'echet derivative of $S$. This will result from the study of
 \[
-\frac{1}{\norm{\delta q}_{\M}} \norm{S(q + \delta q) - S(q)  -S'(q)\delta q}_{\mathcal B} = \frac{1}{\norm{\delta q}_{\M}} \norm{\tilde{y} - y  -\delta y}_{\mathcal B}.
+\frac{1}{\norm{\delta u}_{\M}} \norm{S(u + \delta u) - S(u)  -S'(u)\delta u}_{\mathcal B} = \frac{1}{\norm{\delta u}_{\M}} \norm{\tilde{y} - y  -\delta y}_{\mathcal B}.
 \]
 Calling $w = \tilde{y} - y - \delta y\in \mathcal B$ the function $w$ then satisfies
 \bean
@@ -53,22 +53,22 @@ According to Appendix~\ref{appendixtangent} and Lemma \ref{lemyyx2} it holds
 Therefore the conclusion follows from Lipschitz continuity of $S$. Hence we provide the following lemma which concludes the proof.
 \end{proof}
 \begin{lem}
-Let $q\in Q_{ad}$ and $q+\delta q\in Q_{ad}$ for $\delta q\in \M$. The control-to-state operator $S$ satisfies the estimate
-\[\|S(q+\delta q)-S(q)\|_{\mathcal B}\leq C(\|q\|_{\M})\|\delta q\|_{\M}.\]
+Let $u\in U_{ad}$ and $u+\delta q\in U_{ad}$ for $\delta u\in \M$. The control-to-state operator $S$ satisfies the estimate
+\[\|S(u+\delta u)-S(u)\|_{\mathcal B}\leq C(\|u\|_{\M})\|\delta u\|_{\M}.\]
  \label{lipschitzcontinuity}
 \end{lem}
 \begin{proof}[Proof of Lemma~\ref{lipschitzcontinuity}]
-We define $y = S(q) \in \mathcal{B}$ and $\tilde{y} = S(q+\delta q) \in \mathcal{B}$. Therefore, the difference $w = \tilde{y} - y$ satisfies the equation
+We define $y = S(u) \in \mathcal{B}$ and $\tilde{y} = S(u+\delta u) \in \mathcal{B}$. Therefore, the difference $w = \tilde{y} - y$ satisfies the equation
 \begin{subequations}
  \begin{numcases}{}
-    \partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \partial_x (\bar{y}w)=  \delta q \mbox{ in } I\times\Omega,\label{diffkdv4}\\
+    \partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \partial_x (\bar{y}w)=  \delta u \mbox{ in } I\times\Omega,\label{diffkdv4}\\
     w(.,0) = w(.,L) = \partial_x w (.,L) = 0 \mbox{ in } I,\label{diffkdv5}\\
     w(0,x) = 0 \mbox{ in } \Omega\label{diffkdv6},
  \end{numcases}
 \end{subequations}
 with $\bar{y} = \frac{\tilde{y} + y}{2} \in \mathcal{B}$ in the weak sense of \eqref{weakformlinearkdv}. According to Appendix \ref{appendixtangent} $w \in \mathcal{B}$ satisfies the a priori estimates
 \[
-\norm{w}_{\mathcal{B}} \leq C(T,L,\|q\|_{\M})\norm{\delta q}_{\M}.
+\norm{w}_{\mathcal{B}} \leq C(T,L,\|u\|_{\M})\norm{\delta u}_{\M}.
 \]
 % We have
 % \beal
@@ -76,7 +76,7 @@ with $\bar{y} = \frac{\tilde{y} + y}{2} \in \mathcal{B}$ in the weak sense of \e
 %   & \leq \frac{1}{2} C(T,L)\left( \norm{q+\delta q}_{L^2(I,H^{-1}(\Omega))} + \norm{q}_{L^2(I,H^{-1}(\Omega))} \right)\\
 %   & \leq C(T,L)\norm{q}_{L^2(I,H^{-1}(\Omega))} +\frac{C(T,L)}{2}\norm{\delta q}_{L^2(I,H^{-1}(\Omega))}
 % \eeal
-Therefore we can conclude that the solution operator $S$ is locally Lipschitz continuous.
+Thus we can conclude that the solution operator $S$ is locally Lipschitz continuous.
 \end{proof}
 %   First we define the nonlinear operator \be E\colon S\times \mathcal
 %   U_{ad}\rightarrow L^2(I,H^{-2}(\Omega))\times L^2(\Omega) \ee wit
@@ -138,17 +138,18 @@ Therefore we can conclude that the solution operator $S$ is locally Lipschitz co
 %   state equation or tangent equation.
 % \end{rmk}
 Therefore the control-to-observation operator $S_{obs}$ is also Fr\'echet differentiable and its derivative is given by 
-\[S_{obs}'(q)\colon \delta q\mapsto (\chi_{\Omega_o}\delta y,\chi_{\Omega_o}\delta y(T))\]
+\[S_{obs}'(u)\colon \delta u\mapsto (\chi_{\Omega_o}\delta y,\chi_{\Omega_o}\delta y(T))\]
 where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we introduce we adjoint control to observation operator $S'^\star$.
 \begin{prop}
-  Let $q\in Q_{ad}$. There exists a linear operator
+  Let $u\in U_{ad}$. There exists a linear operator
   \[
-  S'^\star(q)\colon L^2(I\times\Omega_o)\times L^2(\Omega_o)\rightarrow \C, (\phi,p_T)\mapsto p
+  S'^\star(u)\colon L^2(I\times\Omega_o)\times L^2(\Omega_o)\rightarrow \C, (\phi,p_T)\mapsto p
   \]
   which fulfills
   \begin{multline}
-  (S'(q)\delta q,\phi)_{L^2(I\times \Omega_o)}+((S'(q)\delta q)(T),p_T)_{L^2(\Omega_o)}=\langle\delta q, S'^\star(q)(\phi,p_T)\rangle_{\M,\C}\\
-  \forall \delta q\in\M,~(\phi,p_T) \in L^2(I\times \Omega_o)\times L^2(\Omega_o).
+  (S'(u)\delta u,\phi)_{L^2(I\times \Omega_o)}+((S'(u)\delta u)(T),p_T)_{L^2(\Omega_o)}=\langle\delta u, S'^\star(u)(\phi,p_T)\rangle_{\M,\C}\\
+  \forall \delta u\in\M,~(\phi,p_T) \in L^2(I\times \Omega_o)\times L^2(\Omega_o).
+  \label{adjointwf}
   \end{multline}
   Moreover it is the solution operator of
   \begin{subequations}
@@ -158,23 +159,25 @@ where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we i
       p(T,\cdot) = p_T \mbox{ in } \Omega\label{adjointKdV3}
    \end{numcases}
   \end{subequations}
-  with $y=S(q)$.
+  with $y=S(u)$.
   \label{adjointKdV}
 \end{prop}
 \begin{proof}[Proof of Proposition~\ref{adjointKdV}]
 First of all we mention that $y\partial_x p\in L^1(I,L^2(\Omega))$ holds for $y\in \mathcal B$ and $p\in \mathcal B$, c.f., Lemma \ref{lemadjoint}. Then we consider the weak formulation of the tangent equation
-\[
-(\delta y,\phi)_{L^2(I\times\Omega)}+(\delta y(T),p_T)_{L^2(\Omega)}-(\delta y,y\partial_x p)_{L^2(I\times\Omega)}=\langle \delta q,p\rangle_{\mathcal M_I,\mathcal C_I},\quad\delta q\in \M
-\]
-with $y=S(q)\in\mathcal B$.  Therefore we set $S'^\star(q)(\phi,p_T):=p$ where $p$ solves the fixed point equation
-\be\label{fixed_point_equation_adjoint}
-p(t)=W^*(T-t)p_T+\int_t^TW^*(s-t)(\phi(s)-y(s)\partial_xp(s))~\mathrm ds,~t\in I.
+\be
+(\delta y,\phi)_{L^2(I\times\Omega)}+(\delta y(T),p_T)_{L^2(\Omega)}-(\delta y,y\partial_x p)_{L^2(I\times\Omega)}=\langle \delta u,p\rangle_{\mathcal M_I,\mathcal C_I},\quad\delta u\in \M
+\label{tangentwf}
 \ee
-The fixed point equation \eqref{fixed_point_equation_adjoint} has an unique solution $p\in \mathcal B\hookrightarrow\C$, for a proof see Appendix \ref{appendixadjoint}.
+with $y=S(u)\in\mathcal B$ and therefore  $\delta y=S'(u)\delta u\in\mathcal B$. By identification with \eqref{adjointwf}, we set $S'^\star(u)(\phi,p_T):=p$ where $p$ solves the fixed point equation
+\be\label{fixed_point_equation_adjoint}
+p(t)=W^*(T-t)p_T+\int_t^TW^*(s-t)(\phi(s)-y(s)\partial_xp(s))~\mathrm ds,~t\in I,
+\ee
+derived from the form \eqref{adjointmild} with a source term that now also depends on $p$.
+The fixed point equation \eqref{fixed_point_equation_adjoint} has a unique solution $p\in \mathcal B\hookrightarrow\C$, for a proof see Appendix \ref{appendixadjoint}.
 \end{proof}
 Next we derive first order optimality conditions using tools from convex analysis.
 \begin{prop}
-  Let $(\bar y,\bar q)\in \mathcal B\times Q_{ad}$ be the solution of \eqref{cost}. Then there
+  Let $(\bar y,\bar u)\in \mathcal B\times U_{ad}$ be the solution of \eqref{cost}. Then there
   exists a unique $\bar p\in \C$ which is the solution of the adjoint state equation
   \bean
   &-\partial_t\bar p -\partial_x \bar p -\gamma \partial_{xx} \bar p -\partial_{xxx} \bar p - \bar y\partial_x \bar p=\chi_{\Omega_o}\bar y-z_1 \mbox{ in } \Omega,\\
@@ -183,47 +186,47 @@ Next we derive first order optimality conditions using tools from convex analysi
   \eean
   and fulfills the following variational inequality condition
   \be
-  \langle -\bar p,q-\bar q\rangle_{\C,\M}+\|\bar q\|_{\M}\leq\|q\|_{\M}\quad\forall q\in Q_{ad}.
+  \langle -\bar p,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}\leq\|u\|_{\M}\quad\forall u\in Q_{ad}.
   \label{subgradientcond}
   \ee
 \end{prop}
 \begin{proof}
-  We define $G(q)=(1/2)\|S_{obs}(q)-z\|_{L^2(I\times \Omega_{obs})}^2$ and $F(q)=\|q\|_{\M}$+$\mathcal I_{Q_{ad}}(q)$. Then the directional derivative of $G$ can be expressed using the operator $S_{obs}'^\star(\bar q)$ namely
+  We define $G(u)=(1/2)\|S_{obs}(u)-z\|_{L^2(I\times \Omega_{obs})}^2$ and $F(u)=\|u\|_{\M}$+$\mathcal I_{U_{ad}}(u)$. Then the directional derivative of $G$ can be expressed using the operator $S_{obs}'^\star(\bar u)$ namely
   \[
-  \nabla G(\bar q)=S_{obs}'^\star(\bar q)(S_{obs}(\bar q)-z)\in \C.
+  \nabla G(\bar u)=S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z)\in \C.
   \]
-  We define $\bar p := \nabla G(\bar q)$. An element $\bar q\in Q_{ad}$ is optimal if
+  We define $\bar p := \nabla G(\bar u)$. An element $\bar u\in U_{ad}$ is optimal if
   \[
-  G(\bar q)+F(\bar q)\leq G(q)+F(q)\quad\forall q\in Q_{ad}
+  G(\bar u)+F(\bar u)\leq G(u)+F(u)\quad\forall u\in U_{ad}
   \]
   and in  particular
   \[
-  G(\bar q)+F(\bar q)\leq G(\bar q + \varepsilon(q-\bar q))+F(\bar q+ \varepsilon(q-\bar q))
+  G(\bar u)+F(\bar u)\leq G(\bar u + \varepsilon(u-\bar u))+F(\bar u+ \varepsilon(u-\bar u))
   \]
-  for some $0<\varepsilon$ small enough such that $\bar q + \varepsilon(q-\bar q)\in Q_{ad}$ holds. Using the convexity of $F$ we get
+  for some $0<\varepsilon$ small enough such that $\bar u + \varepsilon(u-\bar u)\in U_{ad}$ holds. Using the convexity of $F$ we get
   \[
-    \frac{G(\bar q)-G(\bar q + \varepsilon(\delta q-\bar q))}{\varepsilon}+ F(\bar q)\leq F(q)
+    \frac{G(\bar u)-G(\bar u + \varepsilon(\delta u-\bar u))}{\varepsilon}+ F(\bar u)\leq F(u)
   \]
   which implies
   \[
-  \langle-\bar p ,q-\bar q\rangle_{\C,\M} + F(\bar q)\leq F(q)\quad\forall q\in Q_{ad}.
+  \langle-\bar p ,u-\bar u\rangle_{\C,\M} + F(\bar u)\leq F(u)\quad\forall u\in U_{ad}.
   \]
 \end{proof}
 \begin{rmk}
-  A vector measure $q\in \M$ can be decomposed in a space dependent measure part $|q|\in \mathcal M(\Omega)^+$ and a space-time dependent function $q'\in  L^1((\Omega,|q|),L^2(I))$, in particular it holds
+  A vector measure $u\in \M$ can be decomposed in a space dependent measure part $|u|\in \mathcal M(\Omega)^+$ and a space-time dependent function $u'\in  L^1((\Omega,|u|),L^2(I))$, in particular it holds
   \[
-  \mathrm dq=q'~\mathrm d|q|.
+  \mathrm du=u'~\mathrm d|u|.
   \]
 \end{rmk}
 \begin{prop}
 There exists functions $\bar\mu,\bar\lambda\in \C$  which satisfy $-\bar p=\bar \mu+\bar \lambda$ and
 \begin{align*}
 0&=\left(\|\bar u\|_{\M}-\hat c\right)\|\bar\lambda\|_{\C}\\
-\operatorname{supp}|\bar q|&\subseteq \{x\in \Omega\colon \|\bar \mu(x)\|_{L^2(I)}=\alpha\}.
+\operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\bar \mu(x)\|_{L^2(I)}=\alpha\}.
 \end{align*}
-with $\hat c = C/T^{1/4}-\|y_0\|_{L^2(\Omega)}$. Moreover let $\bar q'$ be the Radon-Nikodym-derivative of the optimal control $\bar q$ with respect to its total variation measure $|\bar q|$. Then the following statement 
+with $\hat c = C/T^{1/4}-\|y_0\|_{L^2(\Omega)}$. Moreover let $\bar u'$ be the Radon-Nikodym-derivative of the optimal control $\bar u$ with respect to its total variation measure $|\bar u|$. Then the following statement 
 \be
-\bar q'(x)=-\frac{\bar p(x)}{\alpha +\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar q|),L^2(I))
+\bar u'(x)=-\frac{\bar p(x)}{\alpha +\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I))
 \label{controlintime}
 \ee
 holds true.
@@ -232,30 +235,30 @@ holds true.
 \begin{proof}
 The variational inequality \eqref{subgradientcond} implies the existence of $\bar \mu,\bar \lambda\in \C$ such that $-\bar p=\bar\mu+\bar\lambda$ and
 \begin{align*}
-\langle \bar\mu,q-\bar q\rangle_{\C,\M}+\|\bar q\|_{\M}&\leq\|q\|_{\M}&&\forall q\in \M\\
-\langle \bar\lambda,q-\bar q\rangle_{\C,\M}&\leq0&&\forall q\in Q_{ad}
+\langle \bar\mu,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}&\leq\|u\|_{\M}&&\forall u\in \M\\
+\langle \bar\lambda,u-\bar u\rangle_{\C,\M}&\leq0&&\forall u\in U_{ad}
 \end{align*}
 holds. 
 The last two variational inequalities are equivalent to
 \begin{align*}
-\alpha\|\bar q\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}&=\langle -\bar p,\bar q\rangle_{\M,\C}\\
-\|\bar \mu\|_{\C}\leq\alpha,~\|\bar q\|&\leq \hat c.
+\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}&=\langle -\bar p,\bar u\rangle_{\M,\C}\\
+\|\bar \mu\|_{\C}\leq\alpha,~\|\bar u\|&\leq \hat c.
 \end{align*}
 In particular we have
 \begin{multline*}
-\alpha\|\bar q\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}= \int_\Omega(-\bar p,\bar q')_{L^2(I)}~\mathrm d|\bar q|
-\leq \int_\Omega\|-\bar p\|_{L^2(I)}\|\bar q'\|_{L^2(I)}~\mathrm d|\bar q|\\
-= \int_\Omega\|\bar\mu+\bar\lambda\|_{L^2(I)}~\mathrm d|\bar q|
-\leq\int_\Omega\|\bar\mu\|_{L^2(I)}+\|\bar\lambda\|_{L^2(I)}~\mathrm d|\bar q|
-\leq\alpha\|\bar q\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}
+\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}= \int_\Omega(-\bar p,\bar u')_{L^2(I)}~\mathrm d|\bar u|
+\leq \int_\Omega\|-\bar p\|_{L^2(I)}\|\bar u'\|_{L^2(I)}~\mathrm d|\bar u|\\
+= \int_\Omega\|\bar\mu+\bar\lambda\|_{L^2(I)}~\mathrm d|\bar u|
+\leq\int_\Omega\|\bar\mu\|_{L^2(I)}+\|\bar\lambda\|_{L^2(I)}~\mathrm d|\bar u|
+\leq\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}
 \end{multline*}
 Thus the last chain of inequalities holds with equality. First of all this implies 
 \[
-\bar q'(x)=-\frac{\bar p(x)}{\|\bar \mu(x)\|_{L^2(I)}+\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar q|),L^2(I)).
+\bar u'(x)=-\frac{\bar p(x)}{\|\bar \mu(x)\|_{L^2(I)}+\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
 \] 
 Moreover we get
 \[
-\int_\Omega\|\bar \mu(x)\|_{L^2(I)}-\alpha~\mathrm d|\bar q|=0
+\int_\Omega\|\bar \mu(x)\|_{L^2(I)}-\alpha~\mathrm d|\bar u|=0
 \]
 and
 \[
@@ -263,7 +266,7 @@ and
 \]
 \end{proof}
 \begin{rmk}
-If the constraint $\|\bar q\|_{\M}\leq \hat c$ is not satisfied with equality there holds $\bar \lambda=0$ and we recover the results from \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
+If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not satisfied with equality there holds $\bar \lambda=0$ and we recover the results from \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
 \end{rmk}
 %\begin{proof}[Proof of Proposition~\ref{propsubgcondition}]
 %
