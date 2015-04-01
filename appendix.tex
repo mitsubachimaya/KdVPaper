@@ -1,3 +1,4 @@
+%!TEX root = kdv.tex
 \appendix
 \section{Well-posedness of the state equation}
 \label{sec:appwp}
@@ -236,30 +237,30 @@
 Next we analyze be well posedness of the tangent equation
 \begin{subequations}
  \begin{numcases}{}
-\partial_t \delta y +\partial_x \delta y + \partial_{xxx} \delta y - \gamma \delta \partial_{xx} y  + \partial_x(y \delta y)=  \delta q \mbox{ in } I\times\Omega,\label{linkdv1}\\
+\partial_t \delta y +\partial_x \delta y + \partial_{xxx} \delta y - \gamma \delta \partial_{xx} y  + \partial_x(y \delta y)=  \delta u \mbox{ in } I\times\Omega,\label{linkdv1}\\
 \delta y(.,0) = \delta y(.,L) = \partial_x \delta y (.,L) = 0 \mbox{ in } I,\label{linkdv2}\\
 \delta y(0,x) = \delta y_0 \mbox{ in } \Omega.\label{linkdv3}
  \end{numcases}
 \end{subequations}
 \begin{Def}
-Let $(\delta q,\delta y_0)\in\M\times \mathcal B$ and $y\in \mathcal B$. A function $\delta y\in \mathcal B$ is called a solution of \eqref{linkdv1}-\eqref{linkdv3} if it satisfies the fixed point equation
+Let $(\delta u,\delta y_0)\in\M\times \mathcal B$ and $y\in \mathcal B$. A function $\delta y\in \mathcal B$ is called a solution of \eqref{linkdv1}-\eqref{linkdv3} if it satisfies the fixed point equation
 \[
 \delta y=\mathcal L(\delta q-\partial_x(y\delta y),\delta y_0)
 \]
 where $\mathcal L$ is the solution operator from Remark \ref{rmklinearoperator}.
 \end{Def}
 \begin{prop}\label{prop:tangent}
- Let $(\delta q,\delta y_0) \in \Hm1\times L^2(\Omega)$ and $y\in \mathcal B$. Then, there exists a unique solution $\delta y \in \mathcal{B}$ of \eqref{linkdv1}-\eqref{linkdv3}. Furthermore, there exists a constant $\widetilde C(T,L,\norm{y}_{\mathcal{B}})$ such that the following estimate holds
+ Let $(\delta u,\delta y_0) \in \Hm1\times L^2(\Omega)$ and $y\in \mathcal B$. Then, there exists a unique solution $\delta y \in \mathcal{B}$ of \eqref{linkdv1}-\eqref{linkdv3}. Furthermore, there exists a constant $\widetilde C(T,L,\norm{y}_{\mathcal{B}})$ such that the following estimate holds
  \be\label{estimatetangent}
- \norm{\delta y}_{\mathcal B}+\|\partial_t \delta y\|_{L^2(I,\mathcal V^*)} \leq \widetilde C \left( \norm{\delta y_0}_{L^2(\Omega)} + \norm{\delta q}_{\Hm1}\right).
+ \norm{\delta y}_{\mathcal B}+\|\partial_t \delta y\|_{L^2(I,\mathcal V^*)} \leq \widetilde C \left( \norm{\delta y_0}_{L^2(\Omega)} + \norm{\delta u}_{\Hm1}\right).
  \ee
 \end{prop}
 \begin{proof}[Proof of Proposition~\ref{prop:tangent}]
 We define the linear mapping
 \[
-\Psi_{\delta q, \delta y_0,y}\colon \mathcal B_{\theta}\rightarrow B_{\theta},~~\Psi_{\delta q, \delta y_0,y}(\delta y) = \mathcal{L}(\delta q - \partial_x(y\delta y),\delta y_0)
+\Psi_{\delta u, \delta y_0,y}\colon \mathcal B_{\theta}\rightarrow B_{\theta},~~\Psi_{\delta u, \delta y_0,y}(\delta y) = \mathcal{L}(\delta u - \partial_x(y\delta y),\delta y_0)
 \]
-with $\mathcal B_{\theta}$ defined as in \eqref{btheta} and \eqref{normbtheta} and $\mathcal{L}$ being the linear \KdV operator described in Remark~\ref{rmklinearoperator}. Our goal is to show that under some constraints on $\theta$, $\Psi_{\delta q, \delta y_0,y}$ is a contraction mapping, such that the Banach fixed point theorem can be applied. First we estimate $\partial_x(y \delta y)$ in the $L^2([0,\theta],H^{-1}(\Omega))$-norm
+with $\mathcal B_{\theta}$ defined as in \eqref{btheta} and \eqref{normbtheta} and $\mathcal{L}$ being the linear \KdV operator described in Remark~\ref{rmklinearoperator}. Our goal is to show that under some constraints on $\theta$, $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping, such that the Banach fixed point theorem can be applied. First we estimate $\partial_x(y \delta y)$ in the $L^2([0,\theta],H^{-1}(\Omega))$-norm
 \beal\label{estimate_variable_coefficient}
 \|\partial_x(y\delta y)\|_{L^2([0,\theta],H^{-1}(\Omega))} &\leq \left(\int_{0}^{\theta}\left(\underset{\|v\|_{H^1_0(\Omega)}\leq 1}{\operatorname{sup}}\langle\partial_x(y\delta y)(t),v\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}\right)^2~\mathrm dt\right)^{\frac{1}{2}}\\
 &\leq\left(\int_{0}^{\theta}\|\delta y(t)\|_{L^2(\Omega)}^2\|y(t)\|_{L^\infty(\Omega)}^2~\mathrm dt\right)^{\frac{1}{2}}\\
@@ -270,14 +271,14 @@ with $\mathcal B_{\theta}$ defined as in \eqref{btheta} and \eqref{normbtheta} a
 \eeal
 Therefore we can estimate
 \beal
-\|\Psi(\delta y)_{\delta q, \delta y_0,y}\|_{\mathcal B_{\theta}} & \leq \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta q\|_{L^2(I,H^{-1}(\Omega))}+\|\partial_x(y\delta y)\|_{L^2([0,\theta],H^{-1}(\Omega))}\right)\\
-&\leq \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta q\|_{L^2(I,H^{-1}(\Omega))}\right) + C_2\theta\|y\|_{\mathcal B_{\theta}}^2\|\delta y\|_{\mathcal B_{\theta}}
+\|\Psi(\delta y)_{\delta u, \delta y_0,y}\|_{\mathcal B_{\theta}} & \leq \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta u\|_{L^2(I,H^{-1}(\Omega))}+\|\partial_x(y\delta y)\|_{L^2([0,\theta],H^{-1}(\Omega))}\right)\\
+&\leq \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta u\|_{L^2(I,H^{-1}(\Omega))}\right) + C_2\theta\|y\|_{\mathcal B_{\theta}}^2\|\delta y\|_{\mathcal B_{\theta}}
 \eeal
 and
 \be
-\|\Psi_{\delta q, \delta y_0,y}(\delta y_1)-\Psi_{\delta q, \delta y_0,y}(\delta y_2)\|_{\mathcal B_{\theta}}\leq C_2\theta\|y\|_{\mathcal B_{\theta}}^2\|\delta y_1-\delta y_2\|_{\mathcal B_{\theta}}.
+\|\Psi_{\delta u, \delta y_0,y}(\delta y_1)-\Psi_{\delta u, \delta y_0,y}(\delta y_2)\|_{\mathcal B_{\theta}}\leq C_2\theta\|y\|_{\mathcal B_{\theta}}^2\|\delta y_1-\delta y_2\|_{\mathcal B_{\theta}}.
 \ee
-Now we set $r=2 \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta q\|_{L^2(I,H^{-1}(\Omega))}\right)$ and introduce the ball
+Now we set $r=2 \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta u\|_{L^2(I,H^{-1}(\Omega))}\right)$ and introduce the ball
 \[
 B=\{\delta y \in \mathcal B_{\theta}\colon \|\delta y\|_{\mathcal B_{\theta}}\leq r\}.
 \]
@@ -287,9 +288,9 @@ C_2\theta\|y\|_{\mathcal B}^2\leq\frac{1}{3}
 \]
 holds. Then the following inequalities hold
 \[
-\|\Psi_{\delta q, \delta y_0,y}(\delta y)\|_{\mathcal B_{\theta}}\leq \frac{2}{3}r,~~\|\Psi_{\delta q, \delta y_0,y}(\delta y_1) - \Psi_{\delta q, \delta y_0,y}(\delta y_2)\|_{\mathcal B_{\theta}}\leq\frac{2}{3}\|\delta y_1-\delta y_2\|_{\mathcal B_{\theta}}.
+\|\Psi_{\delta u, \delta y_0,y}(\delta y)\|_{\mathcal B_{\theta}}\leq \frac{2}{3}r,~~\|\Psi_{\delta u, \delta y_0,y}(\delta y_1) - \Psi_{\delta u, \delta y_0,y}(\delta y_2)\|_{\mathcal B_{\theta}}\leq\frac{2}{3}\|\delta y_1-\delta y_2\|_{\mathcal B_{\theta}}.
 \]
-which implies that $\Psi_{\delta q, \delta y_0,y}$ is a contraction mapping on $B$. So we can apply the Banach fixed point theorem which guarantees the existence of a unique fixed point $\delta y$ of $\Psi_{\delta q, \delta y_0,y}$ which is a solution of \eqref{linkdv1}-\eqref{linkdv3} in $(0,\theta)$ with initial value $\delta y_0$. Since $\theta$ is independent of $\delta y_0$ we can apply this strategy successively starting at $t=0$ with $\delta y_0$ and using $\delta y(k\theta)$ as initial points for $k=1,2,3,\ldots,N$ until $T$ is reached. The concatenation of all $\delta y(k\theta)$ for $k=1,2,3,\ldots,N$ is a solution of \eqref{linkdv1} - \eqref{linkdv3}. Existence of a unique solution is thus proven. Concerning the estimates \eqref{estimatetangent}, the proof is very similar to the non-variable coefficients case (see Appendix~\ref{sec:linear-estimates}). We just mention the main differences.  In the case of  a smooth solution $\delta y \in \mathcal C(\bar I,\mathcal D(A))\cap \,\mathcal C^1(I,L^2(\Omega))$ we multiply \eqref{linkdv1} by $\delta y$ and estimate the term concerning $y$ in the following way
+which implies that $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping on $B$. So we can apply the Banach fixed point theorem which guarantees the existence of a unique fixed point $\delta y$ of $\Psi_{\delta u, \delta y_0,y}$ which is a solution of \eqref{linkdv1}-\eqref{linkdv3} in $(0,\theta)$ with initial value $\delta y_0$. Since $\theta$ is independent of $\delta y_0$ we can apply this strategy successively starting at $t=0$ with $\delta y_0$ and using $\delta y(k\theta)$ as initial points for $k=1,2,3,\ldots,N$ until $T$ is reached. The concatenation of all $\delta y(k\theta)$ for $k=1,2,3,\ldots,N$ is a solution of \eqref{linkdv1} - \eqref{linkdv3}. Existence of a unique solution is thus proven. Concerning the estimates \eqref{estimatetangent}, the proof is very similar to the non-variable coefficients case (see Appendix~\ref{sec:linear-estimates}). We just mention the main differences.  In the case of  a smooth solution $\delta y \in \mathcal C(\bar I,\mathcal D(A))\cap \,\mathcal C^1(I,L^2(\Omega))$ we multiply \eqref{linkdv1} by $\delta y$ and estimate the term concerning $y$ in the following way
 \beal
 \megaabs{\int_0^L{\delta y \partial_x \left( y \delta y \right)}~\mathrm dx} = \megaabs{-\int_0^L{y \delta y \partial_x \delta y}~\mathrm dx} &\leq \frac{1}{2\varepsilon}\int_0^L{y^2 \delta y^2}~\mathrm dx + \frac{\varepsilon}{2}\|\delta y\|_{H^1_0(\Omega)}^2\\
 &\leq \frac{1}{2\varepsilon}\norm{y}_{L^{\infty}(\Omega)}^2 \|\delta y\|^2_{L^2(\Omega)} + \frac{\varepsilon}{2}\|\delta y\|_{H^1_0(\Omega)}^2
