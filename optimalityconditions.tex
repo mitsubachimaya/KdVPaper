@@ -25,7 +25,7 @@ Next we discuss the differentiability of $S$.
 First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),\quad y\mapsto y\partial_x y$ is Fr\'echet differentiable since
 \[
 \|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2
-\] 
+\]
 with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B\hookrightarrow L^4(I\times \Omega)$. Then we differentiate the fixed point equation $y=\mathcal L(u-y\partial_x y,y_0)$ with respect to $(y,u)$ in direction $(\delta y,\delta u)\in \mathcal B\times \M$ and get
 \be\label{abstract_tangent_equation}
 \delta y=\mathcal L'(\delta u-\partial_x(y\delta y))
@@ -137,7 +137,7 @@ Thus we can conclude that the solution operator $S$ is locally Lipschitz continu
 %   &\delta y(0,.) = 0 \mbox{ on } \Omega.  \eealn is called linearized
 %   state equation or tangent equation.
 % \end{rmk}
-Therefore the control-to-observation operator $S_{obs}$ is also Fr\'echet differentiable and its derivative is given by 
+Therefore the control-to-observation operator $S_{obs}$ is also Fr\'echet differentiable and its derivative is given by
 \[S_{obs}'(u)\colon \delta u\mapsto (\chi_{\Omega_o}\delta y,\chi_{\Omega_o}\delta y(T))\]
 where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we introduce we adjoint control to observation operator $S'^\star$.
 \begin{prop}
@@ -218,31 +218,39 @@ Next we derive first order optimality conditions using tools from convex analysi
   \mathrm du=u'~\mathrm d|u|.
   \]
 \end{rmk}
+In order to handle the the norm constraint we need the following assumption.
+\begin{as}\label{as:exist multp}
+We assume the existence of $\bar \lambda,\,\bar\mu\in \C$ satisfying $-\bar p=\bar\lambda +\bar \mu$ and
+\begin{align}
+\langle \bar\mu,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}&\leq\|u\|_{\M}&&\forall u\in \M,\label{var ineq mu}\\
+\langle \bar\lambda,u-\bar u\rangle_{\C,\M}&\leq0&&\forall u\in U_{ad}\label{var ineq lambda}.
+\end{align}
+\end{as}
+Based on this assumption we can show the following result.
 \begin{prop}
-There exists functions $\bar\mu,\bar\lambda\in \C$  which satisfy $-\bar p=\bar \mu+\bar \lambda$ and
+Let $\bar u\in U_{ad}$ be the optimal control of \eqref{cost}. Moreover let $|\bar u|\in \mathcal M(\Omega)$ be its total-variation measure and $\bar u'$ its the Radon-Nikodym-derivative. Furthermore $\bar p\in \C$ be the corresponding optimal adjoint state and $\bar \lambda,\,\bar\mu\in \C$ the functions from Assumption \ref{as:exist multp}. Then there holds
 \begin{align*}
 0&=\left(\|\bar u\|_{\M}-\hat c\right)\|\bar\lambda\|_{\C}\\
 \operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\bar \mu(x)\|_{L^2(I)}=\alpha\}.
 \end{align*}
-with $\hat c = C/T^{1/4}-\|y_0\|_{L^2(\Omega)}$. Moreover let $\bar u'$ be the Radon-Nikodym-derivative of the optimal control $\bar u$ with respect to its total variation measure $|\bar u|$. Then the following statement 
+with $\hat c = C/T^{1/4}-\|y_0\|_{L^2(\Omega)}$ and
 \be
-\bar u'(x)=-\frac{\bar p(x)}{\alpha +\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I))
+\bar u'(x)=-\frac{\bar p(x)}{\alpha +\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
 \label{controlintime}
 \ee
-holds true.
 \label{propsubgcondition}
 \end{prop}
 \begin{proof}
-The variational inequality \eqref{subgradientcond} implies the existence of $\bar \mu,\bar \lambda\in \C$ such that $-\bar p=\bar\mu+\bar\lambda$ and
+The variational inequalities inequalities \label{var ineq mu} and \label{var ineq lambda} are equivalent to 
 \begin{align*}
-\langle \bar\mu,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}&\leq\|u\|_{\M}&&\forall u\in \M\\
-\langle \bar\lambda,u-\bar u\rangle_{\C,\M}&\leq0&&\forall u\in U_{ad}
+\alpha\|\bar u\|_{\M}&=\langle \bar\mu,\bar u\rangle_{\M,\C},\\
+\hat c\,\|\bar\lambda\|_{\C}&=\langle \bar\lambda,\bar u\rangle_{\M,\C},\\
+\|\bar \mu\|_{\C}&\leq\alpha,~\|\bar u\|_{\M}\leq \hat c.
 \end{align*}
-holds. 
-The last two variational inequalities are equivalent to
+and thus 
 \begin{align*}
-\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}&=\langle -\bar p,\bar u\rangle_{\M,\C}\\
-\|\bar \mu\|_{\C}\leq\alpha,~\|\bar u\|&\leq \hat c.
+\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}&=\langle -\bar p,\bar u\rangle_{\M,\C},\\
+\|\bar \mu\|_{\C}\leq\alpha,~\|\bar u\|_{\M}&\leq \hat c.
 \end{align*}
 In particular we have
 \begin{multline*}
@@ -252,10 +260,10 @@ In particular we have
 \leq\int_\Omega\|\bar\mu\|_{L^2(I)}+\|\bar\lambda\|_{L^2(I)}~\mathrm d|\bar u|
 \leq\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}
 \end{multline*}
-Thus the last chain of inequalities holds with equality. First of all this implies 
+Thus the last chain of inequalities holds with equality. First of all this implies
 \[
 \bar u'(x)=-\frac{\bar p(x)}{\|\bar \mu(x)\|_{L^2(I)}+\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
-\] 
+\]
 Moreover we get
 \[
 \int_\Omega\|\bar \mu(x)\|_{L^2(I)}-\alpha~\mathrm d|\bar u|=0
