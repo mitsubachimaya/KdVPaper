@@ -1,53 +1,48 @@
-\section{Well-posedness of the optimal control problem assuming existence of $L^4(I,L^4(\Omega))$}
+\section{Well-posedness of the optimal control problem for $\gamma=0$ and $U_{ad}=\M$}
 %!TEX root = kdv.tex
-In order to have global existence of solutions to the forced Korteweg-de Vries equation with non-smooth source terms without assuming smallness of data or  additional diffusion, one can also use ideas from \cite{casasanalysis,amann2005optimal} and modify the cost functional. In the following, we assume that there exists a small parameter $\eta$ such that the cost functional writes
+This section is based on ideas from \cite{lions1985control}. There the state equation is considered as equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections. Moreover we add the term $\frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4$ for $\eta >0$ to the cost functional. In the following we will see that the boundedness of the state in the $L^4(I,L^4(\Omega))$-norm makes the state equation a well-defined equality constraint and ensures the time-global existence of $y$ in $\mathcal B$. Thus we consider an optimal control problem of the form
 \begin{multline}
-\min_{u \in \M}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{obs}}y - z_1}_{L^2(I\times \Omega_{obs})}^2+\|\chi_{\Omega_{obs}}y(T)-z_2\|_{L^2(\Omega_{obs})}^2\right) \\+ \alpha \norm{u}_{\mathcal{M}(\Omega, L^{2}(I))} + \frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4,
+\min_{u \in \M}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{obs}}y - z_1}_{L^2(I\times \Omega_{obs})}^2+\|\chi_{\Omega_{obs}}y(T)-z_2\|_{L^2(\Omega_{obs})}^2\right) \\+ \alpha \norm{u}_{\mathcal{M}(\Omega, L^{2}(I))} + \frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4.
 \label{cost2}
 \end{multline}
-where $y$ and $u$ are a \textit{state-control pair} of the Korteweg-de Vries equation (state - control pairs in optimal control problems of disturbed singular systems are originally described in \cite{lions1985control}). This new objective functional ensures that in the optimum, the function lies in the space $L^4(I,L^4(\Omega))$ and we can therefore prove that it avoids the blow up that could occur in the previous section. We give hereafter a more precise definition of a state-control pair for our case. But before that, we prove:
-
+subject to \eqref{kdvcontrol1}-\eqref{kdvcontrol3}. The $L^4(I,L^4(\Omega))$-norm is chosen since it guarantees the following regularity of the non-linearity.  
 \begin{lem}
 \label{lemyyxL4}
  Let $y \in L^4(I,L^4(\Omega))$. Then $y \partial_x y \in L^2(I,H^{-1}(\Omega))$.
 \end{lem}
 \begin{proof}
- Let $\varphi \in L^2(I, H^1_0(\Omega))$ and $y \in L^4(I,L^4(\Omega))$.
- \beal
- \megaabs{\int_I{\left( y\partial_x y, \varphi\right)}} &= \megaabs{\int_I{\frac{1}{2}\left( \partial_x y^2, \varphi\right)}}\\
- & = \megaabs{-\int_I{\frac{1}{2}\left(y^2, \partial_x\varphi\right)}}\\
- & \leq \frac{1}{2}\int_I{\norm{y^2}_{L^2(\Omega)} \norm{\partial_x \varphi}_{L^2(\Omega)}}\\
- & \leq \frac{1}{2} \int_I{\norm{y}_{L^4(\Omega)}^2 \norm{\varphi}_{H^1_0(\Omega)}}\\
- & \leq \frac{1}{2} \norm{y}_{L^4(I,L^4(\Omega))}^2 \norm{\varphi}_{L^2(I,H^1_0(\Omega))}
- \eeal
- which concludes the proof.
+The proof is based on similar arguments as in the proof of Lemma \ref{lemyyx2}.
+ %Let $\varphi \in L^2(I, H^1_0(\Omega))$ and $y \in L^4(I,L^4(\Omega))$.
+% \beal
+% \megaabs{\int_I{\left( y\partial_x y, \varphi\right)}} &= \megaabs{\int_I{\frac{1}{2}\left( \partial_x y^2, \varphi\right)}}\\
+% & = \megaabs{-\int_I{\frac{1}{2}\left(y^2, \partial_x\varphi\right)}}\\
+% & \leq \frac{1}{2}\int_I{\norm{y^2}_{L^2(\Omega)} \norm{\partial_x \varphi}_{L^2(\Omega)}}\\
+% & \leq \frac{1}{2} \int_I{\norm{y}_{L^4(\Omega)}^2 \norm{\varphi}_{H^1_0(\Omega)}}\\
+% & \leq \frac{1}{2} \norm{y}_{L^4(I,L^4(\Omega))}^2 \norm{\varphi}_{L^2(I,H^1_0(\Omega))}
+% \eeal
+% which concludes the proof.
 \end{proof}
-
-It is then easy to check that every term involved in the following definition make sense.
+Therefore the following definition is reasonable.
 \begin{Def}\label{statecontrolpair}
-Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$. They are called a \textit{state-control pair} if and only if they satisfy the fixed point equation
-\begin{equation}\label{weakformkdv}
+Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$. They are called a \textit{state-control pair} if they satisfy the equation
+\begin{equation}\label{weakformkdv L4}
 \int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-\partial_xy y,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
 \end{equation}
 for all $(\phi,p_T) \in L^{4/3}(I,L^2(\Omega))\times L^2(\Omega)$, where $p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{Def}
-\begin{rmk}
-\noindent We point out that the test space is slighlty more restrictive than the one from Definition~\ref{defnlkdv}. However, one is still able to prove the following proposition, that results in adequation of both definitions.
-\end{rmk}
-Finally, those tools enable to prove existence of an optimal state-control pair. The originality of this proof lies in the fact that we cannot use a \textit{reduced} approach anymore, but we follow instead \cite{lions1985control}.
+Next we show that the existence of a control-state pair implies the time-global existence of $y$ in $\mathcal B$.
 \begin{prop}\label{statecontrolestimate}
- Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$ be a state-control pair as in Definition~\ref{statecontrolpair} such that $J(y,u) < \infty$. Necessarily, there exists a $K\in \R$ such that $\norm{y}_{L^4(I\times\Omega)} < K $. Then $ y\in \mathcal{B} \cap H^{1}(I,\mathcal{V}^{*})$ and satisfies the global estimate
+ Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$ be a state-control pair. Then $ y\in \mathcal{B} \cap H^{1}(I,\mathcal{V}^{*})$ and satisfies the global estimate
  \be
- \|y\|_{\mathcal{B}}+\|\partial_{t}y\|_{L^2(I,\mathcal{V}^{*})}\leq c(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)} + K^{2} ).
+ \|y\|_{\mathcal{B}}+\|\partial_{t}y\|_{L^2(I,\mathcal{V}^{*})}\leq c\,\left(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)} + \|y\|_{L^4(I,L^4(\Omega))}^{2}\right).
  \ee
 \end{prop}
-
 \begin{proof}
-For the first part of the estimate, one proceed in a similar manner as in Appendix \ref{sec:linear-estimates} but this time for the non-linear \KdV equation. The critical term is then the non-linearity, all the rest is identical. Let $y\in \mathcal C(\bar I,\mathcal D(A))~\cap~\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for data $f\in \Hm1$ and $y_0\in \mathcal D(A)$. We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get for the nonlinear term
+For the first part of the estimate, one proceed in a similar manner as in Appendix \ref{sec:linear-estimates} but this time for the non-linear \KdV equation. The critical term is then the non-linearity, the rest is identical. Let $y\in \mathcal C(\bar I,\mathcal D(A))~\cap~\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth data ($\mathcal C^\infty$). We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get for the nonlinear term
 \[
 \int_0^Ly^2\partial_xy~\mathrm dx=-2\int_0^Ly^2\partial_xy~\mathrm dx.
 \]
-Due to the boundary conditions, the term vanishes. Next, one tests with $xy$
+Due to the boundary conditions, the this term vanishes. Next, we test with $xy$ and see
 \[
 \int_0^Lxy^2\partial_x y~\mathrm dx = -\int_0^L y^3+2xy^2~\mathrm dx.
 \]
@@ -56,32 +51,31 @@ This yields
 \nonumber
 \int_0^Lxy^2\partial_x y~\mathrm dx = -\frac{1}{3}\int_0^L y^3~\mathrm dx.
 \ee
-This additional term is then treated in the same manner as the source term $f$ in Appendix \ref{sec:linear-estimates}. This explains the necessity of the boundedness of $\|y\|_{L^3(I\times\Omega)}$, which is guaranteed by the fact that $y \in L^4(I,L^4(\Omega))$. The estimate for the time derivative $\|\partial_{t}y\|_{L^2(I,\mathcal{V}^{*})}$ follows from \eqref{weakformkdv}, Lemma~\ref{lemyyxL4} and the global estimate for $\norm{y}_{\mathcal{B}}$.
+This additional term is then treated in the same manner as the source term $f$ in Appendix \ref{sec:linear-estimates}. This explains the necessity of the boundedness of $\|y\|_{L^3(I\times\Omega)}$, which is guaranteed by the fact that $y \in L^4(I,L^4(\Omega))$. The estimate for the time derivative $\|\partial_{t}y\|_{L^2(I,\mathcal{V}^{*})}$ follows from \eqref{weakformkdv L4}, Lemma~\ref{lemyyxL4} and the global estimate for $\norm{y}_{\mathcal{B}}$.
 \end{proof}
-
+Now we are in the position to show the existence of an optimal control.
 \begin{prop}
- There exists a solution $(\bar y, \bar u)$ to the optimal control problem \eqref{cost2}.
+There exists a solution $(\bar y, \bar u)$ to the optimal control problem \eqref{cost2}.
 \end{prop}
-
 \begin{proof}
- The cost function $J$ is a positive function. We have already proven in the previous section that there existed small data such that $J$ was finite, thus making it a proper function. Therefore, its infimum $\bar J$ exists and there exists a minimizing sequence of state-control pairs $(y_n,u_n) \in L^4(I,L^4(\Omega))\times \M$ such that $J(y_n, u_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists a $\varepsilon>0$ such that
+Since the cost functional $J$ is positive it has a infimum $\bar J$. Moreover we already have shown existence of a control-state pair $(y,u)\in L^4(I,L^4(\Omega))\times \M$ (for small data). Thus there exists a minimizing sequence of state-control pairs $(y_n,u_n) \in L^4(I,L^4(\Omega))\times \M$ such that $J(y_n, u_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there is a $\varepsilon>0$ such that
 \be
 \varepsilon+J(0,0)\geq \alpha \norm{u_n}_{\M} + \frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4
 \ee
-for $n$ large enough. Therefore the pair $(y_n,u_n)$ is bounded in $L^4(I,L^4(\Omega))\times \M$. Thanks to Proposition~\ref{statecontrolestimate}, one also have $(y_n,u_n)$ is bounded in $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$. This implies the existence of an element $(\bar y, \bar u)\in \mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$ and a state-control subsequence $(y_{n_k},u_{n_k})$ converging in the weak-$*$ topology of $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times\M$ towards $(\bar y, \bar u)$ as well as the existence of $\hat y \in L^2(\Omega)$ such that $y_{n_k}(T) \rightharpoonup \hat y$ in $L^2(\Omega)$. With the Aubin-Lions lemma, one gets also
+for $n$ large enough. Therefore the sequence $(y_n,u_n)$ is bounded in $L^4(I,L^4(\Omega))\times \M$. Thanks to Proposition~\ref{statecontrolestimate}, we also have $(y_n,u_n)$ is bounded in $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$. This implies the existence of an element $(\bar y, \bar u)\in \mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$ and a state-control subsequence $(y_{n_k},u_{n_k})$ converging in the weak-$*$ topology of $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times\M$ towards $(\bar y, \bar u)$ as well as the existence of $\hat y \in L^2(\Omega)$ such that $y_{n_k}(T) \rightharpoonup y(T)$ in $L^2(\Omega)$. With the Aubin-Lions lemma, we get also
 \be
 \nonumber
 y_{n_k} \rightarrow \bar y\quad\text{in}\quad L^2(I,\mathcal C_0(\Omega)).
 \ee
-One needs to check that $(\bar y, \bar u)$ is a state-control pair according to Definition~\ref{statecontrolpair}. The convergence of the linear terms in \eqref{weakformkdv} is obvious. For the nonlinear terms, we already know from Lemma.\ref{lemyyxL4} that $y_{n_{k}}\partial_{x} y_{n_{k}}$ and $y \partial_{x}y$ are in $L^{2}(I, H^{-1}(\Omega))$ and we can make sense of \eqref{weakformkdv}. Cnvergence of the nonlinear terms is due to strong convergence of $y_{nk}$ towards $\bar y$, as
-\begin{multline*}
-\int_0^T\langle y_{n_k}\partial_xy_{n_k}-\bar y\partial_x\bar y,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt=-\int_0^T(y_{n_k}^2-\bar y^2,\partial_x p)_{L^2(\Omega)}~\mathrm dt\\
-\leq\|y_{n_k}-\bar y\|_{L^2(I,\mathcal C_0(\Omega))}\|y_{n_k}+\bar y\|_{\mathcal C(\bar I,L^2(\Omega))}\|\partial_x p\|_{L^2(I\times \Omega)}.
-\end{multline*}
-Therefore $(\bar y, \bar u)$ is a state-control pair and satisfies the weak formulation \eqref{weakformkdv}. The tracking functional (in which we include the $L^4$ part) is weak continuous in $L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$, the control term is weak-* lower semi-continuous in $\M$. Therefore the state-control pair $(\bar y, \bar u)$ is a minimizer of $J$.
+Next we check that $(\bar y, \bar u)$ is a state-control pair according to Definition~\ref{statecontrolpair}. The convergence of the linear terms in \eqref{weakformkdv L4} is obvious. The convergence of the nonlinear terms is due to strong convergence of $y_{nk}$ towards $\bar y$. %, as
+%\begin{multline*}
+%\int_0^T\langle y_{n_k}\partial_xy_{n_k}-\bar y\partial_x\bar y,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt=-\int_0^T(y_{n_k}^2-\bar y^2,\partial_x p)_{L^2(\Omega)}~\mathrm dt\\
+%\leq\|y_{n_k}-\bar y\|_{L^2(I,\mathcal C_0(\Omega))}\|y_{n_k}+\bar y\|_{\mathcal C(\bar I,L^2(\Omega))}\|\partial_x p\|_{L^2(I\times \Omega)}.
+%\end{multline*}
+Therefore $(\bar y, \bar u)$ is a state-control pair and satisfies the weak formulation \eqref{weakformkdv L4}. The tracking functional (in which we include the $L^4$ part) is weakly lower semi-continuous in $L^4(I\times \Omega)\times L^2(\Omega)$, the control term is weakly-* lower semi-continuous in $\M$. Therefore the state-control pair $(\bar y, \bar u)$ is a minimizer of $J$.
 \end{proof}
 
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
-%%% End: 
+%%% End:

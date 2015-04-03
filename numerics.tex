@@ -9,16 +9,16 @@ One difficulty arising when it comes to the discretization of the \KdVB equation
 
 
 
-%Moreover, it is also equivalent to a natural weighted spectral-Galerkin formulation. For those reasons, 
+%Moreover, it is also equivalent to a natural weighted spectral-Galerkin formulation. For those reasons,
 %This will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate discretization of the method regarding the time stepping scheme used.
 
 % One of the most recent and efficient discretization method is a pseudospectral Petrov-Galerkin method on Chebyshev collocation points, as introduced in \cite{ma2000legendre}, and improved in \cite{shen2003new}.
-% 
+%
 %  With the aim of tackling an optimal control problem, spectral discretizations present interesting advantages compared to any finite difference or finite element method \cite{boydchebyshev}. First of all they provide very low approximation errors: in some simple cases, these approaches are even exponentially convergent. As a result, the number of grid points required to achieve the desired precision can be very low and the memory needed to store the variables less than for alternative methods. This is a very convenient feature in our perspective, where the optimization part requires the storage of the forward and backward problem in space and time. Finally, there exist nowadays high-performance implementations of the algorithms required to transform bases for most spectral methods. Because of the nonlinearity in the \KdVB equation,
-% 
-% 
+%
+%
 % TO SUMMARIZE
-% 
+%
 % spectral collocation methods shall be favoured: they indeed allow to represent the variables in terms of their values on a set of points and not only as the coefficients in the spectral expansion. However, for third order equation, the authors show in \cite{merryfield1993properties} that Chebyshev and Legendre collocation methods are unstable. That is why pseudospectral method habe been popular for third order PDEs. Fourier pseudospectral methods have been extensively used \cite{trefethen2000spectral,maday1988error,fornberg1978numerical}. They are in particular very fast when combined with the Fast Fourier Transform to treat the nonlinear term on collocation points. Nevertheless, they are only suited for periodic boundary conditions. Polynomial pseudospectral method on the contrary, which are more adequate for bounded intervals, proved to be stable for the linear third-order differential equation with Chebyshev or Legendre Gauss Lobatto points as collocation points \cite{HuangSloan1992}. They have also demonstrated great performances compared to any other method (see the benchmarking in \cite{skogestad2009boundary}). An interesting hybrid method is proposed in \cite{ma2000legendre}, where the linear term is treated by a Petrov-Galerkin method (better suited for nonsymmetric problems) on Legendre polynomials, while the nonlinear term is treated pseudospectrally using a Chebyshev method. Shortly after, Shen \cite{shen2003new} proposed another dual Petrov-Galerkin method with nearly optimal computational complexity. Moreover, it is also equivalent to a natural weighted spectral-Galerkin formulation. For those reasons, this will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate discretization of the method regarding the time stepping scheme used.
 
 \subsubsection{The dual Petrov-Galerkin method}
@@ -63,13 +63,13 @@ where $M$, $P$, $Q$ and $S$ are matrices of size $(N-2)\times(N-2)$ with coeffic
 
 % \subsection{Time stepping scheme and adjoint - Crank-Nicolson}
 % We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable, though the resolution of the nonlinear system is computationally demanding. This scheme also has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian \cite{meidner2007adaptive}. Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. The scheme for the state is
-% 
+%
 % \bealn
 % &M \tilde y_0=M y_0\\
 % &M \tilde y_{n+1} + \frac{\Delta t}{2}\left( (S +\gamma Q -P)\tilde y_{n+1} - F(\tilde y_{n+1})\right)  &=  M \tilde y_{n} + \frac{\Delta t}{2}\left( (S +\gamma Q-P)\tilde y_{n} - F(\tilde y_{n})\right)  \\
 %  &  &+ \frac{\Delta t}{2}\left( M\tilde q_n + M \tilde q_{n+1}\right), \quad n=0..N.
 % \eealn
-% 
+%
 % Then the discrete adjoint scheme in case of distributed control writes
 % %\begin{equation}\left\{
 % %\begin{split}
@@ -168,7 +168,7 @@ The proof for the adjoint is done by standard calculations on the discrete Lagra
  \eealn
  The major difference lies in the second step. It does not correspond to a consistent discretization of the continuous adjoint equation: the time derivative is not reconstructed. It results in practice in huge oscillations in time of the adjoint variable.
  \end{rmk}
- 
+
  \begin{rmk}
   Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditionned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the mean space step.
  \end{rmk}
@@ -194,7 +194,7 @@ We can then express the optimality condition for \eqref{costreg} by the pointwis
 \be
 \bar u_{\gamma} = -\frac{1}{\gamma}\left( 1 - \alpha/\norm{p_{\gamma}}_{L^{2}(I)}\right)^{+}p_{\gamma}.
 \ee
-It is then directly possible to solve via a Newton type method the equation 
+It is then directly possible to solve via a Newton type method the equation
 \be
 F(u_{\gamma}) = u_{\gamma} + \frac{1}{\gamma}\left( 1 - \alpha/\norm{p_{\gamma}}_{L^{2}(I)}\right)^{+}p_{\gamma} = 0.
 \label{optcondition}
@@ -224,7 +224,7 @@ for an auxiliary variable $q_{\gamma}$ such that $u_{\gamma} = P_{\gamma}(q_{\ga
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
 \begin{rmk}
- To solve problem \ref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{ulbrich2002semismooth}. An iterative method (conjugate gradient) is used to solve the Newton system. A globalization strategy is added inspired by the algorithm of truncated conjugate gradient algorithm for trust region problems by Steihaug\cite{pieperthesis,steihaug1983}.
+ To solve problem \ref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{ulbrich2002semismooth}. An iterative method (conjugate gradient) is used to solve the Newton system. A globalization strategy is added inspired by the algorithm of truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}.
 \end{rmk}
 
 
@@ -235,7 +235,7 @@ V_h = \left\{ u_h \in \mathcal{C}_0 (\Omega) \,|\, u_{h|K} \in \mathcal{P}_1(K) 
 \ee
 The discretization parameter h denotes the maximum length of the intervals defined by the CGL points. For the time discretization, we define for any Banach space $V$ the semi-discrete space
 \be
-X_\tau^0 (I,V) = \left\{ v_{\tau} \in L^2(I,V) \, | \, v_{\tau|I_m} \in P_0(I_m,V), m=1..N_T\right\},  
+X_\tau^0 (I,V) = \left\{ v_{\tau} \in L^2(I,V) \, | \, v_{\tau|I_m} \in P_0(I_m,V), m=1..N_T\right\},
 \ee
 where $I_m = (t_{m-1}, t_m]$ and $0 = t_0 < t_1....< t_m = T$. The time steps are denoted $\tau_m = t_m - t_{m-1}$ and by $\tau$ we designate the maximum of them. The full discrete space for the control is then $X_{\tau}^0(I,V_h)$.
 
@@ -271,11 +271,11 @@ The spacetime grid is parametrized with $T = 5$, $N = 256$ and $\Delta t = 0.01$
 \begin{figure}[!h]
 \includegraphics[width = 0.45\textwidth]{images/ex1yd3D.pdf}
 \includegraphics[width = 0.45\textwidth]{images/ex1yd.pdf}
-\caption{Left: wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow). Right: y-profile at final time with Gaussian white noise.}
+\caption{Left: wave generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow). Right: $y$-profile at final time with Gaussian white noise.}
 \label{waveobservation}
 \end{figure}
 
-At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|q\|_{L^(I)} = \frac{\alpha}{\gamma}$. One can see on Fig.~\ref{support} that the final control is a point source, located at the exact right position. The time profile of the control is depicted on Fig.~\ref{recoveredcontrol} and follows the original one quite well. One points out that the oscillations are du to the noise. It enters indeed directly as an initial condition in the adjoint equation and is not filtered in any manner on the support of the control, where \eqref{controlintime} holds for the time profile of $u$.
+At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|q\|_{L^2(I)} = \frac{\alpha}{\gamma}$. One can see on Fig.~\ref{support} that the final control is a point source, located at the exact right position. The time profile of the control is depicted on Fig.~\ref{recoveredcontrol} and follows the original one quite well. One points out that the oscillations are du to the noise. It enters indeed directly as an initial condition in the adjoint equation and is not filtered in any manner on the support of the control, where \eqref{controlintime} holds for the time profile of $u$.
 \begin{figure}[!h]
 \includegraphics[width = 0.75\textwidth]{images/ex1_bis_qdm6.pdf}
 \caption{Support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$. Here $\alpha = 0.1$ and $\gamma = 10^{-6}$}
@@ -286,7 +286,7 @@ At the end of the continuation strategy, the support of the control is, accordin
  \caption{Recovered control for $\gamma = 10^{-6}$}
  \label{recoveredcontrol}
 \end{figure}
-The results  of the optimization process are shown on Fig.\ref{recoveredstate}, for $\alpha = 0.1$. 
+The results  of the optimization process are shown on Fig.\ref{recoveredstate}, for $\alpha = 0.1$.
 \begin{figure}[!h]
  \includegraphics[width = 0.45\textwidth]{images/ex1recoveredstate3d.pdf}
   \includegraphics[width = 0.45\textwidth]{images/ex1recoveredstate.pdf}
@@ -331,7 +331,7 @@ The support of the control is depicted on Fig.~\ref{supportIP}. At the end of th
 
 \clearpage
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "kdv.tex"
-%%% End:
+%%% End: 
