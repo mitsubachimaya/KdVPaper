@@ -1,7 +1,7 @@
 \section{Well-posedness of the optimal control problem for $\gamma=0$ and $U_{ad}=\M$}
 \label{wp2}
 %!TEX root = kdv.tex
-This section is based on ideas from \cite{lions1985control}. There the state equation is considered as equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections. Moreover we add the term $\frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4$ for $\eta >0$ to the cost functional. In the following we will see that the boundedness of the state in the $L^4(I,L^4(\Omega))$-norm makes the state equation a well-defined equality constraint and ensures the time-global existence of $y$ in $\mathcal B$. Thus we consider an optimal control problem of the form
+This section is based on ideas from \cite{lions1985control}. There the state equation is considered as an equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections. Moreover we add the term $\frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4$ for $\eta >0$ to the cost functional. In the following we will see that the boundedness of the state in the $L^4(I,L^4(\Omega))$-norm makes the state equation a well-defined equality constraint and ensures the time-global existence of $y$ in $\mathcal B$. Thus we consider an optimal control problem of the form
 \begin{multline}
 \min_{u \in \M}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{obs}}y - z_1}_{L^2(I\times \Omega_{obs})}^2+\|\chi_{\Omega_{obs}}y(T)-z_2\|_{L^2(\Omega_{obs})}^2\right) \\+ \alpha \norm{u}_{\mathcal{M}(\Omega, L^{2}(I))} + \frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4.
 \label{cost2}
@@ -27,19 +27,19 @@ Therefore the following definition is reasonable.
 \begin{Def}\label{statecontrolpair}
 Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$. They are called a \textit{state-control pair} if they satisfy the equation
 \begin{equation}\label{weakformkdv L4}
-\int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-\partial_xy y,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
+\int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-y\partial_xy,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
 \end{equation}
-for all $(\phi,p_T) \in L^{4/3}(I,L^2(\Omega))\times L^2(\Omega)$, where $p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
+for all $(\phi,p_T) \in L^{4/3}(I,L^2(\Omega))\times L^2(\Omega)$, where $p = p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{Def}
 Next we show that the existence of a control-state pair implies the time-global existence of $y$ in $\mathcal B$.
 \begin{prop}\label{statecontrolestimate}
- Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$ be a state-control pair. Then $ y\in \mathcal{B} \cap H^{1}(I,\mathcal{V}^{*})$ and satisfies the global estimate
+ Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$ be a state-control pair. Then $ y\in \mathcal{B} \cap H^{1}(I,\mathcal{V}^{*})$ is a weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} in the sense of Definition~\ref{defnlkdv} and satisfies the global estimate
  \be
  \|y\|_{\mathcal{B}}+\|\partial_{t}y\|_{L^2(I,\mathcal{V}^{*})}\leq c\,\left(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)} + \|y\|_{L^4(I,L^4(\Omega))}^{2}\right).
  \ee
 \end{prop}
 \begin{proof}
-For the first part of the estimate, one proceed in a similar manner as in Appendix \ref{sec:linear-estimates} but this time for the non-linear \KdV equation. The critical term is then the non-linearity, the rest is identical. Let $y\in \mathcal C(\bar I,\mathcal D(A))~\cap~\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth data ($\mathcal C^\infty$). We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get for the nonlinear term
+For the first part of the estimate, one proceed in a similar manner as in Appendix \ref{sec:linear-estimates} but this time for the non-linear \KdV equation. The critical term is then the non-linearity, the rest is identical. Let $y\in \mathcal C(\bar I,\mathcal D(A))~\cap~\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for smooth data ($\mathcal C^\infty$). We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get for the nonlinear term
 \[
 \int_0^Ly^2\partial_xy~\mathrm dx=-2\int_0^Ly^2\partial_xy~\mathrm dx.
 \]

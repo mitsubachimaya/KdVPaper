@@ -76,7 +76,7 @@ For $(f,y_0)\in \Hm1\times L^2(\Omega)$ a function $y\in L^\infty(I,L^2(\Omega))
 \begin{equation}\label{weakformlinearkdv}
 \int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
 \end{equation}
-for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
+for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p = p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{Def}
 The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f., \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$. We rather utilize here a strategy based on the approximation of the data which yields higher regularity of the solution.
 \begin{prop}
@@ -96,14 +96,14 @@ We choose sequences with
   \item $\{f_n\}_{n\in\mathbb{N}}\subset\mathcal C^1(\bar I,L^2(\Omega))$ with $f_n\rightarrow f$ in $\Hm1$
   \item $\{y_{0,n}\}_{n\in\mathbb{N}}\subset\mathcal D(A)$ with $y_{0,n}\rightarrow y_0$ in $L^2(\Omega)$
 \end{itemize}
-which exists due to density. According to \cite[Part 2, Prposition 3.3]{bensoussan07} it exits a unique classical solution
+which exists due to density. According to \cite[Part 2, Proposition 3.3]{bensoussan07} it exits a unique classical solution
 \[y_n\in \mathcal C(\bar I,\mathcal D(A))\cap \mathcal C^1(\bar I,L^2(\Omega))\]
 of \eqref{kdvlinnonhom} for data $f_n$ and $y_{0,n}$ which satisfies the weak form \eqref{weakformlinearkdv}. Furthermore it can be shown that $y_n$ satisfy the following estimate
 \be
   \|y_n\|_{\mathcal B}\leq C(T,L) \left(\norm{y_{n,0}}_{L^{2}(\Omega)} + \norm{f_n}_{\Hm1}\right).
   \label{linestimate_regular}
 \ee
-For a proof see Appendix \ref{sec:linear-estimates}.  This estimate implies that $\{y_n\}_{n\in \mathbb{N}}$ is a Cauchy sequence in $\mathcal B$ and therefore there exists a $y\in \mathcal B$ which satisfies \eqref{weakformlinearkdv} with the data $(f,y_0)$. This means that $y$ is a weak solution of \eqref{kdvlinnonhom}. Its uniqueness can be shown using standard arguments.  Furthermore we can  pass to the limit in \eqref{linestimate_regular} and get the first part of \eqref{linestimate}. Next we choose any $\psi\in \mathcal C_c^{\infty}(I,\mathcal D(A^*))$ and set $\phi=\partial_t\psi-A^*\psi$ in \eqref{kdvlinnonhomdual}. Therefore $\psi$ is the solution of \eqref{kdvlinnonhomdual} and it holds
+For a proof see Appendix \ref{sec:linear-estimates}.  This estimate implies that $\{y_n\}_{n\in \mathbb{N}}$ is a Cauchy sequence in $\mathcal B$ and therefore there exists a $y\in \mathcal B$ which satisfies \eqref{weakformlinearkdv} with the data $(f,y_0)$. This means that $y$ is a weak solution of \eqref{kdvlinnonhom}. Its uniqueness can be shown using standard arguments. Furthermore we can  pass to the limit in \eqref{linestimate_regular} and get the first part of \eqref{linestimate}. Next we choose any $\psi\in \mathcal C_c^{\infty}(I,\mathcal D(A^*))$ and set $\phi=\partial_t\psi-A^*\psi$ in \eqref{kdvlinnonhomdual}. Therefore $\psi$ is the solution of \eqref{kdvlinnonhomdual} and it holds
 \begin{multline*}
 \int_0^T(y,\partial_t\psi)_{L^2(\Omega)}~\mathrm dt=\int_0^T(y,A^*\psi)_{L^2(\Omega)}+\langle f,\psi\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}\mathrm dt\\
 \leq C(T,L)\left(\|y\|_{L^2(I,H^1_0(\Omega))}+\|f\|_{L^2(I,H^{-1}(\Omega))}\right)\|\psi\|_{L^2(I,\mathcal V)}.
@@ -315,10 +315,10 @@ y(0,.) = 0 \mbox{ in } \Omega\label{kdv3}.
 \end{subequations}
 \begin{Def}\label{defnlkdv}
 For $(y_0,f)\in L^2(\Omega)\times \Hm1$ a function $y\in \mathcal B$ is called a weak solution of \eqref{kdv1} - \eqref{kdv3} if it satisfies the following fixed point equation
-\[y=\mathcal L(q-\partial_x y y,y_0)\]
+\[y=\mathcal L(q-y\partial_x y ,y_0)\]
 or in other words
 \begin{equation}\label{weakformkdv}
-\int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-\partial_xy y,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
+\int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-y\partial_x y ,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
 \end{equation}
 for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p(\phi,p_T)\in \mathcal B$ is the solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{Def}
@@ -390,7 +390,7 @@ endowed with the norm
 \label{normbtheta}
 \ee
 \begin{prop}
-For any $f \in \Hm1$ and $y_0\in L^2(\Omega)$, there exists a $T^{\ast} \in [0,T]$ depending on $\norm{q}_{L^{2}(I, H^{-1}(\Omega))}$ and $\|y_0\|_{L^2(\Omega)}$ such that the system \eqref{kdv1} - \eqref{kdv3} admits a unique weak solution $y\in \mathcal B_{T^*}\cap H^1((0,T^*),\mathcal V^*)$ which satisfies \eqref{weakformkdv} with $T=T^\ast$.
+For any $f \in \Hm1$ and $y_0\in L^2(\Omega)$, there exists a $T^{\ast} \in [0,T]$ depending on $\norm{f}_{L^{2}(I, H^{-1}(\Omega))}$ and $\|y_0\|_{L^2(\Omega)}$ such that the system \eqref{kdv1} - \eqref{kdv3} admits a unique weak solution $y\in \mathcal B_{T^*}\cap H^1((0,T^*),\mathcal V^*)$ which satisfies \eqref{weakformkdv} with $T=T^\ast$.
 Moreover there exists a constant $C > 0$ such that
 \be
 \norm{y}_{\mathcal B_{T^*}}+\|\partial_ty\|_{L^2((0,T^*),\mathcal V^*)} \leq C\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)
@@ -400,7 +400,7 @@ holds.
 \label{localposedness}
 \end{prop}
 \begin{proof}[Proof of Proposition~\ref{localposedness}]
-We define the operator $\Psi_{q,y_0}^\theta : \mathcal{B}_{\theta} \mapsto \mathcal{B}_{\theta}$ as
+For $\theta \in (0,T]$, we define the operator $\Psi_{q,y_0}^\theta : \mathcal{B}_{\theta} \mapsto \mathcal{B}_{\theta}$ as
 \be
 %\Psi_{q,y_0}(z) = W_0(t)y_0-\int_0^t{W_0(t-s)(z\partial_x z)(s,.)ds} + \int_0^t{W_0(t-s)q(s,.)ds}
 \Psi_{q,y_0}(z) = \mathcal{L}(f-z\partial_x z,y_0).
@@ -593,10 +593,10 @@ which results in
 \norm{y}_{L^2(I,H^1_0(\Omega))}^{2} \leq \frac{1}{\gamma}\norm{y_0}_{L^2(\Omega)}^{2} + \frac{1}{\gamma^2}\norm{f}_{L^2(I,H^{-1}(\Omega))}^{2}.
 \label{H10nonlin2}
 \ee
-Adding \eqref{C0nonlin} and \eqref{H10nonlin2} gives the global estimate \eqref{globalestimate} for smooth data which can be extended by density to $\Hm1\times L^2(\Omega)$. The estimate for $\|y\|_{L^2((0,t),\mathcal V^*)}$ follows from \eqref{linestimate}, Lemma \ref{lemyyx2} and the global estimate for $\|y\|_{\mathcal B_t}$.
+Adding \eqref{C0nonlin} and \eqref{H10nonlin2} gives the global estimate \eqref{globalestimate} for smooth data which can be extended by density to $\Hm1\times L^2(\Omega)$. The estimate for $\|y\|_{L^2((0,t),\mathcal V^*)}$ follows from \eqref{linestimate}, Lemma \ref{lemyyx2} and the global estimate for $\|y\|_{\mathcal B}$.
 \end{proof}
 \begin{rmk}
-The constant in the estimate \eqref{globalestimate} explodes for $\gamma \rightarrow \infty$.
+The constant in the estimate \eqref{globalestimate} explodes for $\gamma \rightarrow 0$.
 \end{rmk}
 %But by using a different approach we can show the time global-existence under a additional assumption.
 %\begin{prop}
@@ -673,12 +673,12 @@ The constant in the estimate \eqref{globalestimate} explodes for $\gamma \righta
 
 \subsection{Well-posedness of the optimization problem. Existence of an optimum}
 We start by defining the admissible set of controls
-$$U_{ad} = \begin{cases} u \in \M\colon \norm{u}_{\M} \leq \frac{C}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
+$$U_{ad} = \begin{cases} u \in \M\colon \norm{u}_{\M} \leq \frac{C(T,L)}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
-where $C$ is the constant from \eqref{ineqqnorm} and 
+where $C(T,L)$ is the constant from \eqref{ineqqnorm} and assuming that
 \begin{equation}\label{constr y0}
-\norm{y_0}_{L^2(\Omega)}< \frac{C}{T^{1/4}}.
+\norm{y_0}_{L^2(\Omega)}< \frac{C(T,L)}{T^{1/4}}.
 \end{equation}
 Moreover we introduce the non-linear control-to-state operator
 \[S\colon U_{ad}\rightarrow \mathcal B\cap H^1(I,\mathcal V^\ast),\quad u\mapsto y\]
@@ -697,7 +697,7 @@ with $z\in L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$.
 There exists a solution $(\bar y,\bar u) \in \mathcal B\times U_{ad}$ to the optimal control problem \eqref{cost}.
 \end{prop}
 \begin{proof}
-\underline{Case $\gamma > 0$}. The cost function $J$ is a positive function. Thus its infimum $\bar J$ exists and there exists a minimizing sequence $(u_n,y_n) \in U_{ad} \times \mathcal B$ such that $J(u_n, y_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists a $\varepsilon>0$ such that
+\underline{Case $\gamma > 0$}. The cost function $J$ is a positive function. Thus its infimum $\bar J$ exists and there exists a minimizing sequence $(u_n,y_n) \in U_{ad} \times \mathcal B$ such that $J(u_n, y_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists an $\varepsilon>0$ such that
 \be
 \varepsilon+J(0,0)\geq \alpha \norm{u_n}_{\M}
 \ee
@@ -705,7 +705,7 @@ for $n$ large enough. Therefore $u_n$ is bounded, which implies the existence of
 \[y_{n_k}\rightharpoonup^\ast\bar y\quad\text{in}\quad L^2(I,H^1_0(\Omega))\cap L^{\infty}(I,L^2(\Omega))\cap H^1(I,\mathcal V^\ast)\]
 and a $\hat y\in L^2(\Omega)$ such that $y_{n_k}(T)\rightharpoonup \hat y$ in $L^2(\Omega)$. Moreover the Aubin-Lions-Lemma, c.f. \cite[Chapter 3, Proposition 1.3]{showalter97}, implies
 \[y_{n_k}\rightarrow\bar y\quad\text{in}\quad L^2(I,\mathcal C_0(\Omega)).\]
-It remains to show that the limit $\bar y$ is indeed a weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for the control $\bar u$. Due to the weak-to-weak continuity of time-point evaluation operator $y\mapsto y(T)$ from $H^1(I,\mathcal V^\ast)$ to $\mathcal V^\ast$ there holds $\hat y=y(T)$.  The convergence of the linear terms in \eqref{weakformkdv} is obvious. The nonlinear term converges due to the strong convergence of $y_{n_k}$, see
+It remains to show that the limit $\bar y$ is indeed a weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for the control $\bar u$. Due to the weak-to-weak continuity of time-point evaluation operator $y\mapsto y(T)$ from $H^1(I,\mathcal V^\ast)$ to $\mathcal V^\ast$ there holds $\hat y=y(T)$.  The convergence of the linear terms in \eqref{weakformkdv} is obvious. The nonlinear term converges due to the strong convergence of $y_{n_k}$, since
 \begin{multline*}
 \int_0^T\langle y_{n_k}\partial_xy_{n_k}-\bar y\partial_x\bar y,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt=-\int_0^T(y_{n_k}^2-\bar y^2,\partial_x p)_{L^2(\Omega)}~\mathrm dt\\
 \leq\|y_{n_k}-\bar y\|_{L^2(I,\mathcal C_0(\Omega))}\|y_{n_k}+\bar y\|_{\mathcal C(\bar I,L^2(\Omega))}\|\partial_x p\|_{L^2(I\times \Omega)}.
@@ -781,9 +781,9 @@ Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}
 % So we conclude that $(\bar y,\bar q)$ are minimizers.
 \end{proof}
 \begin{rmk}
- We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon$ such that
+ We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon$ and a $N \in \N $ such that for any $n > N$
  \[
-\norm{u}_{L^2(I,H^{-1}(\Omega))} \leq c\norm{u}_{\M} \leq \frac{c}{\alpha}\left(J(0,0) + \varepsilon \right).
+\norm{u_n}_{L^2(I,H^{-1}(\Omega))} \leq c\norm{u_n}_{\M} \leq \frac{c}{\alpha}\left(J(0,0) + \varepsilon \right).
  \]
  Therefore, we can always find a regularization parameter $\alpha>0$ such that the condition \eqref{ineqqnorm} is satisfied.
 \end{rmk}
