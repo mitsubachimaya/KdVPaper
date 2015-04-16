@@ -1,0 +1,31 @@
+The variational inequalities inequalities \label{var ineq mu} and \label{var ineq lambda} are equivalent to
+\begin{align*}
+\alpha\|\bar u\|_{\M}&=\langle \bar\mu,\bar u\rangle_{\M,\C},\\
+\hat c\,\|\bar\lambda\|_{\C}&=\langle \bar\lambda,\bar u\rangle_{\M,\C},\\
+\|\bar \mu\|_{\C}&\leq\alpha,~\|\bar u\|_{\M}\leq \hat c.
+\end{align*}
+and thus
+\begin{align*}
+\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}&=\langle -\bar p,\bar u\rangle_{\M,\C},\\
+\|\bar \mu\|_{\C}\leq\alpha,~\|\bar u\|_{\M}&\leq \hat c.
+\end{align*}
+In particular we have
+\begin{multline*}
+\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}= \int_\Omega(-\bar p,\bar u')_{L^2(I)}~\mathrm d|\bar u|
+\leq \int_\Omega\|-\bar p\|_{L^2(I)}\|\bar u'\|_{L^2(I)}~\mathrm d|\bar u|\\
+= \int_\Omega\|\bar\mu+\bar\lambda\|_{L^2(I)}~\mathrm d|\bar u|
+\leq\int_\Omega\|\bar\mu\|_{L^2(I)}+\|\bar\lambda\|_{L^2(I)}~\mathrm d|\bar u|
+\leq\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}
+\end{multline*}
+Thus the last chain of inequalities holds with equality. First of all this implies
+\[
+\bar u'(x)=-\frac{\bar p(x)}{\|\bar \mu(x)\|_{L^2(I)}+\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
+\]
+Moreover we get
+\[
+\int_\Omega\|\bar \mu(x)\|_{L^2(I)}-\alpha~\mathrm d|\bar u|=0
+\]
+and
+\[
+\left(\|\bar u\|_{\M}-\hat c\right)\|\bar\lambda\|_{\C}=0.
+\]

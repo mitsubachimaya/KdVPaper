@@ -213,65 +213,73 @@ Next we derive first order optimality conditions using tools from convex analysi
   \]
 \end{proof}
 \begin{rmk}
-  A vector measure $u\in \M$ can be decomposed in a space dependent measure part $|u|\in \mathcal M(\Omega)^+$ and a space-time dependent function $u'\in  L^1((\Omega,|u|),L^2(I))$, in particular it holds
+The subgradient condition \eqref{subgradientcond} is equivalent to 
+\begin{equation}\label{equivoc}
+\alpha \|\bar u\|_{\M}+\phi^{\star}(-\bar p)=\langle -\bar p,\bar u\rangle_{\C,\M},\quad \bar u\in U_{ad}
+\end{equation}
+with
+\[
+\phi^{\star}(p)=\sup_{u\in U_{ad}}[\langle u,p\rangle_{\C,\M}-\alpha \|u\|_{\M}]
+\]
+for $p\in \C$.
+\end{rmk}
+\begin{lem}
+The functional $\phi^{\star}(p)\colon \C\rightarrow \mathbb R$ has the form
+\[
+\phi^{\star}(p)=\hat c\,(\|p\|_{\C}-\alpha))^+
+\]
+where $\hat c = C/T^{1/4}-\|y_0\|_{L^2(\Omega)}$ and $(\cdot)^+$ is the positive part of a function.
+\end{lem}
+\begin{proof}
+\begin{align*}
+\phi^{\star}(p)&=\sup_{u\in U_{ad}}[\langle u,p\rangle_{\C,\M}-\alpha \|u\|_{\M}]\\
+&=\sup_{\|u\|_{\M}=1,\,\lambda\in [0,c]}\lambda[\langle u,p\rangle_{\C,\M}-\alpha].
+\end{align*}
+This implies the assertion since $\|p\|_{\C}=\sup_{\|u\|_{\M}=1}\langle u,p\rangle_{\C,\M}$.
+\end{proof}
+\begin{rmk}
+A vector measure $u\in \M$ can be decomposed in a space dependent measure part $|u|\in \mathcal M(\Omega)^+$ and a space-time dependent function $u'\in  L^1((\Omega,|u|),L^2(I))$ which satisfies $\|u(x)\|_{L^2(I)}=1$ for $|u|$-a.e. $x\in \Omega$. In particular it holds
   \[
   \mathrm du=u'~\mathrm d|u|.
   \]
+The duality pairing between $\C$ and $\M$ takes the form
+\[
+\langle u,p\rangle_{\M,\C}=\int_\Omega(u',p)_{L^2(I)}~\mathrm d|u|.
+\]  
 \end{rmk}
-In order to handle the the norm constraint we need the following assumption.
-\begin{as}\label{as:exist multp}
-We assume the existence of $\bar \lambda,\,\bar\mu\in \C$ satisfying $-\bar p=\bar\lambda +\bar \mu$ and
-\begin{align}
-\langle \bar\mu,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}&\leq\|u\|_{\M}&&\forall u\in \M,\label{var ineq mu}\\
-\langle \bar\lambda,u-\bar u\rangle_{\C,\M}&\leq0&&\forall u\in U_{ad}\label{var ineq lambda}.
-\end{align}
-\end{as}
-Based on this assumption we can show the following result.
+In order to handle the the norm constraint we need the following assumption. Based on this assumption we can show the following result.
 \begin{prop}
-Let $\bar u\in U_{ad}$ be the optimal control of \eqref{cost}. Moreover let $|\bar u|\in \mathcal M(\Omega)$ be its total-variation measure and $\bar u'$ its the Radon-Nikodym-derivative. Furthermore $\bar p\in \C$ be the corresponding optimal adjoint state and $\bar \lambda,\,\bar\mu\in \C$ the functions from Assumption \ref{as:exist multp}. Then there holds
-\begin{align*}
-0&=\left(\|\bar u\|_{\M}-\hat c\right)\|\bar\lambda\|_{\C}\\
-\operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\bar \mu(x)\|_{L^2(I)}=\alpha\}.
-\end{align*}
-with $\hat c = C/T^{1/4}-\|y_0\|_{L^2(\Omega)}$ and
+Let $\bar u\in U_{ad}$ be the optimal control of \eqref{cost}. Moreover let $|\bar u|\in \mathcal M(\Omega)$ be its total-variation measure and $\bar u'$ its the Radon-Nikodym-derivative. Furthermore $\bar p\in \C$ be the corresponding optimal adjoint state. Then there holds
+\begin{align}
+0&=\left(\|\bar u\|_{\M}-\hat c\right)\bar\lambda\label{scalarlagrange}\\
+\operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\bar p\|_{L^2(I)}=\alpha+\bar\lambda\}\label{controlsupp}.
+\end{align}
+with $\bar\lambda =(\|\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \be
-\bar u'(x)=-\frac{\bar p(x)}{\alpha +\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
+\bar u'(x)=-\frac{\bar p(x)}{\alpha +\bar\lambda}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
 \label{controlintime}
 \ee
 \label{propsubgcondition}
 \end{prop}
 \begin{proof}
-The variational inequalities inequalities \label{var ineq mu} and \label{var ineq lambda} are equivalent to 
-\begin{align*}
-\alpha\|\bar u\|_{\M}&=\langle \bar\mu,\bar u\rangle_{\M,\C},\\
-\hat c\,\|\bar\lambda\|_{\C}&=\langle \bar\lambda,\bar u\rangle_{\M,\C},\\
-\|\bar \mu\|_{\C}&\leq\alpha,~\|\bar u\|_{\M}\leq \hat c.
-\end{align*}
-and thus 
-\begin{align*}
-\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}&=\langle -\bar p,\bar u\rangle_{\M,\C},\\
-\|\bar \mu\|_{\C}\leq\alpha,~\|\bar u\|_{\M}&\leq \hat c.
-\end{align*}
-In particular we have
-\begin{multline*}
-\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}= \int_\Omega(-\bar p,\bar u')_{L^2(I)}~\mathrm d|\bar u|
-\leq \int_\Omega\|-\bar p\|_{L^2(I)}\|\bar u'\|_{L^2(I)}~\mathrm d|\bar u|\\
-= \int_\Omega\|\bar\mu+\bar\lambda\|_{L^2(I)}~\mathrm d|\bar u|
-\leq\int_\Omega\|\bar\mu\|_{L^2(I)}+\|\bar\lambda\|_{L^2(I)}~\mathrm d|\bar u|
-\leq\alpha\|\bar u\|_{\M}+\hat c\,\|\bar\lambda\|_{\C}
-\end{multline*}
-Thus the last chain of inequalities holds with equality. First of all this implies
+Using $\bar u\in U_{ad}$, $\|\bar p\|_{\C}-\bar\lambda\leq\alpha$ and \eqref{equivoc} we can estimate
+\begin{multline}\label{estoc}
+\alpha\|\bar u\|_{\M}=\int_{\Omega}(\bar u',\bar p)_{L^2(I)}~\mathrm d|\bar u|-\hat c\bar\lambda\leq \int_\Omega(\bar u',\bar p)_{L^2(I)}~\mathrm d|\bar u|-\bar\lambda\|\bar u\|_{\M}\\
+\leq \int_\Omega\|\bar u'\|_{L^2(I)}\|\bar p\|_{L^2(I)}~\mathrm d|\bar u|-\bar\lambda\|\bar u\|_{\M}\\
+\leq\|\bar u\|_{\M}(\|\bar p\|_{\C}-\bar\lambda)\leq \alpha\|\bar u\|_{\M}.
+\end{multline}
+Thus the last chain of inequalities holds with equality and therefore we have
 \[
-\bar u'(x)=-\frac{\bar p(x)}{\|\bar \mu(x)\|_{L^2(I)}+\|\bar\lambda(x)\|_{L^2(I)}}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
+\int_{\Omega}(\bar u',\bar p)_{L^2(I)}-\|\bar u'\|_{L^2(I)}\|\bar p\|_{L^2(I)}~\mathrm d|\bar u|=0
 \]
-Moreover we get
+which implies $\bar u'=-(1/\|\bar p\|_{L^2(I)})\,\bar p$ in $L^1((\Omega,|\bar u|),L^2(I))$. Moreover we have
 \[
-\int_\Omega\|\bar \mu(x)\|_{L^2(I)}-\alpha~\mathrm d|\bar u|=0
-\]
-and
+\int_\Omega\|\bar p\|_{L^2(I)}-\bar\lambda-\alpha~\mathrm d|\bar u|=0
+\] 
+which then implies \eqref{controlsupp} and \eqref{controlintime}. Equality in \eqref{estoc} also implies
 \[
-\left(\|\bar u\|_{\M}-\hat c\right)\|\bar\lambda\|_{\C}=0.
-\]
+(\hat c-\alpha\|\bar u\|_{\M})\bar\lambda=0.
+\]   
 \end{proof}
 \begin{rmk}
 If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not satisfied with equality there holds $\bar \lambda=0$ and we recover the results from \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
