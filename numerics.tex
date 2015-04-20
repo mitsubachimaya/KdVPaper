@@ -5,7 +5,7 @@
 \label{secnum}
 This section is devoted to the discretization of the optimization problem \eqref{cost} - \eqref{kdvcontrol3}, as well as some insights into the numerical optimization process we use.
 \subsection{Discretization of state and adjoint equation}
-One difficulty arising when it comes to the discretization of the \KdVB equation is the variety of temporal scales. While the effects of the nonlinearity are only visible after a long time interval, the linear part involves a wide range of scales: the third order derivative represents in particular a high frequency term. In the case of bounded domains numerous schemes are available, be it finite differences \cite{djidjeli1995numerical,zabusky1965interaction}, finite elements \cite{winther1980conservative,arnold1982superconvergent}, finite volumes \cite{dutykh2013finite}, discontinuous Galerkin schemes \cite{Bona1986859,yan2002local}, or polynomial spectral methods \cite{ma2000legendre,ma2001optimal,shen2003new}. One of the most recent and efficient method for the Korteweg-de Vries equation is proposed in \cite{ma2000legendre}. The linear term is treated by a Petrov-Galerkin method (better suited for nonsymmetric problems) on Legendre polynomials, while the nonlinear term is treated pseudospectrally on Chebyschev collocation points. Shortly after, Shen \cite{shen2003new} proposes an improvement of this Petrov-Galerkin method with nearly optimal computational complexity. This will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate discretization of the method regarding the time stepping scheme used.
+One difficulty arising when it comes to the discretization of the \KdVB equation is the variety of temporal scales. While the effects of the nonlinearity are only visible after a long time interval, the linear part involves a wide range of scales: the third order derivative represents in particular a high frequency term. In the case of bounded domains numerous schemes are available, be it finite differences \cite{djidjeli1995numerical,zabusky1965interaction}, finite elements \cite{winther1980conservative,arnold1982superconvergent}, finite volumes \cite{dutykh2013finite}, discontinuous Galerkin schemes \cite{Bona1986859,yan2002local}, or polynomial spectral methods \cite{ma2000legendre,ma2001optimal,shen2003new}. One of the most recent and efficient method for the Korteweg-de Vries equation is proposed in \cite{ma2000legendre}. The linear term is treated by a Petrov-Galerkin method (better suited for nonsymmetric problems) on Legendre polynomials, while the nonlinear term is treated pseudospectrally on Chebyschev collocation points. Shortly after, Shen \cite{shen2003new} proposed an improvement of this Petrov-Galerkin method with nearly optimal computational complexity. This will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate discretization of the method regarding the time stepping scheme used.
 
 
 
@@ -29,11 +29,16 @@ V_N = \left\{y\in P_N : y(1)=y(-1)=\partial_x y(1)=0\right\},
 \be
 V_N^{\ast} = \left\{y\in P_N : y(1) = y(-1) = \partial_x y(-1)=0\right\}.
 \ee
-We consider then the semi-discrete problem: find $y_N \in V_N$
+We consider then the semi-discrete problem: find 
+\beal\nonumber 
+y_N: \quad &I \rightarrow V_N\\
+&t \mapsto y_N(t)
+\eeal
 \begin{multline}
-\langle\partial_t y_N, \varphi_N\rangle - \langle y_N, \partial_x \varphi_N \rangle + \langle\partial_x y_N, \partial_{xx}\varphi_N \rangle  + \\ \gamma \langle \partial_x y_N, \partial_x \varphi_N \rangle- \langle\frac{y_N^2}{2}, \partial_x \varphi_N\rangle= \langle u, \varphi_N\rangle, \quad \forall v_N \in V_N^{\ast}.
+\left(\partial_t y_N , \varphi_N\right) - \left( y_N, \partial_x \varphi_N \right) + \left(\partial_x y_N, \partial_{xx}\varphi_N \right)  + \\ \gamma \left( \partial_x y_N, \partial_x \varphi_N \right)- \left(\frac{y_N^2}{2}, \partial_x \varphi_N\right)= \langle u, \varphi_N\rangle, \quad \forall v_N \in V_N^{\ast},
 \label{petrovgalerkin}
 \end{multline}
+where $\left( \cdot, \cdot \right)$ denotes the usual $L^2(\Omega)$ spatial inner product and $\langle \cdot, \cdot \rangle$ is the spatial duality pairing between $H^{-1}(\Omega)$ and $H^1_0(\Omega)$, as in the continuous case.
 Denoting by $L_k$ the $k$th Legendre polynomial, we can define the basis functions as follows (see Figure~\ref{basisfunctions})
 \be
 \phi_k(x) = L_k(x) - \frac{2k+3}{2k+5}L_{k+1}(x) - L_{k+2}(x) + \frac{2k+3}{2k+5}L_{k+3}(x),
@@ -51,13 +56,14 @@ Thus for $N \geq 3$,
 \eeal
 Then, setting
 \beal
-& y_N = \sum_{k=0}^{N-3}{\tilde y_k\phi_k},\quad \mathbf{y} = \left( \tilde y_0, \tilde y_1, ..., \tilde y_{N-3}\right)^t\\
-& \mathbf{u} = \left( \langle u, \psi_0 \rangle, \langle u, \psi_1 \rangle, ..., \langle u, \psi_{N-3} \rangle\right)^t\\
+& y_N = \sum_{k=0}^{N-3}{\tilde y_k(t)\phi_k},\quad \mathbf{y}(t) = \left( \tilde y_0, \tilde y_1, ..., \tilde y_{N-3}\right)^t\\
+& \mathbf{u}(t) = \left( \langle u, \psi_0 \rangle, \langle u, \psi_1 \rangle, ..., \langle u, \psi_{N-3} \rangle\right)^t\\
 & m_{ij}=(\phi_j, \psi_i),\quad p_{ij}=-(\phi_j^{'}, \psi_i),\quad q_{ij}=(\phi_j^{'}, \psi_i^{'}),\quad s_{ij}=(\phi_j^{'},\psi_i^{''}),
+\label{definitionsmatrices}
 \eeal
 the variational formulation \eqref{petrovgalerkin} yields
 \be
-M\partial_t \mathbf{y} + \left( -P +\gamma Q  + S \right)\mathbf{y} + F(\mathbf{y}) = \mathbf{u},
+M\frac{d\mathbf{y}}{dt} + \left( -P +\gamma Q  + S \right)\mathbf{y} + F(\mathbf{y}) = \mathbf{u},
 \ee
 where $M$, $P$, $Q$ and $S$ are matrices of size $(N-2)\times(N-2)$ with coefficients $m_{ij}, p_{ij}, q_{ij}$ and $s_{ij}$. $F(\mathbf{y})$ represents the nonlinear term and it is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. It means that the nonlinearity is evaluated in the spatial domain, that we choose to be the Chebyshev-Gauss-Lobatto(CGL) points, and transfered back in the Legendre spectral space. We therefore need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform(FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we rather use the direct method that is faster and easier to handle, especially when it will come to finding a discrete adjoint. We build beforehand the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=1..N+1$, $j=1..N-2$, where the points $x_i$ are the CGL points such that $L_1 \mathbf{y} = (y_N(x_1), y_N(x_2), ...y_N(x_{N+1}))^t$ and the same holds with $L_2$ for a variable in the dual space.
 
@@ -99,32 +105,40 @@ where $M$, $P$, $Q$ and $S$ are matrices of size $(N-2)\times(N-2)$ with coeffic
 
 By $\left\{x_i \right\}, i = 1, 2 ..., N$, we denote the grid points of the spatial mesh (i.e. in our case the CGL points). The control is then discretized as follows
 \be
-u_N = \sum_{j=1}^{N}{u_j(t)\delta_{x_j}}
+u_N(t) = \sum_{j=1}^{N}{u_j(t)\delta_{x_j}}
 \ee
 where the functions $u_j(t)$ are piecewise constant on each time step and $\delta_{x_j}$ are Dirac functionals located at the grid points. Hence, we clearly have $u_N \in \M$ and can easily define any inner product required in the resolution of the state equation
 \be
-\langle u_N, \psi \rangle = \sum_{j=1}^{N}{u_j(t)\psi(x_j)},
+\langle u_N, \psi \rangle = \sum_{j=1}^{N}{u_j(t)\psi(x_j)}.
 \ee
-as well as the norm in the objective functional
-\be
-\|{u_N}\|_{\M} = \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\tau_i u_{ji}^2}\right)^{1/2}},
-\ee
-where $N_T$ is the number of time steps and $\tau_i$ is the size of the $i^{th}$ step. We point out that this precise control discretization was also used and analyzed in \cite{pieper2013priori, pieper2014,casas2013parabolic}.
+%as well as the norm in the objective functional
+%\be
+%\|{u_N}\|_{\M} = \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\tau_i u_{ji}^2}\right)^{1/2}},
+%\ee
+%where $N_T$ is the number of time steps and $\tau_i$ is the size of the $i^{th}$ step. We point out that this precise control discretization was also used and analyzed in \cite{pieper2013priori, pieper2014,casas2013parabolic}.
 
 \subsubsection{Time stepping scheme and adjoint - Crank-Nicolson-Leap-Frog}
-We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable. This scheme has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian \cite{meidner2007adaptive}. Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. However, the Crank-Nicolson scheme is computationally demanding. An alternative is then the two-steps Crank-Nicolson Leap Frog method. In this setting, the third derivative is treated implicitely and the nonlinear term is treated explicitely. This method has already been extensively used for the \KdV equation \cite{shen2003new,ma2000legendre,ma2001optimal}, showing for instance extended stability intervals with the Fourier spectral method \cite{chan1985fourier}. However, to the authors knowledge, this has never been used in the context of an optimal control problem. Commonly, this method is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-steps method in order to get a discrete adjoint that is consistent with the continuous adjoint in both the distributed control problem or the terminal observations problem. The forward scheme is as follows
+We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable. This scheme has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian(see, e.g.\cite{meidner2007adaptive}). Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. However, the Crank-Nicolson scheme is computationally demanding. An alternative is then the two-steps Crank-Nicolson Leap Frog method. In this setting, the third derivative is treated implicitely and the nonlinear term is treated explicitely. This method has already been extensively used for the \KdV equation \cite{shen2003new,ma2000legendre,ma2001optimal}, showing for instance extended stability intervals with the Fourier spectral method \cite{chan1985fourier}. However, to the authors' knowledge, this has never been used in the context of an optimal control problem. Commonly, this method is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-steps method in order to get a discrete adjoint that is consistent with the continuous adjoint in both the distributed control problem or the terminal observations problem. The time interval is devided into $N+1$ steps $0 = t_0 < t_1....< t_N = T$. While the first and last one have length $\frac{\Delta t}{2}$, the other steps are of equal length $\Delta t$. We denote hereafter
+$\mathbf{y}_n = \mathbf{y}(t_n) = \left( \tilde y_0(t_n), \tilde y_1(t_n), ..., \tilde y_{N-3}(t_n)\right)^t$
+and
+$\mathbf{u}_n = \mathbf{u}(t_n) = \left( \langle u(t_n), \psi_0 \rangle, \langle u(t_n), \psi_1 \rangle, ..., \langle u(t_n), \psi_{N-3} \rangle\right)^t$.
+With the help of the matrices defined in \eqref{definitionsmatrices}, the forward scheme is as follows
 \bealn
-& \frac{1}{2}\left( M+\Delta t S\right) y_1 = \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) y_0 + \frac{1}{2}\Delta t F(y_0) + \frac{1}{2}\Delta t M q_0 \\
+& \frac{1}{2}\left( M+\Delta t S\right) y_1 = \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) y_0 + \frac{1}{2}\Delta t F(y_0) + \frac{1}{2}\Delta t u_0 \\
 & \frac{1}{2}\left( M+\Delta t S\right) y_{n+1} = \frac{1}{2}\left( M - \Delta t S\right) y_{n-1} +  \Delta t \left( P + \gamma Q\right)y_n \\
-& \mbox{\hspace{0.5\textwidth}}+ \Delta t F(y_n) + \Delta t M q_n,  \, n=1..N-1\\
+& \mbox{\hspace{0.5\textwidth}}+ \Delta t F(y_n) + \Delta t u_n,  \, n=1 \ldots N-1\\
 & M y_{N+1} = \frac{1}{2}\left( M y_N + M y_{N-1} \right)+ \frac{1}{2}\Delta t P y_N + \frac{1}{2}\Delta t F(y_N) - \frac{1}{2}\Delta t S y_{N-1}
 \eealn
-The first step is semi-implicit. The interior steps are classical CNLF steps. The last step - due to our modification - is not a regular, well-known step, but it is designed in such a way that the discrete adjoint shall be consistent with a CNLF discretization of the continuous adjoint. Notice that as $\Delta t$ vanishes, it becomes just a mean between the two preceding steps. The discrete adjoint in the case of terminal observations then writes
+The first step is semi-implicit. The interior steps are classical CNLF steps. The last step - due to our modification - is not a regular, well-known step, but it is designed in such a way that the discrete adjoint shall be consistent with a CNLF discretization of the continuous adjoint. Notice that as $\Delta t$ vanishes, it becomes just a mean between the two preceding steps.
+
+
+
+The discrete adjoint in the case of terminal observations then writes
  \bealn
  &M^t p_N = -A(y_{N+1} - y_d)\\
  &\frac{1}{2}\left( M^t+\Delta t S^t\right) p_{N-1} = \frac{1}{2}\left( M^t + \Delta t P^t + \gamma \Delta t Q^t \right) p_N + \frac{1}{2}\Delta t F^{'}(y_N)^t p_N \\
  &\frac{1}{2}\left( M^t + \Delta t S^t\right)p_{n-2} = \frac{1}{2}\left( M^t - \Delta t S^t\right)p_{n} + \Delta t \left( P^t + \gamma Q^t\right)p_{n-1} + \Delta t F^{'}(y_{n-1})^t p_{n-1}, \\
- &\mbox{\hspace{0.7\textwidth}}\quad n=2..N.
+ &\mbox{\hspace{0.7\textwidth}}\quad n=2 \ldots N.
 \eealn
 The proof for the adjoint is done by standard calculations on the discrete Lagrangian of the problem. Classically, it starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a unique semi-implicit step and regular CNLF steps.
 % The lagrangian of the problem writes at the continuous level.
@@ -164,7 +178,7 @@ The proof for the adjoint is done by standard calculations on the discrete Lagra
  &\frac{1}{2}(M^t+\Delta t S^t) p_N = -A(y_{N+1} - y_d)\\
  &\frac{1}{2}\left( M^t+\Delta t S^t\right) p_{N-1} =  \left(\Delta t P^t + \gamma \Delta t Q^t \right) p_N + \Delta t F^{'}(y_N)^t p_N \\
  &\frac{1}{2}\left( M^t + \Delta t S^t\right)p_{n-2} = \frac{1}{2}\left( M^t - \Delta t S^t\right)p_{n} + \Delta t \left( P^t + \gamma Q^t\right)p_{n-1} \\
- &\mbox{\hspace{0.4\textwidth}}+ \Delta t F^{'}(y_{n-1})^t p_{n-1}, \quad n=2..N.
+ &\mbox{\hspace{0.4\textwidth}}+ \Delta t F^{'}(y_{n-1})^t p_{n-1}, \quad n=2 \ldots N.
  \eealn
  The major difference lies in the second step. It does not correspond to a consistent discretization of the continuous adjoint equation: the time derivative is not reconstructed. It results in practice in huge oscillations in time of the adjoint variable.
  \end{rmk}
@@ -184,11 +198,11 @@ Numerically, the optimization problem is solved via a Newton type method. This r
 \eeal
 where $u$ and $y$ are subject to Korteweg-de Vries Burgers equation. This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
 \be
-\norm{y}_{\M} = \norm{y}_{L^1(I,L^2(\Omega))} = \int_0^L{\norm{y}_{L^2(I)}dx}.
+\psi(u) = \norm{u}_{\M} = \norm{u}_{L^1(I,L^2(\Omega))} = \int_0^L{\norm{u}_{L^2(I)}dx}.
 \ee
-In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. To obtain the optimality conditions, one introduces the proximal map of the $L^1(\Omega, L^{2}(I))$ norm:
+In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. To obtain the optimality conditions, one introduces the proximal map of the $L^1(\Omega, L^{2}(I))$ norm (see, e.g. \cite{bauschke2011convex}):
 \be
-P_{\gamma}(q)(x) = \frac{1}{\gamma}\left( \gamma - \alpha / \norm{q(x)}_{L^{2}(I)}\right)^{+}q(x) \quad \mbox{ for } q \in L^{2}(\Omega_{c}, L^{2}(I)).
+Prox_{\gamma\psi}(q)(x) = \frac{1}{\gamma}\left( \gamma - \alpha / \norm{q(x)}_{L^{2}(I)}\right)^{+}q(x) \quad \mbox{ for } q \in L^{2}(\Omega_{c}, L^{2}(I)).
 \ee
 We can then express the optimality condition for \eqref{costreg} by the pointwise projection formula
 \be
@@ -204,7 +218,7 @@ Following \cite{pieperthesis}, one can also reformulate this optimality conditio
 G(q_{\gamma}) = \gamma q_{\gamma} + \nabla f (P_{\gamma}(q_{\gamma})) = 0,
 \label{normalmap}
 \ee
-for an auxiliary variable $q_{\gamma}$ such that $u_{\gamma} = P_{\gamma}(q_{\gamma})$. One easily prove in that case that $q_{\gamma} = -\frac{1}{\gamma}B^* p_{\gamma}$. Equivalence between \eqref{optcondition} and \eqref{normalmap} is demonstrated in \cite{pieperthesis}.
+for an auxiliary variable $q_{\gamma}$ such that $u_{\gamma} = P_{\gamma}(q_{\gamma})$. One easily prove in that case that $q_{\gamma} = -\frac{1}{\gamma}B^* p_{\gamma}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
 
 % and we can adapt it to state the following theorem
 % \begin{thm}
@@ -275,10 +289,10 @@ The spacetime grid is parametrized with $T = 5$, $N = 256$ and $\Delta t = 0.01$
 \label{waveobservation}
 \end{figure}
 
-At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|q\|_{L^2(I)} = \frac{\alpha}{\gamma}$. One can see on Fig.~\ref{support} that the final control is a point source, located at the exact right position. The time profile of the control is depicted on Fig.~\ref{recoveredcontrol} and follows the original one quite well. One points out that the oscillations are du to the noise. It enters indeed directly as an initial condition in the adjoint equation and is not filtered in any manner on the support of the control, where \eqref{controlintime} holds for the time profile of $u$.
+At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|q\|_{L^2(I)} = \frac{\alpha}{\gamma}$. One can see on Fig.~\ref{support} that the final control is a point source, located at the exact right position. The time profile of the control is depicted on Fig.~\ref{recoveredcontrol} and follows the original one quite well. One points out that the oscillations are due to the noise. It enters indeed directly as an initial condition in the adjoint equation and is not filtered in any manner on the support of the control, where \eqref{controlintime} holds for the time profile of $u$.
 \begin{figure}[!h]
 \includegraphics[width = 0.75\textwidth]{images/ex1_bis_qdm6.pdf}
-\caption{Support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$. Here $\alpha = 0.1$ and $\gamma = 10^{-6}$}
+\caption{Spatial support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$. Here $\alpha = 0.1$ and $\gamma = 10^{-6}$}
 \label{support}
 \end{figure}
 \begin{figure}[!h]
@@ -303,13 +317,13 @@ The second example is a control example. We divide the domain $\Omega = [-L,L]$ 
 \end{figure}
 \begin{figure}[!h]
 \includegraphics[width = 0.75\textwidth]{images/ex2yd.pdf}
-\caption{Objective wave at final time T, for $f = -0.5$ (i.e. subcritical flow).}
+\caption{Objective wave at final time T.}
 \label{objectivewave}
 \end{figure}
-The support of the control is depicted on Fig.~\ref{supportIP}. At the end of the continuation strategy, it boils down to two point sources. One can see clearly on Fig.~\ref{recoveredcontrol} that it has smooth variations in time, as induced by the $L^2$ norm. The recovered state is shown on Fig.~\ref{ex2fullgamma1} for $\gamma = 1$ and Fig.~\ref{ex2fullgammadm5} for $\gamma = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that cannot be avoided since they are not observed.
+The support of the control is depicted on Fig.~\ref{supportIP}. At the end of the continuation strategy, it boils down to two point sources. One can see clearly on Fig.~\ref{recoveredcontrol} that it has smooth variations in time, as induced by the $L^2$ norm. The optimized state is shown on Fig.~\ref{ex2fullgammadm5} for $\gamma = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that cannot be avoided since they are not observed.
 \begin{figure}[!h]
 \includegraphics[width = 0.75\textwidth]{images/ex2gammadm5.pdf}
-\caption{Support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$, for $\gamma = 10^{-5}$.}
+\caption{Spatial support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$, for $\gamma = 10^{-5}$.}
 \label{supportIP}
 \end{figure}
 
@@ -324,7 +338,7 @@ The support of the control is depicted on Fig.~\ref{supportIP}. At the end of th
 \begin{figure}[!h]
  \includegraphics[width = 0.45\textwidth]{images/ex2state3d.pdf}
  \includegraphics[width = 0.45\textwidth]{images/controlledstate.pdf}
- \caption{Left: evolution of the recovered state y for $\gamma = 10^{-5}$. Right: final recovered state y(T), compared with the objective shape for $\gamma = 10^{-5}$.}
+ \caption{Left: evolution of the optimized state y for $\gamma = 10^{-5}$. Right: final optimized state y(T), compared with the objective shape for $\gamma = 10^{-5}$.}
  \label{ex2fullgammadm5}
 \end{figure}
 

@@ -234,7 +234,7 @@
 %\end{proof}
 
 \subsection{The tangent equation}\label{appendixtangent}
-Next we analyze be well posedness of the tangent equation
+Next we analyze the well posedness of the tangent equation
 \begin{subequations}
  \begin{numcases}{}
 \partial_t \delta y +\partial_x \delta y + \partial_{xxx} \delta y - \gamma \delta \partial_{xx} y  + \partial_x(y \delta y)=  \delta u \mbox{ in } I\times\Omega,\label{linkdv1}\\
@@ -243,9 +243,9 @@ Next we analyze be well posedness of the tangent equation
  \end{numcases}
 \end{subequations}
 \begin{Def}
-Let $(\delta u,\delta y_0)\in\M\times \mathcal B$ and $y\in \mathcal B$. A function $\delta y\in \mathcal B$ is called a solution of \eqref{linkdv1}-\eqref{linkdv3} if it satisfies the fixed point equation
+Let $(\delta u,\delta y_0)\in \Hm1\times \mathcal B$ and $y\in \mathcal B$. A function $\delta y\in \mathcal B$ is called a solution of \eqref{linkdv1}-\eqref{linkdv3} if it satisfies the fixed point equation
 \[
-\delta y=\mathcal L(\delta q-\partial_x(y\delta y),\delta y_0)
+\delta y=\mathcal L(\delta u-\partial_x(y\delta y),\delta y_0)
 \]
 where $\mathcal L$ is the solution operator from Remark \ref{rmklinearoperator}.
 \end{Def}
@@ -258,7 +258,7 @@ where $\mathcal L$ is the solution operator from Remark \ref{rmklinearoperator}.
 \begin{proof}[Proof of Proposition~\ref{prop:tangent}]
 We define the linear mapping
 \[
-\Psi_{\delta u, \delta y_0,y}\colon \mathcal B_{\theta}\rightarrow B_{\theta},~~\Psi_{\delta u, \delta y_0,y}(\delta y) = \mathcal{L}(\delta u - \partial_x(y\delta y),\delta y_0)
+\Psi_{\delta u, \delta y_0,y}\colon \mathcal B_{\theta}\rightarrow \mathcal B_{\theta},~~\Psi_{\delta u, \delta y_0,y}(\delta y) = \mathcal{L}(\delta u - \partial_x(y\delta y),\delta y_0)
 \]
 with $\mathcal B_{\theta}$ defined as in \eqref{btheta} and \eqref{normbtheta} and $\mathcal{L}$ being the linear \KdV operator described in Remark~\ref{rmklinearoperator}. Our goal is to show that under some constraints on $\theta$, $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping, such that the Banach fixed point theorem can be applied. First we estimate $\partial_x(y \delta y)$ in the $L^2([0,\theta],H^{-1}(\Omega))$-norm
 \beal\label{estimate_variable_coefficient}
