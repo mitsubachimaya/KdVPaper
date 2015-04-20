@@ -11,7 +11,7 @@ First we consider
 \begin{subequations}\label{kdvlinnonhom}
 \begin{numcases}{}
 \partial_t y +\partial_x y + \partial_{xxx} y - \gamma \partial_{xx} y =  f \mbox{ in } I\times\Omega,\label{kdvlinnonhom1}\\
-y(\cdot,0) = y(\cdot,L) = \partial_x y (.,L) = 0 \mbox{ in } I,\label{kdvlinnonhom2}\\
+y(\cdot,0) = y(\cdot,L) = \partial_x y (\cdot,L) = 0 \mbox{ in } I,\label{kdvlinnonhom2}\\
 y(0,\cdot) = y_{0}(\cdot) \mbox{ in } \Omega,\label{kdvlinnonhom3}
 \end{numcases}{}
 \end{subequations}
@@ -78,7 +78,7 @@ For $(f,y_0)\in \Hm1\times L^2(\Omega)$ a function $y\in L^\infty(I,L^2(\Omega))
 \end{equation}
 for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p = p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{Def}
-The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f., \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$. We rather utilize here a strategy based on the approximation of the data which yields higher regularity of the solution.
+The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f. \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$. We rather utilize here a strategy based on the approximation of the data which yields higher regularity of the solution.
 \begin{prop}
 Let $(f,y_0)\in \Hm1\times L^2(\Omega)$. Then, there exists a unique weak
 solution $y\in \mathcal B\cap H^1(I,\mathcal V^*)$  of \eqref{kdvlinnonhom1}-\eqref{kdvlinnonhom3}. Furthermore there exists a constant
@@ -315,7 +315,7 @@ y(0,.) = 0 \mbox{ in } \Omega\label{kdv3}.
 \end{subequations}
 \begin{Def}\label{defnlkdv}
 For $(y_0,f)\in L^2(\Omega)\times \Hm1$ a function $y\in \mathcal B$ is called a weak solution of \eqref{kdv1} - \eqref{kdv3} if it satisfies the following fixed point equation
-\[y=\mathcal L(q-y\partial_x y ,y_0)\]
+\[y=\mathcal L(f-y\partial_x y ,y_0)\]
 or in other words
 \begin{equation}\label{weakformkdv}
 \int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-y\partial_x y ,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
@@ -516,7 +516,7 @@ T^{\ast}\leq \frac{C(T,L)}{\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{
 \]
 The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the solution. But one can also consider $T$ fixed and shift the constraint on the data
 \be
-\norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq \frac{C(T,L,)}{T^{1/4}}.
+\norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq \frac{C(T,L)}{T^{1/4}}.
 \label{ineqqnorm}
 \ee
 %Since we will only be able to prove global well posedness in the case $\gamma > 0$, we will rather adopt this point of view as far as optimization is concerned for the pure \KdV equation.
@@ -580,7 +580,7 @@ And eventually
 \]
 Integration between $0$ and $t$ yields
 \be
-\norm{y(t,.)}_{L^2(\Omega)}^2 \leq \norm{y_0}_{L^2(\Omega)}^2 + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^2.
+\norm{y(t,\cdot)}_{L^2(\Omega)}^2 \leq \norm{y_0}_{L^2(\Omega)}^2 + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^2.
 \label{C0nonlin}
 \ee
 And integration between $0$ and $T$ gives
@@ -673,7 +673,7 @@ The constant in the estimate \eqref{globalestimate} explodes for $\gamma \righta
 
 \subsection{Well-posedness of the optimization problem. Existence of an optimum}
 We start by defining the admissible set of controls
-$$U_{ad} = \begin{cases} u \in \M\colon \norm{u}_{\M} \leq \frac{C(T,L)}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)} &\quad\mbox{if } \gamma = 0 \\
+$$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M} \leq \frac{C(T,L)}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)}\right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
 where $C(T,L)$ is the constant from \eqref{ineqqnorm} and assuming that
@@ -681,7 +681,10 @@ where $C(T,L)$ is the constant from \eqref{ineqqnorm} and assuming that
 \norm{y_0}_{L^2(\Omega)}< \frac{C(T,L)}{T^{1/4}}.
 \end{equation}
 Moreover we introduce the non-linear control-to-state operator
-\[S\colon U_{ad}\rightarrow \mathcal B\cap H^1(I,\mathcal V^\ast),\quad u\mapsto y\]
+\begin{equation}
+ S\colon U_{ad}\rightarrow \mathcal B\cap H^1(I,\mathcal V^\ast),\quad u\mapsto y
+ \label{controltostate}
+\end{equation}
 where $y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for a given $y_0\in L^2(\Omega)$ which satisfies
 \eqref{constr y0} in the case $\gamma =0$. The control-to-observation operator is given by
 \[
@@ -689,7 +692,7 @@ S_{obs}\colon U_{ad}\rightarrow L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs}
 \]
 Thus we can rewrite problem \eqref{cost} in its reduced form given by
 \be
-\min_{u \in U_{ad}}\frac{1}{2}\left(\norm{S_{obs}u - z}_{L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})}^2\right) + \alpha \norm{u}_{\mathcal{M}(\Omega_{c}, L^{2}(I))}.
+\min_{u \in U_{ad}}\frac{1}{2}\norm{S_{obs}(u) - z}_{L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})}^2 + \alpha \norm{u}_{\mathcal{M}(\Omega_{c}, L^{2}(I))}.
 \label{red cost}
 \ee
 with $z\in L^2(I\times \Omega_{obs})\times L^2(\Omega_{obs})$.

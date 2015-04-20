@@ -3,7 +3,7 @@
 %!TEX root = kdv.tex
 This section is based on ideas from \cite{lions1985control}. There the state equation is considered as an equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections. Moreover we add the term $\frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4$ for $\eta >0$ to the cost functional. In the following we will see that the boundedness of the state in the $L^4(I,L^4(\Omega))$-norm makes the state equation a well-defined equality constraint and ensures the time-global existence of $y$ in $\mathcal B$. Thus we consider an optimal control problem of the form
 \begin{multline}
-\min_{u \in \M}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{obs}}y - z_1}_{L^2(I\times \Omega_{obs})}^2+\|\chi_{\Omega_{obs}}y(T)-z_2\|_{L^2(\Omega_{obs})}^2\right) \\+ \alpha \norm{u}_{\mathcal{M}(\Omega, L^{2}(I))} + \frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4.
+\min_{u \in \M}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{obs}}y - z_1}_{L^2(I\times \Omega_{obs})}^2+\|\chi_{\Omega_{obs}}y(T)-z_2\|_{L^2(\Omega_{obs})}^2\right) \\+ \alpha \norm{u}_{\mathcal{M}(\Omega, L^{2}(I))} + \frac{\eta}{4} \norm{y}_{L^4(I\times \Omega)}^4.
 \label{cost2}
 \end{multline}
 subject to \eqref{kdvcontrol1}-\eqref{kdvcontrol3}. The $L^4(I,L^4(\Omega))$-norm is chosen since it guarantees the following regularity of the non-linearity.  
@@ -25,7 +25,7 @@ The proof is based on similar arguments as in the proof of Lemma \ref{lemyyx2}.
 \end{proof}
 Therefore the following definition is reasonable.
 \begin{Def}\label{statecontrolpair}
-Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$. They are called a \textit{state-control pair} if they satisfy the equation
+Let $(y,u)$ $\in L^4(I,L^4(\Omega))\times \M$ such that $y(T,\cdot)$ exists and is in $L^4(\Omega)$. They are called a \textit{state-control pair} if they satisfy the equation
 \begin{equation}\label{weakformkdv L4}
 \int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-y\partial_xy,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
 \end{equation}
@@ -59,11 +59,11 @@ Now we are in the position to show the existence of an optimal control.
 There exists a solution $(\bar y, \bar u)$ to the optimal control problem \eqref{cost2}.
 \end{prop}
 \begin{proof}
-Since the cost functional $J$ is positive it has a infimum $\bar J$. Moreover we already have shown existence of a control-state pair $(y,u)\in L^4(I,L^4(\Omega))\times \M$ (for small data). Thus there exists a minimizing sequence of state-control pairs $(y_n,u_n) \in L^4(I,L^4(\Omega))\times \M$ such that $J(y_n, u_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there is a $\varepsilon>0$ such that
+Since the cost functional $J$ is positive it has an infimum $\bar J$. Moreover we already have shown in Proposition~\ref{localposedness} existence of a control-state pair $(y,u)\in \mathcal{B}\times \M$ (for small data, see Remark~\ref{rmkUad}). Since $\mathcal{B} \hookrightarrow L^4(I,L^4(\Omega))$, one also has $(y,u)\in  L^4(I,L^4(\Omega))\times \M$. Thus there exists a minimizing sequence of state-control pairs $(y_n,u_n) \in L^4(I,L^4(\Omega))\times \M$ such that $J(y_n, u_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there is a $\varepsilon>0$ such that
 \be
 \varepsilon+J(0,0)\geq \alpha \norm{u_n}_{\M} + \frac{\eta}{4} \norm{y - z_1}_{L^4(I\times \Omega)}^4
 \ee
-for $n$ large enough. Therefore the sequence $(y_n,u_n)$ is bounded in $L^4(I,L^4(\Omega))\times \M$. Thanks to Proposition~\ref{statecontrolestimate}, we also have $(y_n,u_n)$ is bounded in $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$. This implies the existence of an element $(\bar y, \bar u)\in \mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$ and a state-control subsequence $(y_{n_k},u_{n_k})$ converging in the weak-$*$ topology of $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times\M$ towards $(\bar y, \bar u)$ as well as the existence of $\hat y \in L^2(\Omega)$ such that $y_{n_k}(T) \rightharpoonup y(T)$ in $L^2(\Omega)$. With the Aubin-Lions lemma, we get also
+for $n$ large enough. Therefore the sequence $(y_n,u_n)$ is bounded in $L^4(I,L^4(\Omega))\times \M$. Thanks to Proposition~\ref{statecontrolestimate}, we also have $(y_n,u_n)$ is bounded in $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$. This implies the existence of an element $(\bar y, \bar u)\in \mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})\times \M$ and a state-control subsequence $(y_{n_k},u_{n_k})$  such that $u_{n_k}$ converges in the weak-$*$ topology of $\times\M$ towards $\bar u$ and $y_{n_k}$ converges in the weak topology of $\mathcal{B}\cap H^{1}(I, \mathcal{V}^{*})$ towards $\bar y$. Moreover existence of $\hat y \in L^2(\Omega)$ such that $y_{n_k}(T) \rightharpoonup y(T)$ in $L^2(\Omega)$ is ensured. With the Aubin-Lions lemma, we get also
 \be
 \nonumber
 y_{n_k} \rightarrow \bar y\quad\text{in}\quad L^2(I,\mathcal C_0(\Omega)).

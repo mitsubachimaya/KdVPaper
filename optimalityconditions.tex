@@ -3,7 +3,7 @@
 \section{First order optimality conditions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{secoptconditions}
-Next we discuss the differentiability of $S$.
+Next we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}.
 \begin{prop}
   The control to state operator $S$ is continuously Fr\'echet-differentiable. Its derivative
   \[
@@ -13,8 +13,8 @@ Next we discuss the differentiability of $S$.
   at $u\in U_{ad}$ is given by the solution operator of the linear tangent equation
   \begin{subequations}
    \begin{numcases}{}
-      \partial_t \delta y +\partial_x \delta y -\gamma \partial_{xx} \delta y+ \partial_{xxx} \delta y + \partial_x (y \delta y)=\delta u \mbox{ in } \Omega,  \label{linearizedkdv1}\\
-      \delta y(\cdot,0) = \delta y(\cdot,L) = \partial_x \delta y (\cdot,L) = 0 \mbox{ in } \Gamma,  \label{linearizedkdv2}\\
+      \partial_t \delta y +\partial_x \delta y -\gamma \partial_{xx} \delta y+ \partial_{xxx} \delta y + \partial_x (y \delta y)=\delta u \mbox{ in } I\times\Omega,  \label{linearizedkdv1}\\
+      \delta y(\cdot,0) = \delta y(\cdot,L) = \partial_x \delta y (\cdot,L) = 0 \mbox{ on } I,  \label{linearizedkdv2}\\
       \delta y(0,\cdot) = 0 \mbox{ on } \Omega  \label{linearizedkdv3}.
    \end{numcases}
    \label{tan eq}
@@ -22,11 +22,11 @@ Next we discuss the differentiability of $S$.
   \label{propfrechet}
 \end{prop}
 \begin{proof}[Proof of Proposition~\ref{propfrechet}]
-First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),\quad y\mapsto y\partial_x y$ is Fr\'echet differentiable since
+First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),\quad y\mapsto y\partial_x y$ is Fr\'echet differentiable since with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B\hookrightarrow L^4(I\times \Omega)$
 \[
-\|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2
+\|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2.
 \]
-with $F'(y)\delta y=\partial_x(y\delta y)$ for any $\delta y\in \mathcal B\hookrightarrow L^4(I\times \Omega)$. Then we differentiate the fixed point equation $y=\mathcal L(u-y\partial_x y,y_0)$ with respect to $(y,u)$ in direction $(\delta y,\delta u)\in \mathcal B\times \M$ and get
+Then we differentiate the fixed point equation $y=\mathcal L(u-y\partial_x y,y_0)$ with respect to $(y,u)$ in direction $(\delta y,\delta u)\in \mathcal B\times \M$ and get
 \be\label{abstract_tangent_equation}
 \delta y=\mathcal L'(\delta u-\partial_x(y\delta y))
 \ee
@@ -48,12 +48,12 @@ w(0,x) = 0\mbox{ in } \Omega\label{kdvw3}.
 \eesn
 According to Appendix~\ref{appendixtangent} and Lemma \ref{lemyyx2} it holds
 \[
-\norm{w}_{\mathcal{B}} \leq C\norm{-(\tilde{y} - y)\partial_x(\tilde{y} - y)}_{\Hm1}\leq C T^{1/4}\norm{\tilde{y} - y}_{\mathcal{B}}.
+\norm{w}_{\mathcal{B}} \leq C\norm{(\tilde{y} - y)\partial_x(\tilde{y} - y)}_{\Hm1}\leq C T^{1/4}\norm{\tilde{y} - y}_{\mathcal{B}}.
 \]
 Therefore the conclusion follows from Lipschitz continuity of $S$. Hence we provide the following lemma which concludes the proof.
 \end{proof}
 \begin{lem}
-Let $u\in U_{ad}$ and $u+\delta q\in U_{ad}$ for $\delta u\in \M$. The control-to-state operator $S$ satisfies the estimate
+Let $u\in U_{ad}$ and $u+\delta u\in U_{ad}$ for $\delta u\in \M$. The control-to-state operator $S$ satisfies the estimate
 \[\|S(u+\delta u)-S(u)\|_{\mathcal B}\leq C(\|u\|_{\M})\|\delta u\|_{\M}.\]
  \label{lipschitzcontinuity}
 \end{lem}
@@ -165,7 +165,7 @@ where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we i
 \begin{proof}[Proof of Proposition~\ref{adjointKdV}]
 First of all we mention that $y\partial_x p\in L^1(I,L^2(\Omega))$ holds for $y\in \mathcal B$ and $p\in \mathcal B$, c.f., Lemma \ref{lemadjoint}. Then we consider the weak formulation of the tangent equation
 \be
-(\delta y,\phi)_{L^2(I\times\Omega)}+(\delta y(T),p_T)_{L^2(\Omega)}-(\delta y,y\partial_x p)_{L^2(I\times\Omega)}=\langle \delta u,p\rangle_{\mathcal M_I,\mathcal C_I},\quad\delta u\in \M
+(\delta y,\phi)_{L^2(I\times\Omega)}+(\delta y(T),p_T)_{L^2(\Omega)}-(\delta y,y\partial_x p)_{L^2(I\times\Omega)}=\langle \delta u,p\rangle_{\M,\mathcal C_I},\quad\delta u\in \M
 \label{tangentwf}
 \ee
 with $y=S(u)\in\mathcal B$ and therefore  $\delta y=S'(u)\delta u\in\mathcal B$. By identification with \eqref{adjointwf}, we set $S'^\star(u)(\phi,p_T):=p$ where $p$ solves the fixed point equation
@@ -186,7 +186,7 @@ Next we derive first order optimality conditions using tools from convex analysi
   \eean
   and fulfills the following variational inequality condition
   \be
-  \langle -\bar p,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}\leq\|u\|_{\M}\quad\forall u\in Q_{ad}.
+  \langle -\bar p,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}\leq\|u\|_{\M}\quad\forall u\in U_{ad}.
   \label{subgradientcond}
   \ee
 \end{prop}
@@ -282,7 +282,7 @@ which then implies \eqref{controlsupp} and \eqref{controlintime}. Equality in \e
 \]   
 \end{proof}
 \begin{rmk}
-If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not satisfied with equality there holds $\bar \lambda=0$ and we recover the results from \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
+If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not satisfied with equality there holds $\bar \lambda=0$ and we recover the usual optimality conditions; c.f. \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
 \end{rmk}
 %\begin{proof}[Proof of Proposition~\ref{propsubgcondition}]
 %
