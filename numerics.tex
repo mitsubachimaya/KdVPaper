@@ -118,29 +118,32 @@ where the functions $u_j(t)$ are piecewise constant on each time step and $\delt
 %where $N_T$ is the number of time steps and $\tau_i$ is the size of the $i^{th}$ step. We point out that this precise control discretization was also used and analyzed in \cite{pieper2013priori, pieper2014,casas2013parabolic}.
 
 \subsubsection{Time stepping scheme and adjoint - Crank-Nicolson-Leap-Frog}
-We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable. This scheme has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian(see, e.g.\cite{meidner2007adaptive}). Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. However, the Crank-Nicolson scheme is computationally demanding. An alternative is then the two-steps Crank-Nicolson Leap Frog method. In this setting, the third derivative is treated implicitely and the nonlinear term is treated explicitely. This method has already been extensively used for the \KdV equation \cite{shen2003new,ma2000legendre,ma2001optimal}, showing for instance extended stability intervals with the Fourier spectral method \cite{chan1985fourier}. However, to the authors' knowledge, this has never been used in the context of an optimal control problem. Commonly, this method is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-steps method in order to get a discrete adjoint that is consistent with the continuous adjoint in both the distributed control problem or the terminal observations problem. The time interval is devided into $N+1$ steps $0 = t_0 < t_1....< t_N = T$. While the first and last one have length $\frac{\Delta t}{2}$, the other steps are of equal length $\Delta t$. We denote hereafter
+We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable. This scheme has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian(see, e.g.\cite{meidner2007adaptive}). Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. However, the Crank-Nicolson scheme is computationally demanding. An alternative is then the two-steps Crank-Nicolson Leap Frog method. In this setting, the third derivative is treated implicitely and the nonlinear term is treated explicitely. This method has already been extensively used for the \KdV equation \cite{shen2003new,ma2000legendre,ma2001optimal}, showing for instance extended stability intervals with the Fourier spectral method \cite{chan1985fourier}. However, to the authors' knowledge, this has never been used in the context of an optimal control problem. Commonly, this method is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-steps method in order to get a discrete adjoint that is consistent with the continuous adjoint in both the distributed control problem or the terminal observations problem. The time interval is devided into $N_{T}+1$ steps $0 = t_0 < t_1....< t_{N_{T}} = T$. While the first and last one have length $\frac{\Delta t}{2}$, the other steps are of equal length $\Delta t$. We denote hereafter
 $\mathbf{y}_n = \mathbf{y}(t_n) = \left( \tilde y_0(t_n), \tilde y_1(t_n), ..., \tilde y_{N-3}(t_n)\right)^t$
 and
-$\mathbf{u}_n = \mathbf{u}(t_n) = \left( \langle u(t_n), \psi_0 \rangle, \langle u(t_n), \psi_1 \rangle, ..., \langle u(t_n), \psi_{N-3} \rangle\right)^t$.
+$\mathbf{u}_n = \mathbf{u}(t_n) = \left( \langle u(t_n), \psi_0 \rangle, \langle u(t_n), \psi_1 \rangle, ..., \langle u(t_n), \psi_{N-3} \rangle\right)^t$, $ n=0 \ldots N_{T}$.
 With the help of the matrices defined in \eqref{definitionsmatrices}, the forward scheme is as follows
 \bealn
-& \frac{1}{2}\left( M+\Delta t S\right) y_1 = \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) y_0 + \frac{1}{2}\Delta t F(y_0) + \frac{1}{2}\Delta t u_0 \\
-& \frac{1}{2}\left( M+\Delta t S\right) y_{n+1} = \frac{1}{2}\left( M - \Delta t S\right) y_{n-1} +  \Delta t \left( P + \gamma Q\right)y_n \\
-& \mbox{\hspace{0.5\textwidth}}+ \Delta t F(y_n) + \Delta t u_n,  \, n=1 \ldots N-1\\
-& M y_{N+1} = \frac{1}{2}\left( M y_N + M y_{N-1} \right)+ \frac{1}{2}\Delta t P y_N + \frac{1}{2}\Delta t F(y_N) - \frac{1}{2}\Delta t S y_{N-1}
+& \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 = \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \mathbf{y}_0 + \frac{1}{2}\Delta t F(\mathbf{y}_0) + \frac{1}{2}\Delta t \mathbf{u}_0 \\
+& \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{n+1} = \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{n-1} +  \Delta t \left( P + \gamma Q\right)\mathbf{y}_n \\
+& \mbox{\hspace{0.5\textwidth}}+ \Delta t F(\mathbf{y}_n) + \Delta t \mathbf{u}_n,  \, n=1 \ldots N_{T}-1\\
+& M \mathbf{y}_{N_{T}+1} = \frac{1}{2}\left( M \mathbf{y}_{N_{T}} + M \mathbf{y}_{N_{T}-1} \right)+ \frac{1}{2}\Delta t P \mathbf{y}_{N_{T}} + \frac{1}{2}\Delta t F(\mathbf{y}_{N_{T}}) - \frac{1}{2}\Delta t S \mathbf{y}_{N_{T}-1}
 \eealn
 The first step is semi-implicit. The interior steps are classical CNLF steps. The last step - due to our modification - is not a regular, well-known step, but it is designed in such a way that the discrete adjoint shall be consistent with a CNLF discretization of the continuous adjoint. Notice that as $\Delta t$ vanishes, it becomes just a mean between the two preceding steps.
 
+As for the resolution of the optimization problem, the objective functional writes at the discrete level
+\be
+J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{u}_{N_{T}}) = \frac{1}{2}\sum_{i=1}^{N_{T}}{\Delta t \mathbf{y}_{i}^{t}M \mathbf{y}_{i}} + \alpha \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\Delta t u_{ji}^2}\right)^{1/2}}
+\ee
 
-
-The discrete adjoint in the case of terminal observations then writes
+This allows also to define a discrete Lagrangian and derive the discrete adjoint in the case of terminal observations
  \bealn
  &M^t p_N = -A(y_{N+1} - y_d)\\
  &\frac{1}{2}\left( M^t+\Delta t S^t\right) p_{N-1} = \frac{1}{2}\left( M^t + \Delta t P^t + \gamma \Delta t Q^t \right) p_N + \frac{1}{2}\Delta t F^{'}(y_N)^t p_N \\
  &\frac{1}{2}\left( M^t + \Delta t S^t\right)p_{n-2} = \frac{1}{2}\left( M^t - \Delta t S^t\right)p_{n} + \Delta t \left( P^t + \gamma Q^t\right)p_{n-1} + \Delta t F^{'}(y_{n-1})^t p_{n-1}, \\
  &\mbox{\hspace{0.7\textwidth}}\quad n=2 \ldots N.
 \eealn
-The proof for the adjoint is done by standard calculations on the discrete Lagrangian of the problem. Classically, it starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a unique semi-implicit step and regular CNLF steps.
+Classically, it starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a unique semi-implicit step and regular CNLF steps.
 % The lagrangian of the problem writes at the continuous level.
 % \beal
 %   \mathcal{L}(y,q,p) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{\M} + <p, By-q>
@@ -186,6 +189,10 @@ The proof for the adjoint is done by standard calculations on the discrete Lagra
  \begin{rmk}
   Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditionned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the mean space step.
  \end{rmk}
+ 
+ \begin{prop}
+ Blabla
+ \end{prop}
 
 
 \subsection{Numerical treatment of the optimization problem}
