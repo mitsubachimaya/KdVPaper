@@ -107,7 +107,7 @@ By $\left\{x_i \right\}, i = 1, 2 ..., N$, we denote the grid points of the spat
 \be
 u_N(t) = \sum_{j=1}^{N}{u_j(t)\delta_{x_j}}
 \ee
-where the functions $u_j(t)$ are piecewise constant on each time step and $\delta_{x_j}$ are Dirac functionals located at the grid points. Hence, we clearly have $u_N \in \M$ and can easily define any inner product required in the resolution of the state equation
+where the functions $u_j(t)$ are pointwise evaluations in time of the control at the grid points and $\delta_{x_j}$ are Dirac functionals located at the grid points. Hence, we clearly have $u_N \in \M$ and can easily define any inner product required in the resolution of the state equation
 \be
 \langle u_N, \psi \rangle = \sum_{j=1}^{N}{u_j(t)\psi(x_j)}.
 \ee
@@ -133,14 +133,23 @@ The first step is semi-implicit. The interior steps are classical CNLF steps. Th
 
 As for the resolution of the optimization problem, the objective functional writes at the discrete level
 \be
-J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{u}_{N_{T}}) = \frac{1}{2}\sum_{i=1}^{N_{T}}{\Delta t \mathbf{y}_{i}^{t}M \mathbf{y}_{i}} + \alpha \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\Delta t u_{ji}^2}\right)^{1/2}}
+J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{u}_{N_{T}}) = \frac{1}{2}\sum_{i=1}^{N_{T}}{\Delta t \mathbf{y}_{i}^{t}A \mathbf{y}_{i}} + \alpha \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\Delta t \mathbf{u}_{ij}^2}\right)^{1/2}}
 \ee
 
-This allows also to define a discrete Lagrangian and derive the discrete adjoint in the case of terminal observations
+This allows also to define a discrete Lagrangian:
+\begin{multline}
+\mathcal{L}_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{u}_{N_{T}},\mathbf{p}_{0}, \ldots, \mathbf{p}_{N_{T}-1}) = J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{u}_{N_{T}}) + \\
+ + \mathbf{p}_0^t\left[ \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \mathbf{y}_0 - \frac{1}{2}\Delta t F(\mathbf{y}_0) - \frac{1}{2}\Delta t \mathbf{u}_0 \right]\\
+ +\sum_{k=1}^{N-1}{\mathbf{p}_k^t\left[
+ \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{k-1} - \Delta t \left( P + \gamma Q\right)y_k - \Delta t F(y_k) - \Delta t \mathbf{u}_k\right]}\\
+ + \mathbf{p}_N^t\left[ M \mathbf{y}_{N+1} - \frac{1}{2}\left( M \mathbf{y}_N + M \mathbf{y}_{N-1} \right)- \frac{1}{2}\Delta t P \mathbf{y}_N - \frac{1}{2}\Delta t F(\mathbf{y}_N) +\frac{1}{2}\Delta t S \mathbf{y}_{N-1}\right].
+ \end{multline}
+
+and derive the discrete adjoint in the case of terminal observations
  \bealn
- &M^t p_N = -A(y_{N+1} - y_d)\\
- &\frac{1}{2}\left( M^t+\Delta t S^t\right) p_{N-1} = \frac{1}{2}\left( M^t + \Delta t P^t + \gamma \Delta t Q^t \right) p_N + \frac{1}{2}\Delta t F^{'}(y_N)^t p_N \\
- &\frac{1}{2}\left( M^t + \Delta t S^t\right)p_{n-2} = \frac{1}{2}\left( M^t - \Delta t S^t\right)p_{n} + \Delta t \left( P^t + \gamma Q^t\right)p_{n-1} + \Delta t F^{'}(y_{n-1})^t p_{n-1}, \\
+ &M^t \mathbf{p}_N = -A(y_{N+1} - y_d)\\
+ &\frac{1}{2}\left( M^t+\Delta t S^t\right) \mathbf{p}_{N-1} = \frac{1}{2}\left( M^t + \Delta t P^t + \gamma \Delta t Q^t \right) \mathbf{p}_N + \frac{1}{2}\Delta t F^{'}(y_N)^t \mathbf{p}_N \\
+ &\frac{1}{2}\left( M^t + \Delta t S^t\right)\mathbf{p}_{n-2} = \frac{1}{2}\left( M^t - \Delta t S^t\right)\mathbf{p}_{n} + \Delta t \left( P^t + \gamma Q^t\right)\mathbf{p}_{n-1} + \Delta t F^{'}(y_{n-1})^t \mathbf{p}_{n-1}, \\
  &\mbox{\hspace{0.7\textwidth}}\quad n=2 \ldots N.
 \eealn
 Classically, it starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a unique semi-implicit step and regular CNLF steps.
@@ -327,7 +336,7 @@ The second example is a control example. We divide the domain $\Omega = [-L,L]$ 
 \caption{Objective wave at final time T.}
 \label{objectivewave}
 \end{figure}
-The support of the control is depicted on Fig.~\ref{supportIP}. At the end of the continuation strategy, it boils down to two point sources. One can see clearly on Fig.~\ref{recoveredcontrol} that it has smooth variations in time, as induced by the $L^2$ norm. The optimized state is shown on Fig.~\ref{ex2fullgammadm5} for $\gamma = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that cannot be avoided since they are not observed.
+The support of the control is depicted on Fig.~\ref{supportIP}. At the end of the continuation strategy, it boils down to two point sources. One can see clearly on Fig.~\ref{recoveredcontrol} that it has smooth variations in time, as induced by the $L^2$ norm. The optimized state is shown on Fig.~\ref{ex2fullgammadm5} for $\gamma = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that do not have to be avoided since they are not observed.
 \begin{figure}[!h]
 \includegraphics[width = 0.75\textwidth]{images/ex2gammadm5.pdf}
 \caption{Spatial support of the control, determined by $\norm{q}_{L^2(0,T)}\geq \frac{\alpha}{\gamma}$, for $\gamma = 10^{-5}$.}
