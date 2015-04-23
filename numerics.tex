@@ -262,12 +262,12 @@ for an auxiliary variable $q_{\gamma}$ such that $u_{\gamma} = P_{\gamma}(q_{\ga
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
 \begin{rmk}
- To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{ulbrich2002semismooth}. An iterative method (conjugate gradient) is used to solve the Newton system. A globalization strategy is added inspired by the algorithm of truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}.
+ To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{ulbrich2002semismooth}. An iterative method (conjugate gradient) is used to solve the Newton system. If a simple continuation strategy is often suggested to achieve global convergence in that case \cite{herzog2012directional}, this is not sufficient for our problem, due to the high nonlinearity of the phenomena involved. A globalization strategy based on the decrease of the objective functional is required. We implement it based on the algorithm of truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}.
 \end{rmk}
 
 
 \subsubsection{Discretization of the control and mass lumping}
-In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible anymore as we need a discretization that is compatible with $L^2(\Omega_c \times I)$ functions. However for this regularized case, one need to find a discretization that should lead to an equivalent problem to \eqref{cost} in the limiting case $\gamma \to 0$ (i.e. to obtain a Dirac measure like discretization). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentionned.
+In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible anymore as we need a discretization that is compatible with $L^2(\Omega_c \times I)$ functions. Thus, for this regularized case, one need to find a discretization that should lead to an equivalent problem to \eqref{cost} in the limiting case $\gamma \to 0$ (i.e. to obtain a Dirac measure like discretization). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentioned.
 
 % The finite element space associated with this grid is
 % \be
@@ -283,8 +283,13 @@ Moreover, the various norms involved in the optimization problem shall be comput
 \beal
 &\norm{u_h}_{L^1(\Omega_c, L^2(I))} = \sum_{n=1}^N{d_n\left(\sum_{j=1}^{N_T}{\Delta t u_{nj}^2}\right)^{1/2}}, \quad \norm{u_h}_{L^2(\Omega_c, L^2(I))}^2 = \sum_{n=1}^N{d_n\left(\sum_{j=1}^{N_T}{\Delta t u_{nj}^2}\right)},\\
 &\langle \chi_{\Omega_c} u_h,\varphi_h \rangle = \sum_{n=1}^N{d_n \sum_{j=1}^{N_T} \Delta t u_{jn}\varphi_{jn}}
+\label{masslumping}
 \eeal
 for all $\varphi_h = \chi_{\Omega_c}\sum_{j=1}^{N_T}{\chi_{I_j}\sum_n{\varphi_{jn} e_n}}$
+
+\begin{rmk}
+ With \eqref{masslumping} as expressions for the norms and inner products, all projections formulae involved at the continuous level in the optimization process can be transfered one to one to the (spatial) discrete vector. Therefore, \eqref{optcondition} or \eqref{normalmap} hold at the discrete level.
+\end{rmk}
 
 
 \subsection{Numerical examples}
