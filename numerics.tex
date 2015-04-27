@@ -240,8 +240,8 @@ Classically, it starts with a projection of the tracking term in the state space
 \subsubsection{The regularized problem}
 Numerically, the optimization problem is solved via a Newton type method. This requires an additional regularization term which we introduce as follows
 \beal
-\min_{q \in \M} J(y) &= \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\gamma}{2}\norm{u}_{L^2(\Omega,L^2(I))} \\
-& = f(y) + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\gamma}{2}\norm{u}_{L^2(\Omega,L^2(I))},
+\min_{q \in \M} J(y) &= \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))} \\
+& = f(y) + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))},
 \label{costreg}
 \eeal
 where $u$ and $y$ are subject to Korteweg-de Vries Burgers equation. This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
@@ -250,23 +250,23 @@ where $u$ and $y$ are subject to Korteweg-de Vries Burgers equation. This enable
 \ee
 In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. To obtain the optimality conditions, one introduces the proximal map of the $L^1(\Omega, L^{2}(I))$ norm (see, e.g. \cite{bauschke2011convex}):
 \be
-Prox_{\gamma\psi}(q)(x) = \frac{1}{\gamma}\left( \gamma - \alpha / \norm{q(x)}_{L^{2}(I)}\right)^{+}q(x) \quad \mbox{ for } q \in L^{2}(\Omega_{c}, L^{2}(I)).
+\operatorname{Prox}_{\psi/ \rg}(q)(x) = \frac{1}{\rg}\left( \rg - \alpha / \norm{q(x)}_{L^{2}(I)}\right)^{+}q(x) \quad \mbox{ for } q \in L^{2}(\Omega_{c}, L^{2}(I)).
 \ee
 We can then express the optimality condition for \eqref{costreg} by the pointwise projection formula
 \be
-\bar u_{\gamma} = -\frac{1}{\gamma}\left( 1 - \alpha/\norm{p_{\gamma}}_{L^{2}(I)}\right)^{+}p_{\gamma}.
+\bar u_{\rg} = -\frac{1}{\rg}\left( 1 - \alpha/\norm{p_{\rg}}_{L^{2}(I)}\right)^{+}p_{\rg}.
 \ee
 It is then directly possible to solve via a Newton type method the equation
 \be
-F(u_{\gamma}) = u_{\gamma} + \frac{1}{\gamma}\left( 1 - \alpha/\norm{p_{\gamma}}_{L^{2}(I)}\right)^{+}p_{\gamma} = 0.
+F(u_{\rg}) = u_{\rg} + \frac{1}{\rg}\left( 1 - \alpha/\norm{p_{\rg}}_{L^{2}(I)}\right)^{+}p_{\rg} = 0.
 \label{optcondition}
 \ee
 Following \cite{pieperthesis}, one can also reformulate this optimality condition thanks to the "normal map", due to Robinson:
 \be
-G(q_{\gamma}) = \gamma q_{\gamma} + \nabla f (P_{\gamma}(q_{\gamma})) = 0,
+G(q_{\rg}) = \rg q_{\rg} + \nabla f (\operatorname{Prox}_{\psi/ \rg}(q_{\rg})) = 0,
 \label{normalmap}
 \ee
-for an auxiliary variable $q_{\gamma}$ such that $u_{\gamma} = P_{\gamma}(q_{\gamma})$. One easily prove in that case that $q_{\gamma} = -\frac{1}{\gamma} p_{\gamma}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
+for an auxiliary variable $q_{\rg}$ such that $u_{\rg} = \operatorname{Prox}_{\psi/ \rg}(q_{\rg})$. One easily prove in that case that $q_{\rg} = -\frac{1}{\rg} p_{\rg}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
 
 % and we can adapt it to state the following theorem
 % \begin{thm}
@@ -291,7 +291,7 @@ for an auxiliary variable $q_{\gamma}$ such that $u_{\gamma} = P_{\gamma}(q_{\ga
 
 
 \subsubsection{Discretization of the control and mass lumping}
-In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible anymore as we need a discretization that is compatible with $L^2(\Omega_c \times I)$ functions. Thus, for this regularized case, one need to find a discretization that should lead to an equivalent problem to \eqref{cost} in the limiting case $\gamma \to 0$ (i.e. to obtain a Dirac measure like discretization). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentioned.
+In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible anymore as we need a discretization that is compatible with $L^2(\Omega_c \times I)$ functions. Thus, for this regularized case, one need to find a discretization that should lead to an equivalent problem to \eqref{cost} in the limiting case $\rg \to 0$ (i.e. to obtain a Dirac measure like discretization). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points previsously mentioned.
 
 % The finite element space associated with this grid is
 % \be
@@ -344,22 +344,22 @@ The spacetime grid is parametrized with $T = 5$, $N = 256$ and $\Delta t = 0.01$
 \label{waveobservation}
 \end{figure}
 
-At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|q\|_{L^2(I)} = \frac{\alpha}{\gamma}$. One can see on Fig.~\ref{support} that the final control is a point source, located at the exact right position. The time profile of the control is depicted on Fig.~\ref{recoveredcontrol} and follows the original one quite well. One points out that the oscillations are due to the noise. It enters indeed directly as an initial condition in the adjoint equation and is not filtered in any manner on the support of the control, where \eqref{controlintime} holds for the time profile of $u$.
+At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|q\|_{L^2(I)} = \frac{\alpha}{\rg}$. One can see on Fig.~\ref{support} that the final control is a point source, located at the exact right position. The time profile of the control is depicted on Fig.~\ref{recoveredcontrol} and follows the original one quite well. One points out that the oscillations are due to the noise. It enters indeed directly as an initial condition in the adjoint equation and is not filtered in any manner on the support of the control, where \eqref{controlintime} holds for the time profile of $u$.
 \begin{figure}[!h]
 \includegraphics[width = 0.75\textwidth]{images/normp.pdf}
-\caption{Spatial support of the control, determined by $\norm{p}_{L^2(0,T)}\geq \alpha$. Here $\alpha = 0.1$ and $\gamma = 10^{-6}$}
+\caption{Spatial support of the control, determined by $\norm{p}_{L^2(0,T)}\geq \alpha$. Here $\alpha = 0.1$ and $\rg = 10^{-6}$}
 \label{support}
 \end{figure}
 \begin{figure}[!h]
  \includegraphics[width = 0.75\textwidth]{images/ex1recoveredcontrol2.pdf}
- \caption{Recovered control for $\gamma = 10^{-6}$}
+ \caption{Recovered control for $\rg = 10^{-6}$}
  \label{recoveredcontrol}
 \end{figure}
 The results  of the optimization process are shown on Fig.\ref{recoveredstate}, for $\alpha = 0.1$.
 \begin{figure}[!h]
  \includegraphics[width = 0.45\textwidth]{images/ex1recoveredstate3d.pdf}
   \includegraphics[width = 0.45\textwidth]{images/ex1recoveredstate.pdf}
- \caption{Recovered state $y$ and final observation $y(T)$ for $\gamma = 10^{-6}$}
+ \caption{Recovered state $y$ and final observation $y(T)$ for $\rg = 10^{-6}$}
  \label{recoveredstate}
 \end{figure}
 
@@ -375,17 +375,17 @@ The second example is a control example. We divide the domain $\Omega = [-L,L]$ 
 \caption{Objective wave at final time T.}
 \label{objectivewave}
 \end{figure}
-The support of the control is depicted on Fig.~\ref{supportIP}. At the end of the continuation strategy, it boils down to two point sources. One can see clearly on Fig.~\ref{recoveredcontrol} that it has smooth variations in time, as induced by the $L^2$ norm. The optimized state is shown on Fig.~\ref{ex2fullgammadm5} for $\gamma = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that do not have to be avoided since they are not observed.
+The support of the control is depicted on Fig.~\ref{supportIP}. At the end of the continuation strategy, it boils down to two point sources. One can see clearly on Fig.~\ref{recoveredcontrol} that it has smooth variations in time, as induced by the $L^2$ norm. The optimized state is shown on Fig.~\ref{ex2fullgammadm5} for $\rg = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that do not have to be avoided since they are not observed.
 \begin{figure}[!h]
 \includegraphics[width = 0.75\textwidth]{images/norm2p.pdf}
-\caption{Spatial support of the control, determined by $\norm{p}_{L^2(0,T)}\geq \alpha$, for $\gamma = 10^{-5}$.}
+\caption{Spatial support of the control, determined by $\norm{p}_{L^2(0,T)}\geq \alpha$, for $\rg = 10^{-5}$.}
 \label{supportIP}
 \end{figure}
 
 \begin{figure}[!h]
  \includegraphics[width = 0.45\textwidth]{images/ex2optcontrol3d.png}
  \includegraphics[width = 0.45\textwidth]{images/ex2utime.pdf}
- \caption{Optimal control $u$, $\gamma = 10^{-5}$}
+ \caption{Optimal control $u$, $\rg = 10^{-5}$}
  \label{recoveredcontrol}
 \end{figure}
 
@@ -393,7 +393,7 @@ The support of the control is depicted on Fig.~\ref{supportIP}. At the end of th
 \begin{figure}[!h]
  \includegraphics[width = 0.45\textwidth]{images/ex2state3d.pdf}
  \includegraphics[width = 0.45\textwidth]{images/controlledstate.pdf}
- \caption{Left: evolution of the optimized state y for $\gamma = 10^{-5}$. Right: final optimized state y(T), compared with the objective shape for $\gamma = 10^{-5}$.}
+ \caption{Left: evolution of the optimized state y for $\rg = 10^{-5}$. Right: final optimized state y(T), compared with the objective shape for $\rg = 10^{-5}$.}
  \label{ex2fullgammadm5}
 \end{figure}
 
