@@ -27,9 +27,9 @@ We denote by $A\colon L^2(\Omega)\rightarrow L^2(\Omega)$ the linear differentia
 \[
 Aw = -\partial_{xxx}w - \partial_{x}w + \gamma \partial_{xx}w
 \]
-with the dense domain $\mathcal{D}(A)\subset L^{2}(0,L)$ defined by
+with the dense domain $\mathcal{D}(A)\subset L^{2}(\Omega)$ defined by
 \[
-\mathcal{D}(A) = \left\{w\in H^{3}(0,L) \mbox{ s.t. } w(0) = w(L) = \partial_xw(L) = 0\right\}.
+\mathcal{D}(A) = \left\{w\in H^{3}(\Omega) \mbox{ s.t. } w(0) = w(L) = \partial_xw(L) = 0\right\}.
 \]
 The adjoint operator $A^*\colon L^2(\Omega)\rightarrow L^2(\Omega)$ is given by
 \[
@@ -37,7 +37,7 @@ A^*w = \partial_{xxx}w + \partial_{x}w + \gamma \partial_{xx}w
 \]
 with the domain
 \[
-\mathcal{D}(A^*) = \left\{w\in H^{3}(0,L) \mbox{ s.t. } w(0) = w(L) = \partial_xw(0) = 0\right\}.
+\mathcal{D}(A^*) = \left\{w\in H^{3}(\Omega) \mbox{ s.t. } w(0) = w(L) = \partial_xw(0) = 0\right\}.
 \]
 The operators $A$ and $A^*$ generate strongly continuous semigroups of contractions on $L^{2}(\Omega)$ denoted by $W(\cdot)\colon L^2(\Omega)\rightarrow L^2(\Omega)$ and $W^*(\cdot)\colon L^2(\Omega)\rightarrow L^2(\Omega)$. The reader is referred to \cite{rosier1997exact} for a proof.  In the sequel, we will denote by $\mathcal{B}$ the Banach space
 $C(I,L^2(\Omega))\cap L^2(I,H^1_0(\Omega))$ endowed with the norm
@@ -114,7 +114,7 @@ Due to the density of $\mathcal D(A^*)$ in $\mathcal V$, it holds $y\in H^1(I,\m
 
 % Thus, \eqref{kdvlinhomogeneous} can be written as the initial
 % value problem of an abstract evolution equation in the space
-% $L^{2}(0,L)$ \bealn
+% $L^{2}(\Omega)$ \bealn
 % &\frac{d}{dt}y(t)=Ay,\\
 % &y(0,x) = y_{0}(x).
 % \label{evolutionlinear}
@@ -125,16 +125,16 @@ Due to the density of $\mathcal D(A^*)$ in $\mathcal V$, it holds $y\in H^1(I,\m
 %The proof is provided in Appendix~\ref{sec:semigr-contr}.
 %   The idea is to prove that $A$ is maximally dissipative in order to
 %   use a corollary of the Lumer-Philips theorem and conclude. We
-%   already have that $A:\mathcal{D}(A) \mapsto L^{2}(0,L)$ has a dense
+%   already have that $A:\mathcal{D}(A) \mapsto L^{2}(\Omega)$ has a dense
 %   domain and it is easy to see that it is a closed operator. Let us
 %   prove that it is dissipative. For any $w \in \mathcal{D}(A)$, \beal
-%   <w,Aw>_{L^{2}(0,L)} &= \int_{0}^{L}{w(-w'''-w'+\gamma w'')dx}\\
+%   <w,Aw>_{L^{2}(\Omega)} &= \int_{0}^{L}{w(-w'''-w'+\gamma w'')dx}\\
 %   & = -[ww'']_{0}^{L} + \int_{0}^{L}{w'w''dx} - [w^{2}]_{0}^{L} + \gamma [ww']_{0}^{L} - \gamma \int_{0}^{L}{w'^{2}dx}\\
 %   & = -\frac{1}{2}w'(0)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
 %   \eeal Hence A is dissipative. Denoting $A^{\ast}$ the adjoint
 %   operator of $A$ satisfying \be A^{\ast}w = w''' + w' + \gamma w'',
 %   \ee we also have \beal
-%   <A^{\ast}w,w>_{L^{2}(0,L)} &= \int_{0}^{L}{w(w'''+w'+\gamma w'')dx}\\
+%   <A^{\ast}w,w>_{L^{2}(\Omega)} &= \int_{0}^{L}{w(w'''+w'+\gamma w'')dx}\\
 %   & = -\frac{1}{2}w'(L)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
 %   \eeal Therefore $A^{\ast}$ is also dissipative and A is maximally
 %   dissipative. A corollary of the Lumer-Philips theorem theorem (see
@@ -467,7 +467,7 @@ As a consequence, we can apply the Banach fixed point theorem which implies the 
 % \ee
 % Recalling from \cite{coron2003exact} the lemma
 % \begin{lem}
-% For every $\phi \in H^1_0(0,L)$ with $\phi(0) = 0$ and every $a \in [0,L]$,
+% For every $\phi \in H^1_0(\Omega)$ with $\phi(0) = 0$ and every $a \in [\Omega]$,
 % \be
 % \int_0^L{\phi^2dx} \leq \frac{a^2}{2}\int_0^L{\left(\partial_x \phi \right)^2 dx} + \frac{1}{a}\int_0^L{x\phi^2 dx},
 % \ee
@@ -480,11 +480,11 @@ As a consequence, we can apply the Banach fixed point theorem which implies the 
 % \ee
 % Finally, using the same justification as \eqref{eq1}, there exists $C_{3}$ such that
 % \be
-% 2\megaabs{\int_0^L{zu^{2} dx}} \leq C_{3}\norm{z_{x}}_{L^{2}(0,L)}\int_{0}^{L}{u^{2}dx},
+% 2\megaabs{\int_0^L{zu^{2} dx}} \leq C_{3}\norm{z_{x}}_{L^{2}(\Omega)}\int_{0}^{L}{u^{2}dx},
 % \ee
 % Combined with \eqref{eq4}, this latter inequality rewrites, for a constant $C_{4}$
 % \be
-% 2\int_0^L{zu^{2} dx} \leq \frac{1}{2}\int_{0}^{L}{\left( \partial_{x} u\right)^{2}dx} + C_{4} \left( 1 + \norm{z_{x}}_{L^{2}(0,L)}^{3/2}\right) \int_{0}^{L}{xu^{2}dx}
+% 2\int_0^L{zu^{2} dx} \leq \frac{1}{2}\int_{0}^{L}{\left( \partial_{x} u\right)^{2}dx} + C_{4} \left( 1 + \norm{z_{x}}_{L^{2}(\Omega)}^{3/2}\right) \int_{0}^{L}{xu^{2}dx}
 % \label{eq5}
 % \ee
 % Now, by \eqref{eq2}, \eqref{eq3}, \eqref{eq4}, \eqref{eq5}, we have
@@ -784,7 +784,7 @@ Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}
 % So we conclude that $(\bar y,\bar q)$ are minimizers.
 \end{proof}
 \begin{rmk}
- We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon$ and a $N \in \N $ such that for any $n > N$
+ We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon > 0$ and an $N \in \N $ such that for any $n > N$
  \[
 \norm{u_n}_{L^2(I,H^{-1}(\Omega))} \leq c\norm{u_n}_{\M} \leq \frac{c}{\alpha}\left(J(0,0) + \varepsilon \right).
  \]
