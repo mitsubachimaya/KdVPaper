@@ -205,14 +205,14 @@ Next we derive first order optimality conditions using tools from convex analysi
   \]
   for some $0<\varepsilon$ small enough such that $\bar u + \varepsilon(u-\bar u)\in U_{ad}$ holds. Using the convexity of $F$ we get
   \[
-    \frac{G(\bar u)-G(\bar u + \varepsilon(\delta u-\bar u))}{\varepsilon}+ F(\bar u)\leq F(u)
+    \frac{G(\bar u)-G(\bar u + \varepsilon(u-\bar u))}{\varepsilon}+ F(\bar u)\leq F(u)
   \]
   which implies
   \[
   \langle-\bar p ,u-\bar u\rangle_{\C,\M} + F(\bar u)\leq F(u)\quad\forall u\in U_{ad}.
   \]
 \end{proof}
-\begin{rmk}
+\begin{prop}
 The subgradient condition \eqref{subgradientcond} is equivalent to 
 \begin{equation}\label{equivoc}
 \alpha \|\bar u\|_{\M}+\phi^{\star}(-\bar p)=\langle -\bar p,\bar u\rangle_{\C,\M},\quad \bar u\in U_{ad}
@@ -222,7 +222,8 @@ with
 \phi^{\star}(p)=\sup_{u\in U_{ad}}[\langle u,p\rangle_{\C,\M}-\alpha \|u\|_{\M}]
 \]
 for $p\in \C$.
-\end{rmk}
+\end{prop}
+See \cite{} for a proof.
 \begin{lem}
 The functional $\phi^{\star}(p)\colon \C\rightarrow \mathbb R$ has the form
 \[
