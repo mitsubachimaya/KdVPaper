@@ -35,13 +35,13 @@
   \ee
   Applying Cauchy-Schwarz followed by Young's inequality to the right-hand side
   leads to \be \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x}y)^{2}dx}\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
-  \label{linnhupperbound1}.
+  \label{1linnhupperbound}.
   \ee
   We proceed in the same manner testing with $xy$
   \be
   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{xy^{2}dx}-\frac{1}{2}\int_{0}^{L}{y^{2}dx} +  \frac{3}{2}\int_{0}^{L}{(\partial_{x} y)^{2}dx} +\gamma
   \int_{0}^{L}{x(\partial_{x} y)^{2}dx}= \langle f,xy \rangle_{H^{1}_{0}(\Omega)}.
-  \label{linnhupperbound2}
+  \label{2linnhupperbound}
   \ee
   The right-hand side is treated again thanks to Cauchy-Schwarz
   and Young's inequalities
@@ -52,9 +52,9 @@
   & \leq \norm{f}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + L\norm{\partial_{x}y}_{L^{2}(\Omega)} \right)\\
   &\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{L}{2L}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
   &\leq \frac{1+L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} +  \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} +  \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}
-  \label{upperboundq}
+  \label{qupperbound}
   \eeal
-  Adding \eqref{linnhupperbound1}, \eqref{linnhupperbound2}(with the upper bound \eqref{upperboundq}) and omitting some non-negative terms on the left-hand side yields \be
+  Adding \eqref{1linnhupperbound}, \eqref{2linnhupperbound}(with the upper bound \eqref{qupperbound}) and omitting some non-negative terms on the left-hand side yields \be
   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}dx} +(\frac{1}{2}+\gamma)\int_{0}^{L}{(\partial_{x}y)^{2}} \leq \left(   1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \int_{0}^{L}{y^{2}dx}.
   \ee
    To facilitate the next computations, we add a non-negative term on the right and multiply by two

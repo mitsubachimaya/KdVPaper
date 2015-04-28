@@ -1,6 +1,8 @@
-\documentclass[a4paper,10pt,reqno]{amsart}
+\documentclass[final,leqno,onefignum,onetabnum]{siamltex1213}
+%\documentclass[a4paper,10pt,reqno]{amsart}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm,dsfont}
+%\usepackage{amsmath,amssymb,amsthm,dsfont}
+\usepackage{dsfont,amssymb}
 \usepackage[top = 3cm, bottom = 3cm, left = 3.0cm, right = 3.0cm]{geometry}
 \usepackage{graphicx}
 %\usepackage[notcite,notref]{showkeys}
@@ -49,19 +51,19 @@
 \def\rg{\varepsilon}
 
 
-\newtheoremstyle{slplain}% name
-  {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space above
-  {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space below
-  {\itshape}% Body font
-  {}%Indent amount (empty = no indent, \parindent = para indent)
-  {\bfseries}%  Thm head font
-  {.}%       Punctuation after thm head
-  { }%      Space after thm head: " " = normal interword space;
-        %       \newline = linebreak
-  {}%       Thm head spec
-
-
-\theoremstyle{slplain}
+% \newtheoremstyle{slplain}% name
+%   {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space above
+%   {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space below
+%   {\itshape}% Body font
+%   {}%Indent amount (empty = no indent, \parindent = para indent)
+%   {\bfseries}%  Thm head font
+%   {.}%       Punctuation after thm head
+%   { }%      Space after thm head: " " = normal interword space;
+%         %       \newline = linebreak
+%   {}%       Thm head spec
+% 
+% 
+% \theoremstyle{slplain}
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
@@ -95,13 +97,24 @@ citecolor=myhyperblue
 
 \DeclareMathOperator{\shrink}{shrink}
 %opening
-\title[Sparse optimal control of the KdVB equation]{Sparse optimal control of the Korteweg-de Vries-Burgers equation on a bounded domain}
+\title{Sparse optimal control of the Korteweg-de Vries-Burgers equation on a bounded domain}
 \author{Anne-Celine Boulanger, Philip Trautmann, Boris Vexler}
 
 \begin{document}
 
 \maketitle
 
+\slugger{sicon}{xxxx}{xx}{x}{x--x}%slugger should be set to mms, siap, sicomp, sicon, sidma, sima, simax, sinum, siopt, sisc, or sirev
+
+\begin{abstract}
+In this work we propose a directional sparsity framework allowing for measure valued controls in the spatial
+direction for optimal control problems of the Korteweg-de Vries Burgers equation. Well-posedness of the optimal control
+problem is established and the optimality system is derived. Efficient numerical schemes based on spectral methods are proposed for the state and adjoint equation, as well as adequate optimization methods. The work is illustrated on several numerical examples.
+\end{abstract}
+
+\begin{keywords}Sparse optimal control, Korteweg-de Vries equation, Inverse problem, Spectral methods\end{keywords}
+
+\begin{AMS}35Q93,49J20, 65M70, 74J30\end{AMS}
 \input{introduction}
 
 \input{wellposedness}
