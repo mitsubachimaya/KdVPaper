@@ -150,7 +150,8 @@
 & \leq\frac{1}{2} \norm{z-y}_{C(0,T,L^2(\Omega))}^{1/2}\left( \int_0^T{\norm{z-y}_{L^{\infty}(\Omega)}^2}\right)^{1/4}\\
 &\quad \quad\cdot\norm{z+y}_{C(0,T,L^2(\Omega))}^{1/2}\left( \int_0^T{\norm{z+y}_{L^{\infty}(\Omega)}^2}\right)^{1/4}\\
 & \leq c\, \norm{z-y}_{C(0,T,L^2(\Omega))}^{1/2}\norm{z+y}_{C(0,T,L^2(\Omega))}^{1/2}\\
-& \quad \quad\cdot \left(\int_0^T{ \norm{z-y}_{L^2(\Omega)}\norm{z-y}_{H^1_0(\Omega)}}\right)^{1/4}\left(\int_0^T{ \norm{z+y}_{L^2(\Omega)}\norm{z+y}_{H^1_0(\Omega)}}\right)^{1/4}\\
+& \quad \quad\cdot \left(\int_0^T{ \norm{z-y}_{L^2(\Omega)}\norm{z-y}_{H^1_0(\Omega)}}\right)^{1/4}\\
+&\quad \quad\cdot \left(\int_0^T{ \norm{z+y}_{L^2(\Omega)}\norm{z+y}_{H^1_0(\Omega)}}\right)^{1/4}\\
 & \leq c \,T^{1/4}\norm{z-y}_{C(0,T,L^2(\Omega))}^{3/4}\norm{z-y}_{L^2(0,T,H^1_0(\Omega))}^{1/4}\\
 & \quad \quad \cdot\norm{z+y}_{C(0,T,L^2(\Omega))}^{3/4}\norm{z+y}_{L^2(0,T,H^1_0(\Omega))}^{1/4} \\
 &\leq c \,T^{1/4}\norm{y-z}_{\B}\norm{y+z}_{\B}
@@ -335,8 +336,9 @@ The proof uses similar arguments as the proof of Proposition \ref{prop:tangent}.
 \end{align*}
 for any $\varepsilon>0$ and
 \begin{align*}
-\left|\int_0^Ly\partial_xp(L-x)p~\mathrm dx\right|=\left|-\int_0^L(L-x)p^2\partial_xy-yp^2~\mathrm dx\right|&\leq c\,\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}\\
-&\leq \frac{c}{2\varepsilon}\|p\|_{L^2(\Omega)}^2\|y\|_{H^1_0(\Omega)}^2+\frac{\varepsilon}{2}\|p\|_{H^1_0(\Omega)}^2.
+\left|\int_0^Ly\partial_xp(L-x)p~\mathrm dx\right|&=\left|-\int_0^L(L-x)p^2\partial_xy-yp^2~\mathrm dx\right|\\
+&\leq c\,\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}\\
+&\leq \frac{c}{2\varepsilon}\|p\|_{L^2(\Omega)}^2\|y\|_{H^1_0(\Omega)}^2 + \frac{\varepsilon}{2}\|p\|_{H^1_0(\Omega)}^2.
 \end{align*}
 for any $\varepsilon>0$.
 \end{proof}
@@ -463,9 +465,10 @@ for any $\varepsilon>0$.
 \norm{y\partial_x p}_{L^1(0,T,L^2(\Omega))} \leq c\,T^{1/4}\norm{y}_{\mathcal{B}}\norm{p}_{\mathcal{B}}.
 \ee
 \end{lem}
-\begin{proof}[Proof of Lemma~\ref{lemadjoint}]
+\begin{proof}{Proof of Lemma~\ref{lemadjoint}}
 \beal
-  \norm{y\partial_x p}_{L^1(0,T,L^2(\Omega))}&\leq \int_0^T{\norm{y}_{L^{\infty}(\Omega)}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt  \leq c\,\int_0^T{\norm{y}_{L^2(\Omega)}^{1/2}\norm{y}_{H^1_0(\Omega)}^{1/2}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt\\
+  \norm{y\partial_x p}_{L^1(0,T,L^2(\Omega))}&\leq \int_0^T{\norm{y}_{L^{\infty}(\Omega)}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt  \\
+  &\leq c\,\int_0^T{\norm{y}_{L^2(\Omega)}^{1/2}\norm{y}_{H^1_0(\Omega)}^{1/2}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt\\
 &\leq c\,\norm{y}_{C(0,T,L^2(\Omega))}^{1/2}\left( \int_0^T{\norm{y}_{H^1_0(\Omega)}}~\mathrm dt\right)^{1/2}\norm{p}_{L^2(I,H^1_0(\Omega))}\\
 & \leq c\, T^{1/4} \norm{y}_{C(0,T,L^2(\Omega))}^{1/2} \norm{y}_{L^2(0,T,H^1_0(\Omega))}^{1/2}\norm{p}_{L^2(0,T,H^1_0(\Omega))},
 \eeal

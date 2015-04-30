@@ -50,7 +50,9 @@ Denoting by $L_k$ the $k$th Legendre polynomial, we can define the basis functio
 %\input{plotbasis}
 \begin{center}
 \begin{figure}[!h]
-\includegraphics[scale=0.7,angle=270]{images/plotbasis2.pdf}
+\includegraphics[scale=0.6,angle=270]{images/plotbasis2.pdf}
+\caption{First test and trial functions.}
+\label{basisfunctions}
 \end{figure}
 \end{center}
 
@@ -158,7 +160,8 @@ $$\mathbf{y}_n = \mathbf{y}(t_n) = \left( \hat y_0(t_n), \hat y_1(t_n), ..., \ha
 & \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 = \frac{1}{2}\left( M + \Delta t \left(P + \gamma  Q \right) \right) \mathbf{y}_0 + \frac{1}{2}\Delta t F(\mathbf{y}_0) + \frac{1}{2}\Delta t \mathbf{u}_0 \\
 & \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{n+1} = \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{n-1} +  \Delta t \left( P + \gamma Q\right)\mathbf{y}_n \\
 & \mbox{\hspace{0.5\textwidth}}+ \Delta t F(\mathbf{y}_n) + \Delta t \mathbf{u}_n,  \, n=1 \ldots N_{T}-1\\
-& M \mathbf{y}_{N_{T}+1} = \frac{1}{2}\left( M \mathbf{y}_{N_{T}} + M \mathbf{y}_{N_{T}-1} \right)+ \frac{1}{2}\Delta t \left(P + \gamma Q \right)\mathbf{y}_{N_{T}} + \frac{1}{2}\Delta t F(\mathbf{y}_{N_{T}}) - \frac{1}{2}\Delta t S \mathbf{y}_{N_{T}-1}
+& M \mathbf{y}_{N_{T}+1} = \frac{1}{2}\left( M \mathbf{y}_{N_{T}} + M \mathbf{y}_{N_{T}-1} \right)+ \frac{1}{2}\Delta t \left(P + \gamma Q \right)\mathbf{y}_{N_{T}} \\
+& \mbox{\hspace{0.5\textwidth}} + \frac{1}{2}\Delta t F(\mathbf{y}_{N_{T}}) - \frac{1}{2}\Delta t S \mathbf{y}_{N_{T}-1}
 \eealn
 The first step is semi-implicit. The interior steps are classical CNLF steps. The last step - due to our modification - is not a regular, well-known step, but it is designed in such a way that the discrete adjoint shall be consistent with a CNLF discretization of the continuous adjoint. Notice that as $\Delta t$ vanishes, it becomes just a mean between the two preceding steps.
 
@@ -170,21 +173,23 @@ J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, 
  \end{multline}
 
 This allows also to define a discrete Lagrangian:
-\begin{multline}
-\mathcal{L}_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{\hat u}_{0}, \ldots, \mathbf{\hat u}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{ u}_{N_{T}}, \mathbf{p}_{0}, \ldots, \mathbf{p}_{N_{T}-1}) = J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{\hat u}_{0}, \ldots, \mathbf{\hat u}_{N_{T}})  \\
- + \mathbf{p}_0^T\left[ \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \mathbf{y}_0 - \frac{1}{2}\Delta t F(\mathbf{y}_0) - \frac{1}{2}\Delta t \mathbf{u}_0 \right]\\
- +\sum_{k=1}^{N_T-2}{\mathbf{p}_k^T\left[
- \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{k-1} - \Delta t \left( P + \gamma Q\right)y_k - \Delta t F(y_k) - \Delta t \mathbf{u}_k\right]}\\
- + \mathbf{p}_{N_T-1}^T\left[ M \mathbf{y}_{N_T} - \frac{1}{2}\left( M \mathbf{y}_{N_T-1} + M \mathbf{y}_{N_T-2} \right)- \frac{1}{2}\Delta t P \mathbf{y}_{N_T - 1} - \frac{1}{2}\Delta t F(\mathbf{y}_{N_T-1}) +\frac{1}{2}\Delta t S \mathbf{y}_{N_T-2}\right].
- \label{discrlag}
+ \begin{multline}
+ \mathcal{L}_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{\hat u}_{0}, \ldots, \mathbf{\hat u}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{ u}_{N_{T}}, \mathbf{p}_{0}, \ldots, \mathbf{p}_{N_{T}-1}) = \\
+ J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{\hat u}_{0}, \ldots, \mathbf{\hat u}_{N_{T}})  +\\
+   \mathbf{p}_0^T\left[ \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \mathbf{y}_0 - \frac{1}{2}\Delta t F(\mathbf{y}_0) - \frac{1}{2}\Delta t \mathbf{u}_0 \right]+\\
+  \sum_{k=1}^{N_T-2}{\mathbf{p}_k^T\left[\frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{k-1} - \Delta t \left( P + \gamma Q\right)y_k \right.}\\
+  \left.- \Delta t F(y_k) - \Delta t \mathbf{u}_k\right] + \\
+ \mathbf{p}_{N_T-1}^T\left[ M \mathbf{y}_{N_T} - \frac{1}{2}\left( M \mathbf{y}_{N_T-1} + M \mathbf{y}_{N_T-2} \right)- \frac{1}{2}\Delta t P \mathbf{y}_{N_T - 1} \right.\\ \left.- \frac{1}{2}\Delta t F(\mathbf{y}_{N_T-1}) +\frac{1}{2}\Delta t S \mathbf{y}_{N_T-2}\right].
+  \label{discrlag}
  \end{multline}
 
 From \eqref{discrlag}, one can classically derive the discrete adjoint, hereafter written in the case of terminal observations (i.e. we consider only the tracking part depending on $z_{2}$ in \eqref{discrobj}), which will be of particular interest in the numerical examples:
  \bealn
  &M^T \mathbf{p}_{N_T-1} = -A(\mathbf{y}_{N_T} - \mathbf{z}_2)\\
- &\frac{1}{2}\left( M^T+\Delta t S^T\right) \mathbf{p}_{N_T-2} = \frac{1}{2}\left( M^T + \Delta t P^T + \gamma \Delta t Q^T \right) \mathbf{p}_{N_T - 1} + \frac{1}{2}\Delta t F^{'}(\mathbf{y}_{N_T - 1})^T \mathbf{p}_{N_T - 1} \\
- &\frac{1}{2}\left( M^T + \Delta t S^T\right)\mathbf{p}_{n-2} = \frac{1}{2}\left( M^T - \Delta t S^T\right)\mathbf{p}_{n} + \Delta t \left( P^T + \gamma Q^T\right)\mathbf{p}_{n-1} + \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1}, \\
- &\mbox{\hspace{0.7\textwidth}}\quad n=2 \ldots N_T - 1.
+ &\frac{1}{2}\left( M^T+\Delta t S^T\right) \mathbf{p}_{N_T-2} = \frac{1}{2}\left( M^T + \Delta t P^T + \gamma \Delta t Q^T \right) \mathbf{p}_{N_T - 1} \\
+ &\mbox{\hspace{0.3\textwidth}} + \frac{1}{2}\Delta t F^{'}(\mathbf{y}_{N_T - 1})^T \mathbf{p}_{N_T - 1} \\
+ &\frac{1}{2}\left( M^T + \Delta t S^T\right)\mathbf{p}_{n-2} = \frac{1}{2}\left( M^T - \Delta t S^T\right)\mathbf{p}_{n} + \Delta t \left( P^T + \gamma Q^T\right)\mathbf{p}_{n-1} \\
+ &\mbox{\hspace{0.3\textwidth}}+ \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1},\quad n=2 \ldots N_T - 1.
  \label{numschemeadj}
 \eealn
 Classically, it starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a unique semi-implicit step and regular CNLF steps.
