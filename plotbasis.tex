@@ -1,6 +1,24 @@
+\documentclass[final,leqno,onefignum,onetabnum]{amsart}
+%\documentclass[a4paper,10pt,reqno]{amsart}
+\usepackage[utf8]{inputenc}
+%\usepackage{amsmath,amssymb,amsthm,dsfont}
+\usepackage{dsfont,amssymb}
+\usepackage[top = 3cm, bottom = 3cm, left = 3.0cm, right = 3.0cm]{geometry}
+\usepackage{graphicx}
+%\usepackage[notcite,notref]{showkeys}
+\usepackage{mathtools}
+\usepackage{cases}
+\usepackage{pgfplotstable}
+\usepackage{lscape}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{landscape}
+
 \begin{figure}[h!]
 \begin{center}
-\begin{tikzpicture}[scale=0.7]
+\begin{tikzpicture}[scale=1.1]
 \begin{axis}[title={\Large First test functions},
 	xmin=-50,
         xmax = 50,
@@ -60,7 +78,7 @@
 \end{axis}
 \end{tikzpicture}
 \hspace{0.5cm}
-\begin{tikzpicture}[scale=0.7]
+\begin{tikzpicture}[scale=1.1]
 \begin{axis}[title={\Large First trial functions},
 	xmin=-50,
         xmax = 50,
@@ -119,7 +137,11 @@
 \end{axis}
 \end{tikzpicture}
 
-  \caption{Basis functions for the Petrov-Galerkin method.}
+ % \caption{Basis functions for the Petrov-Galerkin method.}
 \label{basisfunctions}
  \end{center}
 \end{figure}
+\end{landscape}
+
+
+\end{document}
