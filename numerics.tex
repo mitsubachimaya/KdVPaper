@@ -179,7 +179,7 @@ This allows also to define a discrete Lagrangian:
    \mathbf{p}_0^T\left[ \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \mathbf{y}_0 - \frac{1}{2}\Delta t F(\mathbf{y}_0) - \frac{1}{2}\Delta t \mathbf{u}_0 \right]+\\
   \sum_{k=1}^{N_T-2}{\mathbf{p}_k^T\left[\frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{k-1} - \Delta t \left( P + \gamma Q\right)y_k \right.}\\
   \left.- \Delta t F(y_k) - \Delta t \mathbf{u}_k\right] + \\
- \mathbf{p}_{N_T-1}^T\left[ M \mathbf{y}_{N_T} - \frac{1}{2}\left( M \mathbf{y}_{N_T-1} + M \mathbf{y}_{N_T-2} \right)- \frac{1}{2}\Delta t P \mathbf{y}_{N_T - 1} \right.\\ \left.- \frac{1}{2}\Delta t F(\mathbf{y}_{N_T-1}) +\frac{1}{2}\Delta t S \mathbf{y}_{N_T-2}\right].
+ \mathbf{p}_{N_T-1}^T\left[ M \mathbf{y}_{N_T} - \frac{1}{2}\left( M \mathbf{y}_{N_T-1} + M \mathbf{y}_{N_T-2} \right)- \frac{1}{2}\Delta t \left(P+ \gamma Q\right) \mathbf{y}_{N_T - 1} \right.\\ \left.- \frac{1}{2}\Delta t F(\mathbf{y}_{N_T-1}) +\frac{1}{2}\Delta t S \mathbf{y}_{N_T-2}\right].
   \label{discrlag}
  \end{multline}
 
@@ -192,7 +192,7 @@ From \eqref{discrlag}, one can classically derive the discrete adjoint, hereafte
  &\mbox{\hspace{0.3\textwidth}}+ \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1},\quad n=2 \ldots N_T - 1.
  \label{numschemeadj}
 \eealn
-Classically, it starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a unique semi-implicit step and regular CNLF steps.
+It starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a single semi-implicit step and regular CNLF steps.
 % The lagrangian of the problem writes at the continuous level.
 % \beal
 %   \mathcal{L}(y,q,p) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{\M} + <p, By-q>
@@ -224,7 +224,7 @@ Classically, it starts with a projection of the tracking term in the state space
 % &-\delta y_{N}^t \left( \frac{1}{2}(M^t + \Delta t P^t + \Delta t F^{'}(y_N)^t) \right)p_N.
 % \eeal
 % The discrete adjoint scheme is obtained by imposing $\delta L(\bar y, \bar q, \bar p)\delta \bar y = 0$.
- \begin{rmk}
+ \begin{remark}
  Without this modification of the last forward step, the discrete adjoint obtained in the case of terminal observation would be
  \bealn
  &\frac{1}{2}(M^T+\Delta t S^T) \mathbf{p}_{N_T-1} = -A(\mathbf{y}_{N_T} - \mathbf{z}_2)\\
@@ -233,11 +233,11 @@ Classically, it starts with a projection of the tracking term in the state space
  &\mbox{\hspace{0.4\textwidth}}+ \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1}, \quad n=2 \ldots N_T-1.
  \eealn
  The major difference lies in the second step. It does not correspond to a consistent discretization of the continuous adjoint equation: the time derivative is not reconstructed. It results in practice in huge oscillations in time of the adjoint variable.
- \end{rmk}
+ \end{remark}
 
- \begin{rmk}
-  Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditionned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the mean space step.
- \end{rmk}
+ \begin{remark}
+  Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditionned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the average space step.
+ \end{remark}
 
  The advantage of computing the adjoint lies in the following proposition
  \begin{proposition}
@@ -297,7 +297,7 @@ for an auxiliary variable $q_{\rg}$ such that $u_{\rg} = \operatorname{Prox}_{\p
 % F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
- To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{ulbrich2002semismooth}. An iterative method (conjugate gradient) is used to solve the Newton system. If a simple continuation strategy is often suggested to achieve global convergence in that case \cite{herzog2012directional}, this is not sufficient for our problem, due to the high nonlinearity of the phenomena involved. A globalization strategy based on the decrease of the objective functional is required. We implement it based on the algorithm of truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}.
+ To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{ulbrich2002semismooth}. An iterative method (conjugate gradient) is used to solve the Newton system. If a simple continuation strategy is often suggested to achieve global convergence in that case \cite{herzog2012directional}, this is not sufficient for our problem, due to the high nonlinearity of the phenomena involved. A globalization strategy based on the decrease of the objective functional is required. We implement it based on the truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}.
 
 
 \subsubsection{Discretization of the control and mass lumping}
@@ -321,9 +321,9 @@ Moreover, the various norms involved in the optimization problem shall be comput
 \eeal
 for all $\varphi_h = \sum_{j=1}^{N_T}{\chi_{I_j}\sum_n{\varphi_{jn} e_n}}$.
 
-\begin{rmk}
+\begin{remark}
  With \eqref{masslumping} as expressions for the norms and inner products, all projections formulae involved at the continuous level in the optimization process can be transfered one to one to the (spatial) discrete vector. Therefore, \eqref{optcondition} or \eqref{normalmap} hold at the discrete level.
-\end{rmk}
+\end{remark}
 
 
 \subsection{Numerical examples}

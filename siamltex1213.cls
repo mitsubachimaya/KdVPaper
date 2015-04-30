@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 %%
 %% This is file `siamltex1213.cls', based on article.cls
 %% Revision of siam macros for use with LaTeX 2e
@@ -53,35 +52,6 @@
 \newif\if@onefignum
 \@onefignumfalse
 \newif\if@onethmnum
-\@onethmnumfalse
-%_%_%_%_%
-\newif\if@translated
-\@translatedfalse
-%_%_%_%_%
-%\newif\if@openbib
-%\@openbibfalse
-\DeclareOption{a4paper}
-   {\setlength\paperheight {297mm}%
-    \setlength\paperwidth  {210mm}}
-\DeclareOption{a5paper}
-   {\setlength\paperheight {210mm}%
-    \setlength\paperwidth  {148mm}}
-\DeclareOption{b5paper}
-   {\setlength\paperheight {250mm}%
-    \setlength\paperwidth  {176mm}}
-\DeclareOption{letterpaper}
-   {\setlength\paperheight {11in}%
-    \setlength\paperwidth  {8.5in}}
-\DeclareOption{legalpaper}
-   {\setlength\paperheight {14in}%
-    \setlength\paperwidth  {8.5in}}
-\DeclareOption{executivepaper}
-   {\setlength\paperheight {10.5in}%
-    \setlength\paperwidth  {7.25in}}
-\DeclareOption{landscape}
-   {\setlength\@tempdima   {\paperheight}%
-    \setlength\paperheight {\paperwidth}%
-    \setlength\paperwidth  {\@tempdima}}>>>>>>> 3535e22da57637b45b095d7f161a15644144b650
 %%
 %% This is file `siamltex1213.cls', based on article.cls
 %% Revision of siam macros for use with LaTeX 2e
@@ -125,7 +95,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
 \ProvidesClass{siamltex1213}[2013/10/21 v1.0 LaTeX document e-class]
-\newcommand\@ptsize{}
+%\newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
 \@titlepagefalse
@@ -908,4 +878,3 @@ Internet\string\iexplore.exe}
 \endinput
 %%
 %% End of file `siamltex1213.cls'.
->>>>>>> 3535e22da57637b45b095d7f161a15644144b650
