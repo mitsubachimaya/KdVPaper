@@ -1,4 +1,3 @@
-
 % ====================== SIAM.BST ================================ % 
 % SIAM bibliography style (24-Jan-88 version)
 %    numeric labels, alphabetic order, Mathematical Reviews abbreviations,
@@ -1037,4 +1036,4 @@ FUNCTION {end.bib}
 }
 
 EXECUTE {end.bib}
- 
+

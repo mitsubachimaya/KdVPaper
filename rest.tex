@@ -29,3 +29,593 @@ and
 \[
 \left(\|\bar u\|_{\M}-\hat c\right)\|\bar\lambda\|_{\C}=0.
 \]
+
+
+% Thus, \eqref{kdvlinhomogeneous} can be written as the initial
+% value problem of an abstract evolution equation in the space
+% $L^{2}(\Omega)$ \bealn
+% &\frac{d}{dt}y(t)=Ay,\\
+% &y(0,x) = y_{0}(x).
+% \label{evolutionlinear}
+% \eealn
+%The following result holds
+
+
+%The proof is provided in Appendix~\ref{sec:semigr-contr}.
+%   The idea is to prove that $A$ is maximally dissipative in order to
+%   use a corollary of the Lumer-Philips theorem and conclude. We
+%   already have that $A:\mathcal{D}(A) \mapsto L^{2}(\Omega)$ has a dense
+%   domain and it is easy to see that it is a closed operator. Let us
+%   prove that it is dissipative. For any $w \in \mathcal{D}(A)$, \beal
+%   <w,Aw>_{L^{2}(\Omega)} &= \int_{0}^{L}{w(-w'''-w'+\gamma w'')dx}\\
+%   & = -[ww'']_{0}^{L} + \int_{0}^{L}{w'w''dx} - [w^{2}]_{0}^{L} + \gamma [ww']_{0}^{L} - \gamma \int_{0}^{L}{w'^{2}dx}\\
+%   & = -\frac{1}{2}w'(0)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
+%   \eeal Hence A is dissipative. Denoting $A^{\ast}$ the adjoint
+%   operator of $A$ satisfying \be A^{\ast}w = w''' + w' + \gamma w'',
+%   \ee we also have \beal
+%   <A^{\ast}w,w>_{L^{2}(\Omega)} &= \int_{0}^{L}{w(w'''+w'+\gamma w'')dx}\\
+%   & = -\frac{1}{2}w'(L)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
+%   \eeal Therefore $A^{\ast}$ is also dissipative and A is maximally
+%   dissipative. A corollary of the Lumer-Philips theorem theorem (see
+%   \cite{pazy1983semigroups}, Chapter 1, Cor 4.4) permits to conclude
+%   that A generates a strongly continuous semigroup of contractions.
+
+%Our goal is to show that there exists a solution to the non-homogeneous linear system \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3} and that it lies in the space %$\mathcal{B}$. Then we can extend it to the nonlinear equation
+%with a fixed point theorem. Noticing that in a one-dimensional problem $\M \hookrightarrow \Hm1$, we will work in the more general framework of a control $q \in %\Hm1)$.
+% \begin{prop}
+%   The map $y_0 \in L^2(\Omega)\mapsto W_0(.)y_0 \in \mathcal{B}$ is
+%   continuous.
+% \end{prop}
+% \begin{proof}
+%   Proposition~\ref{propsemigroup} automatically induces that $y \in
+%   C(I,L^2(\Omega))$ and \be \norm{y}_{C(I,L^2(\Omega))} \leq
+%   \norm{y_0}_{L^2(\Omega)}.
+%   \label{ineqlinhom}
+%   \ee To show the other part of the estimate, we first assume that
+%   $y_0 \in \mathcal{D}(A)$. In that case, semigroup theory tells us
+%   that $y$ is a classical solution belonging to
+%   $C(I,\mathcal{D}(A))\cap C^1(I,L^2(\Omega))$. Hence the computations
+%   carried out hereafter are justfified. We perform the method of
+%   multiplier as follows \beal \int_0^T{\int_0^L{xy(\partial_t y
+%       +\partial_x y + \partial_{xxx} y - \gamma \partial_{xx} y)}} = 0
+%   \eeal This leads to \beal
+%   \frac{1}{2}\int_0^L{xy^2(T)} - \frac{1}{2}\int_0^L{xy_0^2} &- \frac{1}{2}\int_0^T{\int_0^L{y^2}dxdt} \\
+%   &+ \frac{3}{2}\int_0^T{\int_0^L{(\partial_x y )^2dxdt}} + \gamma
+%   \int_0^T{\int_0^L{x(\partial_x y)^2}dxdt} = 0.  \eeal Neglecting
+%   some positive terms in the left-hand side, we come up with the
+%   inequality \be \frac{3}{2}\int_0^T{\int_0^L{(\partial_x y )^2dxdt}}
+%   \leq \frac{1}{2}\int_0^L{xy_0^2} +
+%   \frac{1}{2}\int_0^T{\int_0^L{y^2}dxdt}.  \ee And finally using
+%   \eqref{ineqlinhom} \be \norm{y}_{L^2(I,H^1_0(\Omega))} \leq
+%   \sqrt{\frac{L+T}{3}}\norm{y_0}_{L^2(\Omega)}.  \ee By the density of
+%   $\mathcal{D}(A)$ in $L^2(\Omega)$, we extend our results to any $y_0
+%   \in L^2(\Omega)$ and this concludes the proof.
+% \end{proof}
+
+
+% Next we consider the non homogeneous linear system where $q \in \M$,
+% \bealn
+% &\partial_t y +\partial_x y + \partial_{xxx} y - \gamma \partial_{xx} y =  q \mbox{ in } I\times\Omega,\\
+% &y(.,0) = y(.,L) = \partial_x y (.,L) = 0 \mbox{ on } I\times\Gamma,\\
+% &y(0,x) = y_{0}(x) \mbox{ in } \Omega.
+% \label{kdvlinnonhom}
+% \eealn
+
+
+ %  Let us consider first $y_{0} \in \mathcal{D}(A)$ and $q \in
+%   C([0,T], \mathcal{D}(A))$. It is a classical result from
+%   semigroup theory that in that case, $y$, defined by
+%  \be y(t,x) = W_{0}(t)y_{0}(x) +
+%    \int_{0}^{t}{W_{0}(t - \tau)q(\tau,.)d\tau},
+% \ee
+%  is a strong solution $\in
+%   C([0,T], \mathcal{D}(A))\cap C^1([0,T], L^2(\Omega))$. This regularity justifies the
+%   computations that follow. We use the
+%   method of multipliers. We first multiply \eqref{kdvlinnonhom} by $y$
+%   and integrate in space \be
+%   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x}
+%     y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}dx}=
+%   _{H^{-1}(\Omega)}<q,y>_{H^{1}_{0}(\Omega)}.  \ee Applying
+%   Cauchy-Schwarz followed by Young's inequality to the right-hand side
+%   leads to \be \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} +
+%   \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x}
+%     y)^{2}dx}\leq \frac{1}{2}\norm{q}_{H^{-1}(\Omega)}^{2} +
+%   \frac{1}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
+%   \label{linnhupperbound1}.  \ee We proceed in the same manner
+%   multiplying now by $xy$ and integrating in space \be
+%   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{xy^{2}dx}
+%   -\frac{1}{2}\int_{0}^{L}{y^{2}dx} +
+%   \frac{3}{2}\int_{0}^{L}{(\partial_{x} y)^{2}dx} +\gamma
+%   \int_{0}^{L}{x(\partial_{x} y)^{2}dx}=
+%   _{H^{-1}(\Omega)}<q,xy>_{H^{1}_{0}(\Omega)}.
+%   \label{linnhupperbound2}
+%   \ee The right-hand side is treated again thanks to Cauchy-Schwarz
+%   and Young's inequalities \beal
+%   _{H^{-1}(\Omega)}<q,xy>_{H^{1}_{0}(\Omega)} &\leq \norm{q}_{H^{-1}(\Omega)}\norm{xy}_{H^{1}_{0}(\Omega)}\\
+%   & \leq \norm{q}_{H^{-1}(\Omega)}\norm{y + x\partial_{x}y}_{L^{2}(\Omega)}\\
+%   % & \leq \norm{q}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + \norm{x\partial_{x}y}_{L^{2}(\Omega)} \right)\\
+%   & \leq \norm{q}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + L\norm{\partial_{x}y}_{L^{2}(\Omega)} \right)\\
+%   &\leq \frac{1}{2}\norm{q}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{q}_{H^{-1}(\Omega)}^{2} + %\frac{L}{2L}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
+%   &\leq \frac{1+L^{2}}{2}\norm{q}_{H^{-1}(\Omega)}^{2} +
+%   \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} +
+%   \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}
+%   \label{upperboundq}
+%   \eeal Adding \eqref{linnhupperbound1}, \eqref{linnhupperbound2}
+%   (with the upper bound \eqref{upperboundq}) and omitting some
+%   non-negative terms on the left-hand side yields \be
+%   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}dx} +
+%   (\frac{1}{2}+\gamma)\int_{0}^{L}{(\partial_{x}y)^{2}} \leq \left(
+%     \frac{1+L^{2}}{2}\right)\norm{q}_{H^{-1}(\Omega)}^{2} +
+%   \frac{1}{2}\int_{0}^{L}{y^{2}dx}.  \ee To facilitate the next
+%   computations, we add a non-negative term on the right \be
+%   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}dx} +
+%   (\frac{1}{2}+\gamma)\int_{0}^{L}{(\partial_{x}y)^{2}} \leq \left(
+%     \frac{1+L^{2}}{2}\right)\norm{q}_{H^{-1}(\Omega)}^{2} +
+%   \frac{1}{2}\int_{0}^{L}{(1+x)y^{2}dx}.  \ee Then we can follow a
+%   Gronwall strategy, multiplying by $e^{-t}$ \beal \frac{d}{dt}\left(
+%     e^{-t}\frac{1}{2}\int_{0}^{L}{(1+x)y^{2}dx}\right) + e^{-t}\left(
+%     \frac{1}{2}+\gamma\right)\int_{0}^{L}{(\partial_{x}y)^{2}} \leq
+%   e^{-t}\left( \frac{1+L^{2}}{2}\right)\norm{q}_{H^{-1}(\Omega)}^{2}
+%   \eeal After integration between $0$ and $t$ we have \beal
+%   \frac{1}{2}\int_{0}^{L}{y^{2}(t)dx} + \left( \frac{1}{2}+\gamma \right)\int_{0}^{t}{\int_{0}^{L}{(\partial_{x} y)^{2}dxdt}} \leq %e^{t}\left(\frac{1+L^{2}}{2}\right)&\int_{0}^{t}{\norm{q}_{H^{-1}(\Omega)}^{2}}\\
+%   & + \frac{1}{2}e^{t}\int_{0}^{L}{(1+L)y_{0}^{2}dx}, \eeal that we
+%   transform into \beal
+%   \frac{1}{2}\int_{0}^{L}{y^{2}(t)dx} + \left( \frac{1}{2}+\gamma \right)\int_{0}^{t}{\int_{0}^{L}{(\partial_{x} y)^{2}dxdt}} \leq %e^{T}\left(\frac{1+L^{2}}{2}\right)&\norm{q}_{L^{2}(I,H^{-1}(\Omega))}^{2} \\
+%   &+ \frac{1}{2}e^{T}(1+L)\norm{y_{0}}_{L^{2}(\Omega)}.  \eeal Because
+%   it is a one-dimensional problem, there holds
+% $$\M \hookrightarrow L^{2}(I, \mathcal{M}(\Omega)) \hookrightarrow L^{2}(I, H^{-1}(\Omega)).$$
+% Therefore we obtain estimate \eqref{linestimate} for any $y_{0} \in
+% \mathcal{D}(A)$ and $q \in C_{0}([0,T], \mathcal{D}(A))$. Let us
+% conclude by a density argument. We consider two sequences
+% $$ y_{0}^{n} \in \mathcal{D}(A) \xrightarrow[n\rightarrow+\infty]{}y_{0} \in L^{2}(\Omega),$$
+% $$ q^{n} \in  C_{0}([0,T], \mathcal{D}(A)) \xrightarrow[n\rightarrow+\infty]{} q \in L^{2}(I,H^{-1}(\Omega)).$$
+% We associate to any pair $\left(y_{0}^{n}, q^{n}\right)$ the sequence
+% of solutions $(y^{n})$. Due to the linearity of the considered
+% equation, the estimate \eqref{linestimate} implies that $(y^{n})$ is a
+% Cauchy sequence in $\mathcal{B}$ that converges towards some $y \in
+% \mathcal{B}$. Besides, uniqueness follows from semigroup theory and
+% uniqueness of the limit. This concludes the proof.
+%\end{proof}
+
+% We distinguish now between two cases, according to $\gamma$.
+% \paragraph{\underline{Case $\gamma > 0$}}
+%
+% Multiplying \eqref{kdvlinnonhom} by $y$ and integrating in space
+% leads \be \int_{0}^{L}{y\left(\partial_t y +\partial_x y
+%   + \partial_{xxx} y - \gamma \partial_{xx} y\right)dx} =
+% _{H^{-1}(\Omega)}<q,y>_{H^{1}_{0}(\Omega)}.  \ee Using simple
+% integrations by part and taking into account the boundary
+% conditions, we have \be \frac{d}{dt}\norm{y}_{L^{2}(\Omega)}^{2} +
+% \gamma \norm{y}_{H^{1}_{0}(\Omega)}^{2} +
+% \abs{\partial_{x}y(0)^{2}}=
+% _{H^{-1}(\Omega)}<q,y>_{H^{1}_{0}(\Omega)}.  \ee Then Young's
+% inequality yields \be \frac{d}{dt}\norm{y}_{L^{2}(\Omega)}^{2} +
+% \gamma \norm{y}_{H^{1}_{0}(\Omega)}^{2} + \abs{\partial_{x}y(0)^{2}}
+% \leq \frac{1}{2\gamma}\norm{q}_{H^{-1}(\Omega)} +
+% \frac{\gamma}{2}\norm{y}_{H^{1}_{0}(\Omega)}, \ee which results,
+% after integration in time, in \be \norm{y(t)^{2}}_{L^{2}(\Omega)} +
+% \frac{\gamma}{2} \norm{y}_{L^{2}(I,H^{1}_{0}(\Omega))} \leq
+% \norm{y_{0}^{2}}_{L^{2}(\Omega)} +
+% \frac{1}{2\gamma}\norm{q}_{L^{2}(I,H^{-1}(\Omega))}.  \ee
+% \paragraph{\underline{Case $\gamma = 0$}}
+
+% \begin{rmk}\label{rmkweakform}
+%   From Proposition~\ref{propnonhomo}, one can deduce that the solution $y$ to \eqref{kdvlinnonhom} satisfies the weak form
+% \be
+% -(y,\partial_t \varphi)_I + (\partial_x y, \varphi)_I + (\partial_x y, \partial_{xx}\varphi)_I + \gamma (\partial_x y, \partial_x \varphi)_I = <q,\varphi>, \quad \forall \varphi \in \mathcal{V}
+% \label{weakform}
+% \ee
+% where $\mathcal{V} = \left\{\varphi \in H^1(0,T,H^2 \cap H^1_0)\mbox{ with } \partial_x\varphi(0) = 0 \right\}$, $(\cdot, \cdot)_I$ denotes the inner product of $L^2(I, L^2(\Omega))$ and  $<\cdot,\cdot>$ denotes the duality pairing between $L^2(I,H^{-1}(\Omega))$ and $L^2(I,H^1_{0}(\Omega))$. The idea of the proof is detailed in Appendix~\ref{sec:weak-formulation}. This weak form will be of particular interest for the optimization problem.
+% \end{rmk}
+
+%It is the dual operator of
+%\[
+%(\phi,p_T)\mapsto W^*(T-t)p_T+\int_t^TW^*(t-s)\phi(s)~\mathrm ds
+%\]
+%for $(\phi,p_T)\in L^1(I,L^2(\Omega))\times L^2(\Omega)$.
+
+% The next step is to prove that for a right-hand side in $L^1(0,T, L^2(\Omega))$, the solution of the linear \KdVB equation is also in $\mathcal{B}$. This will allow us to consider $y\partial_x y$ as a source term as soon as $y$ is supposed to lie in $\mathcal{B}$, thanks to Lemma~\ref{lemyyx2}. We consider
+% \bealn
+% &\partial_t y +\partial_x y + \partial_{xxx} y - \gamma \partial_{xx} y =  q \mbox{ in } I\times\Omega,\\
+% &y(.,0) = y(.,L) = \partial_x y (.,L) = 0 \mbox{ on } I\times\Gamma,\\
+% &y(0,x) = 0 \mbox{ in } \Omega,
+% \label{kdvlinnonhomL1}
+% \eealn
+% for $q \in L^1(I,L^2(\Omega))$.
+% \begin{prop}
+% The mild solution of \eqref{kdvlinnonhomL1} belongs to $\mathcal{B}$. It is given by Duhamel's formula
+% \be
+% y(t,.) = \int_0^t{W_0(t-s)q(s,.)ds}.
+% \label{duhamelL1}
+% \ee
+% Moreover, the linear map $q \mapsto y$ is continuous i.e there exists a constant C(T,L) such that
+% \be
+% \norm{y}_{\mathcal{B}} \leq \norm{q}_{L^1(I,L^2(\Omega))}.
+% \label{linestimateL1}
+% \ee
+% \end{prop}
+% \begin{proof}
+% Since $W_0$ is a contraction operator on $L^2(\Omega)$, we have for any $s \in [0,t]$,
+% \be
+% \norm{W_0(t-s)q(s,.)}_{L^2(\Omega)} \leq \norm{q(s,.)}_{L^2(\Omega)} \in L^1(I).
+% \ee
+% It follows that the mild solution defined by \eqref{duhamelL1} lies in $C(I,L^2(\Omega))$, and we have the estimate
+% \be
+% \norm{y(t,.)}_{L^2(\Omega)} \leq \int_0^t{\norm{q}_{L^2(\Omega)}} \leq \norm{q}_{L^1(I,L^2(\Omega))}.
+% \label{estimateL1}
+% \ee
+% Then we have to find an estimate in $L^2(I,H^1_0(\Omega))$ to conclude. As already done in a previous proof, we use the method of multiplier. We integrate in space and time
+% \be
+% \int_0^T{\int_0^L{xy(\partial_t y +\partial_x y + \partial_{xxx} y - \gamma \partial_{xx} y)}dxdt} = \int_0^T{\int_0^L{xyq}dxdt},
+% \ee
+% and get
+% \beal
+% \frac{1}{2}\int_0^L{xy(T,x)^2dx} & - \frac{1}{2}\int_0^T{\int_0^L{y^2(t,x)}dxdt}\\
+% & + \frac{3}{2}\int_0^T{\int_0^L{(\partial_x y)^2}dxdt}  + \gamma \int_0^T{\int_0^L{x(\partial_x y)^2}dxdt}= \int_0^T{\int_0^L{xyq(t,x)}dxdt}.
+% \eeal
+% This leads an upper bound for our quantity of interest (using \eqref{estimateL1})
+% \beal
+% \frac{3}{2}\int_0^T{\int_0^L{(\partial_x y)^2}dxdt} &\leq \frac{1}{2}\int_0^T{\int_0^L{y^2(t,x)}dxdt} + L\int_0^T{\int_0^L{yq}dxdt} \\
+% &\leq \frac{1}{2}\int_0^T{\left(\norm{q}_{L^1(I,L^2(\Omega))}\right)dt} + L\int_0^T{\int_0^L{\norm{y}_{L^2(\Omega)}\norm{q}_{L^2(\Omega)}}dxdt} \\
+% &\leq (T+L) \norm{q}_{L^1(I,L^2(\Omega))}^2.
+% \eeal
+% And this concludes the proof.
+% \end{proof}
+
+
+%The estimate \eqref{localestimate} follows from \eqref{linestimate}.
+
+%% We now prove the uniqueness of the (weak) solution of the nonlinear KdV equation \eqref{kdvcontrol}. Let us first consider two solutions of the same Cauchy problem $y$ and $z$ defined on $[0,T^{\ast}]\times\Omega$. Then $u = y-z$ is a solution of
+% \bealn
+% &\partial_t u +\partial_x u + \partial_{xxx} u -\gamma \partial_{xx} u= - y\partial_x u - u\partial_x z \mbox{ in }   I\times\Omega,\\
+% &u(.,0) = u(.,L) = \partial_x u (.,L) = 0 \mbox{ on } I\times\Gamma,\\
+% &u(0,.) = 0 \mbox{ in } \Omega,
+% \label{kdvnonlin1}
+% \eealn
+% Multiplying by $2xu$ and integrating in $x$ (as proposed in \cite{rosier1997exact,coron2003exact}) leads to
+% \be
+% \int_{0}^{L}{2xu\left( \partial_t u +\partial_x u + \partial_{xxx} u -\gamma \partial_{xx} u+ y\partial_x u + u\partial_x z\right)dx} = 0,
+% \ee
+% which also writes
+% \be
+% \frac{d}{dt}\int_{0}^{L}{xu^2dx} + 3\int_0^L{(\partial_x u)^2dx} +  2\gamma\int_0^L{x(\partial_x u)^2dx} = \int_0^L{u^2dx} - 2\int_0^L{x y u \partial_x udx} + 2\int_0^L{zu^2 dx}+4\int_0^L{x z u \partial_x u dx}
+% \ee
+% Then, we follow \cite{coron2003exact} to upperbound every term on the right hand side. Thanks to the continuous embedding of $H^1_0(\Omega)$ into $C^0(\Omega)$, there exists a positive constant $C$ such that
+% \be
+% 2\megaabs{\int_0^L{xy u \partial_x u dx}} \leq C_1 \norm{\partial_x y}_{L^2(\Omega)}\int_0^L{\abs{x u \partial_x u}dx}
+% \label{eq1}
+% \ee
+% Using Cauchy-Schwarz and Young's inequalities leads to
+% \be
+% 2\megaabs{\int_0^L{xy u \partial_x u dx}} \leq \frac{1}{2}\int_0^L{\left(\partial_x u\right)^2dx} + \frac{C_1^2}{2}\norm{\partial_x y}_{L^2(\Omega)}^2 L\int_0^L{x u^2 dx}.
+% \label{eq2}
+% \ee
+% And the same process is applied to
+% \be
+% 4\megaabs{\int_0^L{x z u \partial_x u dx}} \leq \frac{1}{2}\int_0^L{\left(\partial_x u\right)^2dx} + 2 C_1^2\norm{\partial_x z}_{L^2(\Omega)}^2 L\int_0^L{x u^2 dx}.
+% \label{eq3}
+% \ee
+% Recalling from \cite{coron2003exact} the lemma
+% \begin{lem}
+% For every $\phi \in H^1_0(\Omega)$ with $\phi(0) = 0$ and every $a \in [\Omega]$,
+% \be
+% \int_0^L{\phi^2dx} \leq \frac{a^2}{2}\int_0^L{\left(\partial_x \phi \right)^2 dx} + \frac{1}{a}\int_0^L{x\phi^2 dx},
+% \ee
+% \label{lem1}
+% \end{lem}
+% \noindent one can prove that there exists $C_{2}$ such that
+% \be
+% \int_0^L{u^{2}dx} \leq \frac{1}{2}\int_{0}^{L}{\left( \partial_{x}u\right)^{2}dx} + C_{2}\int_{0}^{L}{xu^{2}dx}.
+% \label{eq4}
+% \ee
+% Finally, using the same justification as \eqref{eq1}, there exists $C_{3}$ such that
+% \be
+% 2\megaabs{\int_0^L{zu^{2} dx}} \leq C_{3}\norm{z_{x}}_{L^{2}(\Omega)}\int_{0}^{L}{u^{2}dx},
+% \ee
+% Combined with \eqref{eq4}, this latter inequality rewrites, for a constant $C_{4}$
+% \be
+% 2\int_0^L{zu^{2} dx} \leq \frac{1}{2}\int_{0}^{L}{\left( \partial_{x} u\right)^{2}dx} + C_{4} \left( 1 + \norm{z_{x}}_{L^{2}(\Omega)}^{3/2}\right) \int_{0}^{L}{xu^{2}dx}
+% \label{eq5}
+% \ee
+% Now, by \eqref{eq2}, \eqref{eq3}, \eqref{eq4}, \eqref{eq5}, we have
+% \beal
+% \frac{d}{dt}\int_{0}^{L}{xu^2dx} + \int_0^L{(\partial_x u)^2dx} \leq C_5 \left( 1 + \norm{\partial_x y}_{L^2(\Omega)}^2 + \norm{\partial_x z}_{L^2(\Omega)}^2 \right)\int_0^L{ xu^2 dx}
+% \label{eq6}
+% \eeal
+% for a given constant $C_5$.
+% In particular, applying Gronwall lemma to
+% \be
+% \frac{d}{dt}\int_{0}^{L}{xu^2dx} \leq C_5 \left( 1 + \norm{\partial_x y}_{L^2(\Omega)}^2 + \norm{\partial_x z}_{L^2(\Omega)}^2 \right)\int_0^L{ xu^2 dx}
+% \ee
+% leads to
+% \be
+% \int_{0}^{L}{xu^2dx} \leq \left[\int_{0}^{L}{xu_0^2dx}\right]\, e^{\displaystyle \int_0^s{C_5 \left( 1 + \norm{\partial_x y}_{L^2(\Omega)}^2 + \norm{\partial_x z}_{L^2(\Omega)}^2 \right)ds}} = 0,
+% \label{eqend}
+% \ee
+% since in our case $u_0 = 0$, \eqref{eqend} leads to $u = 0$ in $C^0(I,L^2(\Omega))$. Moreover, using again \eqref{eq6}
+% we have
+% \be
+% \int_0^{T^{\ast}}{\int_0^L{(\partial_x u)^2dx}} \leq \int_0^{T^{\ast}}{C_5 \left( 1 + \norm{\partial_x y}_{L^2(\Omega)}^2 + \norm{\partial_x z}_{L^2(\Omega)}^2 \right)\int_0^L{ xu^2 dx}} = 0,
+% \ee
+% which leads also to $u = 0$ in $L^2(I, H^1_0(\Omega))$. Unicity of the solution to the nonlinear KdV system is thus proved.
+
+
+%But by using a different approach we can show the time global-existence under a additional assumption.
+%\begin{prop}
+%Let $\gamma=0$ and let $y\in \mathcal B_\theta$ be a time local-solution of \eqref{kdv1}-\eqref{kdv3} with $\theta\in (0,T)$. Moreover suppose that there exits a $c>0$ in independent of $y$ such that
+%\[\|y\|_{L^3(I\times \Omega)}\leq c\]
+%holds. Then there exists a constant $\hat c>0$ such that $y$ satisfies
+%\[
+%\norm{y}_{\mathcal B}+\|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq \hat c\,\left(\norm{y_{0}}_{L^{2}(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)+c.
+%\]
+%\end{prop}
+%\begin{proof}
+%We proceed in a similar manner as in Appendix \ref{sec:linear-estimates} but for the non-linear \KdV equation. Critical term is the non-linearity. First we test with $y$ which yields
+%\[
+%\int_0^Ly^2\partial_xy~\mathrm dx=-2\int_0^Ly^2\partial_xy~\mathrm dx.
+%\]
+%Thus the term vanishes. Next we test with $xy$
+%\[
+%\int_0^Lxy^2\partial_x y~\mathrm dx = -\int_0^L y^3+2xy^2~\mathrm dx
+%\]
+%which explains the necessity of the boundedness of $\|y\|_{L^3(\Omega)}$.
+%  %Let $y\in \mathcal C(\bar I,\mathcal D(A))~\cap~\mathcal C^1(\bar I,L^2(\Omega))$ . We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get
+%%   \be
+%%  \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x}y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}dx}=  \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
+%%  \ee
+%%  Applying Cauchy-Schwarz followed by Young's inequality to the right-hand side
+%%  leads to \be \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x}y)^{2}dx}\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
+%%  \label{linnhupperbound1}.
+%%  \ee
+%%  We proceed in the same manner testing with $xy$
+%%  \be
+%%  \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{xy^{2}dx}-\frac{1}{2}\int_{0}^{L}{y^{2}dx} +  \frac{3}{2}\int_{0}^{L}{(\partial_{x} y)^{2}dx} +\gamma
+%%  \int_{0}^{L}{x(\partial_{x} y)^{2}dx} - \frac{1}{3}\int_0^L{y^3 dx}= \langle f,xy \rangle_{H^{1}_{0}(\Omega)}.
+%%  \label{linnhupperbound2}
+%%  \ee
+%%  The right-hand side is treated again thanks to Cauchy-Schwarz
+%%  and Young's inequalities
+%%  \beal
+%%  \langle f,xy\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)} &\leq \norm{q}_{H^{-1}(\Omega)}\norm{xy}_{H^{1}_{0}(\Omega)}\\
+%%  & \leq \norm{f}_{H^{-1}(\Omega)}\norm{y + x\partial_{x}y}_{L^{2}(\Omega)}\\
+%%  % & \leq \norm{q}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + \norm{x\partial_{x}y}_{L^{2}(\Omega)} \right)\\
+%%  & \leq \norm{f}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + L\norm{\partial_{x}y}_{L^{2}(\Omega)} \right)\\
+%%  &\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{L}{2L}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
+%%  &\leq \frac{1+L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} +  \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} +  \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}
+%%  \label{upperboundq}
+%%  \eeal
+%%  Adding \eqref{linnhupperbound1}, \eqref{linnhupperbound2}(with the upper bound \eqref{upperboundq}) and omitting some non-negative terms on the left-hand side yields \be
+%%  \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}dx} +(\frac{1}{2}+\gamma)\int_{0}^{L}{(\partial_{x}y)^{2}} \leq \left(   1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \int_{0}^{L}{y^{2}dx} + \frac{1}{3}\int_0^L{y^3 dx}.
+%%  \ee
+%%   To facilitate the next computations, we add a non-negative term on the right and multiply by two
+%%   \be
+%% \frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}dx} + (1+2\gamma)\int_{0}^{L}{(\partial_{x}y)^{2}} \leq \left(    2 +L^{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} +  2\int_{0}^{L}{(1+x)y^{2}dx} + \frac{2}{3}\int_0^L{\abs{y}^3 dx}.
+%%  \ee
+%%  Then we can follow a Gronwall strategy, multiplying by $e^{-t}$
+%%  \beal
+%%  \frac{d}{dt}\left(e^{-2t}\int_{0}^{L}{(1+x)y^{2}dx}\right) + e^{-2t}\left(1+2\gamma\right)\int_{0}^{L}{(\partial_{x}y)^{2}} \leq
+%%  e^{-2t}\left( 2+L^{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + e^{-2t}\frac{2}{3}\int_0^L{\abs{y}^3 dx}
+%%  \eeal
+%%  After integration between $0$ and $t$  and multiplication by $e^{2t}$we have
+%%  \begin{multline}
+%%  \int_{0}^{L}{y^{2}(t)dx} + \left( 1+2\gamma \right)\int_{0}^{t}{\int_{0}^{L}{(\partial_{x} y)^{2}dxds}}  \leq e^{2t}\left(2+L^{2}\right)\int_{0}^{t}{\norm{f}_{H^{-1}(\Omega)}^{2}ds} \\
+%%   + e^{2t}\int_{0}^{L}{(1+L)y_{0}^{2}dx} + e^{2t}\frac{2}{3}\int_0^t{\norm{y}_{L^3(\Omega)}^3 ds},
+%%  \end{multline}
+%%  that we transform into
+%%  \begin{multline}
+%%  \int_{0}^{L}{y^{2}(t)dx} + \left( 1+2\gamma \right)\int_{0}^{t}{\int_{0}^{L}{(\partial_{x} y)^{2}dxds}} \leq e^{2T}\left(2+L^{2}\right)\norm{f}_{L^{2}(I,H^{-1}(\Omega))}^{2} \\
+%%  + e^{2T}(1+L)\norm{y_{0}}_{L^{2}(\Omega)} + e^{2T}\frac{2}{3}\norm{y}_{L^3(I,L^3(\Omega))}^3.
+%%  \end{multline}
+%%  This yields
+%%  \[\|y\|_{\mathcal C(\bar I,L^2(\Omega))}+\|y\|_{L^2(I,H^1_0(\Omega))}\leq c(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)} + \norm{y}_{L^3(I,L^3(\Omega))}^{3/2} ).\]
+%%  And we have a global estimate for our problem, under the condition that $y \in L^3(I \times \Omega)$.
+%\end{proof}
+
+
+%\be
+%y_{n_k} = W_0(t)y_0 - \int_0^t{W_0(t-s)(y_{n_k}\partial_x y_{n_k})(s,.)ds} + \int_0^t{W_0(t-s)q_{n_{k}}(s,.)ds}.
+%\label{mildsubsequence}
+%\ee
+%In order to prove that $\bar y$ is a mild solution for the control $\bar q$, we consider a test function $\varphi \in C_0^{\infty}(\Omega)$ and take the $L^2$ scalar product in space (that we denote $<.,.>_{L^2}$). Fubini's theorem allows us to write
+%\beal
+%<y_{n_k}(t,.),\varphi>_{L^2}  = <W_0(t)y_0,\varphi>_{L^2} & - \int_0^t{<W_0(t-s)(y_{n_k}\partial_x y_{n_k})(s,.),\varphi>_{L^2}ds}\\
+%& + \int_0^t{<W_0(t-s)q_{n_{k}}(s,.),\varphi>_{L^2}ds}.
+%\eeal
+%Thanks to the weak convergences of $y_{n_k}$ above, we have
+%$$<y_{n_k}(t,.),\varphi>_{L^2} \xrightarrow[n\mapsto+\infty]{} <\bar y,\varphi>_{L^2}.$$
+%In the same manner, and because $W_0(t-s)\varphi$ makes sense in $L^2(I,H^1_0)$,
+%$$<W_0(t-s)q_{n_k}(s,.),\varphi>_{L^2} =  <q_{n_k}(s,.),W_0(t-s)\varphi>_{L^2}\xrightarrow[n\mapsto+\infty]{} <\bar q,W_0(t-s)\varphi>_{L^2} = <W_0(t-s)\bar q,\varphi>_{L^2}.$$
+%Let us focus on the nonlinear term and compute the limit of $I$
+%\beal
+%I & = \int_0^t{<W_0(t-s)(y_{n_k}\partial_x y_{n_k})(s,.),\varphi>_{L^2}ds} - \int_0^t{<W_0(t-s)(\bar y\partial_x \bar y(s,.),\varphi>_{L^2}ds}\\
+%& = \int_0^t{<(y_{n_k}\partial_x y_{n_k})(s,.),W_0(t-s)\varphi>_{L^2}ds} - \int_0^t{<(\bar y\partial_x \bar y(s,.),W_0(t-s)\varphi>_{L^2}ds}\\
+%& = -\frac{1}{2}\int_0^t{<(y_{n_k}^2(s,.),W_0(t-s)\partial_x \varphi>_{L^2}ds} + \frac{1}{2}\int_0^t{<\bar{y}^2(s,.),W_0(t-s)\partial_x \varphi>_{L^2}ds}
+%\eeal
+%This results in
+%\be
+%I = \frac{1}{2}\int_0^t{<y_{n_k}^2(s,.) - \bar{y}^2(s,.),W_0(t-s)\partial_x \varphi>_{L^2}ds},
+%\ee
+%and
+%\be
+%\abs{I} \leq \norm{y_{n_k} - \bar y}_{L^2(I, C_0(\Omega))}\norm{y_{n_k} + \bar y}_{L^4(I, L^2(\Omega))}\norm{\partial_x \varphi}_{L^4(I, L^2(\Omega)}.
+%\ee
+% We now need a small lemma
+% \begin{lem}
+% Let $y$ be the solution of \eqref{kdvcontrol} defined earlier. Then we have the additional regularity $\partial_t y \in L^1(I,H^{-2}(\Omega))$.
+% \end{lem}
+% \begin{proof}
+% We basically have
+% \be
+% \partial_t y = -\partial_x y - \partial_{xxx}y - y\partial_x y + \gamma \partial_{xx}y + q
+% \ee
+% Since $y\in \mathcal{B}$, we have
+% $$\partial_x y \in L^2(I,L^2(\Omega)), \quad  \partial_{xxx}y \in L^2(I,H^{-2}(\Omega)), \partial_{xx}y \in L^2(I,H^{-1}(\Omega)),\quad y\partial_x y \in L^1(I,L^2(\Omega)).$$
+% This naturally induces that $\partial_t y$ in bounded in $L^1(I,H^{-2}(\Omega))$.
+% \end{proof}
+
+% It remains to show that $M(\bar q) = \bar y$ holds in the weak sense defined in \eqref{weakform}. Therefore we proceed with
+% \be\label{weakformtime}
+% \int_I (y_{n_k}, \partial_t\varphi)- (y_{n_k}, \partial_x \varphi) + (\partial_x y_{n_k}, \partial_{xx}\varphi)  - (\frac{y_{n_k}^2}{2}, \partial_x \varphi)~\mathds dt= \langle q_{n_k}, \varphi\rangle
+% \ee
+% for $\varphi \in H^1(I,H^1_0(\Omega)\cap H^2(\Omega))$ with $\varphi(T)=0$.
+% The weak convergence of $y_{n_k}$ in $L^2(I,H^1_0(\Omega))$ implies weak convergence in $L^2(\Omega\times I)$. So all linear terms in \eqref{weakformtime} converge.
+% For the nonlinear term, we need  strong convergence. We indeed have to prove
+% \be
+% \int_I(y_{n_k}^2 - \bar y^2, \partial_x \varphi )~\mathds dt  \rightarrow 0 \mbox{ as }n_k \rightarrow +\infty.
+% \label{cvnonlinear1}
+% \ee
+% We can estimate
+% \beal
+% \int_I(y_{n_k}^2 - \bar y^2, \partial_x \varphi )~\mathds dt &= \int_I((y_{n_k} - \bar y)(y_{n_k} + \bar y), \partial_x \varphi)~\mathds dt\\
+% &\leq \norm{y_{n_k} - \bar y}_{L^2(I, C_0(\Omega))}\norm{y_{n_k} + \bar y}_{L^4(I, L^2(\Omega))}\norm{\partial_x \varphi}_{L^4(I, L^2(\Omega)}.
+% \label{cvnonlinear2}
+% \eeal The embedding
+% \be
+% L^2(I,H^1_0(\Omega))\cap W^{1,1}(I,H^{-2}(\Omega))\hookrightarrow L^2(I,C_0(\Omega))
+% \ee
+% is compact according to the generalized Aubin-Lions Lemma \cite{roubivcek1990generalization}. Therefore it follows strong convergence of $y_{n_k}$ in $L^2(I,C_0(\Omega))$ from the boundness of $y_{n_k}$ in $L^2(I,H^1_0(\Omega))\cap W^{1,1}(I,H^{-2}(\Omega))$. Then we have
+% \eqref{cvnonlinear1} according to \eqref{cvnonlinear2}. Eventually $\bar y$ solves \eqref{weakform} for $\bar q$. We also have strong convergence of $y_{n_k}$ in $L^2(\Omega\times I)$. Then the continuity of $\|\cdot-y_d\|^2_{L^2(\Omega\times I)}$ and the weak-$\ast$ lower semi-continuity of $\|\cdot\|_{\M}$ implies
+% \be
+% \bar J = \underset{n_k\rightarrow\infty}{\operatorname{lim~inf}} J(q_{n_k}, y_{n_k}) \geq J(\bar q, \bar y).
+% \ee
+% So we conclude that $(\bar y,\bar q)$ are minimizers. 
+
+
+%Let $\varphi \in L^2(I, H^1_0(\Omega))$ and $y \in L^4(I,L^4(\Omega))$.
+% \beal
+% \megaabs{\int_I{\left( y\partial_x y, \varphi\right)}} &= \megaabs{\int_I{\frac{1}{2}\left( \partial_x y^2, \varphi\right)}}\\
+% & = \megaabs{-\int_I{\frac{1}{2}\left(y^2, \partial_x\varphi\right)}}\\
+% & \leq \frac{1}{2}\int_I{\norm{y^2}_{L^2(\Omega)} \norm{\partial_x \varphi}_{L^2(\Omega)}}\\
+% & \leq \frac{1}{2} \int_I{\norm{y}_{L^4(\Omega)}^2 \norm{\varphi}_{H^1_0(\Omega)}}\\
+% & \leq \frac{1}{2} \norm{y}_{L^4(I,L^4(\Omega))}^2 \norm{\varphi}_{L^2(I,H^1_0(\Omega))}
+% \eeal
+% which concludes the proof.
+
+% We have
+% \beal
+%   \norm{\bar y}_{\mathcal{B}} &\leq \frac{1}{2} \left( \norm{y}_{\mathcal{B}} + \norm{\tilde{y}}_{\mathcal{B}}\right)\\
+%   & \leq \frac{1}{2} C(T,L)\left( \norm{q+\delta q}_{L^2(I,H^{-1}(\Omega))} + \norm{q}_{L^2(I,H^{-1}(\Omega))} \right)\\
+%   & \leq C(T,L)\norm{q}_{L^2(I,H^{-1}(\Omega))} +\frac{C(T,L)}{2}\norm{\delta q}_{L^2(I,H^{-1}(\Omega))}
+% \eeal
+
+%   First we define the nonlinear operator \be E\colon S\times \mathcal
+%   U_{ad}\rightarrow L^2(I,H^{-2}(\Omega))\times L^2(\Omega) \ee wit
+%   $S:=\{y\in L^2(I,H^1_0(\Omega))\cap \mathcal C(\bar
+%   I,L^2(\Omega))\colon y_x(\cdot,L)=0\}\cap H^1(I,H^{-2}(\Omega))$
+%   which consists of \be E(y,q) = L(y,q)+H(y) \ee with \be
+%   L(y,q)=\left(
+%     \begin{array}{c}
+%       \partial_t y+\partial_x y-\gamma \partial_{xx}y+\partial_{xxx} y-q\\
+%       y(0,\cdot)
+%     \end{array}
+%   \right),~~ H(y)=\left(
+%     \begin{array}{c}
+%       y\partial_x y\\
+%       0
+%     \end{array}
+%   \right).  \ee The operator $E$ allows us to write the state-equation
+%   in the following form \be E(y,q)=0,~y\in S,~q\in U_{ad}.  \ee The
+%   linear terms in $L$ are continuously Fr\'echet-differentiable. The
+%   nonlinear term \be H_1\colon S\rightarrow
+%   L^2(I,H^{-1}(\Omega)),~y\mapsto y\partial_x y \ee is also
+%   continuously Fr\'echet-differentiable with the derivative
+%   $H'_1(y)\delta y=\partial_x(y\delta y)$. This is true since it holds
+%   \be \|H_1(y+\delta y)-H_1(y)-H'_1(y)\delta
+%   y\|_{L^2(I,H^{-1}(\Omega))}=\|\delta y\partial_x \delta
+%   y\|_{L^2(I,H^{-1}(\Omega))}\leq c\|\delta
+%   y\|_{L^2(I,H^1_0(\Omega))}\|\delta y\|_{\mathcal C(\bar
+%     I,L^2(\Omega))}, \ee for $y,\delta y\in S$ according to
+%   Lemma~\ref{lemyyx2}. This means that $E$ is continuously
+%   Fr\'echet-differentiable. The partial derivative of $E$ with respect
+%   to $y$ is given by \be E'_y(y,q)\delta y=\left(
+%     \begin{array}{c}
+%       \partial_t \delta y+\partial_x \delta y-\gamma \partial_{xx} \delta y+\partial_{xxx}\delta y + \partial_x(y\delta y)\\
+%       \delta y(0,\cdot)
+%     \end{array}
+%   \right) \ee and with respect to $q$ by $E'_q(y,q)\delta q=-\delta
+%   q\in \M$. Therefore it is enough that the operator $E'_y(y,q)\colon
+%   S\rightarrow L^2(I,H^{-2}(\Omega))\times L^2(\Omega)$ is
+%   continuously invertible from $S$ to $L^2(I,H^{-1}(\Omega))$. Indeed,
+%   the equation \be E'_y(y,q)\delta y=(f,y_0)^t \ee has a unique
+%   solution $\delta y\in S$ for any $(f,y_0)\in
+%   L^2(I,H^{-1}(\Omega))\times L^2(\Omega)$ and fulfills the following
+%   a priori estimate \be \|\delta y\|_{L^2(I,H^1_0(\Omega))}+\|\delta
+%   y\|_{\mathcal C(\bar I,L^2(\Omega))} \leq
+%   c(\|y\|_{L^2(I,H^1_0(\Omega))})\left(\|f\|_{L^2(I,H^{-2}(\Omega))}+\|y_0\|_{L^2(\Omega)}\right)
+%   \ee according to Theorem ??. So the implicit function theorem
+%   \cite{pinnau2008optimization} guarantees the existence of a
+%   continuously Fr\'echet differentiable mapping \be M\colon
+%   U_{ad}\rightarrow S,~~q\mapsto y \ee which fulfills \be E(M(q),q)=0.
+%   \ee Its derivative \be M'(q)\colon \M\rightarrow S,~~\delta q\mapsto
+%   \delta y,~q\in U_{ad} \ee is given by \be M'(q)\delta
+%   q=-E'_y(M(q),q)^{-1}\delta q,~~\delta q\in \M,~q\in U_{ad}.  \ee
+
+% \begin{rmk}
+%   \bealn
+%   &\partial_t \delta y +\partial_x \delta y - \gamma \partial_{x} \delta y+\partial_{xxx} \delta y + \partial_x(y\delta y)=\delta q \mbox{ in } \Omega,\\
+%   &\delta y(.,0) = \delta y(.,L) = \partial_x \delta y (.,L) = 0 \mbox{ in } \Gamma,\\
+%   &\delta y(0,.) = 0 \mbox{ on } \Omega.  \eealn is called linearized
+%   state equation or tangent equation.
+% \end{rmk}
+
+%\begin{proof}[Proof of Proposition~\ref{propsubgcondition}]
+%
+%  %The subgradient condition \eqref{subgradientcond} is equivalent to
+%%  \be
+%%  \|\bar q\|_{\M}+(\|\cdot\|_{\M})^*(-\bar p)=\langle \bar q,-\bar p\rangle_{\M,\M^*}
+%%  \label{subgradientcondfenchel4}
+%%  \ee
+%%  where
+%%  \[
+%%  (\|\cdot\|_{\M})^*(-\bar p)=\begin{cases} 0~~&\|\bar p\|_{\M^*}\leq\alpha\\ \infty~~&\text{else}\end{cases}
+%%  \]
+%%  is the convex conjugate functional of $\|\cdot\|_{\M}$. Then
+%%  \eqref{subgradientcondfenchel4} is equivalent to
+%%  \bean
+%%  &\|\bar q\|_{\M}+\langle\bar q,\bar p\rangle_{\M,\M^*}=0 \\
+%%  &\|\bar p\|_{\M^*}\leq\alpha.
+%%  \eean
+%%  Recall that $\bar p=\nabla G(\bar q)\in \C\subset \M^*$. This and $C_0(\Omega,L^2(I))^* = \M$ imply
+%%  \[
+%%  \|\bar p\|_{\M^*}=\|\bar p\|_{\C}
+%%  \]
+%%  which yields the assertion.
+%\end{proof}
+
+
+%\begin{proof}[Proof of Theorem~\ref{supportcontrol}]
+%  Let $\bar q'$ be the density of $\bar q$ with resect to $|\bar
+%  q|$. From \eqref{subgradientconditionfenchel1} - \eqref{subgradientconditionfenchel2} follows
+%  \begin{equation}\label{supp_opt_control_estimate}
+%    \begin{aligned}
+%      \alpha \|\bar q\|_{\M} &= \langle \bar q,-\bar p \rangle_{\M,C_0(\Omega,L^2(I))}\\
+%      & = \int_{\Omega}{(\bar q'(x),-\bar p(x))_{L^2(I)}~\mathrm{d}|\bar q|} \\
+%      & \leq \int_{\Omega}{\|\bar q'(x)\|_{L^2(I)}\|\bar p(x)\|_{L^2(I)}~\mathrm d|\bar q}|\\
+%      & \leq \|\bar q\|_{\M} \|\bar p\|_{C_0(\Omega,L^2(I))}\\
+%      & \leq \alpha \|\bar q\|_{\M}.
+%    \end{aligned}
+%  \end{equation}
+%  This means that \eqref{supp_opt_control_estimate} holds with
+%  equality, in particular it holds
+%  \begin{equation}\label{complementarity_optimal_control}
+%    \int_\Omega \underbrace{\|\bar p(x)\|_{L^2(I)}-\alpha}_{\leq 0}~\mathrm d|q|=0
+%  \end{equation}
+%  which implies
+%  \begin{equation}\label{norm_alpha}
+%    \|\bar p(x)\|_{L^2(I)}=\alpha~~|\bar q|-\text{a.e.}~x\in \Omega
+%  \end{equation}
+%  and \eqref{support_optimal_control} due to the continuity of
+%  $\alpha-\|\bar p(\cdot)\|_{L^2(I)}$.  From equality in
+%  \eqref{supp_opt_control_estimate} also follows
+%  \begin{equation*}
+%    \int_\Omega\underbrace{\|\bar q'(x)\|_{L^2(I)}\|\bar p(x)\|_{L^2(I)}-(\bar q'(x),-\bar p(x))_{L^2(I)}}_{\geq0}~\mathrm{d}|\bar q|=0.
+%  \end{equation*}
+%  Due to the sign of the integrant it even holds
+%  \begin{equation*}
+%    \|\bar q'(x)\|_{L^2(I)}\|\bar p(x)\|_{L^2(I)}-(\bar q'(x),-\bar p(x))_{L^2(I)}=0~~|\bar u|-\text{a.e.}~x\in \Omega
+%  \end{equation*}
+%  which means that $q'$ and $-\bar p$ are colinear. In particular,
+%  $\|q'(\cdot)\|_{L^2(I)}\equiv1$ and \eqref{norm_alpha} imply
+%  \begin{equation}\label{supp_opt_control_representation}
+%    \bar q'(x,t)=-\frac{1}{\alpha}\bar p(x,t)~~|\bar q|-\text{a.e.}~x\in\Omega,~\text{a.e.}~t\in I.
+%  \end{equation}

@@ -29,8 +29,8 @@ V_N = \left\{y\in P_N : y(1)=y(-1)=\partial_x y(1)=0\right\},
 \be
 V_N^{\ast} = \left\{y\in P_N : y(1) = y(-1) = \partial_x y(-1)=0\right\}.
 \ee
-We consider then the semi-discrete problem: find 
-\beal\nonumber 
+We consider then the semi-discrete problem: find
+\beal\nonumber
 y_N: \quad &I \rightarrow V_N,\\
 &t \mapsto y_N(t,\cdot),
 \eeal
@@ -80,7 +80,7 @@ The variational formulation \eqref{petrovgalerkin} thus yields
 \be
 M\frac{d\mathbf{y}}{dt} + \left( -P +\gamma Q  + S \right)\mathbf{y} + F(\mathbf{y}) = \mathbf{u},
 \ee
-where $F(\mathbf{y})$ represents the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. It means that the nonlinearity is evaluated in the spatial domain, that we choose to be the Chebyshev-Gauss-Lobatto(CGL) points, and transfered back in the Legendre spectral space. We therefore need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform(FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we rather use the direct method which is faster and easier to handle, especially when it comes to finding a discrete adjoint (see Section~\ref{numadjoint}). We build beforehand the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points such that 
+where $F(\mathbf{y})$ represents the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. It means that the nonlinearity is evaluated in the spatial domain, that we choose to be the Chebyshev-Gauss-Lobatto(CGL) points, and transfered back in the Legendre spectral space. We therefore need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform(FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we rather use the direct method which is faster and easier to handle, especially when it comes to finding a discrete adjoint (see Section~\ref{numadjoint}). We build beforehand the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points such that
 \be
 L_1 \mathbf{y}(t) = \mathbf{\tilde{y}}(t) = (y_N(t, x_0), y_N(t, x_2), ...y_N(t, x_{N}))^T,
 \label{spec2spat}
@@ -238,11 +238,11 @@ Classically, it starts with a projection of the tracking term in the state space
  \begin{rmk}
   Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditionned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the mean space step.
  \end{rmk}
- 
+
  The advantage of computing the adjoint lies in the following proposition
- \begin{prop}
+ \begin{proposition}
  Following the definition of the discrete objective functional $J_{N,N_T}$ \eqref{discrobj} and discrete lagrangian $\mathcal{L}_{N,N_T}$ \eqref{discrlag}, the discrete derivative of the reduced tracking cost term is given by $\left(-\mathbf{p}_0,\ldots,-\mathbf{p}_{N_T-1}\right)$, where $\mathbf{p}$ is the discrete adjoint state defined by the numerical scheme \eqref{numschemeadj} in the case of terminal observations.
- \end{prop}
+ \end{proposition}
 \begin{proof}
  The proof is done by standard differentiation of the discrete Lagrangian.
 \end{proof}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 %%
 %% This is file `siamltex1213.cls', based on article.cls
 %% Revision of siam macros for use with LaTeX 2e
@@ -24,6 +25,89 @@
 %% ALLOWED to take money for the distribution or use of either this 
 %% file or a changed version, except for a nominal charge for copying 
 %% etc. 
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+\NeedsTeXFormat{LaTeX2e}[1995/06/01]
+\ProvidesClass{siamltex1213}[2013/10/21 v1.0 LaTeX document e-class]
+\newcommand\@ptsize{}
+\newif\if@restonecol
+\newif\if@titlepage
+\@titlepagefalse
+\newif\if@oneeqnum
+\@oneeqnumfalse
+\newif\if@onetabnum
+\@onetabnumfalse
+\newif\if@onefignum
+\@onefignumfalse
+\newif\if@onethmnum
+\@onethmnumfalse
+%_%_%_%_%
+\newif\if@translated
+\@translatedfalse
+%_%_%_%_%
+%\newif\if@openbib
+%\@openbibfalse
+\DeclareOption{a4paper}
+   {\setlength\paperheight {297mm}%
+    \setlength\paperwidth  {210mm}}
+\DeclareOption{a5paper}
+   {\setlength\paperheight {210mm}%
+    \setlength\paperwidth  {148mm}}
+\DeclareOption{b5paper}
+   {\setlength\paperheight {250mm}%
+    \setlength\paperwidth  {176mm}}
+\DeclareOption{letterpaper}
+   {\setlength\paperheight {11in}%
+    \setlength\paperwidth  {8.5in}}
+\DeclareOption{legalpaper}
+   {\setlength\paperheight {14in}%
+    \setlength\paperwidth  {8.5in}}
+\DeclareOption{executivepaper}
+   {\setlength\paperheight {10.5in}%
+    \setlength\paperwidth  {7.25in}}
+\DeclareOption{landscape}
+   {\setlength\@tempdima   {\paperheight}%
+    \setlength\paperheight {\paperwidth}%
+    \setlength\paperwidth  {\@tempdima}}>>>>>>> 3535e22da57637b45b095d7f161a15644144b650
+%%
+%% This is file `siamltex1213.cls', based on article.cls
+%% Revision of siam macros for use with LaTeX 2e
+%%
+%% October 24, 2013
+%%
+%% Supplemental Files Supported Version 1.0.0
+%%
+%% You are not allowed to change this file.
+%%
+%% You are allowed to distribute this file under the condition that
+%% it is distributed together with all of the files in the siam macro
+%% distribution. These are:
+%%
+%%  siamltex1213.cls (this file)
+%%  siam10.clo   (size option for 10pt papers)
+%%  subeqn.clo   (allows equation numbners with lettered subelements)
+%%  siam.bst     (bibliographic style file for BibTeX)
+%%  docultex.tex (documentation file)
+%%
+%% If you receive only some of these files from someone, complain!
+%%
+%% You are NOT ALLOWED to distribute this file alone. You are NOT
+%% ALLOWED to take money for the distribution or use of either this
+%% file or a changed version, except for a nominal charge for copying
+%% etc.
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -196,9 +280,9 @@ Vol.\ #3, No.\ #4, pp.\ #5
 %
 \if@translated
 \newcommand\tpa{T{\fiveptsize HEORY}~P{\fiveptsize ROBAB.}~A{\fiveptsize PPL}}% added 1/7/04
-\def\@translation{Translated from Russian Journal}  
+\def\@translation{Translated from Russian Journal}
 \else%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand\tpa{T{\fiveptsize HEORY}~P{\fiveptsize ROBAB.}~A{\fiveptsize PPL}}% added 1/7/04  
+\newcommand\tpa{T{\fiveptsize HEORY}~P{\fiveptsize ROBAB.}~A{\fiveptsize PPL}}% added 1/7/04
 \fi
 %
 \def\@slugger{}
@@ -256,9 +340,9 @@ Vol.\ #3, No.\ #4, pp.\ #5
 \newcommand\siopt{SIAM J.\ O{\fiveptsize PTIM}}
 \newcommand\sisc{SIAM J.\ S{\fiveptsize CI.} C{\fiveptsize OMPUT}}
 \newcommand\sirev{SIAM R{\fiveptsize EV}}
-\newcommand\mms{M{\fiveptsize ULTISCALE}~M{\fiveptsize ODEL.}~S{\fiveptsize IMUL}} % Added 9/17/02  
-   
-        
+\newcommand\mms{M{\fiveptsize ULTISCALE}~M{\fiveptsize ODEL.}~S{\fiveptsize IMUL}} % Added 9/17/02
+
+
 \setcounter{secnumdepth}{3}
 \newcounter {section}
 \newcounter {subsection}[section]
@@ -273,10 +357,10 @@ Vol.\ #3, No.\ #4, pp.\ #5
 
 
 \def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
-     \def\@svsec{}\else 
+     \def\@svsec{}\else
      \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname.\hskip .5em }\fi
      \@tempskipa #5\relax
-      \ifdim \@tempskipa>\z@ 
+      \ifdim \@tempskipa>\z@
         \begingroup #6\relax
           \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}
         \endgroup
@@ -297,7 +381,7 @@ Vol.\ #3, No.\ #4, pp.\ #5
    \else \def\@svsechd{#4\hskip #1\relax #5.}\fi
     \@xsect{#3}}
 
-              
+
 \newcommand\section{\@startsection{section}{1}{.25in}%
                                    {1.3ex \@plus .5ex \@minus .2ex}%
                                    {-.5em \@plus -.1em}%
@@ -371,14 +455,14 @@ Vol.\ #3, No.\ #4, pp.\ #5
                {\begin{list}{{\upshape \arabic{muni}.}}{\usecounter{muni}
                 \setlength{\leftmargin}{0pt}
                 \setlength{\itemindent}{38pt}}}{\end{list}}
-                                
+
 \newenvironment{@abssec}[1]{%
      \if@twocolumn
        \section*{#1}%
      \else
        \vspace{.05in}\footnotesize
        \parindent .2in
-         {\upshape\bfseries #1. }\ignorespaces 
+         {\upshape\bfseries #1. }\ignorespaces
      \fi}
      {\if@twocolumn\else\par\vspace{.1in}\fi}
 
@@ -437,12 +521,14 @@ Vol.\ #3, No.\ #4, pp.\ #5
   \newtheorem{corollary}[theorem]{Corollary}
   \newtheorem{proposition}[theorem]{Proposition}
   \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{remark}[theorem]{Remark}
 \else
   \newtheorem{theorem}{Theorem}[section]
   \newtheorem{lemma}[theorem]{Lemma}
   \newtheorem{corollary}[theorem]{Corollary}
   \newtheorem{proposition}[theorem]{Proposition}
   \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{remark}[theorem]{Remark}
 \fi
 
 
@@ -453,11 +539,11 @@ Vol.\ #3, No.\ #4, pp.\ #5
 % message to appear.  If this happens it will be necessary to update the
 % definition of  \@tempb below and incorperate the changes into
 % the new definitions of \eqnarray.
- 
- 
+
+
 % This is the current definition of \eqnarray for the fleqn document style
 % latex.ltx
- 
+
 \def\@tempb{%
    \stepcounter{equation}%
    \def\@currentlabel{\p@equation\theequation}%
@@ -494,7 +580,7 @@ Vol.\ #3, No.\ #4, pp.\ #5
 }
 \else    \typeout{Warning: Unable to fix unknown version of \string\eqnarray.}
 \fi
- 
+
 \def\@tempb{}
 
 
@@ -519,7 +605,7 @@ Vol.\ #3, No.\ #4, pp.\ #5
 \secdef\Append\sAppend}%
  \setcounter{section}{0}%
  \setcounter{subsection}{0}%
- \renewcommand\thesection{\Alph{section}}} 
+ \renewcommand\thesection{\Alph{section}}}
 
 \newcommand\append[2][?]{%
 \refstepcounter{section}%
@@ -708,7 +794,7 @@ Vol.\ #3, No.\ #4, pp.\ #5
   \if@oneeqnum
   \else
      \@addtoreset{equation}{section}   %  \section resets 'equation' counter
-     \renewcommand{\theequation}{\thesection.\arabic{equation}}  
+     \renewcommand{\theequation}{\thesection.\arabic{equation}}
   \fi
 %
   \if@onefignum
@@ -820,7 +906,6 @@ Internet\string\iexplore.exe}
 
 
 \endinput
-%% 
+%%
 %% End of file `siamltex1213.cls'.
-
-
+>>>>>>> 3535e22da57637b45b095d7f161a15644144b650
