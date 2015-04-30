@@ -242,19 +242,19 @@ Next we analyze the well posedness of the tangent equation
 \delta y(0,x) = \delta y_0 \mbox{ in } \Omega.\label{linkdv3}
  \end{numcases}
 \end{subequations}
-\begin{Def}
+\begin{definition}
 Let $(\delta u,\delta y_0)\in \Hm1\times \mathcal B$ and $y\in \mathcal B$. A function $\delta y\in \mathcal B$ is called a solution of \eqref{linkdv1}-\eqref{linkdv3} if it satisfies the fixed point equation
 \[
 \delta y=\mathcal L(\delta u-\partial_x(y\delta y),\delta y_0)
 \]
 where $\mathcal L$ is the solution operator from Remark \ref{rmklinearoperator}.
-\end{Def}
-\begin{prop}\label{prop:tangent}
+\end{definition}
+\begin{proposition}\label{prop:tangent}
  Let $(\delta u,\delta y_0) \in \Hm1\times L^2(\Omega)$ and $y\in \mathcal B$. Then, there exists a unique solution $\delta y \in \mathcal{B}$ of \eqref{linkdv1}-\eqref{linkdv3}. Furthermore, there exists a constant $\widetilde C(T,L,\norm{y}_{\mathcal{B}})$ such that the following estimate holds
  \be\label{estimatetangent}
  \norm{\delta y}_{\mathcal B}+\|\partial_t \delta y\|_{L^2(I,\mathcal V^*)} \leq \widetilde C \left( \norm{\delta y_0}_{L^2(\Omega)} + \norm{\delta u}_{\Hm1}\right).
  \ee
-\end{prop}
+\end{proposition}
 \begin{proof}[Proof of Proposition~\ref{prop:tangent}]
 We define the linear mapping
 \[
@@ -314,19 +314,19 @@ p(.,0) = p(.,L) = \partial_x p (.,0) = 0 \mbox{ on } I,\label{adjoint2}\\
 p(T) = p_{T} \mbox{ in } \Omega.\label{adjoint3}
 \eesn
 for any $y\in \mathcal B$.
-\begin{Def}
+\begin{definition}
 A function $p\in \mathcal B$ is called a solution of \eqref{adjoint1}-\eqref{adjoint3} if it solves the fixed point equation
 \[
 p(t)=W^*(t)p_T+\int_t^TW^*(s-t)(\phi(s)+y(s)\partial_x p(s))~\mathrm ds.
 \]
-\end{Def}
-\begin{prop}
+\end{definition}
+\begin{proposition}
 Let $(\phi,p_T)\in L^1(I,L^2(\Omega))\times L^2(\Omega)$. Then the equation \eqref{adjoint1}-\eqref{adjoint3} has a unique solution $p\in \mathcal B$. Furthermore there exists a constant $c\,(\|y\|_{\mathcal B})>0$ such that
 \begin{equation}\label{apriori_adjoint}
 \|p\|_{\mathcal B}\leq c\,(\|p_T\|_{L^2(\Omega)}+\|\phi\|_{L^1(I,L^2(\Omega))})
 \end{equation}
 holds.
-\end{prop}
+\end{proposition}
 \begin{proof}
 The proof uses similar arguments as the proof of Proposition \ref{prop:tangent}. In particular it is based on the Banach fixed theorem and Lemma \eqref{lemadjoint}. The estimate \eqref{apriori_adjoint} follows from
 \begin{align*}
@@ -457,12 +457,12 @@ for any $\varepsilon>0$.
 %& \Psi_{p_0,y}(p)= \mathcal L(p_0,f + y\partial_x p)
 %\eeal
 %where $\mathcal L$ shall be the solution operator of the nonhomogeneous linear system \eqref{nonhomoadjoint1} - \eqref{nonhomoadjoint3}, whose existence is guaranteed by Proposition~\ref{existencenonhomoadjoint}. Now we state a lemma that will enable us to prove that $\Psi_{p_0,y}$ is a contraction mapping on some well chosen ball $\mathcal{V}$, thus paving the way for a Banach fixed point theorem.
-\begin{lem}\label{lemadjoint}
+\begin{lemma}\label{lemadjoint}
   Let $y\in\mathcal B$, $p\in\mathcal B$. Then it holds
 \be
 \norm{y\partial_x p}_{L^1(0,T,L^2(\Omega))} \leq c\,T^{1/4}\norm{y}_{\mathcal{B}}\norm{p}_{\mathcal{B}}.
 \ee
-\end{lem}
+\end{lemma}
 \begin{proof}[Proof of Lemma~\ref{lemadjoint}]
 \beal
   \norm{y\partial_x p}_{L^1(0,T,L^2(\Omega))}&\leq \int_0^T{\norm{y}_{L^{\infty}(\Omega)}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt  \leq c\,\int_0^T{\norm{y}_{L^2(\Omega)}^{1/2}\norm{y}_{H^1_0(\Omega)}^{1/2}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt\\
