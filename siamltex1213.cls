@@ -1,16 +1,16 @@
-<<<<<<< HEAD
+%<<<<<<< HEAD
 %%
 %% This is file `siamltex1213.cls', based on article.cls
 %% Revision of siam macros for use with LaTeX 2e
-%% 
+%%
 %% October 24, 2013
 %%
 %% Supplemental Files Supported Version 1.0.0
-%% 
-%% You are not allowed to change this file. 
-%% 
-%% You are allowed to distribute this file under the condition that 
-%% it is distributed together with all of the files in the siam macro 
+%%
+%% You are not allowed to change this file.
+%%
+%% You are allowed to distribute this file under the condition that
+%% it is distributed together with all of the files in the siam macro
 %% distribution. These are:
 %%
 %%  siamltex1213.cls (this file)
@@ -19,12 +19,12 @@
 %%  siam.bst     (bibliographic style file for BibTeX)
 %%  docultex.tex (documentation file)
 %%
-%% If you receive only some of these files from someone, complain! 
-%% 
-%% You are NOT ALLOWED to distribute this file alone. You are NOT 
-%% ALLOWED to take money for the distribution or use of either this 
-%% file or a changed version, except for a nominal charge for copying 
-%% etc. 
+%% If you receive only some of these files from someone, complain!
+%%
+%% You are NOT ALLOWED to distribute this file alone. You are NOT
+%% ALLOWED to take money for the distribution or use of either this
+%% file or a changed version, except for a nominal charge for copying
+%% etc.
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -81,7 +81,8 @@
 \DeclareOption{landscape}
    {\setlength\@tempdima   {\paperheight}%
     \setlength\paperheight {\paperwidth}%
-    \setlength\paperwidth  {\@tempdima}}>>>>>>> 3535e22da57637b45b095d7f161a15644144b650
+    \setlength\paperwidth  {\@tempdima}}
+    %%>>>>>>> 3535e22da57637b45b095d7f161a15644144b650
 %%
 %% This is file `siamltex1213.cls', based on article.cls
 %% Revision of siam macros for use with LaTeX 2e
@@ -125,7 +126,7 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}[1995/06/01]
 \ProvidesClass{siamltex1213}[2013/10/21 v1.0 LaTeX document e-class]
-\newcommand\@ptsize{}
+\renewcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@titlepage
 \@titlepagefalse
@@ -880,7 +881,7 @@ Vol.\ #3, No.\ #4, pp.\ #5
 
 
 \RequirePackage[dvips]{graphics,graphicx}
-\RequirePackage[colorlinks,pdfmark,dvips]{hyperref}
+\RequirePackage[colorlinks]{hyperref}
 \def\wwwbrowser{C:\string\Program\space
 Files\string\Plus!\string\Microsoft\space
 Internet\string\iexplore.exe}

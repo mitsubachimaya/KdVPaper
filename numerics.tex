@@ -224,7 +224,7 @@ Classically, it starts with a projection of the tracking term in the state space
 % &-\delta y_{N}^t \left( \frac{1}{2}(M^t + \Delta t P^t + \Delta t F^{'}(y_N)^t) \right)p_N.
 % \eeal
 % The discrete adjoint scheme is obtained by imposing $\delta L(\bar y, \bar q, \bar p)\delta \bar y = 0$.
- \begin{rmk}
+ \begin{remark}
  Without this modification of the last forward step, the discrete adjoint obtained in the case of terminal observation would be
  \bealn
  &\frac{1}{2}(M^T+\Delta t S^T) \mathbf{p}_{N_T-1} = -A(\mathbf{y}_{N_T} - \mathbf{z}_2)\\
@@ -233,11 +233,11 @@ Classically, it starts with a projection of the tracking term in the state space
  &\mbox{\hspace{0.4\textwidth}}+ \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1}, \quad n=2 \ldots N_T-1.
  \eealn
  The major difference lies in the second step. It does not correspond to a consistent discretization of the continuous adjoint equation: the time derivative is not reconstructed. It results in practice in huge oscillations in time of the adjoint variable.
- \end{rmk}
+ \end{remark}
 
- \begin{rmk}
+ \begin{remark}
   Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditionned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the mean space step.
- \end{rmk}
+ \end{remark}
 
  The advantage of computing the adjoint lies in the following proposition
  \begin{proposition}
@@ -245,15 +245,14 @@ Classically, it starts with a projection of the tracking term in the state space
  \end{proposition}
 \begin{proof}
  The proof is done by standard differentiation of the discrete Lagrangian.
-\end{proof}
-
+\qquad\end{proof}
 
 \subsection{Numerical treatment of the optimization problem}
 \subsubsection{The regularized problem}
 Numerically, the optimization problem is solved via a Newton type method. This requires an additional regularization term which we introduce as follows
 \beal
-\min_{q \in \M} J(y) &= \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))} \\
-& = f(y) + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))},
+\min_{q \in \M} J(y) &= \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))}^2 \\
+& = f(y) + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))}^2,
 \label{costreg}
 \eeal
 where $u$ and $y$ are subject to Korteweg-de Vries Burgers equation. This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
@@ -321,9 +320,9 @@ Moreover, the various norms involved in the optimization problem shall be comput
 \eeal
 for all $\varphi_h = \sum_{j=1}^{N_T}{\chi_{I_j}\sum_n{\varphi_{jn} e_n}}$.
 
-\begin{rmk}
+\begin{remark}
  With \eqref{masslumping} as expressions for the norms and inner products, all projections formulae involved at the continuous level in the optimization process can be transfered one to one to the (spatial) discrete vector. Therefore, \eqref{optcondition} or \eqref{normalmap} hold at the discrete level.
-\end{rmk}
+\end{remark}
 
 
 \subsection{Numerical examples}

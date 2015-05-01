@@ -43,8 +43,8 @@
 \def\N{\mathbb{N}}
 \def\B{\mathcal{B}}
 \def\Hm1{L^2(I,H^{-1}(\Omega))}
-\def\KdVB{Korteweg-de Vries-Burgers }
-\def\KdV{Korteweg-de Vries }
+\def\KdVB{KdVB }
+\def\KdV{KdV }
 \newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
 \def\bem{\begin{multline}}
 \def\endmult {\end{multline}}
@@ -71,30 +71,30 @@
 %\newtheorem{lem}[thm]{Lemma}
 %\newtheorem{cor}[thm]{Corollary}
 %\newtheorem{Def}[thm]{Definition}
-\newtheorem{rmk}[thm]{Remark}
+%\newtheorem{rmk}[thm]{Remark}
 %\newtheorem{as}[thm]{Assumption}
 
 % ===================================================================
 % Color
 % ===================================================================
-\usepackage{color}
-\definecolor{myorange}{rgb}{0.9568,0.4941,0.1961}
-\definecolor{myred}{rgb}{0.9098,0.1294,0.2078}
-\definecolor{myblue}{rgb}{0.0352,0.4981,0.6509}
-\definecolor{myhyperblue}{rgb}{0.1607,0.3922,0.9}
-\definecolor{mygreen}{rgb}{0.2235,0.6353,0.2588}
-\definecolor{mygrey}{rgb}{0.3,0.3,0.3}
+%\usepackage{color}
+%\definecolor{myorange}{rgb}{0.9568,0.4941,0.1961}
+%\definecolor{myred}{rgb}{0.9098,0.1294,0.2078}
+%\definecolor{myblue}{rgb}{0.0352,0.4981,0.6509}
+%\definecolor{myhyperblue}{rgb}{0.1607,0.3922,0.9}
+%\definecolor{mygreen}{rgb}{0.2235,0.6353,0.2588}
+%\definecolor{mygrey}{rgb}{0.3,0.3,0.3}
 
 %====================================================================
 % HyperRef
 %====================================================================
-\usepackage{hyperref}
-\hypersetup{
-pdfborder=0 0 0,
-colorlinks=true,
-linkcolor=mygrey,
-citecolor=myhyperblue
-}
+%\usepackage{hyperref}
+%\hypersetup{
+%pdfborder=0 0 0,
+%colorlinks=true,
+%linkcolor=mygrey,
+%citecolor=myhyperblue
+%}
 
 \DeclareMathOperator{\shrink}{shrink}
 %opening
@@ -124,11 +124,13 @@ problem is established and the optimality system is derived. Efficient numerical
 
 \input{optimalityconditions}
 
-%\input{numerics}
+\input{numerics}
 
+\section*{Acknowledgement}
+The authors warmly thank Tang Quoc Bao, Felix Henneke, Karl Kunisch, Konstantin Pieper and Boris Vexler for fruitful discussions during this work. Also, the authors gratefully acknowledge support from the International Research Training Group IGDK 1754, funded by the German Science Foundation (DFG) and Austrian Science Foundation (FWF).
 \input{appendix}
 
-\bibliographystyle{plain}
+\bibliographystyle{siam}
 \bibliography{kdvbib}
 \end{document}
 

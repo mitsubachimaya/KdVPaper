@@ -1,31 +1,7 @@
 %!TEX root = kdv.tex
 \appendix
-\section{Well-posedness of the state equation}
+\section{Well-posedness of the state equation, tangent equation and adjoint equation}
 \label{sec:appwp}
-
-% \subsection{Semigroup of contractions}
-% \label{sec:semigr-contr}
-% \begin{proof}[Proof of Proposition~\ref{propsemigroup}]
-%   The idea of the proof is not new and was first introduced in \cite{rosier1997exact}. We choose to provide it here as we are concerned with a slightly different operator (we add diffusion to the problem).
-%   The idea is to prove that $A$ is maximally dissipative in order to
-%   use a corollary of the Lumer-Philips theorem and conclude. We
-%   already have that $A:\mathcal{D}(A) \mapsto L^{2}(0,L)$ has a dense
-%   domain and it is easy to see that it is a closed operator. Let us
-%   prove that it is dissipative. For any $w \in \mathcal{D}(A)$, \beal
-%   <w,Aw>_{L^{2}(0,L)} &= \int_{0}^{L}{w(-w'''-w'+\gamma w'')dx}\\
-%   & = -[ww'']_{0}^{L} + \int_{0}^{L}{w'w''dx} - [w^{2}]_{0}^{L} + \gamma [ww']_{0}^{L} - \gamma \int_{0}^{L}{w'^{2}dx}\\
-%   & = -\frac{1}{2}w'(0)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
-%   \eeal Hence A is dissipative. Denoting $A^{\ast}$ the adjoint
-%   operator of $A$ satisfying \be A^{\ast}w = w''' + w' + \gamma w'',
-%   \ee we also have \beal
-%   <A^{\ast}w,w>_{L^{2}(0,L)} &= \int_{0}^{L}{w(w'''+w'+\gamma w'')dx}\\
-%   & = -\frac{1}{2}w'(L)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
-%   \eeal Therefore $A^{\ast}$ is also dissipative and A is maximally
-%   dissipative. A corollary of the Lumer-Philips theorem theorem (see
-%   \cite{pazy1983semigroups}, Chapter 1, Cor 4.4) permits to conclude
-%   that A generates a strongly continuous semigroup of contractions.
-% \end{proof}
-
 \subsection{Linear estimates}
 \label{sec:linear-estimates}
 \begin{proof}[Proof linear estimate \eqref{linestimate_regular}]
@@ -51,7 +27,7 @@
   %&\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
   &\leq \frac{1+L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2}+\frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2}+\frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}.
   \eeal
-  Adding \eqref{1linnhupperbound}, \eqref{2linnhupperbound} (with the upper bound \eqref{qupperbound}) and omitting $\abs{\partial_{x} y(t,0)}^{2}$ on the left-hand side yields 
+  Adding \eqref{1linnhupperbound}, \eqref{2linnhupperbound} (with the upper bound \eqref{qupperbound}) and omitting $\abs{\partial_{x} y(t,0)}^{2}$ on the left-hand side yields
   \[
   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}~\mathrm dx} +\left(\frac{1}{2}+\gamma\right)\|y\|_{H^1_0(\Omega)}^2\leq \left(1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \|y\|_{L^2(\Omega)}^2.
   \]
@@ -180,13 +156,14 @@ holds.
 \begin{proof}
 The proof uses similar arguments as the proof of Proposition \ref{prop:tangent}. In particular it is based on the Banach fixed theorem and Lemma \eqref{lemadjoint}. The estimate \eqref{apriori_adjoint} follows from
 \begin{multline*}
-\left|\int_0^Ly\partial_xpp~\mathrm dx\right|=\left|-\int_0^Lp^2\partial_xy~\mathrm dx\right|\leq c\,\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}\\
+\left|\int_0^Ly\partial_xpp~\mathrm dx\right|=\left|\frac 1 2\int_0^Lp^2\partial_xy~\mathrm dx\right|\leq c\,\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}\\
 \leq \frac{c}{2\varepsilon}\|p\|_{L^2(\Omega)}^2\|y\|_{H^1_0(\Omega)}^2+\frac{\varepsilon}{2}\|p\|_{H^1_0(\Omega)}^2
 \end{multline*}
 for any $\varepsilon>0$ and
 \begin{multline*}
-\left|\int_0^Ly\partial_xp(L-x)p~\mathrm dx\right|=\left|-\int_0^L(L-x)p^2\partial_xy-yp^2~\mathrm dx\right|\\
-\leq c\,\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}\leq \frac{c}{2\varepsilon}\|p\|_{L^2(\Omega)}^2\|y\|_{H^1_0(\Omega)}^2+\frac{\varepsilon}{2}\|p\|_{H^1_0(\Omega)}^2.
+\left|\int_0^Ly\partial_xp(L-x)p~\mathrm dx\right|=\left|\frac 1 2\int_0^L(L-x)p^2\partial_xy-yp^2~\mathrm dx\right|\\
+\leq c\,\left(\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}+\|p\|_{L^2(\Omega)}^2\|y\|_{H^1_0(\Omega)}\right)\\
+\leq \|p\|_{L^2(\Omega)}^2\left(\frac{c}{2\varepsilon}\|y\|_{H^1_0(\Omega)}^2+\|y\|_{H^1_0(\Omega)}\right)+\frac{\varepsilon}{2}\|p\|_{H^1_0(\Omega)}^2.
 \end{multline*}
 for any $\varepsilon>0$.
 \qquad\end{proof}
@@ -201,14 +178,13 @@ for any $\varepsilon>0$.
 \begin{multline*}
 \norm{y\partial_x p}_{L^1(I,L^2(\Omega))}\leq \int_0^T{\norm{y}_{L^{\infty}(\Omega)}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt\\
 \leq c\,\int_0^T{\norm{y}_{L^2(\Omega)}^{1/2}\norm{y}_{H^1_0(\Omega)}^{1/2}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt\\
-\leq c\,\norm{y}_{C(\bat I,L^2(\Omega))}^{1/2}\left( \int_0^T{\norm{y}_{H^1_0(\Omega)}}~\mathrm dt\right)^{1/2}\norm{p}_{L^2(I,H^1_0(\Omega))}\\
+\leq c\,\norm{y}_{C(\bar I,L^2(\Omega))}^{1/2}\left( \int_0^T{\norm{y}_{H^1_0(\Omega)}}~\mathrm dt\right)^{1/2}\norm{p}_{L^2(I,H^1_0(\Omega))}\\
 \leq c\, T^{1/4} \norm{y}_{C(\bar I,L^2(\Omega))}^{1/2} \norm{y}_{L^2(I,H^1_0(\Omega))}^{1/2}\norm{p}_{L^2(I,H^1_0(\Omega))},
-\end{multline}
+\end{multline*}
 which implies the assertion.
 \qquad\end{proof}
 
-\section{Acknowledgement}
-The authors warmly thank Tang Quoc Bao, Felix Henneke, Karl Kunisch, Konstantin Pieper and Boris Vexler for fruitful discussions during this work. Also, the authors gratefully acknowledge support from the International Research Training Group IGDK 1754, funded by the German Science Foundation (DFG) and Austrian Science Foundation (FWF).
+
 
 %%% Local Variables:
 %%% mode: latex

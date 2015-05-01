@@ -49,7 +49,7 @@ where $\mathcal M(\Omega_c)$ is the space Borel measures on $\Omega_c$ and $\|\c
 \begin{equation}\label{embeddingM(L2)L2(M)}
 \M\hookrightarrow L^2(I,\mathcal M(\Omega_c)).
 \end{equation}
-Since $d=1$ we have the embedding $H^1_0(\Omega)\hookrightarrow \mathcal C(\Omega_c)$. Thus there holds $L^2(I,H^1_0(\Omega))\hookrightarrow L^2(I,C(\Omega_c))$ and by duality 
+Since $d=1$ we have the embedding $H^1_0(\Omega)\hookrightarrow \mathcal C(\Omega_c)$. Thus there holds $L^2(I,H^1_0(\Omega))\hookrightarrow L^2(I,C(\Omega_c))$ and by duality
 $L^2(I,\mathcal M(\Omega_c))\hookrightarrow L^2(I,H^{-1}(\Omega))$.
 \section{Well posedness of the state equation}
 In this section we discuss the well posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. For the proof of the well-posedness we need the following results for the linear KdV-equation.
@@ -126,7 +126,7 @@ For $(f,y_0)\in \Hm1\times L^2(\Omega)$ a function $y\in C(\bar I,L^2(\Omega))$ 
 for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p = p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{definition}
 
-%The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f. \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$. 
+%The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f. \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$.
 In order to show existence of a weak solution we utilize a strategy based on the approximation of the data .
 \begin{proposition}\label{propnonhomo}
 Let $(f,y_0)\in \Hm1\times L^2(\Omega)$. Then, there exists a unique weak
@@ -138,7 +138,7 @@ $C(T,L) > 0$ such that the following estimate holds
 \ee
 \end{proposition}
 \begin{proof}
-We choose sequences 
+We choose sequences
 \begin{itemize}
   \item $\{f_n\}_{n\in\mathbb{N}}\subset\mathcal C^1(\bar I,L^2(\Omega))$ with $f_n\rightarrow f$ in $\Hm1$
   \item $\{y_{0,n}\}_{n\in\mathbb{N}}\subset\mathcal D(A)$ with $y_{0,n}\rightarrow y_0$ in $L^2(\Omega)$
@@ -165,7 +165,7 @@ Proposition~\ref{propnonhomo}  allows us to define the linear solution operator
 \be
 \mathcal{L}:\Hm1\times L^2(\Omega)\rightarrow \mathcal{B},(f,y_0) \mapsto y,
 \ee
-where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}. 
+where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}.
 \end{remark}
 \subsection{Well-posedness of the \KdVB equation}
 We consider in this section the nonlinear \KdVB equation \eqref{kdvcontrol1} - \eqref{kdvcontrol3} with sources from $f\in \Hm1$. In particular we show existence for short time and small data for $\gamma =0$ and time-global existence for $\gamma>0$.  First of all we introduce a suitable solution concept for the \KdVB equation
@@ -265,37 +265,6 @@ The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the soluti
 %Since we will only be able to prove global well posedness in the case $\gamma > 0$, we will rather adopt this point of view as far as optimization is concerned for the pure \KdV equation.
 \label{rmkUad}
 \end{remark}
-%We now introduce some notations before stating a weak formulation for the \KdVB equation. First, the space of test functions is defined as
-%\be
-%\mathcal{T} = \{ \varphi \in H^1(I,H^2\cap H^1_0(\Omega)) \mbox{ s.t. } \varphi_x(.,x=0) = 0\}.
-%\label{testspace}
-%\ee
-%Then, $(\cdot,\cdot)_{I\times\Omega}$ denotes the $L^2(I\times \Omega)$ inner product while $<\cdot,\cdot>$ denotes the duality product between $L^2(I,H^1_0(\Omega))$ and $L^2(I,H^{-1}(\Omega))$.
-%\begin{cor}
-% The unique solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} satisfies the variational formulation
-% \be
-% -(y,\partial_t \varphi)_I + (\partial_x y, \varphi)_I + (\partial_x y, \partial_{xx}\varphi)_I + \gamma (\partial_x y, \partial_x \varphi)_I  + <y\partial_x y,\varphi> = <q,\varphi>, \quad \forall \varphi \in \mathcal{T}
-% \label{varform}
-% \ee
-%\end{cor}
-%\begin{proof}
-%Proposition~\ref{localposedness} guarantees the existence of a unique solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} (locally in time) in $\mathcal{B}$ for any $y_0 \in L^2(\Omega)$ or $q \in L^2(I,H^{-1}(\Omega))$. Moreover, this solution is bounded in $\mathcal{B}$. Let us introduce by density a sequence $C_0^{\infty}(\Omega) \ni y_0^n \xrightarrow[n \to +\infty]{} y_0$ and $C_0^{\infty}(I,,\Omega) \ni q_n \xrightarrow[n \to +\infty]{} q$. For a given pair $(y_0^n,q_n)$ we call $y_n$ the corresponding smooth solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}. Those latter solve also, after integrations by parts of the original system, the variational formulation suggested in \eqref{varform}. For two indices $(n,m)$, the discrepancy $u = y_n - y_m$ satisfies the system
-%\begin{subequations}
-%\begin{numcases}{}
-%\partial_t u +\partial_x u + \partial_{xxx} u + \partial_x \left(u\left(\frac{y_m + y_n}{2}\right)\right) -\gamma \partial_{xx} u=  q_n - q_m \mbox{ in } \Omega,\label{tangent1}\\
-%u(.,0) = u(.,L) = \partial_x u (.,L) = 0,\label{tangent2}\\
-%u(0,.) = y_0^n - y_0^m \mbox{ on } \Omega\label{tangent3}.
-%\end{numcases}
-%\end{subequations}
-%Equation~\eqref{tangent1} is actually the tangent equation for \eqref{kdvcontrol1} at the point $\frac{y_m + y_n}{2}$. Existence of a unique solution as well as an estimate for this solution in $\mathcal{B}$ are required here, but also further in the optimization process. Therefore those proofs are provided in Appendix~\ref{appendixtangent} and are quite similar to those for the nonlinear state equation (i.e. based on a Banach fixed point theorem for the existence and the multiplier method for the estimates). From them, we deduce that the unique solution $u$ of \eqref{tangent1} - \eqref{tangent3} satisfies the inequality (recall $u = y_n - y_m$)
-%\be
-%\norm{u}_{C(I,L^2(\Omega))} + \norm{u}_{L^2(I,H^1_0(\Omega))} \leq C(T,L,\frac{\norm{y_n}_{\mathcal{B}} + \norm{y_m}_{\mathcal{B}}}{2})\left( \norm{y_0^n - y_0^m}  + \norm{q_n - q_n}_{L^2(I,H^{-1}(\Omega))}\right)
-%\label{estimatetangentcauchy}
-%\ee
-%Since $\left( y_0^n\right)_{n\in \mathbb{N}}$ and $\left( q_n\right)_{n\in \mathbb{N}}$ are converging sequences, we deduce from \eqref{estimatetangentcauchy} that $\left( y_n \right)_{n\in \mathbb{N}}$ is a Cauchy sequence, from which we can extract a subsequence converging strongly towards $y \in \mathcal{B}$. This strong convergence property allows us to pass to the limit in \eqref{varform}, especially in the nonlinear term. Thus $y$ satisfies the weak formulation \eqref{varform}.
-%
-%\end{proof}
-
 \subsubsection{Global well-posedness of the nonlinear \KdVB equation}
 Proposition~\ref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem on $[0,T]$. We will show that such estimates exist in the case $\gamma > 0$.
 \begin{theorem}

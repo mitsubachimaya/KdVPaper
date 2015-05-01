@@ -909,4 +909,59 @@ and
 % \[
 % \|\Psi(p)_{\theta_1,\theta_2}\|_{\mathcal B_{\theta_1,\theta_2}}\leq \frac{5}{6}r,~~\|\Psi(\delta y_1)_{\theta_1,\theta_2}-\Psi(\delta y_2)_{\theta_1,\theta_1}\|_{\mathcal B_{\theta_1,\theta_2}}\leq\frac{2}{3}\|p_1-p_2\|_{\mathcal B_{\theta_1,\theta_2}}.
 % \]
-% which implies that $\Psi_{\theta_1,\theta_2}$ is a contraction mapping. So we can apply the Banach fixed point theorem blablabla. 
+% which implies that $\Psi_{\theta_1,\theta_2}$ is a contraction mapping. So we can apply the Banach fixed point theorem blablabla.
+
+
+% \subsection{Semigroup of contractions}
+% \label{sec:semigr-contr}
+% \begin{proof}[Proof of Proposition~\ref{propsemigroup}]
+%   The idea of the proof is not new and was first introduced in \cite{rosier1997exact}. We choose to provide it here as we are concerned with a slightly different operator (we add diffusion to the problem).
+%   The idea is to prove that $A$ is maximally dissipative in order to
+%   use a corollary of the Lumer-Philips theorem and conclude. We
+%   already have that $A:\mathcal{D}(A) \mapsto L^{2}(0,L)$ has a dense
+%   domain and it is easy to see that it is a closed operator. Let us
+%   prove that it is dissipative. For any $w \in \mathcal{D}(A)$, \beal
+%   <w,Aw>_{L^{2}(0,L)} &= \int_{0}^{L}{w(-w'''-w'+\gamma w'')dx}\\
+%   & = -[ww'']_{0}^{L} + \int_{0}^{L}{w'w''dx} - [w^{2}]_{0}^{L} + \gamma [ww']_{0}^{L} - \gamma \int_{0}^{L}{w'^{2}dx}\\
+%   & = -\frac{1}{2}w'(0)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
+%   \eeal Hence A is dissipative. Denoting $A^{\ast}$ the adjoint
+%   operator of $A$ satisfying \be A^{\ast}w = w''' + w' + \gamma w'',
+%   \ee we also have \beal
+%   <A^{\ast}w,w>_{L^{2}(0,L)} &= \int_{0}^{L}{w(w'''+w'+\gamma w'')dx}\\
+%   & = -\frac{1}{2}w'(L)^{2} - \gamma \int_{0}^{L}{w'^{2}dx} \leq 0.
+%   \eeal Therefore $A^{\ast}$ is also dissipative and A is maximally
+%   dissipative. A corollary of the Lumer-Philips theorem theorem (see
+%   \cite{pazy1983semigroups}, Chapter 1, Cor 4.4) permits to conclude
+%   that A generates a strongly continuous semigroup of contractions.
+% \end{proof}
+
+%We now introduce some notations before stating a weak formulation for the \KdVB equation. First, the space of test functions is defined as
+%\be
+%\mathcal{T} = \{ \varphi \in H^1(I,H^2\cap H^1_0(\Omega)) \mbox{ s.t. } \varphi_x(.,x=0) = 0\}.
+%\label{testspace}
+%\ee
+%Then, $(\cdot,\cdot)_{I\times\Omega}$ denotes the $L^2(I\times \Omega)$ inner product while $<\cdot,\cdot>$ denotes the duality product between $L^2(I,H^1_0(\Omega))$ and $L^2(I,H^{-1}(\Omega))$.
+%\begin{cor}
+% The unique solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} satisfies the variational formulation
+% \be
+% -(y,\partial_t \varphi)_I + (\partial_x y, \varphi)_I + (\partial_x y, \partial_{xx}\varphi)_I + \gamma (\partial_x y, \partial_x \varphi)_I  + <y\partial_x y,\varphi> = <q,\varphi>, \quad \forall \varphi \in \mathcal{T}
+% \label{varform}
+% \ee
+%\end{cor}
+%\begin{proof}
+%Proposition~\ref{localposedness} guarantees the existence of a unique solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} (locally in time) in $\mathcal{B}$ for any $y_0 \in L^2(\Omega)$ or $q \in L^2(I,H^{-1}(\Omega))$. Moreover, this solution is bounded in $\mathcal{B}$. Let us introduce by density a sequence $C_0^{\infty}(\Omega) \ni y_0^n \xrightarrow[n \to +\infty]{} y_0$ and $C_0^{\infty}(I,,\Omega) \ni q_n \xrightarrow[n \to +\infty]{} q$. For a given pair $(y_0^n,q_n)$ we call $y_n$ the corresponding smooth solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}. Those latter solve also, after integrations by parts of the original system, the variational formulation suggested in \eqref{varform}. For two indices $(n,m)$, the discrepancy $u = y_n - y_m$ satisfies the system
+%\begin{subequations}
+%\begin{numcases}{}
+%\partial_t u +\partial_x u + \partial_{xxx} u + \partial_x \left(u\left(\frac{y_m + y_n}{2}\right)\right) -\gamma \partial_{xx} u=  q_n - q_m \mbox{ in } \Omega,\label{tangent1}\\
+%u(.,0) = u(.,L) = \partial_x u (.,L) = 0,\label{tangent2}\\
+%u(0,.) = y_0^n - y_0^m \mbox{ on } \Omega\label{tangent3}.
+%\end{numcases}
+%\end{subequations}
+%Equation~\eqref{tangent1} is actually the tangent equation for \eqref{kdvcontrol1} at the point $\frac{y_m + y_n}{2}$. Existence of a unique solution as well as an estimate for this solution in $\mathcal{B}$ are required here, but also further in the optimization process. Therefore those proofs are provided in Appendix~\ref{appendixtangent} and are quite similar to those for the nonlinear state equation (i.e. based on a Banach fixed point theorem for the existence and the multiplier method for the estimates). From them, we deduce that the unique solution $u$ of \eqref{tangent1} - \eqref{tangent3} satisfies the inequality (recall $u = y_n - y_m$)
+%\be
+%\norm{u}_{C(I,L^2(\Omega))} + \norm{u}_{L^2(I,H^1_0(\Omega))} \leq C(T,L,\frac{\norm{y_n}_{\mathcal{B}} + \norm{y_m}_{\mathcal{B}}}{2})\left( \norm{y_0^n - y_0^m}  + \norm{q_n - q_n}_{L^2(I,H^{-1}(\Omega))}\right)
+%\label{estimatetangentcauchy}
+%\ee
+%Since $\left( y_0^n\right)_{n\in \mathbb{N}}$ and $\left( q_n\right)_{n\in \mathbb{N}}$ are converging sequences, we deduce from \eqref{estimatetangentcauchy} that $\left( y_n \right)_{n\in \mathbb{N}}$ is a Cauchy sequence, from which we can extract a subsequence converging strongly towards $y \in \mathcal{B}$. This strong convergence property allows us to pass to the limit in \eqref{varform}, especially in the nonlinear term. Thus $y$ satisfies the weak formulation \eqref{varform}.
+%
+%\end{proof} 
