@@ -1,0 +1,48 @@
+\section{Control space}\label{control space}
+In this section we introduce the control space $\M$ and its properties. The control set $\Omega_c$ is any relatively closed subset of $\Omega$. Let $u\colon\mathcal B(\Omega_c)\rightarrow L^2(I)$ be a countably additive mapping on the Borel sets $\mathcal B(\Omega_c)$ of $\Omega_c$ with values in $L^2(I)$. For $u$ we denote by $|u|\in \mathcal M^+(\Omega_c)$ (positive regular Borel measure) the total variation measure defined by
+\begin{equation*}
+|u|(B) = \underset{\pi}{\operatorname{sup}}\sum_{E\in\pi}\|u(E)\|_{L^2(I)}
+\end{equation*}
+where $\pi$ is the set of all disjoint partitions of $B\in \mathcal B(\Omega_c)$. The space
+\begin{equation*}
+\M=\{u\colon \mathcal B(\Omega_c)\rightarrow L^2(I)\colon~~u~\text{countably additive},~~|u|(\Omega_c)<\infty\}
+\end{equation*}
+is the space of vector measures with values in $L^2(I)$. Equipped with the norm
+\begin{equation*}
+\|u\|_{\M}=|u|(\Omega_c)
+\end{equation*}
+it is a Banach space. The support of $u$, respectively of its
+ total variation measure $|u|$, is defined by
+\begin{equation*}
+\operatorname{supp}u = \operatorname{supp}|u|=\Omega\setminus\left(\bigcup\{B~\text{open in}~\Omega_c|~|u|(B)=0\}\right).
+\end{equation*}
+The vector measure $u$ possesses a Radon-Nikodym derivative, see \cite{Lang1983realanalysis},
+\begin{equation}\label{eq:radon_nikodym}
+u'\in L^{\infty}((\Omega_c,|u|),L^2(I))~\text{with}~\|u'(\cdot)\|_{L^2(I)}\equiv 1
+\end{equation}
+with respect to its total variation measure $|u|$. So $u$ can be represented in the following way
+\begin{equation*}
+\mathrm du=u'~\mathrm d|u|.
+\end{equation*}
+Next we introduce the space $\C$ of vector-valued continuous functions $p\colon\bar \Omega_c\rightarrow L^2(I)$ with $p|_{\partial\Omega\cap \bar \Omega_c}=0$. Equipped with the norm
+\begin{equation*}
+\|p\|_{\C}=\max_{x\in\Omega_c}\|p(x,\cdot)\|_{L^2(I)}
+\end{equation*}
+it is a separable Banach space. The dual space of $\C$ can be characterized by $\M$, i.e.,
+\[
+\C^*\cong\M.
+\]
+A proof is given in \cite{Hensgen:1996}. The duality pairing between $\C$ and $\M$ takes the form
+\[
+\langle u,p\rangle_{\M,\C}=\int_\Omega(u',p)_{L^2(I)}~\mathrm d|u|.
+\]
+Next we introduce the space $L^2(I,\mathcal M(\Omega_c))$. It is the space of weakly-$*$ measurable functions $u\colon I\rightarrow \mathcal M(\Omega_c)$  which satisfy
+\[
+\int_0^T\|u(t)\|_{\mathcal M(\Omega_c)}^2~\mathrm dt<\infty
+\]
+where $\mathcal M(\Omega_c)$ is the space Borel measures on $\Omega_c$ and $\|\cdot\|_{\mathcal M(\Omega_c)}$ is the total variation norm in $\mathcal M(\Omega_c)$. Furthermore it can be identified with the dual space of $\mathcal C(\Omega_c)$ which is the space of continuous functions on $\bar \Omega_c$ with $p|_{\partial\Omega\cap \bar \Omega_c}=0$.  There holds
+\begin{equation}\label{embeddingM(L2)L2(M)}
+\M\hookrightarrow L^2(I,\mathcal M(\Omega_c)).
+\end{equation}
+Since $d=1$ we have the embedding $H^1_0(\Omega)\hookrightarrow \mathcal C(\Omega_c)$. Thus there holds $L^2(I,H^1_0(\Omega))\hookrightarrow L^2(I,C(\Omega_c))$ and by duality
+$L^2(I,\mathcal M(\Omega_c))\hookrightarrow L^2(I,H^{-1}(\Omega))$.
