@@ -266,10 +266,10 @@ The constant in the estimate \eqref{globalestimate} explodes for $\gamma \righta
 \end{remark}
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
 We start by defining the admissible set of controls
-$$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M} \leq \frac{C(T,L)}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)}\right\} &\quad\mbox{if } \gamma = 0 \\
+$$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq \hat c \right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
-where $C(T,L)$ is the constant from \eqref{ineqqnorm} and assuming that
+where $\hat c< \frac{C(T,L)}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)}$. The constant $C(T,L)$ comes from \eqref{ineqqnorm} and we assume that
 \begin{equation}\label{constr y0}
 \norm{y_0}_{L^2(\Omega)}< \frac{C(T,L)}{T^{1/4}}.
 \end{equation}
@@ -279,7 +279,7 @@ Moreover we introduce the non-linear control-to-state operator
  \label{controltostate}
 \end{equation}
 where $y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for a given $y_0\in L^2(\Omega)$ which satisfies
-\eqref{constr y0} in the case $\gamma =0$. The control-to-observation operator is denoted by
+\eqref{constr y0} in the case $\gamma =0$. According to Remark \ref{ineqqnorm} the mapping $S$ is well-defined. In \cite{ClasonKaltenbacher13} the authors used a similar strategy for the definition of the control-to-state mapping. The control-to-observation operator is denoted by
 \[
 S_{obs}\colon U_{ad}\rightarrow L^2(I\times \Omega_{o})\times L^2(\Omega_{o}),\quad u\mapsto(\chi_{\Omega_{o}}y,\chi_{\Omega_{o}}y(T)).
 \]
