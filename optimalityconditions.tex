@@ -5,7 +5,7 @@
 \label{secoptconditions}
 Next we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}.
 \begin{proposition}
-  The control to state operator $S$ is continuously Fr\'echet-differentiable. Its derivative
+  The control to state operator $S\colon U_{ad}\rightarrow \mathcal B$ is continuously Fr\'echet-differentiable. Its derivative
   \[
   S'(u)\colon \M\rightarrow \mathcal B,~\delta u\mapsto
   \delta y
@@ -132,14 +132,14 @@ Next we derive first order optimality conditions using tools from convex analysi
   \eean
 \end{proposition}
 \begin{proof}
-  We define 
+  We define
   \[
-  F(u_1,u_2)=\frac 1 2\left(\|u_1-z_1\|_{L^2(I\times \Omega_{obs})}^2+\|u_2-z_2\|_{L^2(\Omega_{obs})}^2\right)
+  F(u_1,u_2)=\frac 1 2\left(\|u_1-z_1\|_{L^2(I\times \Omega_{o})}^2+\|u_2-z_2\|_{L^2(\Omega_{o})}^2\right)
   \]
   for $(u_1,u_2)\in L^2(I\times \Omega_o)\times L^2(I\times \Omega_o)$ and \[\psi(u)=\|u\|_{\M}+\mathcal I_{U_{ad}}(u).\]
   Since $F$ and $\SO$ are Fr\'echet differentiable the directional derivative of $F\circ \SO$ at $\bar u$ has the form
   \[
-  D(F\circ \SO,\bar u,\delta =\langle S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z),\delta u\rangle_{\C,\M},\quad \delta u\in\C. 
+  D(F\circ \SO,\bar u,\delta =\langle S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z),\delta u\rangle_{\C,\M},\quad \delta u\in\C.
   \]
   Then we set $\chi_{\Omega_c}\bar p:=S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z)$. An element $\bar u\in U_{ad}$ is optimal if and only if
   \[
@@ -147,7 +147,7 @@ Next we derive first order optimality conditions using tools from convex analysi
   \]
   and in  particular
   \[
-  F\circ \SO(\bar u)+\psi(\bar u)\leq G(\bar u + \varepsilon(u-\bar u))+\psi(\bar u+ \varepsilon(u-\bar u))
+  F\circ \SO(\bar u)+\psi(\bar u)\leq F\circ \SO(\bar u + \varepsilon(u-\bar u))+\psi(\bar u+ \varepsilon(u-\bar u))
   \]
   for some $0<\varepsilon$ small enough such that $\bar u + \varepsilon(u-\bar u)\in U_{ad}$ holds. Using the convexity of $F$ we get
   \[
@@ -181,7 +181,7 @@ The functional $\phi^{\star}(p)\colon \C\rightarrow \mathbb R$ has the form
 \[
 \phi^{\star}(p)=\hat c\,(\|p\|_{\C}-\alpha))^+
 \]
-where $\hat c = C/T^{1/4}-\|y_0\|_{L^2(\Omega)}$ and $(\cdot)^+ = \operatorname{max}(0,\cdot)$ is the positive part of a function.
+where $(\cdot)^+ = \operatorname{max}(0,\cdot)$ is the positive part of a function.
 \end{lemma}
 \begin{proof}
 \begin{align*}
