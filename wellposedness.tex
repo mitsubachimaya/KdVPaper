@@ -2,56 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 %\section{Well-posedness of the problem}
 %%%%%%%%%%%%%%%%%%%%%%%
-%\label{secwellposedness}
-\section{Control space}
-In this section we introduce the control space $\M$ and its properties. The control set $\Omega_c$ is any relatively closed subset of $\Omega$. Let $u\colon\mathcal B(\Omega_c)\rightarrow L^2(I)$ be a countably additive mapping on the Borel sets $\mathcal B(\Omega_c)$ of $\Omega_c$ with values in $L^2(I)$. For $u$ we denote by $|u|\in \mathcal M^+(\Omega_c)$ (positive regular Borel measure) the total variation measure defined by
-\begin{equation*}
-|u|(B) = \underset{\pi}{\operatorname{sup}}\sum_{E\in\pi}\|u(E)\|_{L^2(I)}
-\end{equation*}
-where $\pi$ is the set of all disjoint partitions of $B\in \mathcal B(\Omega_c)$. The space
-\begin{equation*}
-\M=\{u\colon \mathcal B(\Omega_c)\rightarrow L^2(I)\colon~~u~\text{countably additive},~~|u|(\Omega_c)<\infty\}
-\end{equation*}
-is the space of vector measures with values in $L^2(I)$. Equipped with the norm
-\begin{equation*}
-\|u\|_{\M}=|u|(\Omega_c)
-\end{equation*}
-it is a Banach space. The support of $u$, respectively of its
- total variation measure $|u|$, is defined by
-\begin{equation*}
-\operatorname{supp}u = \operatorname{supp}|u|=\Omega\setminus\left(\bigcup\{B~\text{open in}~\Omega_c|~|u|(B)=0\}\right).
-\end{equation*}
-The vector measure $u$ possesses a Radon-Nikodym derivative, see \cite{Lang1983realanalysis},
-\begin{equation}\label{eq:radon_nikodym}
-u'\in L^{\infty}((\Omega_c,|u|),L^2(I))~\text{with}~\|u'(\cdot)\|_{L^2(I)}\equiv 1
-\end{equation}
-with respect to its total variation measure $|u|$. So $u$ can be represented in the following way
-\begin{equation*}
-\mathrm du=u'~\mathrm d|u|.
-\end{equation*}
-Next we introduce the space $\C$ of vector-valued continuous functions $p\colon\bar \Omega_c\rightarrow L^2(I)$ with $p|_{\partial\Omega\cap \bar \Omega_c}=0$. Equipped with the norm
-\begin{equation*}
-\|p\|_{\C}=\max_{x\in\Omega_c}\|p(x,\cdot)\|_{L^2(I)}
-\end{equation*}
-it is a separable Banach space. The dual space of $\C$ can be characterized by $\M$, i.e.,
-\[
-\C^*\cong\M.
-\]
-A proof is given in \cite{Hensgen:1996}. The duality pairing between $\C$ and $\M$ takes the form
-\[
-\langle u,p\rangle_{\M,\C}=\int_\Omega(u',p)_{L^2(I)}~\mathrm d|u|.
-\]
-Next we introduce the space $L^2(I,\mathcal M(\Omega_c))$. It is the space of weakly-$*$ measurable functions $u\colon I\rightarrow \mathcal M(\Omega_c)$  which satisfy
-\[
-\int_0^T\|u(t)\|_{\mathcal M(\Omega_c)}^2~\mathrm dt<\infty
-\]
-where $\mathcal M(\Omega_c)$ is the space Borel measures on $\Omega_c$ and $\|\cdot\|_{\mathcal M(\Omega_c)}$ is the total variation norm in $\mathcal M(\Omega_c)$. Furthermore it can be identified with the dual space of $\mathcal C(\Omega_c)$ which is the space of continuous functions on $\bar \Omega_c$ with $p|_{\partial\Omega\cap \bar \Omega_c}=0$.  There holds
-\begin{equation}\label{embeddingM(L2)L2(M)}
-\M\hookrightarrow L^2(I,\mathcal M(\Omega_c)).
-\end{equation}
-Since $d=1$ we have the embedding $H^1_0(\Omega)\hookrightarrow \mathcal C(\Omega_c)$. Thus there holds $L^2(I,H^1_0(\Omega))\hookrightarrow L^2(I,C(\Omega_c))$ and by duality 
-$L^2(I,\mathcal M(\Omega_c))\hookrightarrow L^2(I,H^{-1}(\Omega))$.
-\section{Well posedness of the state equation}
+\section{Well posedness of the state equation}\label{secwellposedness}
 In this section we discuss the well posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. For the proof of the well-posedness we need the following results for the linear KdV-equation.
 \subsection{Well posedness of the linear Korteweg-de Vries}
 First we consider
@@ -126,7 +77,7 @@ For $(f,y_0)\in \Hm1\times L^2(\Omega)$ a function $y\in C(\bar I,L^2(\Omega))$ 
 for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p = p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
 \end{definition}
 
-%The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f. \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$. 
+%The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f. \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$.
 In order to show existence of a weak solution we utilize a strategy based on the approximation of the data .
 \begin{proposition}\label{propnonhomo}
 Let $(f,y_0)\in \Hm1\times L^2(\Omega)$. Then, there exists a unique weak
@@ -138,7 +89,7 @@ $C(T,L) > 0$ such that the following estimate holds
 \ee
 \end{proposition}
 \begin{proof}
-We choose sequences 
+We choose sequences
 \begin{itemize}
   \item $\{f_n\}_{n\in\mathbb{N}}\subset\mathcal C^1(\bar I,L^2(\Omega))$ with $f_n\rightarrow f$ in $\Hm1$
   \item $\{y_{0,n}\}_{n\in\mathbb{N}}\subset\mathcal D(A)$ with $y_{0,n}\rightarrow y_0$ in $L^2(\Omega)$
@@ -165,7 +116,7 @@ Proposition~\ref{propnonhomo}  allows us to define the linear solution operator
 \be
 \mathcal{L}:\Hm1\times L^2(\Omega)\rightarrow \mathcal{B},(f,y_0) \mapsto y,
 \ee
-where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}. 
+where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}.
 \end{remark}
 \subsection{Well-posedness of the \KdVB equation}
 We consider in this section the nonlinear \KdVB equation \eqref{kdvcontrol1} - \eqref{kdvcontrol3} with sources from $f\in \Hm1$. In particular we show existence for short time and small data for $\gamma =0$ and time-global existence for $\gamma>0$.  First of all we introduce a suitable solution concept for the \KdVB equation
@@ -265,37 +216,6 @@ The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the soluti
 %Since we will only be able to prove global well posedness in the case $\gamma > 0$, we will rather adopt this point of view as far as optimization is concerned for the pure \KdV equation.
 \label{rmkUad}
 \end{remark}
-%We now introduce some notations before stating a weak formulation for the \KdVB equation. First, the space of test functions is defined as
-%\be
-%\mathcal{T} = \{ \varphi \in H^1(I,H^2\cap H^1_0(\Omega)) \mbox{ s.t. } \varphi_x(.,x=0) = 0\}.
-%\label{testspace}
-%\ee
-%Then, $(\cdot,\cdot)_{I\times\Omega}$ denotes the $L^2(I\times \Omega)$ inner product while $<\cdot,\cdot>$ denotes the duality product between $L^2(I,H^1_0(\Omega))$ and $L^2(I,H^{-1}(\Omega))$.
-%\begin{cor}
-% The unique solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} satisfies the variational formulation
-% \be
-% -(y,\partial_t \varphi)_I + (\partial_x y, \varphi)_I + (\partial_x y, \partial_{xx}\varphi)_I + \gamma (\partial_x y, \partial_x \varphi)_I  + <y\partial_x y,\varphi> = <q,\varphi>, \quad \forall \varphi \in \mathcal{T}
-% \label{varform}
-% \ee
-%\end{cor}
-%\begin{proof}
-%Proposition~\ref{localposedness} guarantees the existence of a unique solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} (locally in time) in $\mathcal{B}$ for any $y_0 \in L^2(\Omega)$ or $q \in L^2(I,H^{-1}(\Omega))$. Moreover, this solution is bounded in $\mathcal{B}$. Let us introduce by density a sequence $C_0^{\infty}(\Omega) \ni y_0^n \xrightarrow[n \to +\infty]{} y_0$ and $C_0^{\infty}(I,,\Omega) \ni q_n \xrightarrow[n \to +\infty]{} q$. For a given pair $(y_0^n,q_n)$ we call $y_n$ the corresponding smooth solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}. Those latter solve also, after integrations by parts of the original system, the variational formulation suggested in \eqref{varform}. For two indices $(n,m)$, the discrepancy $u = y_n - y_m$ satisfies the system
-%\begin{subequations}
-%\begin{numcases}{}
-%\partial_t u +\partial_x u + \partial_{xxx} u + \partial_x \left(u\left(\frac{y_m + y_n}{2}\right)\right) -\gamma \partial_{xx} u=  q_n - q_m \mbox{ in } \Omega,\label{tangent1}\\
-%u(.,0) = u(.,L) = \partial_x u (.,L) = 0,\label{tangent2}\\
-%u(0,.) = y_0^n - y_0^m \mbox{ on } \Omega\label{tangent3}.
-%\end{numcases}
-%\end{subequations}
-%Equation~\eqref{tangent1} is actually the tangent equation for \eqref{kdvcontrol1} at the point $\frac{y_m + y_n}{2}$. Existence of a unique solution as well as an estimate for this solution in $\mathcal{B}$ are required here, but also further in the optimization process. Therefore those proofs are provided in Appendix~\ref{appendixtangent} and are quite similar to those for the nonlinear state equation (i.e. based on a Banach fixed point theorem for the existence and the multiplier method for the estimates). From them, we deduce that the unique solution $u$ of \eqref{tangent1} - \eqref{tangent3} satisfies the inequality (recall $u = y_n - y_m$)
-%\be
-%\norm{u}_{C(I,L^2(\Omega))} + \norm{u}_{L^2(I,H^1_0(\Omega))} \leq C(T,L,\frac{\norm{y_n}_{\mathcal{B}} + \norm{y_m}_{\mathcal{B}}}{2})\left( \norm{y_0^n - y_0^m}  + \norm{q_n - q_n}_{L^2(I,H^{-1}(\Omega))}\right)
-%\label{estimatetangentcauchy}
-%\ee
-%Since $\left( y_0^n\right)_{n\in \mathbb{N}}$ and $\left( q_n\right)_{n\in \mathbb{N}}$ are converging sequences, we deduce from \eqref{estimatetangentcauchy} that $\left( y_n \right)_{n\in \mathbb{N}}$ is a Cauchy sequence, from which we can extract a subsequence converging strongly towards $y \in \mathcal{B}$. This strong convergence property allows us to pass to the limit in \eqref{varform}, especially in the nonlinear term. Thus $y$ satisfies the weak formulation \eqref{varform}.
-%
-%\end{proof}
-
 \subsubsection{Global well-posedness of the nonlinear \KdVB equation}
 Proposition~\ref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem on $[0,T]$. We will show that such estimates exist in the case $\gamma > 0$.
 \begin{theorem}
@@ -342,7 +262,7 @@ Adding \eqref{C0nonlin} and \eqref{H10nonlin2} gives the global estimate \eqref{
 \begin{remark}
 The constant in the estimate \eqref{globalestimate} explodes for $\gamma \rightarrow 0$.
 \end{remark}
-\section{Well-posedness of the optimization problem. Existence of an optimum}
+\section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
 We start by defining the admissible set of controls
 $$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M} \leq \frac{C(T,L)}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)}\right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
