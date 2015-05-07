@@ -21,7 +21,8 @@ Next we discuss the differentiability of the control-to-state operator $S$ defin
   \end{subequations}
   \label{propfrechet}
 \end{proposition}
-\begin{proof}[Proof of Proposition~\ref{propfrechet}]
+%[Proof of Proposition~\ref{propfrechet}]
+\begin{proof}
 First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),~y\mapsto y\partial_x y$ is Fr\'echet differentiable since there holds
 \[
 \|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2
@@ -59,7 +60,8 @@ $C(T,L,u,\tilde u)>0$ such that
 \[\|S(u)-S(\tilde u)\|_{\mathcal B}\leq C(T,L,u,\tilde u)\,\|u-\tilde u\|_{\M}\quad \forall \tilde u\in V.\]
  \label{lipschitzcontinuity}
 \end{lemma}
-\begin{proof}[Proof of Lemma~\ref{lipschitzcontinuity}]
+%[Proof of Lemma~\ref{lipschitzcontinuity}]
+\begin{proof}
 We define $y = S(u) \in \mathcal{B}$ and $\tilde{y} = S(\tilde u) \in \mathcal{B}$ for $\tilde u\in V$. Therefore, the difference $w = \tilde{y} - y$ satisfies the equation
 \bean
 &\partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \frac 1 2\partial_x ((y+\tilde y) w)= \tilde u - u \mbox{ in } I\times\Omega,\\
@@ -99,7 +101,8 @@ where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we i
   with $y=S(u)$ for $(\phi,p_T)\in L^2(I\times\Omega_o)\times L^2(\Omega_o)$.
   \label{adjointKdV}
 \end{proposition}
-\begin{proof}[Proof of Proposition~\ref{adjointKdV}]
+%[Proof of Proposition~\ref{adjointKdV}]
+\begin{proof}
 First of all we mention that $y\partial_x p\in L^1(I,L^2(\Omega))$ holds for $y\in \mathcal B$ and $p\in \mathcal B$, cf., Lemma \ref{lemadjoint}. We use the weak formulation of the tangent equation and get
 \begin{multline}
 (\SO'(u)\delta u,\phi)_{L^2(I\times \Omega_o)}+((\SO'(u)\delta u)(T),p_T)_{L^2(\Omega_o)}\\
