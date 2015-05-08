@@ -136,10 +136,10 @@ Next we derive first order optimality conditions using tools from convex analysi
   \[
   F(u_1,u_2)=\frac 1 2\left(\|u_1-z_1\|_{L^2(I\times \Omega_{o})}^2+\|u_2-z_2\|_{L^2(\Omega_{o})}^2\right)
   \]
-  for $(u_1,u_2)\in L^2(I\times \Omega_o)\times L^2(I\times \Omega_o)$ and \[\psi(u)=\|u\|_{\M}+\mathcal I_{U_{ad}}(u).\]
+  for $(u_1,u_2)\in L^2(I\times \Omega_o)\times L^2(\Omega_o)$ and $\psi(u)=\|u\|_{\M}.$
   Since $F$ and $\SO$ are Fr\'echet differentiable the directional derivative of $F\circ \SO$ at $\bar u$ has the form
   \[
-  D(F\circ \SO,\bar u,\delta =\langle S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z),\delta u\rangle_{\C,\M},\quad \delta u\in\C.
+  D(F\circ \SO,\bar u,\delta u) =\langle S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z),\delta u\rangle_{\C,\M},\quad \delta u\in\C.
   \]
   Then we set $\chi_{\Omega_c}\bar p:=S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z)$. An element $\bar u\in U_{ad}$ is optimal if and only if
   \[
