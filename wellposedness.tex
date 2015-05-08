@@ -2,9 +2,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 %\section{Well-posedness of the problem}
 %%%%%%%%%%%%%%%%%%%%%%%
-\section{Well posedness of the state equation}\label{secwellposedness}
-In this section we discuss the well posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. For the proof of the well-posedness we need the following results for the linear KdV-equation.
-\subsection{Well posedness of the linear Korteweg-de Vries}
+\section{Well-posedness of the state equation}\label{secwellposedness}
+In this section we discuss the well-posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. For the proof of the well-posedness we need the following results for the linear KdVB-equation.
+\subsection{Well-posedness of the linear Korteweg-de Vries Burgers}
 First we consider
 \begin{subequations}\label{kdvlinnonhom}
 \begin{numcases}{}
@@ -78,7 +78,7 @@ for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p = p(\phi
 \end{definition}
 
 %The existence proof can be based on the transposition method using the linear operator of the dual equation defined in Proposition \ref{prop:ex smooth}, c.f. \cite[Part 2, section 2.2]{bensoussan07}. This would produce a unique solution $y\in L^{\infty}(I,L^2(\Omega))$ with $y(T)\in L^2(\Omega)$.
-In order to show existence of a weak solution we utilize a strategy based on the approximation of the data .
+In order to show existence of a weak solution we utilize a strategy based on the approximation of the data.
 \begin{proposition}\label{propnonhomo}
 Let $(f,y_0)\in \Hm1\times L^2(\Omega)$. Then, there exists a unique weak
 solution $y\in \mathcal B\cap H^1(I,\mathcal V^*)$  of \eqref{kdvlinnonhom1}-\eqref{kdvlinnonhom3}. Furthermore there exists a constant
@@ -94,7 +94,7 @@ We choose sequences
   \item $\{f_n\}_{n\in\mathbb{N}}\subset\mathcal C^1(\bar I,L^2(\Omega))$ with $f_n\rightarrow f$ in $\Hm1$
   \item $\{y_{0,n}\}_{n\in\mathbb{N}}\subset\mathcal D(A)$ with $y_{0,n}\rightarrow y_0$ in $L^2(\Omega)$
 \end{itemize}
-which exists due to density. According to \cite[Part 2, Proposition 3.3]{bensoussan07} it exits a unique classical solution
+which exist due to density. According to \cite[Part 2, Proposition 3.3]{bensoussan07} it exists a unique classical solution
 \[y_n\in \mathcal C(\bar I,\mathcal D(A))\cap \mathcal C^1(\bar I,L^2(\Omega))\]
 of \eqref{kdvlinnonhom} for data $f_n$ and $y_{0,n}$ which satisfies the weak form \eqref{weakformlinearkdv}. Furthermore it can be shown that $y_n$ satisfy the following estimate
 \be
@@ -124,13 +124,13 @@ We consider in this section the nonlinear \KdVB equation \eqref{kdvcontrol1} - \
 \begin{numcases}{}
 \partial_t y +\partial_x y + \partial_{xxx} y + y\partial_x y -\gamma \partial_{xx} y=  f \mbox{ in } I\times\Omega,\label{kdv1}\\
 y(.,0) = y(.,L) = \partial_x y (.,L) = 0,\label{kdv2}\mbox{ in } I,\\
-y(0,.) = 0 \mbox{ in } \Omega\label{kdv3}
+y(0,.) = 0 \mbox{ in } \Omega\label{kdv3},
 \end{numcases}
 \end{subequations}
 for sources from $\Hm1$.
 \begin{definition}\label{defnlkdv}
 For $(y_0,f)\in L^2(\Omega)\times \Hm1$ a function $y\in \mathcal B$ is called a weak solution of \eqref{kdv1} - \eqref{kdv3} if it satisfies the following fixed point equation
-\[y=\mathcal L(f-y\partial_x y ,y_0)\]
+\[y=\mathcal L(f-y\partial_x y ,y_0),\]
 or in other words
 \begin{equation}\label{weakformkdv}
 \int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-y\partial_x y ,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
@@ -215,7 +215,7 @@ The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the soluti
 \norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq \frac{C(T,L)}{T^{1/4}}.
 \label{ineqqnorm}
 \ee
-%Since we will only be able to prove global well posedness in the case $\gamma > 0$, we will rather adopt this point of view as far as optimization is concerned for the pure \KdV equation.
+%Since we will only be able to prove global well-posedness in the case $\gamma > 0$, we will rather adopt this point of view as far as optimization is concerned for the pure \KdV equation.
 \label{rmkUad}
 \end{remark}
 \subsubsection{Global well-posedness of the nonlinear \KdVB equation}
@@ -229,7 +229,7 @@ Let $\gamma>0$. For any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ let $y\in\mathcal 
  for some $c>0$ independent of $y$ and the data.
 \end{theorem}
 \begin{proof}
-Considering first that $y$ is a classical solution $y\in \mathcal C(\bar I,\mathcal D(A))\cap \mathcal\, C^1(\bar I,L^2(\Omega))$ for smooth data. Then equation \eqref{kdv1} holds in $L^2(\Omega)$ and we can multiply it with $y$ which yields
+We consider first that $y$ is a classical solution $y\in \mathcal C(\bar I,\mathcal D(A))\cap \mathcal\, C^1(\bar I,L^2(\Omega))$ for smooth data. Then equation \eqref{kdv1} holds in $L^2(\Omega)$ and we can multiply it with $y$ which yields
 \[
 \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}dx}= \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
 \]
