@@ -362,42 +362,45 @@ in a subcritical configuration ($f = -0.5$). The time horizon is $T = 5$. The sp
 \label{waveobservation}
 \end{figure}
 
-At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|p\|_{L^2(I)} = \alpha$. One can see on Fig.~\ref{support} that the final control is a point source, located close to $x=1.5$. The time profile of the control is depicted on Fig.~\ref{recoveredcontrol} and it follows the original one quite well. We point out that the oscillations are caused by the noise. The noisy observation enters the adjoint equation as initial condition and the time profile of $\bar u$ is related to $t\mapsto\bar p(t,1.5)$.
+At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|p\|_{L^2(I)} = \alpha$. One can see on Fig.~\ref{support}(left) that the final control is a point source, located close to $x=1.5$. The time profile of the control is depicted on Fig.~\ref{support}(right) and it follows the original one quite well. We point out that the oscillations are caused by the noise. The noisy observation enters the adjoint equation as initial condition and the time profile of $\bar u$ is related to $t\mapsto\bar p(t,1.5)$. The results  of the optimization process are shown on Fig.\ref{recoveredstate}, for $\alpha = 0.1$.
 \begin{figure}[!h]
-\includegraphics[width = 0.75\textwidth]{images/normp.pdf}
-\caption{Spatial support of the control, determined by $\norm{p_{\rg}}_{L^2(0,T)} = \alpha$. Here $\alpha = 0.1$ and $\rg = 10^{-6}$}
+\includegraphics[width = 0.5\textwidth]{images/normp.pdf}
+ \includegraphics[width = 0.5\textwidth]{images/ex1recoveredcontrol2.pdf}
+\caption{Left: spatial support of the control, determined by $\norm{p_{\rg}}_{L^2(0,T)} = \alpha$. Here $\alpha = 0.1$ and $\rg = 10^{-6}$. Right: recovered control for $\rg = 10^{-6}$}
 \label{support}
 \end{figure}
+% \begin{figure}[!h]
+%  \includegraphics[width = 0.45\textwidth]{images/ex1recoveredcontrol2.pdf}
+%  \caption{Recovered control for $\rg = 10^{-6}$}
+%  \label{recoveredcontrol}
+% \end{figure}
 \begin{figure}[!h]
- \includegraphics[width = 0.75\textwidth]{images/ex1recoveredcontrol2.pdf}
- \caption{Recovered control for $\rg = 10^{-6}$}
- \label{recoveredcontrol}
-\end{figure}
-The results  of the optimization process are shown on Fig.\ref{recoveredstate}, for $\alpha = 0.1$.
-\begin{figure}[!h]
- \includegraphics[width = 0.45\textwidth]{images/ex1recoveredstate3d.pdf}
-  \includegraphics[width = 0.45\textwidth]{images/ex1recoveredstate.pdf}
+ \includegraphics[width = 0.5\textwidth]{images/ex1recoveredstate3d.pdf}
+  \includegraphics[width = 0.5\textwidth]{images/ex1recoveredstate.pdf}
  \caption{Recovered state $y$ and final observation $y(T)$ for $\rg = 10^{-6}$}
  \label{recoveredstate}
 \end{figure}
 
 \paragraph{\underline{Control example}.}
-The second example is a control example. We divide the domain $\Omega = [-L,L]$ into two subdomains. The domain $\Omega_c = [-L,0]$ is the control domain, while $\Omega_{obs} = [0,L]$ is the observation domain. See Fig.~\ref{controlsetup} for the description of the setup. The flow enters the domain from the right and we want to create the wave profile shown on Fig.\ref{objectivewave} on $\Omega_{obs}$, acting only on $\Omega_c$.
+The second example is a control example. We divide the domain $\Omega = [-L,L]$ into two subdomains. The domain $\Omega_c = [-L,0]$ is the control domain, while $\Omega_{obs} = [0,L]$ is the observation domain. See Fig.~\ref{controlsetup}(left) for the description of the setup. The flow enters the domain from the right and we want to create the wave profile shown on Fig.\ref{controlsetup}(right) on $\Omega_{obs}$, acting only on $\Omega_c$.
 \begin{figure}[!h]
-\includegraphics[width = 0.75\textwidth]{images/control_setup.png}
-\caption{Setup of the control problem.}
+\includegraphics[width = 0.6\textwidth]{images/control_setup.png}
+\includegraphics[width = 0.4\textwidth]{images/ex2yd.pdf}
+\caption{Left: Setup of the control problem. Right: Objective wave at final time T.}
 \label{controlsetup}
 \end{figure}
-\begin{figure}[!h]
-\includegraphics[width = 0.75\textwidth]{images/ex2yd.pdf}
-\caption{Objective wave at final time T.}
-\label{objectivewave}
-\end{figure}
+% \begin{figure}[!h]
+% \includegraphics[width = 0.75\textwidth]{images/ex2yd.pdf}
+% \caption{Objective wave at final time T.}
+% \label{objectivewave}
+% \end{figure}
 The $L^2$ norm of the adjoint state is depicted on Fig.~\ref{supportIP}. As in the previous example, we infer from that the support of the control. At the end of the continuation strategy, it boils down to two point sources, the points where $\|p\|_{L^2(I)} = \alpha$. One can see clearly on Fig.~\ref{recoveredcontrol2} that it has smooth variations in time, as induced by the $L^2$ norm in $\|\cdot\|_{\M}$. The optimized state is shown on Fig.~\ref{ex2fullgammadm5} for $\rg = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that which have no contribution to the cost functional.
 \begin{figure}[!h]
-\includegraphics[width = 0.75\textwidth]{images/norm2p.pdf}
+\begin{center}
+\includegraphics[width = 0.5\textwidth]{images/norm2p.pdf}
 \caption{Spatial support of the control, determined by $\norm{p_{\rg}}_{L^2(0,T)} = \alpha$, for $\rg = 10^{-5}$.}
 \label{supportIP}
+\end{center}
 \end{figure}
 
 \begin{figure}[!h]
