@@ -1,4 +1,4 @@
-\section{Well-posedness of the optimal control problem for $\gamma=0$ and $U_{ad}=\M$}
+\section{Well-posedness of the optimal control problem for $\gamma=0$ without norm-constraint}
 \label{wp2}
 %!TEX root = kdv.tex
 This section is based on ideas from \cite{lions1985control}. There the state equation is considered as an equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections. Moreover we add the term $\frac{\eta}{4} \norm{y}_{L^4(I\times \Omega)}^4$ for $\eta >0$ to the cost functional. In the following we will see that the boundedness of the state in the $L^4(I,L^4(\Omega))$-norm makes the state equation a well-defined equality constraint and ensures the time-global existence of $y$ in $\mathcal B$. Thus we consider an optimal control problem of the form
@@ -66,7 +66,9 @@ Next we check that $(\bar y, \bar u)$ is a state-control pair according to Defin
 %\leq\|y_{n_k}-\bar y\|_{L^2(I,\mathcal C_0(\Omega))}\|y_{n_k}+\bar y\|_{\mathcal C(\bar I,L^2(\Omega))}\|\partial_x p\|_{L^2(I\times \Omega)}.
 %\end{multline*}
 Therefore $(\bar y, \bar u)$ is a state-control pair and satisfies the weak formulation \eqref{weakformkdv L4}. The tracking functional (in which we include the $L^4$ part) is weakly lower semi-continuous in $L^4(I\times \Omega)\times L^2(\Omega)$, the control term is weakly-$*$ lower semi-continuous in $\M$. Therefore the state-control pair $(\bar y, \bar u)$ is a minimizer of $J$.
-\end{proof}
+\qquad\end{proof}
+
+In the next section we proceed with the derivation of the optimality conditions for problem \eqref{cost} posed on $U_{ad}$.
 
 %%% Local Variables:
 %%% mode: latex
