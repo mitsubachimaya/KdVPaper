@@ -38,13 +38,13 @@ where $\mathcal L'(\cdot)=\mathcal L(\cdot,0)$. In the Appendix~\ref{appendixtan
 Calling $w = \tilde{y} - y - \delta y\in \mathcal B$ the function $w$ then satisfies
 \bean
   &\partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \tilde{y}\partial_x \tilde{y}  - y\partial_x y - \partial_x(y\delta y)=  0 \mbox{ in } I\times\Omega,\nonumber\\
-  &w(.,0) = w(.,L) = \partial_x w (.,L) = 0 \mbox{ in } I,\nonumber\\
+  &w(\cdot,0) = w(\cdot,L) = \partial_x w (\cdot,L) = 0 \mbox{ in } I,\nonumber\\
   &w(0,\cdot) = 0 \mbox{ in } \Omega\nonumber.
 \eean
 in the weak sense of \eqref{weakformkdv}. After rearranging the terms we end up with
 \bean
 &\partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \partial_x(yw) =  -(\tilde{y} - y)\partial_x(\tilde{y} - y) \mbox{ in } I\times\Omega,\\
-&w(.,0) = w(.,L) = \partial_x w (.,L) = 0 \mbox{ in } I,\\
+&w(\cdot,0) = w(\cdot,L) = \partial_x w (\cdot,L) = 0 \mbox{ in } I,\\
 &w(0,\cdot) = 0\mbox{ in } \Omega.
 \eean
 According to Appendix~\ref{appendixtangent} and Lemma \ref{lemyyx2} it holds
@@ -65,7 +65,7 @@ $C(T,L,u,\tilde u)>0$ such that
 We define $y = S(u) \in \mathcal{B}$ and $\tilde{y} = S(\tilde u) \in \mathcal{B}$ for $\tilde u\in V$. Therefore, the difference $w = \tilde{y} - y$ satisfies the equation
 \bean
 &\partial_t w +\partial_x w + \partial_{xxx} w - \gamma \partial_{xx} w  + \frac 1 2\partial_x ((y+\tilde y) w)= \tilde u - u \mbox{ in } I\times\Omega,\\
-&w(.,0) = w(.,L) = \partial_x w (.,L) = 0 \mbox{ in } I,\\
+&w\cdot,0) = w(\cdot,L) = \partial_x w(\cdot,L) = 0 \mbox{ in } I,\\
 &w(0,x) = 0 \mbox{ in } \Omega,
 \eean
 in the weak sense of \eqref{weakformlinearkdv}. According to Appendix \ref{appendixtangent} $w \in \mathcal{B}$ satisfies the a priori estimates
@@ -179,14 +179,14 @@ Next we characterize $\phi^\star.$
 \begin{lemma}\label{lem:phistar}
 The functional $\phi^{\star}(p)\colon \C\rightarrow \mathbb R$ has the form
 \[
-\phi^{\star}(p)=\hat c\,(\|p\|_{\C}-\alpha))^+
+\phi^{\star}(p)=\hat c\,(\|p\|_{\C}-\alpha)^+
 \]
 where $(\cdot)^+ = \operatorname{max}(0,\cdot)$ is the positive part of a function.
 \end{lemma}
 \begin{proof}
 \begin{align*}
 \phi^{\star}(p)&=\sup_{u\in U_{ad}}[\langle u,p\rangle_{\C,\M}-\alpha \|u\|_{\M}]\\
-&=\sup_{\|u\|_{\M}=1,\,\lambda\in [0,\hat c]}\lambda[\langle u,p\rangle_{\C,\M}-\alpha].
+&=\sup_{\lambda\in [0,\hat c]}\sup_{\|u\|_{\M}=1,}\lambda[\langle u,p\rangle_{\C,\M}-\alpha].
 \end{align*}
 This implies the assertion since \[\|p\|_{\C}=\sup_{\|u\|_{\M}=1}\langle u,p\rangle_{\C,\M}.\]
 \qquad\end{proof}
@@ -200,7 +200,7 @@ Let $\bar u\in U_{ad}$ be an optimal control of \eqref{cost}. Moreover let $|\ba
 \end{align}
 with $\bar\lambda =(\|\chi_{\Omega_c}\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \be
-\bar u'(x)=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha +\bar\lambda}\quad\text{in}~L^1((\Omega,|\bar u|),L^2(I)).
+\bar u'(x)=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha +\bar\lambda}\quad\text{in}~L^1((\mathring\Omega_c,|\bar u|),L^2(I)).
 \label{controlintime}
 \ee
 \label{propsubgcondition}
@@ -215,12 +215,12 @@ Using $\bar u\in U_{ad}$, $\|\chi_{\Omega_c}\bar p\|_{\C}-\bar\lambda\leq\alpha$
 \end{multline}
 Thus the last chain of inequalities holds with equality and therefore we have
 \[
-\int_{\Omega}(\bar u',\chi_{\Omega_c}\bar p)_{L^2(I)}-\|\bar u'\|_{L^2(I)}\|\chi_{\Omega_c}\bar p\|_{L^2(I)}~\mathrm d|\bar u|=0
+\int_{\Omega_c}(\bar u',\chi_{\Omega_c}\bar p)_{L^2(I)}-\|\bar u'\|_{L^2(I)}\|\chi_{\Omega_c}\bar p\|_{L^2(I)}~\mathrm d|\bar u|=0
 \]
 which implies \[\bar u'=-\frac 1{\|\chi_{\Omega_c}\bar p\|_{L^2(I)}}\,\chi_{\Omega_c}\bar p\quad\text{in}~ L^1((\Omega_c,|\bar u|),L^2(I)).\]
 Moreover we have
 \[
-\int_\Omega\|\chi_{\Omega_c}\bar p\|_{L^2(I)}-\bar\lambda-\alpha~\mathrm d|\bar u|=0
+\int_{\Omega_c}\|\chi_{\Omega_c}\bar p\|_{L^2(I)}-\bar\lambda-\alpha~\mathrm d|\bar u|=0
 \]
 which then implies \eqref{controlsupp} and \eqref{controlintime}. Equality in \eqref{estoc} also implies
 \[
