@@ -68,7 +68,7 @@ We define $y = S(u) \in \mathcal{B}$ and $\tilde{y} = S(\tilde u) \in \mathcal{B
 &w\cdot,0) = w(\cdot,L) = \partial_x w(\cdot,L) = 0 \mbox{ in } I,\\
 &w(0,x) = 0 \mbox{ in } \Omega,
 \eean
-in the weak sense of \eqref{weakformlinearkdv}. According to Appendix \ref{appendixtangent} $w \in \mathcal{B}$ satisfies the a priori estimates
+in the weak sense of \eqref{weakformkdv}. According to Appendix \ref{appendixtangent} $w \in \mathcal{B}$ satisfies the a priori estimates
 \[
 \norm{w}_{\mathcal{B}} \leq C(T,L,u,\tilde u)\norm{u-\tilde u}_{\M}.
 \]
@@ -77,7 +77,7 @@ Thus we can conclude that the solution operator $S$ is locally Lipschitz continu
 
 Therefore the control-to-observation operator $S_{obs}$ is also Fr\'echet differentiable and its derivative is given by
 \[S_{obs}'(u)\colon \delta u\mapsto (\chi_{\Omega_o}\delta y,\chi_{\Omega_o}\delta y(T))\]
-where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we introduce we adjoint control to observation operator $S'^\star$.
+where $\delta y\in \mathcal B$ is the weak solution of \eqref{tan eq}. Next we introduce the adjoint control to observation operator $S'^\star$.
 \begin{proposition}
   Let $u\in U_{ad}$. There exists a bounded linear operator
   \[
@@ -121,7 +121,7 @@ Next we derive first order optimality conditions using tools from convex analysi
 \begin{proposition}
   Let $(\bar y,\bar u)\in \mathcal B\times U_{ad}$ be a solution of \eqref{cost}. Then $\bar u$ satisfies the following variational variational inequality
   \be
-  \langle -\chi_{\Omega_c}\bar p,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}\leq\|u\|_{\M}\quad\forall u\in U_{ad}.
+  \langle -\chi_{\Omega_c}\bar p,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}\leq\|u\|_{\M}\quad\forall u\in U_{ad},
   \label{subgradientcond}
   \ee
   where $\bar p$  is the solution of the adjoint state equation
@@ -134,9 +134,9 @@ Next we derive first order optimality conditions using tools from convex analysi
 \begin{proof}
   We define
   \[
-  F(u_1,u_2)=\frac 1 2\left(\|u_1-z_1\|_{L^2(I\times \Omega_{o})}^2+\|u_2-z_2\|_{L^2(\Omega_{o})}^2\right)
+  F(u_1,u_2)=\frac 1 2\left(\|y_1-z_1\|_{L^2(I\times \Omega_{o})}^2+\|y_2-z_2\|_{L^2(\Omega_{o})}^2\right)
   \]
-  for $(u_1,u_2)\in L^2(I\times \Omega_o)\times L^2(\Omega_o)$ and $\psi(u)=\|u\|_{\M}.$
+  for $(y_1,y_2)\in L^2(I\times \Omega_o)\times L^2(\Omega_o)$ and $\psi(u)=\|u\|_{\M}.$
   Since $F$ and $\SO$ are Fr\'echet differentiable the directional derivative of $F\circ \SO$ at $\bar u$ has the form
   \[
   D(F\circ \SO,\bar u,\delta u) =\langle S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z),\delta u\rangle_{\C,\M},\quad \delta u\in\C.
@@ -149,7 +149,7 @@ Next we derive first order optimality conditions using tools from convex analysi
   \[
   F\circ \SO(\bar u)+\psi(\bar u)\leq F\circ \SO(\bar u + \varepsilon(u-\bar u))+\psi(\bar u+ \varepsilon(u-\bar u))
   \]
-  for some $0<\varepsilon$ small enough such that $\bar u + \varepsilon(u-\bar u)\in U_{ad}$ holds. Using the convexity of $F$ we get
+  for some $0<\varepsilon$ small enough such that $\bar u + \varepsilon(u-\bar u)\in U_{ad}$ holds. Using the convexity of $\psi$ we get
   \[
     \frac{F\circ \SO(\bar u)-F\circ \SO(\bar u + \varepsilon(u-\bar u))}{\varepsilon}+ \psi(\bar u)\leq \psi(u)
   \]
@@ -195,8 +195,8 @@ Using Proposition \ref{prop:equivoc} and Lemma \ref{lem:phistar} we can derive t
 \begin{proposition}
 Let $\bar u\in U_{ad}$ be an optimal control of \eqref{cost}. Moreover let $|\bar u|\in \mathcal M(\Omega)$ be its total-variation measure and $\bar u'$ its the Radon-Nikodym-derivative. Furthermore let $\bar p$ be the corresponding optimal adjoint state. Then there holds
 \begin{align}
-0&=\left(\|\bar u\|_{\M}-\hat c\right)\bar\lambda\label{scalarlagrange}\\
-\operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\chi_{\Omega_c}\bar p\|_{L^2(I)}=\alpha+\bar\lambda\}\label{controlsupp}.
+0&=\left(\|\bar u\|_{\M}-\hat c\right)\bar\lambda,\label{scalarlagrange}\\
+\operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\chi_{\Omega_c}\bar p\|_{L^2(I)}=\alpha+\bar\lambda\}\label{controlsupp}
 \end{align}
 with $\bar\lambda =(\|\chi_{\Omega_c}\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \be

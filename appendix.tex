@@ -34,11 +34,11 @@
   After integration between $0$ and $0<t<T$ we have
   \begin{multline*}
   \|y(t)\|_{L^2(\Omega)}^2+ \left( 1+2\gamma \right)\int_{0}^{t}{\|y\|_{H^1_0(\Omega)}^2~\mathrm dt}\leq \left(2+L^{2}\right)\int_{0}^{t}{\norm{f}_{H^{-1}(\Omega)}^{2}~\mathrm dt}\\
-  +\|y_{0}\|_{L^2(\Omega)}^2+\int_0^t{\|y\|_{L^2(\Omega)}^2~\mathrm dt}.
+  +\|y_{0}\|_{L^2(\Omega)}^2+2\int_0^t{\|y\|_{L^2(\Omega)}^2~\mathrm dt}.
   \end{multline*}
   Then the standard Gronwall inequality gives us
   \[
-  \|y(t)\|_{L^2(\Omega)}^2  \leq e^t\left(\left(2+L^{2}\right)\norm{f}_{L^{2}(I,H^{-1}(\Omega))}^{2}+\norm{y_{0}}_{L^{2}(\Omega)}\right).
+  \|y(t)\|_{L^2(\Omega)}^2  \leq e^{2t}\left(\left(2+L^{2}\right)\norm{f}_{L^{2}(I,H^{-1}(\Omega))}^{2}+\norm{y_{0}}_{L^{2}(\Omega)}\right).
   \]
   This yields
   \[
@@ -51,7 +51,7 @@
 \label{sec:nonl-state-equat}
 \begin{proof}[Proof of Lemma~\ref{lemyyx2}] The proof is inspired from \cite[Theorem 2.8]{faminskii2010initial}. Let us consider $y \in \B$ and $z \in \B$. There holds $\mathcal B\hookrightarrow L^4(I\times \Omega)$ and therefore we can estimate using $\|y\|_{L^\infty(\Omega)}^2\leq c\|y\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}$
 \begin{multline*}
-\norm{y\partial_x y - z\partial_x z}_{\Hm1}= \frac 1 2\left(\int_0^T{\left(\ \sup_{\norm{\varphi}_{H^1_0(\Omega) = 1}}(y^2 -  z^2,\partial_x\varphi)_{L^2(\Omega)}\right)^2}\mathrm dt\right)^{1/2} \\
+\norm{y\partial_x y - z\partial_x z}_{\Hm1}= \frac 1 2\left(\int_0^T{\left(\ \sup_{\norm{\varphi}_{H^1_0(\Omega)} = 1}(y^2 -  z^2,\partial_x\varphi)_{L^2(\Omega)}\right)^2}\mathrm dt\right)^{1/2} \\
 \leq \frac{1}{2}\norm{z-y}_{L^4(I\times \Omega)}\norm{z+y}_{L^4(I\times \Omega)}\\
 \leq\frac{1}{2} \norm{z-y}_{C(\bar I,L^2(\Omega))}^{1/2}\norm{z-y}_{L^2(I,L^{\infty}(\Omega))}^{1/2}\norm{z+y}_{C(\bar I,L^2(\Omega))}^{1/2}\norm{z+y}_{L^2(I,L^{\infty}(\Omega))}^{1/2}\\
 \leq c\, \norm{z-y}_{C(\bar I,L^2(\Omega))}^{1/2}\norm{z+y}_{C(\bar I,L^2(\Omega))}^{1/2}\\
@@ -91,19 +91,19 @@ We define the linear mapping
 \]
 with $\mathcal B_{\theta}$ defined as in \eqref{btheta} and \eqref{normbtheta} and $\mathcal{L}$ being the linear \KdV operator described in Remark~\ref{rmklinearoperator}. Our goal is to show that under some constraints on $\theta$, $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping, such that the Banach fixed point theorem can be applied. First we estimate $\partial_x(y \delta y)$ in the $L^2((0,\theta),H^{-1}(\Omega))$-norm
 \begin{multline}\label{estimate_variable_coefficient}
-\|\partial_x(y\delta y)\|_{L^2((0,\theta),H^{-1}(\Omega))}=\left(\int_{0}^{\theta}\left(\underset{\|v\|_{H^1_0(\Omega)}=1}{\operatorname{sup}}(y\delta y,\partial_x v)_{L^2(\Omega)}\right)^2~\mathrm dt\right)^{\frac{1}{2}}\\
-\leq\left(\int_{0}^{\theta}\|\delta y\|_{L^2(\Omega)}^2\|y\|_{L^\infty(\Omega)}^2~\mathrm dt\right)^{\frac{1}{2}}\leq c\,\|\delta y\|_{\mathcal C([0,\theta],L^2(\Omega))}\left(\int_{0}^{\theta}\|y\|_{H^1_0(\Omega)}\|y\|_{L^2(\Omega)}~\mathrm dt\right)^{\frac{1}{2}}\\
-\leq c\,\theta\,\|\delta y\|_{\mathcal C([0,\theta],L^2(\Omega))}\left(\int_{0}^{\theta}\|y\|_{H^1_0(\Omega)}^2\|y\|_{L^2(\Omega)}^2~\mathrm dt\right)^{\frac{1}{2}}\\
-\leq c\,\theta\,\|\delta y\|_{\mathcal C([0,\theta],L^2(\Omega))}\|y\|_{\mathcal C([0,\theta],L^2(\Omega))}\|y\|_{L^2((0,\theta),H^1_0(\Omega))}\leq c\,\theta\,\|y\|_{\mathcal B_{\theta}}^2\|\delta y\|_{\mathcal B_{\theta}}
+\|\partial_x(y\delta y)\|_{L^2((0,\theta),H^{-1}(\Omega))}=\left(\int_{0}^{\theta}\left(\underset{\|v\|_{H^1_0(\Omega)}=1}{\operatorname{sup}}(y\delta y,\partial_x v)_{L^2(\Omega)}\right)^2~\mathrm dt\right)^{1/2}\\
+\leq\left(\int_{0}^{\theta}\|\delta y\|_{L^2(\Omega)}^2\|y\|_{L^\infty(\Omega)}^2~\mathrm dt\right)^{1/2}\leq c\,\|y\|_{\mathcal C([0,\theta],L^2(\Omega))}\left(\int_{0}^{\theta}\|\delta y\|_{H^1_0(\Omega)}\|\delta y\|_{L^2(\Omega)}~\mathrm dt\right)^{1/2}\\
+\leq c\,\theta^{1/4}\,\|y\|_{\mathcal C([0,\theta],L^2(\Omega))}\|\delta y\|_{\mathcal C([0,\theta],L^2(\Omega))}^{1/2}\|\delta y\|_{L^2((0,\theta),H^1_0(\Omega))}^{1/2}\\
+\leq c\,\theta^{1/4}\,\|y\|_{\mathcal B_{\theta}}\|\delta y\|_{\mathcal B_{\theta}}
 \end{multline}
 Therefore we can estimate
 \begin{align*}
 \|\Psi(\delta y)_{\delta u, \delta y_0,y}\|_{\mathcal B_{\theta}} & \leq \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta u\|_{L^2(I,H^{-1}(\Omega))}+\|\partial_x(y\delta y)\|_{L^2((0,\theta),H^{-1}(\Omega))}\right)\\
-&\leq \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta u\|_{L^2(I,H^{-1}(\Omega))}\right) + C_2\theta\|y\|_{\mathcal B_{\theta}}^2\|\delta y\|_{\mathcal B_{\theta}}
+&\leq \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta u\|_{L^2(I,H^{-1}(\Omega))}\right) + \hat C\theta^{1/4}\|y\|_{\mathcal B_{\theta}}\|\delta y\|_{\mathcal B_{\theta}}
 \end{align*}
 and
 \[
-\|\Psi_{\delta u, \delta y_0,y}(\delta y_1)-\Psi_{\delta u, \delta y_0,y}(\delta y_2)\|_{\mathcal B_{\theta}}\leq C_2\theta\|y\|_{\mathcal B_{\theta}}^2\|\delta y_1-\delta y_2\|_{\mathcal B_{\theta}}.
+\|\Psi_{\delta u, \delta y_0,y}(\delta y_1)-\Psi_{\delta u, \delta y_0,y}(\delta y_2)\|_{\mathcal B_{\theta}}\leq \hat C\theta^{1/4}\|y\|_{\mathcal B_{\theta}}\|\delta y_1-\delta y_2\|_{\mathcal B_{\theta}}.
 \]
 Now we set $r=3 \widetilde{C}\left(\|\delta y_0\|_{L^2(\Omega)}+\|\delta u\|_{L^2(I,H^{-1}(\Omega))}\right)$ and introduce the ball
 \[
@@ -111,7 +111,7 @@ B=\{\delta y \in \mathcal B_{\theta}\colon \|\delta y\|_{\mathcal B_{\theta}}\le
 \]
 Next we choose $\theta$ small enough such that
 \[
-C_2\theta\|y\|_{\mathcal B}^2\leq\frac{1}{3}
+\hat C\theta^{1/4}\|y\|_{\mathcal B}\leq\frac{1}{3}
 \]
 holds. Then the following inequalities hold
 \[
