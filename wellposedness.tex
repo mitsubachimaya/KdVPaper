@@ -232,7 +232,7 @@ Let $\gamma>0$. For any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ let $y\in\mathcal 
  \]
 \end{theorem}
 \begin{proof}
-We consider first that $y$ is a classical solution $y\in \mathcal C(\bar I,\mathcal D(A))\cap \mathcal\, C^1(\bar I,L^2(\Omega))$ for smooth data. Then equation \eqref{kdv1} holds in $L^2(\Omega)$ and we can multiply it with $y$ which yields
+We consider first that $y$ is a classical solution $y\in \mathcal C(\bar I,\mathcal D(A))\cap \mathcal\, C^1(\bar I,L^2(\Omega))$ for smooth data which exists according to \cite{faminskii2010initial}. Then equation \eqref{kdv1} holds in $L^2(\Omega)$ and we can multiply it with $y$ which yields
 \[
 \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}dx}= \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
 \]
@@ -267,6 +267,20 @@ Adding \eqref{C0nonlin} and \eqref{H10nonlin2} gives the global estimate \eqref{
 \begin{remark}
 The constant in the estimate \eqref{globalestimate} explodes for $\gamma \rightarrow 0$.
 \end{remark}
+\begin{corollary}
+Let $\gamma >0$ and $(f,y_0) \in \Hm1\times L^2(\Omega)$. Then there exists a unique solution $y\in \mathcal B\cap L^2(I,\mathcal V^\ast)$ of \eqref{kdv1}-\eqref{kdv3} which satisfies 
+\be
+ \norm{y}_{\mathcal B}\leq c(\gamma) \left(\norm{y_{0}}_{L^{2}(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)
+\ee
+for some $c>0$ independent of $y$ and the data. Moreover there holds
+\[
+\|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq C(T,L,y_0,f,\gamma).
+\]
+for some $C>0$.  
+\end{corollary}
+\begin{proof}
+First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1-y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$.
+\end{proof}
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
 We start by defining the admissible set of controls
 $$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq \hat c \right\} &\quad\mbox{if } \gamma = 0 \\
