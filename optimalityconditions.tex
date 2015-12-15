@@ -3,9 +3,13 @@
 \section{First order optimality conditions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{secoptconditions}
-Next we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}.
+Next we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}. In order to do that, we introduce the open set 
+$$\tilde U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}< \tilde c \right\} &\quad\mbox{if } \gamma = 0 \\
+\M & \quad \mbox{otherwise}
+ \end{cases}$$
+with $\hat c<\tilde c<\|y_0\|_{L^2(\Omega)}-C(T,L)/T^4$, where $C$ is the constant in \eqref{ineqqnorm}. 
 \begin{proposition}
-  The control to state operator $S\colon U_{ad}\rightarrow \mathcal B$ is continuously Fr\'echet-differentiable. Its derivative
+  The control to state operator $S\colon \tilde U_{ad}\rightarrow \mathcal B$ is continuously Fr\'echet-differentiable. Its derivative
   \[
   S'(u)\colon \M\rightarrow \mathcal B,~\delta u\mapsto
   \delta y
@@ -23,7 +27,7 @@ Next we discuss the differentiability of the control-to-state operator $S$ defin
 \end{proposition}
 %[Proof of Proposition~\ref{propfrechet}]
 \begin{proof}
-First we mention that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),~y\mapsto y\partial_x y$ is Fr\'echet differentiable since there holds
+First we mention that $S$ is well-defined on $\tilde U_{ad}$ and that the non-linearity $F:\mathcal B\rightarrow L^2(I,H^{-1}(\Omega)),~y\mapsto y\partial_x y$ is Fr\'echet differentiable since there holds
 \[
 \|F(y+\delta y)-F(y)-F'(y)\delta y\|_{\Hm1}\leq \frac 1 2\|\delta y\|_{L^4(I\times \Omega)}^2\leq c\,\|\delta y\|_{\mathcal B}^2
 \]
@@ -49,13 +53,13 @@ in the weak sense of \eqref{weakformkdv}. After rearranging the terms we end up 
 \eean
 According to Appendix~\ref{appendixtangent} and Lemma \ref{lemyyx2} it holds
 \[
-\norm{w}_{\mathcal{B}} \leq C(T,L,u)\norm{(\tilde{y} - y)\partial_x(\tilde{y} - y)}_{\Hm1}\leq C(T,L,u)\,T^{1/4}\norm{\tilde{y} - y}_{\mathcal{B}}.
+\norm{w}_{\mathcal{B}} \leq C(T,L,u)\norm{(\tilde{y} - y)\partial_x(\tilde{y} - y)}_{\Hm1}\leq C(T,L,u)\,T^{1/4}\norm{\tilde{y} - y}_{\mathcal{B}}^2.
 \]
 Therefore the conclusion follows from local Lipschitz continuity of $S$. Hence we provide the following lemma which concludes the proof.
 \qquad\end{proof}
 
 \begin{lemma}
-The control-to-state operator $S\colon U_{ad}\rightarrow \mathcal B$ is locally Lipschitz continuous, i.e., for every $u\in U_{ad}$ there exists a neighbourhood $V\subset U_{ad}$ and a constant
+The control-to-state operator $S\colon \tilde U_{ad}\rightarrow \mathcal B$ is locally Lipschitz continuous, i.e., for every $u\in \tilde U_{ad}$ there exists a neighbourhood $V\subset \tilde U_{ad}$ and a constant
 $C(T,L,u,\tilde u)>0$ such that
 \[\|S(u)-S(\tilde u)\|_{\mathcal B}\leq C(T,L,u,\tilde u)\,\|u-\tilde u\|_{\M}\quad \forall \tilde u\in V.\]
  \label{lipschitzcontinuity}
@@ -179,16 +183,30 @@ Next we characterize $\phi^\star.$
 \begin{lemma}\label{lem:phistar}
 The functional $\phi^{\star}(p)\colon \C\rightarrow \mathbb R$ has the form
 \[
-\phi^{\star}(p)=\hat c\,(\|p\|_{\C}-\alpha)^+
+\phi^{\star}(p)=
+\begin{cases}
+\hat c\,(\|p\|_{\C}-\alpha)^+&\gamma=0\\
+\mathcal I_{\C}(p)&\gamma>0
+\end{cases}
 \]
-where $(\cdot)^+ = \operatorname{max}(0,\cdot)$ is the positive part of a function.
+where $(\cdot)^+ = \operatorname{max}(0,\cdot)$ is the positive part of a function and
+\[
+\mathcal I_{\C}(p)=
+\begin{cases}
+0&\|p\|_{\C}\leq \alpha\\
+\infty&\text{else}
+\end{cases}
+\]
 \end{lemma}
-\begin{proof}
+\begin{proof} 
+In the case $\gamma>0$ we set $b=\infty$ and $b=\hat c$ else. Then we have
 \begin{align*}
 \phi^{\star}(p)&=\sup_{u\in U_{ad}}[\langle u,p\rangle_{\C,\M}-\alpha \|u\|_{\M}]\\
-&=\sup_{\lambda\in [0,\hat c]}\sup_{\|u\|_{\M}=1,}\lambda[\langle u,p\rangle_{\C,\M}-\alpha].
+&=\sup_{\lambda\in [0,b]}\sup_{\|u\|_{\M}\leq\lambda}[\langle u,p\rangle_{\C,\M}-\alpha\lambda]\\
+&=\sup_{\lambda\in [0,b]}\lambda[\|p\|_{\C}-\alpha],
 \end{align*}
-This implies the assertion since \[\|p\|_{\C}=\sup_{\|u\|_{\M}=1}\langle u,p\rangle_{\C,\M}.\]
+since \[\lambda\|p\|_{\C}=\sup_{\|u\|_{\M}\leq\lambda}\langle u,p\rangle_{\C,\M}.\]
+This implies the assertion.
 \qquad\end{proof}
 
 Using Proposition \ref{prop:equivoc} and Lemma \ref{lem:phistar} we can derive the following structural properties of the optimal control.
@@ -229,7 +247,7 @@ which then implies \eqref{controlsupp} and \eqref{controlintime}. Equality in \e
 \qquad\end{proof}
 
 \begin{remark}
-If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not active there holds $\bar \lambda=0$ and we recover the usual optimality conditions; c.f. \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
+If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not active there holds $\bar \lambda=0$ and we recover the usual optimality conditions, cf. \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
 \end{remark}
 
 

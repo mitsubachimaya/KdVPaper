@@ -138,7 +138,7 @@ for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p(\phi,p_T
 \end{definition}\\
 The last definition makes sense considering the next Lemma which is also needed for the proof of existence of a solution to \eqref{kdv1} - \eqref{kdv3}.
 \begin{lemma}\label{lemyyx2}
- Let $T > 0$, $y \in \B$ and $z \in \B$, then there exists a $c>0$ such that
+ Let $T > 0$, $y \in \B$ and $z \in \B$, then there exists a $c>0$ independent of $T$ such that
  \[
  \norm{y \partial_x y - z \partial_x z}_{\Hm1} \leq c\, T^{1/4} \norm{y+z}_{\B} \norm{y - z}_{\B}.
  \]
@@ -284,7 +284,7 @@ Let $\gamma >0$ and $(f,y_0) \in \Hm1\times L^2(\Omega)$. Then there exists a un
 \ee
 for some $c>0$ independent of $y$ and the data. Moreover there holds
 \begin{equation}\label{estytglobal}
-\|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq C(y_0,f,\gamma).
+\|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq C(T,L,y_0,f,\gamma).
 \end{equation}
 for some $C>0$.  
 \end{corollary}
@@ -324,9 +324,9 @@ There exists a solution $(\bar y,\bar u) \in \mathcal B\times U_{ad}$ to the opt
 \be
 \varepsilon+J(0,0)\geq \alpha \norm{u_n}_{\M}
 \ee
-for $n$ large enough. Therefore $u_n$ is bounded, which implies the existence of an element $\bar u\in\M$ and a subsequence $u_{n_k}$ converging in the weak-$*$ topology of $\M$ towards $\bar u$. For each $u_{n_k}$, we define $y_{n_k}=Su_{n_k}\in \mathcal B\cap H^1(I,\mathcal V^*)$, cf., \cite[Corollary 3.30]{Brezis11}. Thanks to the global estimate \eqref{globalestimate}, there exists a exists a $\bar y\in L^2(I,H^1_0(\Omega))\cap\,L^\infty(I,L^2(\Omega))\cap\,H^1(I,\mathcal V^\ast)$ such that
+for $n$ large enough. Therefore $u_n$ is bounded, which implies the existence of an element $\bar u\in\M$ and a subsequence $u_{n_k}$ converging in the weak-$*$ topology of $\M$ towards $\bar u$, cf., \cite[Corollary 3.30]{Brezis11}. For each $u_{n_k}$, we define $y_{n_k}=Su_{n_k}\in \mathcal B\cap H^1(I,\mathcal V^*)$. Thanks to the global estimate \eqref{globalestimate}, there exists a exists a $\bar y\in L^2(I,H^1_0(\Omega))\cap\,L^\infty(I,L^2(\Omega))\cap\,H^1(I,\mathcal V^\ast)$ such that
 \[y_{n_k}\rightharpoonup^\ast\bar y\quad\text{in}\quad L^2(I,H^1_0(\Omega))\cap L^{\infty}(I,L^2(\Omega))\cap H^1(I,\mathcal V^\ast)\]
-and a $\hat y\in L^2(\Omega)$ such that $y_{n_k}(T)\rightharpoonup \hat y$ in $L^2(\Omega)$. Moreover the Aubin-Lions-Lemma, c.f. \cite[Chapter 3, Proposition 1.3]{showalter97}, implies
+and a $\hat y\in L^2(\Omega)$ such that $y_{n_k}(T)\rightharpoonup \hat y$ in $L^2(\Omega)$ up to a subsequence. Moreover the Aubin-Lions-Lemma, cf. \cite[Chapter 3, Proposition 1.3]{showalter97}, implies
 \[y_{n_k}\rightarrow\bar y\quad\text{in}\quad L^2(I,\mathcal C_0(\Omega)).\]
 It remains to show that the limit $\bar y$ is indeed a weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} for the control $\bar u$. Due to the weak-to-weak continuity of time-point evaluation operator $y\mapsto y(T)$ from $H^1(I,\mathcal V^\ast)$ to $\mathcal V^\ast$ there holds $\hat y=y(T)$.  The convergence of the linear terms in \eqref{weakformkdv} is obvious. The nonlinear term converges due to the strong convergence of $y_{n_k}$, since
 \begin{multline*}
