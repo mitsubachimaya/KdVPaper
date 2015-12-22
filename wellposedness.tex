@@ -40,13 +40,13 @@ with the domain
 The operators $A$ and $A^*$ generate strongly continuous semigroups of contractions on $L^{2}(\Omega)$ denoted by $W(\cdot)\colon L^2(\Omega)\rightarrow L^2(\Omega)$ and $W^*(\cdot)\colon L^2(\Omega)\rightarrow L^2(\Omega)$. The reader is referred to \cite{rosier1997exact} for a proof.  In the sequel, we will denote by $\mathcal{B}$ the Banach space
 $C(I,L^2(\Omega))\cap L^2(I,H^1_0(\Omega))$ endowed with the norm
 \[
-\norm{y}_{\mathcal{B}} = \norm{y}_{\mathcal C(\bar I,L^2(\Omega))}+ \norm{y}_{L^2(I,H^1_0(\Omega))}
+\norm{y}_{\mathcal{B}} = \norm{y}_{\mathcal C(\bar I,L^2(\Omega))}+ \norm{y}_{L^2(I,H^1_0(\Omega))},\quad y\in \mathcal B
 \]
-Furthermore we introduce the Hilbert space
+where $\|\cdot\|_{H^1_0(\Omega)}=\|\partial_x \cdot\|_{L^2(\Omega)}$. Furthermore we introduce the Hilbert space
 \[
-\mathcal V =\{v\in H^2(\Omega)\cap H^1_0(\Omega)\colon \partial_xv(0)=\partial_xv(L)=0\}
+\mathcal V=H^2_0(\Omega)=\{v\in H^2(\Omega)\cap H^1_0(\Omega)\colon \partial_xv(0)=\partial_xv(L)=0\}
 \]
-endowed with the norm $\|\cdot\|_{\mathcal V}=\|\partial_{xx}\cdot\|_{L^2(\Omega)}$. %In particular it holds $H^2_0(\Omega)\subset\mathcal V$ and therefore $\mathcal V^*\subset H^{-2}(\Omega)$.
+endowed with the norm $\|\cdot\|_{\mathcal V}=\|\partial_{xx}\cdot\|_{L^2(\Omega)}$. Thus we have $\mathcal V^*=H^{-2}(\Omega)$.
 The following existence and uniqueness result can be found in \cite[Section 2]{BonaSunZhang03}.
 \begin{proposition}\label{prop:ex smooth}
 Let $(f,y_0)\in L^1(I,L^2(\Omega))\times L^2(\Omega)$ and $(\phi,p_T)\in L^1(I,L^2(\Omega))\times L^2(\Omega)$. Then equations \eqref{kdvlinnonhom1}-\eqref{kdvlinnonhom3} have a unique (mild) solution $y\in \mathcal B$ which is given by
@@ -106,17 +106,16 @@ For a proof see Appendix \ref{sec:linear-estimates}.  This estimate implies that
 \leq C(T,L)\left(\|y\|_{L^2(I,H^1_0(\Omega))}+\|f\|_{L^2(I,H^{-1}(\Omega))}\right)\|\psi\|_{L^2(I,\mathcal V)}.
 \end{multline*}
 Due to the density of $\mathcal C_c^\infty(I\times \Omega)$ in $L^2(I,\mathcal V)$, it holds $y\in H^1(I,\mathcal V^*)$ and
-\[\|\partial_t y\|_{L^2(I,V^*)}\leq C(T,L)\left(\|f\|_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)}\right).\]
+\[\|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq C(T,L)\left(\|f\|_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)}\right).\]
 \qquad\end{proof}
 
-\begin{remark}
-\label{rmklinearoperator}
-Proposition~\ref{propnonhomo}  allows us to define the linear solution operator
-\be
+\begin{corollary}\label{rmklinearoperator}
+The operator
+\[
 \mathcal{L}:\Hm1\times L^2(\Omega)\rightarrow \mathcal{B},(f,y_0) \mapsto y,
-\ee
-where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}.
-\end{remark}
+\]
+where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}, is linear and bounded.
+\end{corollary}
 \subsection{Well-posedness of the \KdVB equation}
 We consider in this section the nonlinear \KdVB equation \eqref{kdvcontrol1} - \eqref{kdvcontrol3} with sources from $f\in \Hm1$. In particular we show existence for short time and small data for $\gamma =0$ and time-global existence for $\gamma>0$.  First of all we introduce a suitable solution concept for the \KdVB equation
 \begin{subequations}
@@ -170,10 +169,11 @@ For $\theta \in (0,T]$, we define the operator $\Psi_{f,y_0}^\theta : \mathcal{B
 \ee
 which is the weak solution of \eqref{kdvlinnonhom1}-\eqref{kdvlinnonhom3} with $T=\theta$ for the data $(f-z\partial_x z,y_0)$.
 Estimate \eqref{linestimate} and Lemma~\ref{lemyyx2} imply
-\be
-\norm{\Psi_{f,y_0}(y)}_{\mathcal{B}_{\theta}} \leq C_1 \left(\norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right) + C_2\theta^{1/4}\norm{y}_{\mathcal{B}_{\theta}}^2
+\begin{multline}
+\norm{\Psi_{f,y_0}(y)}_{\mathcal{B}_{\theta}} \leq C_1 \left(\norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}+\norm{y\partial_x y}_{L^2(I,H^{-1}(\Omega))}\right)\\
+\leq C_1 \left(\norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right) + C_2\theta^{1/4}\norm{y}_{\mathcal{B}_{\theta}}^2
 \label{normpsi2}
-\ee
+\end{multline}
 and
 \[
 \norm{\Psi_{f,y_0}(y) - \Psi_{f,y_0}(z)}_{\mathcal{B}_{\theta}} \leq C_2 \theta^{1/4} \norm{y+z}_{\mathcal{B}_{\theta}}\norm{y - z}_{\mathcal{B}_{\theta}}.
@@ -210,21 +210,22 @@ The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the soluti
 \end{remark}
 In particular, we have the following result:
 \begin{corollary}\label{existlocal}
-There exists a constant $C(T,L)>0$ such that for any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ with
+There exists a constant $C_{\max}(T,L)>0$ such that for any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ with
 \be\label{ineqqnorm}
-\norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq \frac{C}{T^{1/4}}.
+\norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq C_{\max}
 \ee
-there exists a unique solution $y\in \mathcal B$ of \eqref{kdv1} - \eqref{kdv3} which satisfies 
+there exists a unique solution $y\in \mathcal B$ of \eqref{kdv1} - \eqref{kdv3} which satisfies
 \be\label{localestimate}
 \norm{y}_{\mathcal B}\leq c\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)
 \ee
 for some $c(T,L)>0$ independent of $y$ and the data. Moreover, there holds
 \begin{equation}\label{estyt}
-\|\partial_t y\|_{L^2(I,\mathcal V^\ast)}\leq \tilde c(L,T,y_0,f).
+\|\partial_t y\|_{L^2(I,\mathcal V^\ast)}\leq \tilde c(L,T,y_0,f)
 \end{equation}
+for some constant $\tilde c>0$ only depending on $L,T,y_0,f$.
 \end{corollary}
 \begin{proof}
-Existence, uniqueness and \eqref{localestimate} are proven by similar arguments as in the proof of Proposition \ref{localposedness}. Now we proof the estimate \eqref{estyt} using \eqref{linestimate} and Lemma \eqref{lemyyx2}. In particular, we have:
+Existence, uniqueness and \eqref{localestimate} are proven by similar arguments as in the proof of Proposition \ref{localposedness} based on the observation of Remark \ref{rmkUad}. Now we proof the estimate \eqref{estyt} using \eqref{linestimate} and Lemma \ref{lemyyx2}. In particular, we have:
 \begin{align*}
 \|y\|_{L^2(I,\mathcal V^\ast)}&\leq c\left(\|y_0\|_{L^2(\Omega)}+\|y\partial_xy\|_{\Hm1}+\|f\|_{\Hm1}\right)\\
 &\leq c\left(\|y_0\|_{L^2(\Omega)}+\|y\|_{\mathcal B}^2+\|f\|_{\Hm1}\right)\\
@@ -239,46 +240,50 @@ Let $\gamma>0$. For any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ let $y\in\mathcal 
  \norm{y}_{\mathcal B_\theta}\leq c\,\left( \frac{\sqrt{\gamma}+1}{\sqrt{\gamma}}\right) \left(\norm{y_{0}}_{L^{2}(\Omega)} + \frac{1}{\sqrt{\gamma}}\norm{f}_{L^2(I,H^{-1}(\Omega))}\right)
  \label{globalestimate}
  \ee
- for some $c>0$ independent of $y$ and the data. 
+ for some $c>0$ independent of $y$ and the data.
 \end{theorem}
 \begin{proof}
 We consider first that $y$ is a classical solution $y\in \mathcal C([0,\theta],\mathcal D(A))\cap \mathcal\, C^1([0,\theta],L^2(\Omega))$ for smooth data which exists according to \cite{faminskii2010initial}. Then equation \eqref{kdv1} holds in $L^2(\Omega)$ and we can multiply it with $y$ which yields
 \[
-\frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}dx}= \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
+\frac{1}{2}\frac{d}{dt}\|y(t)\|_{L^2(\Omega)}^2 + \abs{\partial_{x} y(t,0)}^{2} + \gamma \|y(t)\|_{H^1_0(\Omega)}^2= \langle f(t),y(t)\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}
 \]
-Applying Cauchy-Schwarz followed by Young's inequality to the right-hand side leads to
+since
 \[
-\frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \abs{\partial_{x} y(t,0)}^{2} +  \gamma \int_{0}^{L}{(\partial_{x} y)^{2}dx}\leq \frac{1}{2\gamma}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{\gamma}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
+\int_\Omega y^2\partial_x y~\mathrm dx=0.
+\]
+Using the continuity of the duality pairing on the righthand side and Young's inequality, we get
+\[
+\frac{1}{2}\frac{d}{dt}\|y\|_{L^2(\Omega)}^2 + \abs{\partial_{x} y(t,0)}^{2} +  \gamma \|y\|_{H^1_0(\Omega)}^2\leq \frac{1}{2\gamma}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{\gamma}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
 \label{linnhupperbound1}.
 \]
-And eventually
+Then we get by omitting the positive term $\abs{\partial_{x} y(t,0)}^{2}$ and by subtraction of $\gamma/2\norm{y}_{H^{1}_{0}(\Omega)}^{2}$ the following inequality
 \[
-\frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}dx} + \frac{\gamma}{2} \int_{0}^{L}{(\partial_{x} y)^{2}dx}\leq \frac{1}{2\gamma}\norm{f}_{H^{-1}(\Omega)}^{2}.
+\frac{1}{2}\frac{d}{dt}\|y\|_{L^2(\Omega)}^2 + \frac{\gamma}{2} \|y\|_{H^1_0(\Omega)}^2\leq \frac{1}{2\gamma}\norm{f}_{H^{-1}(\Omega)}^{2}.
 \label{estimatenonlin}
 \]
-Integration between $0$ and $t\leq \theta$ yields
+Omitting the term $\frac{\gamma}{2} \|y\|_{H^1_0(\Omega)}^2$ and integration between $0$ and $t\leq \theta$ yields
 \be
-\norm{y(t,\cdot)}_{L^2(\Omega)}^2 \leq \norm{y_0}_{L^2(\Omega)}^2 + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^2.
+\norm{y(t,\cdot)}_{L^2(\Omega)}^2 \leq \norm{y_0}_{L^2(\Omega)}^2+\frac 1\gamma \int_0^t\norm{f(s)}_{H^{-1}(\Omega)}^{2}~\mathrm ds\leq \norm{y_0}_{L^2(\Omega)}^2 + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^2.
 \label{C0nonlin}
 \ee
-And integration between $0$ and $\theta$ gives
+Similarily integration between $0$ and $\theta$ gives
 \[
-\norm{y(\theta,.)}_{L^2(\Omega)}^2 +  \gamma \norm{y}_{L^2(I,H^1_0(\Omega))}^{2} \leq \norm{y_0}_{L^2(\Omega)}^{2} + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^{2},
+\norm{y(\theta,.)}_{L^2(\Omega)}^2 +  \gamma \norm{y}_{L^2((0,\theta),H^1_0(\Omega))}^{2} \leq \norm{y_0}_{L^2(\Omega)}^{2} + \frac{1}{\gamma}\norm{f}_{L^2((0,\theta),H^{-1}(\Omega))}^{2},
 \label{H10nonlin}
 \]
-which results in
+Omitting the term $\norm{y(\theta,.)}_{L^2(\Omega)}^2$ results in
 \be
 \norm{y}_{L^2((0,\theta),H^1_0(\Omega))}^{2} \leq \frac{1}{\gamma}\norm{y_0}_{L^2(\Omega)}^{2} + \frac{1}{\gamma^2}\norm{f}_{L^2(I,H^{-1}(\Omega))}^{2}.
 \label{H10nonlin2}
 \ee
-Adding \eqref{C0nonlin} and \eqref{H10nonlin2} gives the global estimate \eqref{globalestimate} for smooth data which can be extended by density to $\Hm1\times L^2(\Omega)$ using Proposition \ref{prop:tangent}. 
+Adding \eqref{C0nonlin} and \eqref{H10nonlin2} gives the global estimate \eqref{globalestimate} for smooth data which can be extended by density to $\Hm1\times L^2(\Omega)$ using Proposition \ref{prop:tangent}.
 \qquad\end{proof}
 
 \begin{remark}
 The constant in the estimate \eqref{globalestimate} explodes for $\gamma \rightarrow 0$.
 \end{remark}
 \begin{corollary}
-Let $\gamma >0$ and $(f,y_0) \in \Hm1\times L^2(\Omega)$. Then there exists a unique solution $y\in \mathcal B\cap L^2(I,\mathcal V^\ast)$ of \eqref{kdv1}-\eqref{kdv3} which satisfies 
+Let $\gamma >0$ and $(f,y_0) \in \Hm1\times L^2(\Omega)$. Then there exists a unique solution $y\in \mathcal B\cap L^2(I,\mathcal V^\ast)$ of \eqref{kdv1}-\eqref{kdv3} which satisfies
 \be
  \norm{y}_{\mathcal B}\leq c(\gamma) \left(\norm{y_{0}}_{L^{2}(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)
 \ee
@@ -286,19 +291,19 @@ for some $c>0$ independent of $y$ and the data. Moreover there holds
 \begin{equation}\label{estytglobal}
 \|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq C(T,L,y_0,f,\gamma).
 \end{equation}
-for some $C>0$.  
+for some $C>0$.
 \end{corollary}
 \begin{proof}
-First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1-y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$. According to Proposition \ref{localposedness} \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T_1^\ast}$ which satisfies \eqref{globalestimate}. Thus we ca repeat the procedure of Proposition \ref{localposedness} starting from $y(\theta)$ and by concatenation we get another local solution $y\in \mathcal B_{T_1^\ast+T_2^\ast}$ which also satisfies estimate \eqref{globalestimate}. So we carry on until $T$ is reached. The estimate \eqref{estytglobal} is proven as in Corollary \ref{existlocal}.
+First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1-y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$. According to Proposition \ref{localposedness} \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of Proposition \ref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}.
 \qquad\end{proof}
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
 We start by defining the admissible set of controls
-$$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq \hat c \right\} &\quad\mbox{if } \gamma = 0 \\
+$$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
-where $\hat c< \frac{C(T,L)}{T^{1/4}}-\norm{y_0}_{L^2(\Omega)}$. The constant $C(T,L)$ comes from \eqref{ineqqnorm} and we assume that
+where $c_{ad}< C_{\max}-\norm{y_0}_{L^2(\Omega)}$. The constant $C_{\max}$ comes from \eqref{ineqqnorm} and we assume that
 \begin{equation}\label{constr y0}
-\norm{y_0}_{L^2(\Omega)}< \frac{C(T,L)}{T^{1/4}}.
+\norm{y_0}_{L^2(\Omega)}< C_{\max}.
 \end{equation}
 Moreover we introduce the non-linear control-to-state operator
 \begin{equation}
