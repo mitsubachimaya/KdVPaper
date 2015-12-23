@@ -119,7 +119,7 @@ holds. Then the following inequalities hold
 \]
 which imply that $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping on $B$. So we can apply the Banach fixed point theorem which guarantees the existence of a unique fixed point $\delta y$ of $\Psi_{\delta u, \delta y_0,y}$ which is a solution of \eqref{linkdv1}-\eqref{linkdv3} in $(0,\theta)$ with initial value $\delta y_0$. This strategy is repeated successively using the intermediate values of $y$ as initial data. The final time $T$ can be reached since the length $\theta$ of the existence intervals is independent of initial data, see \eqref{linstatetheta}. The concatenation of all $\delta y$ for is a solution of \eqref{linkdv1} - \eqref{linkdv3}. This strategy generates a time grid $(t_k)_{k=0}^N$ with $t_0=$ and $t_N=T$. Next we prove the estimate \eqref{estimatetangent}. Using the time-grid we get
 \begin{multline*}
-\|\delta y\|_{\mathcal B}\leq c\sum_{k=0}^{N-1}\left(\|\delta y\|_{\mathcal C([t_k,t_{k+1}],L^2(\Omega))}+\|\delta y\|_{L^2((t_k,t_{k+1}),L^2(\Omega))}\right)\\
+\|\delta y\|_{\mathcal B}\leq c\sum_{k=0}^{N-1}\left(\|\delta y\|_{\mathcal C([t_k,t_{k+1}],L^2(\Omega))}+\|\delta y\|_{L^2((t_k,t_{k+1}),H^1_0(\Omega))}\right)\\
 \leq c\,N\left(\|\delta u\|_{\Hm1}+\|\delta y_0\|_{L^2(\Omega)}\right),
 \end{multline*}
 Then \eqref{linstatetheta} implies that there exists a $c>0$ such that
@@ -134,7 +134,7 @@ Finally we discuss uniqueness. Let $\delta y\in \mathcal B$ be a solution of \eq
 \[
 \|\delta y(t)\|_{L^2(\Omega)}^2\leq c\int_0^t\|\partial_x(y\delta y)(s)\|_{H^{-1}(\Omega)}^2~\mathrm ds\leq \tilde c\int_0^t\|y(s)\|_{H^1_0(\Omega)}^2\|\delta y(s)\|_{L^2(\Omega)}^2~\mathrm ds
 \]
-for any $T>t>0$. Then Gronwall's Lemma implies $y\equiv0$. Thus existence of a unique solution is proven.
+for any $T\geq t\geq 0$. Then Gronwall's Lemma implies $y\equiv0$. Thus existence of a unique solution is proven.
 
 %Concerning the estimates \eqref{estimatetangent}, the proof is very similar to the non-variable coefficients case (see Appendix~\ref{sec:linear-estimates}). We just mention the main differences.  In the case of  a smooth solution $\delta y \in \mathcal C(\bar I,\mathcal D(A))\cap \,\mathcal C^1(I,L^2(\Omega))$ we multiply \eqref{linkdv1} by $\delta y$ and estimate the term involving $y$ in the following way
 %\begin{align*}
