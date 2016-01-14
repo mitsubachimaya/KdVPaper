@@ -82,12 +82,17 @@ The variational formulation \eqref{petrovgalerkin} thus yields
 \be
 M\frac{d\mathbf{y}}{dt} + \left( -P +\gamma Q  + S \right)\mathbf{y} + F(\mathbf{y}) = \mathbf{u},
 \ee
-where $F(\mathbf{y})$ represents the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. It means that the nonlinearity is evaluated in the spatial domain, that we choose to be the Chebyshev-Gauss-Lobatto (CGL) points, and transfered back in the Legendre spectral space. We therefore need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform (FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we rather use the direct method which is faster and easier to handle, especially when it comes to finding a discrete adjoint (see Section~\ref{numadjoint}). We build beforehand the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points such that
+where $F(\mathbf{y})$ represents the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. It means that the nonlinearity is evaluated in the spatial domain, that we choose to be the Chebyshev-Gauss-Lobatto (CGL) points, and transferred back in the Legendre spectral space. We therefore need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform (FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we use a simpler and more direct method which is faster and easier to handle, especially when it comes to finding a discrete adjoint (see Section~\ref{numadjoint}). It consists in building beforehand the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points. By construction, those matrices satisfy
 \be
 L_1 \mathbf{y}(t) = \mathbf{\tilde{y}}(t) = (y_N(t, x_0), y_N(t, x_2), ...y_N(t, x_{N}))^T,
 \label{spec2spat}
 \ee
-and the same holds with $L_2$ for a variable in the dual space. Note that the spatial space, in which $\mathbf{\tilde{y}}(t)$ lies and the spectral space, in which $\mathbf{y}(t)$ lies do not apparently have the same dimensions ($N+1$ versus $N-2$). This is only due to the fact that the three boundary conditions are already included in the spectral space and not in the spatial space.
+and the same holds with $L_2$ for a variable in the dual space. Thus ehe evaluation of the nonlinear term boils down to solving
+\be
+L_1 F(\mathbf{y}(t)) = \mathbf{\tilde{y}}^2(t) = (y_N^2(t, x_0), y_N^2(t, x_2), ...y_N^2(t, x_{N}))^T.
+\label{spec2spat2}
+\ee
+Note that the spatial space, in which $\mathbf{\tilde{y}}(t)$ lies and the spectral space, in which $\mathbf{y}(t)$ lies do not apparently have the same dimensions ($N+1$ versus $N-2$). This is only due to the fact that the three boundary conditions are already included in the spectral space and not in the spatial space.
 
 % \subsection{Time stepping scheme and adjoint - Crank-Nicolson}
 % We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable, though the resolution of the nonlinear system is computationally demanding. This scheme also has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian \cite{meidner2007adaptive}. Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. The scheme for the state is
@@ -284,7 +289,7 @@ F(u_{\rg}) = u_{\rg} + \frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{p_{\rg}}_{L^{
 \ee
 Following \cite{pieperthesis}, one can also reformulate this optimality condition thanks to the "normal map", due to Robinson:
 \be
-G(q_{\rg}) = \rg q_{\rg} + \nabla f (\operatorname{Prox}_{\psi/ \rg}(q_{\rg})) = 0,
+\operatorname{G}(q_{\rg}) = \rg q_{\rg} + \nabla f (\operatorname{Prox}_{\psi/ \rg}(q_{\rg})) = 0,
 \label{normalmap}
 \ee
 for an auxiliary variable $q_{\rg}$ such that $u_{\rg} = \operatorname{Prox}_{\psi/ \rg}(q_{\rg})$. One easily prove in that case that $q_{\rg} = -\frac{1}{\rg} p_{\rg}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
@@ -306,7 +311,18 @@ for an auxiliary variable $q_{\rg}$ such that $u_{\rg} = \operatorname{Prox}_{\p
 % F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
- To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $G$ \cite{ulbrich2002semismooth}. An iterative method (conjugate gradient) is used to solve the Newton system. If a simple continuation strategy is often suggested to achieve global convergence in that case \cite{herzog2012directional}, this is not sufficient for our problem, due to the nonlinearity of the state equation. A globalization strategy based on the decrease of the objective functional is required. We implement it based on the truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}.
+ To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $\operatorname{G}$ \cite{ulbrich2002semismooth}. To be more precise, we get
+ \be
+  \operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + \nabla^2 f( \operatorname{Prox}_{\psi/ \rg}(q_{\rg}))\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
+ \ee
+ where the general derivative of the proximal operator is given by
+\begin{numcases}{\operatorname{DProx}_{\psi/ \rg}\delta q_{\rg} = }
+\frac{1}{\rg}\left( \rg - \frac{\alpha}{\norm{q_{\rg}(x)}_{L^{2}(I)}}\right)^{+} \delta q_{\rg}(x) + \alpha \frac{\left( q_{\rg}, \delta q_{\rg}\right)_{L^2(I)}}{\norm{q_{\rg}(x)}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
+ & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}(x)}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
+0 & \mbox{otherwise.}
+\end{numcases}
+ 
+ \noindent An iterative method (conjugate gradient) is used to solve the Newton system. If a simple continuation strategy is often suggested to achieve global convergence in that case \cite{herzog2012directional}, this is not sufficient for our problem, due to the nonlinearity of the state equation. A globalization strategy based on the decrease of the objective functional is required. We implement it based on the truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}. A concise explanation is also available in \cite{PieperRund2015}[Section 6.2 and A.3].
 
 
 \subsubsection{Discretization of the control and mass lumping}
