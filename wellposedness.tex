@@ -3,8 +3,8 @@
 %\section{Well-posedness of the problem}
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Well-posedness of the state equation}\label{secwellposedness}
-In this section we discuss the well-posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. For the proof of the well-posedness we need the following results for the linear KdVB-equation.
-\subsection{Well-posedness of the linear Korteweg-de Vries Burgers}
+In this section we discuss the well-posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. For the proof of the time-global well-posedness we need to distinguish the viscous case $\gamma>0$ and the non-viscous case $\gamma=0$. In the non-viscous case we are restricted to small data whereas in the viscous case no such constraints on the data are necessary.  First we present some results concerning the linear \KdVB equation.
+\subsection{Well-posedness of the linear \KdVB equation for $\gamma\geq 0$}
 First we consider
 \begin{subequations}\label{kdvlinnonhom}
 \begin{numcases}{}
@@ -18,10 +18,10 @@ and its dual counter part
 \begin{numcases}{}
 -\partial_t p -\partial_x p - \partial_{xxx} p - \gamma \partial_{xx} p =  \phi \mbox{ in } I\times\Omega,\label{kdvlinnonhomdual1}\\
 p(\cdot,0) = p(\cdot,L) = \partial_x p (\cdot,0) = 0 \mbox{ in } I,\label{kdvlinnonhomdual2}\\
-p(T,\cdot) = p_{T}(\cdot) \mbox{ in } \Omega.\label{kdvlinnonhomdual3}
+p(T,\cdot) = p_{T}(\cdot) \mbox{ in } \Omega,\label{kdvlinnonhomdual3}
 \end{numcases}{}
 \end{subequations}
-We denote by $A\colon L^2(\Omega)\rightarrow L^2(\Omega)$ the linear differential operator
+where $\gamma\geq0$ is assumed. We denote by $A\colon L^2(\Omega)\rightarrow L^2(\Omega)$ the linear differential operator
 \[
 Aw = -\partial_{xxx}w - \partial_{x}w + \gamma \partial_{xx}w
 \]
@@ -116,7 +116,7 @@ The operator
 \]
 where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}, is linear and bounded.
 \end{corollary}
-\subsection{Well-posedness of the \KdVB equation}
+\subsection{Time-local well-posedness of the \KdVB equation with $\gamma\geq0$}
 We consider in this section the nonlinear \KdVB equation \eqref{kdvcontrol1} - \eqref{kdvcontrol3} with sources from $f\in \Hm1$. In particular we show existence for short time and small data for $\gamma =0$ and time-global existence for $\gamma>0$.  First of all we introduce a suitable solution concept for the \KdVB equation
 \begin{subequations}
 \begin{numcases}{}
@@ -196,7 +196,7 @@ and for all $(y,z) \in B$
 \]
 As a consequence, we can apply the Banach fixed point theorem which implies the existence of a unique fix point $y$ of $\Psi_{f,y_0}(\cdot)$.
 \qquad\end{proof}
-\begin{remark}
+\subsection{Time-global well-posedness of the \KdVB equation with $\gamma=0$ and small data}\label{rmkUad}
 According to the proof of Proposition \ref{localposedness}, an upper bound for $T^{\ast}$ is given by
 \[
 T^{\ast}\leq \frac{C(T,L)}{\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)^{4}}.
@@ -206,11 +206,9 @@ The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the soluti
 \norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq \frac{C(T,L)}{T^{1/4}}.
 \ee
 %Since we will only be able to prove global well-posedness in the case $\gamma > 0$, we will rather adopt this point of view as far as optimization is concerned for the pure \KdV equation.
-\label{rmkUad}
-\end{remark}
 In particular, we have the following result:
 \begin{corollary}\label{existlocal}
-There exists a constant $C_{\max}(T,L)>0$ such that for any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ with
+Let $\gamma=0$. Then there exists a constant $C_{\max}(T,L)>0$ such that for any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ with
 \be\label{ineqqnorm}
 \norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq C_{\max}
 \ee
@@ -232,7 +230,7 @@ Existence, uniqueness and \eqref{localestimate} are proven by similar arguments 
 &\leq \tilde c(T,L,y_0,f)
 \end{align*}
 \qquad\end{proof}
-\subsubsection{Global well-posedness of the nonlinear \KdVB equation}
+\subsubsection{Time-global well-posedness of the \KdVB equation with $\gamma>0$ and general data}
 Proposition~\ref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem on $[0,T]$. We will show that such estimates exist in the case $\gamma > 0$.
 \begin{theorem}
 Let $\gamma>0$. For any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ let $y\in\mathcal B_\theta$, $\theta\in (0,T]$, be a time-local solution of \eqref{kdv1}-\eqref{kdv3}, then $y$ satisfies
