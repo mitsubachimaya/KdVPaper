@@ -321,7 +321,7 @@ for an auxiliary variable $q_{\rg}$ such that $u_{\rg} = \operatorname{Prox}_{\p
  & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}(x)}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
 0 & \mbox{otherwise.}
 \end{numcases}
- 
+
  \noindent An iterative method (conjugate gradient) is used to solve the Newton system. If a simple continuation strategy is often suggested to achieve global convergence in that case \cite{herzog2012directional}, this is not sufficient for our problem, due to the nonlinearity of the state equation. A globalization strategy based on the decrease of the objective functional is required. We implement it based on the truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}. A concise explanation is also available in \cite{PieperRund2015}[Section 6.2 and A.3].
 
 
@@ -352,7 +352,7 @@ for all spectral basis test functions $\psi$ where we have denoted $\psi_n = \ps
 \end{remark}
 
 
-\subsection{Numerical examples}
+\subsection{Numerical examples}\label{num_ex}
 The numerical examples illustrate the problem of wave generation. We want to investigate the optimal position and vertical movement of a wavemaker. A similar study has been carried out in a slighty different framework in \cite{nersisyan2014generation}, where one possible application was to design artificial surfing facilities. For that purpose, we use a version of the forced Korteweg-de Vries equation with physical parameters, as the one derived in \cite{milewski2004forced}
 \be
 \partial_t y + f \partial_x y - \frac{1}{6}\partial_{xxx} y - \frac{3}{2}y \partial_x y = u
