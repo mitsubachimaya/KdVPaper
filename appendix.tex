@@ -2,9 +2,8 @@
 \appendix
 \section{Well-posedness of the state equation, tangent equation and adjoint equation}
 \label{sec:appwp}
-\subsection{Linear estimates}
+\subsection{Linear estimates: Proof of estimate \eqref{linestimate_regular}}
 \label{sec:linear-estimates}
-\begin{proof}[Proof linear estimate \eqref{linestimate_regular}]
   The proof is largely inspired from \cite{rosier1997exact,glass2008some}. Let $y\in \mathcal C(\bar I,\mathcal D(A))\,\cap\,\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth versions of the data $f$ and $y_0$. We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get
    \be
   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x}y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}~\mathrm dx}=  \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
@@ -20,13 +19,13 @@
   \label{2linnhupperbound}
   \ee
   The right-hand side is treated using the continuity of the duality pairing and Young's inequality
-  \beal\label{qupperbound}
+  {\color{red}\beal\label{qupperbound}
   \langle f,xy\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)} &\leq \norm{q}_{H^{-1}(\Omega)}\norm{\partial_x(xy)}_{L^2(\Omega)}\\
   & \leq \norm{f}_{H^{-1}(\Omega)}\norm{y + x\partial_{x}y}_{L^{2}(\Omega)}\\
   & \leq \norm{f}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + L\norm{\partial_{x}y}_{L^{2}(\Omega)} \right)\\
   &\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
   &\leq \frac{1+L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2}+\frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2}+\frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}.
-  \eeal
+  \eeal}
   Adding \eqref{1linnhupperbound}, \eqref{2linnhupperbound} (with the upper bound \eqref{qupperbound}) and omitting $\abs{\partial_{x} y(t,0)}^{2}$ on the left-hand side yields
   \[
   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}~\mathrm dx} +\left(\frac{1}{2}+\gamma\right)\|y\|_{H^1_0(\Omega)}^2\leq \left(1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \|y\|_{L^2(\Omega)}^2.
@@ -45,11 +44,9 @@
   \|y\|_{\mathcal C(\bar I,L^2(\Omega))}+\|y\|_{L^2(I,H^1_0(\Omega))}\leq c(T,L)\,(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)})
   \]
   for some $c(T,L)>0$ independent of $y$, $f$ and $y_o$.
-\qquad\end{proof}
-
-\subsection{Nonlinear state equation}
+\subsection{Nonlinear estimates: Proof of Lemma~\ref{lemyyx2}}
 \label{sec:nonl-state-equat}
-\begin{proof}[Proof of Lemma~\ref{lemyyx2}] The proof is inspired from \cite[Theorem 2.8]{faminskii2010initial}. Let us consider $y \in \B$ and $z \in \B$. There holds $\mathcal B\hookrightarrow L^4(I\times \Omega)$ and therefore we can estimate using $\|y\|_{L^\infty(\Omega)}^2\leq c\|y\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}$
+The proof is inspired from \cite[Theorem 2.8]{faminskii2010initial}. Let us consider $y \in \B$ and $z \in \B$. There holds $\mathcal B\hookrightarrow L^4(I\times \Omega)$ and therefore we can estimate using $\|y\|_{L^\infty(\Omega)}^2\leq c\|y\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}$
 \begin{multline*}
 \norm{y\partial_x y - z\partial_x z}_{\Hm1}= \frac 1 2\left(\int_0^T{\left(\ \sup_{\norm{\varphi}_{H^1_0(\Omega)} = 1}(y^2 -  z^2,\partial_x\varphi)_{L^2(\Omega)}\right)^2}\mathrm dt\right)^{1/2} \\
 \leq \frac{1}{2}\norm{z-y}_{L^4(I\times \Omega)}\norm{z+y}_{L^4(I\times \Omega)}\\
@@ -59,8 +56,6 @@
 \leq c \,T^{1/4}\norm{z-y}_{C(\bar I,L^2(\Omega))}^{3/4}\norm{z-y}_{L^2(I,H^1_0(\Omega))}^{1/4}\norm{z+y}_{C(\bar I,L^2(\Omega))}^{3/4}\norm{z+y}_{L^2(I,H^1_0(\Omega))}^{1/4} \\
 \leq c \,T^{1/4}\norm{y-z}_{\B}\norm{y+z}_{\B}
 \end{multline*}
-\qquad\end{proof}
-
 \subsection{The tangent equation}\label{appendixtangent}
 Next we analyze the well-posedness of the tangent equation.
 \begin{subequations}
@@ -85,6 +80,7 @@ where $\mathcal L$ is the solution operator from Remark \ref{rmklinearoperator}.
 \end{proposition}
 %[Proof of Proposition~\ref{prop:tangent}]
 \begin{proof}
+{\color{red}
 We define the linear mapping
 \[
 \Psi_{\delta u, \delta y_0,y}\colon \mathcal B_{\theta}\rightarrow \mathcal B_{\theta},~~\Psi_{\delta u, \delta y_0,y}(\delta y) = \mathcal{L}(\delta u - \partial_x(y\delta y),\delta y_0)
@@ -134,7 +130,7 @@ Finally we discuss uniqueness. Let $\delta y\in \mathcal B$ be a solution of \eq
 \[
 \|\delta y(t)\|_{L^2(\Omega)}^2\leq c\int_0^t\|\partial_x(y\delta y)(s)\|_{H^{-1}(\Omega)}^2~\mathrm ds\leq \tilde c\int_0^t\|y(s)\|_{H^1_0(\Omega)}^2\|\delta y(s)\|_{L^2(\Omega)}^2~\mathrm ds
 \]
-for any $T\geq t\geq 0$. Then Gronwall's Lemma implies $y\equiv0$. Thus existence of a unique solution is proven.
+for any $T\geq t\geq 0$. Then Gronwall's Lemma implies $y\equiv0$. Thus existence of a unique solution is proven.}
 
 %Concerning the estimates \eqref{estimatetangent}, the proof is very similar to the non-variable coefficients case (see Appendix~\ref{sec:linear-estimates}). We just mention the main differences.  In the case of  a smooth solution $\delta y \in \mathcal C(\bar I,\mathcal D(A))\cap \,\mathcal C^1(I,L^2(\Omega))$ we multiply \eqref{linkdv1} by $\delta y$ and estimate the term involving $y$ in the following way
 %\begin{align*}
@@ -172,7 +168,7 @@ p(t)=W^*(t)p_T+\int_t^TW^*(s-t)(\phi(s)+y(s)\partial_x p(s))~\mathrm ds.
 \norm{y\partial_x p}_{L^1(0,T,L^2(\Omega))} \leq c\,T^{1/4}\norm{y}_{\mathcal{B}}\norm{p}_{\mathcal{B}}.
 \]
 \end{lemma}
-\begin{proof} 
+\begin{proof}
 We estimate
 \begin{multline*}
 \norm{y\partial_x p}_{L^1(I,L^2(\Omega))}\leq \int_0^T{\norm{y}_{L^{\infty}(\Omega)}\norm{p}_{H^1_0(\Omega)}}~\mathrm dt\\
@@ -190,7 +186,7 @@ Let $(\phi,p_T)\in L^1(I,L^2(\Omega))\times L^2(\Omega)$. Then the equation \eqr
 holds.
 \end{proposition}
 \begin{proof}
-Uniqueness follows from \cite[Proposition 15]{coron2003exact}. Existence and the estimate \eqref{apriori_adjoint} are proven in the same way as in the proof of Proposition \ref{prop:tangent}. Hereby we rely on Lemma \ref{lemadjoint}.
+{\color{red}Uniqueness follows from \cite[Proposition 15]{coron2003exact}. Existence and the estimate \eqref{apriori_adjoint} are proven in the same way as in the proof of Proposition \ref{prop:tangent}. Hereby we rely on Lemma \ref{lemadjoint}.}
 %The proof uses similar arguments as the proof of Proposition \ref{prop:tangent}. In particular it is based on the Banach fixed theorem and Lemma \eqref{lemadjoint}. The estimate \eqref{apriori_adjoint} follows from
 %\begin{multline*}
 %\left|\int_0^Ly\partial_xpp~\mathrm dx\right|=\left|\frac 1 2\int_0^Lp^2\partial_xy~\mathrm dx\right|\leq c\,\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}\\

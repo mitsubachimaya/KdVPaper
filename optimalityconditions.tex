@@ -3,11 +3,11 @@
 \section{First order optimality conditions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{secoptconditions}
-Next we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}. In order to do that, we introduce the open set
+First we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}. {\color{red}In order to do that, we introduce the open set
 $$\tilde U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}< c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise.}
- \end{cases}$$
-The following Lemma concerning the local Lipschitz continuity of $S$ is needed for the proof of its Fr\'echet differentiability.  
+ \end{cases}$$}
+The following Lemma concerning the local Lipschitz continuity of $S$ is needed for the proof of its Fr\'echet differentiability.
 \begin{lemma}
 The control-to-state operator $S\colon \tilde U_{ad}\rightarrow \mathcal B$ is locally Lipschitz continuous, i.e., for every $u\in \tilde U_{ad}$ there exists a neighbourhood $V\subset \tilde U_{ad}$ and a constant
 $C(T,L,u,\tilde u)>0$ such that
@@ -27,8 +27,8 @@ in the weak sense of \eqref{weakformkdv}. According to Appendix \ref{appendixtan
 \norm{w}_{\mathcal{B}} \leq C(T,L,u,\tilde u)\norm{u-\tilde u}_{\M}.
 \]
 Thus we can conclude that the solution operator $S$ is locally Lipschitz continuous.
-\qquad\end{proof} 
- 
+\qquad\end{proof}
+
 \begin{proposition}
   The control to state operator $S\colon \tilde U_{ad}\rightarrow \mathcal B$ is continuously Fr\'echet-differentiable. Its derivative
   \[
@@ -74,7 +74,7 @@ in the weak sense of \eqref{weakformkdv}. After rearranging the terms we end up 
 \eean
 According to Appendix~\ref{appendixtangent} and Lemma \ref{lemyyx2} it holds
 \[
-\norm{w}_{\mathcal{B}} \leq C(T,L,u)\norm{(\tilde{y} - y)\partial_x(\tilde{y} - y)}_{\Hm1}\leq C(T,L,u)\,T^{1/4}\norm{\tilde{y} - y}_{\mathcal{B}}^2.
+{\color{red} \norm{w}_{\mathcal{B}} \leq C(T,L,u)\norm{(\tilde{y} - y)\partial_x(\tilde{y} - y)}_{\Hm1}\leq C(T,L,u)\,T^{1/4}\norm{\tilde{y} - y}_{\mathcal{B}}^2.}
 \]
 Therefore the conclusion follows from local Lipschitz continuity of $S$, see Lemma \ref{lipschitzcontinuity}. Hence we provide the following lemma which concludes the proof.
 \qquad\end{proof}
@@ -179,7 +179,7 @@ for $p\in \C$.
 This a well known characterization of the subdifferential of a convex function, cf., \cite{EkelandTemam99}.  However the assertion can be easily derived from the definition of the of $\phi^\star$ and \eqref{subgradientcond}.
 \qquad \end{proof}
 
-Next we characterize $\phi^\star.$
+{\color{red} Next we characterize $\phi^\star.$
 \begin{lemma}\label{lem:phistar}
 The functional $\phi^{\star}(p)\colon \C\rightarrow \mathbb R$ has the form
 \[
@@ -215,11 +215,14 @@ b(\|p\|_{\C}-\alpha)&\text{else.}
 \end{cases}
 \]
 This implies the assertion.
-\qquad\end{proof}
+\qquad\end{proof}}
 
 Using Proposition \ref{prop:equivoc} and Lemma \ref{lem:phistar} we can derive the following structural properties of the optimal control.
+{\color{red}
 \begin{proposition}
 Let $\bar u\in U_{ad}$ be an optimal control of \eqref{cost}. Moreover let $|\bar u|\in \mathcal M(\Omega)$ be its total-variation measure and $\bar u'$ its the Radon-Nikodym-derivative. Furthermore let $\bar p$ be the corresponding optimal adjoint state. Then there holds
+\begin{enumerate}
+\item Non-viscous case $\gamma=0$:
 \begin{align}
 0&=\left(\|\bar u\|_{\M}-\hat c\right)\bar\lambda,\label{scalarlagrange}\\
 \operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\chi_{\Omega_c}\bar p\|_{L^2(I)}=\alpha+\bar\lambda\}\label{controlsupp}
@@ -229,9 +232,16 @@ with $\bar\lambda =(\|\chi_{\Omega_c}\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \bar u'(x)=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha +\bar\lambda}\quad\text{in}~L^1((\mathring\Omega_c,|\bar u|),L^2(I)).
 \label{controlintime}
 \ee
+\item Viscous case $\gamma>0$:
+\begin{align}
+\operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\chi_{\Omega_c}\bar p\|_{L^2(I)}=\alpha\}\label{supp2}\\
+\bar u'(x)&=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha}\quad\text{in}~L^1((\mathring\Omega_c,|\bar u|),L^2(I))\label{Radon2}
+\end{align}
+\end{enumerate}
 \label{propsubgcondition}
-\end{proposition}
+\end{proposition}}
 \begin{proof}
+{\color{red}First we consider the case $\gamma>0$. A proof of \eqref{supp2} and \eqref{Radon2} is given in \cite{pieper2014}.} Then we discuss the case $\gamma>0$ which involves norm-constraints on the control.
 Using $\bar u\in U_{ad}$, $\|\chi_{\Omega_c}\bar p\|_{\C}-\bar\lambda\leq\alpha$ and \eqref{equivoc} we can estimate
 \begin{multline}\label{estoc}
 \alpha\|\bar u\|_{\M}=\int_{\Omega_c}(\bar u',\chi_{\Omega_c}\bar p)_{L^2(I)}~\mathrm d|\bar u|-\hat c\bar\lambda\\
@@ -253,10 +263,10 @@ which then implies \eqref{controlsupp} and \eqref{controlintime}. Equality in \e
 (\hat c-\alpha\|\bar u\|_{\M})\bar\lambda=0.
 \]
 \qquad\end{proof}
-
+{\color{red}
 \begin{remark}
-If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not active there holds $\bar \lambda=0$ and we recover the usual optimality conditions, cf. \cite{pieper2014}. This can be guaranteed for a large enough parameter $\alpha$.
-\end{remark}
+If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not active there holds $\bar \lambda=0$ and we recover the usual optimality conditions \eqref{supp2} and \eqref{Radon2}. This can be guaranteed for a large enough parameter $\alpha$, cf. Remark \ref{alphaconstraint}.
+\end{remark}}
 
 
 %%% Local Variables:

@@ -1,15 +1,21 @@
-\documentclass[final,leqno,onefignum,onetabnum]{siamltex1213}
+\documentclass[final]{siamart}
 %\documentclass[a4paper,10pt,reqno]{amsart}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb}
+%\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts}
 %\usepackage{amsmath,amssymb,amsthm,dsfont}
 %\usepackage{dsfont,amssymb}
 %\usepackage[top = 3cm, bottom = 3cm, left = 3.0cm, right = 3.0cm]{geometry}
-\usepackage{graphicx}
 %\usepackage[notcite,notref]{showkeys}
-\usepackage{mathtools}
-\usepackage{cases}
+%\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{multirow}
 \usepackage{pgfplots}
+%\usepackage{tikz}
+\pgfplotsset{compat=newest}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{cases}
 %MACROs
 
 
@@ -51,7 +57,7 @@
 \def\endmult {\end{multline}}
 \def\rg{\varepsilon}
 \def\SO{S_{obs}}
-
+\newtheorem{remark}[theorem]{Remark}
 
 % \newtheoremstyle{slplain}% name
 %   {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space above
@@ -78,13 +84,14 @@
 % ===================================================================
 % Color
 % ===================================================================
-\usepackage{xcolor}
-\definecolor{myorange}{rgb}{0.9568,0.4941,0.1961}
-\definecolor{myred}{rgb}{0.9098,0.1294,0.2078}
-\definecolor{myblue}{rgb}{0.0352,0.4981,0.6509}
-\definecolor{myhyperblue}{rgb}{0.1607,0.3922,0.9}
-\definecolor{mygreen}{rgb}{0.2235,0.6353,0.2588}
-\definecolor{mygrey}{rgb}{0.3,0.3,0.3}
+
+%\usepackage{xcolor}
+%\definecolor{myorange}{rgb}{0.9568,0.4941,0.1961}
+%\definecolor{myred}{rgb}{0.9098,0.1294,0.2078}
+%\definecolor{myblue}{rgb}{0.0352,0.4981,0.6509}
+%\definecolor{myhyperblue}{rgb}{0.1607,0.3922,0.9}
+%\definecolor{mygreen}{rgb}{0.2235,0.6353,0.2588}
+%\definecolor{mygrey}{rgb}{0.3,0.3,0.3}
 
 %====================================================================
 % HyperRef

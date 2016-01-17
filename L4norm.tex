@@ -12,8 +12,9 @@ subject to \eqref{kdvcontrol1}-\eqref{kdvcontrol3}. The state space is chosen as
  Let $y \in L^4(I,L^4(\Omega))$. Then $y \partial_x y \in L^2(I,H^{-1}(\Omega))$.\\
 \end{lemma}
 \begin{proof}
-The proof is based on similar arguments as in the proof of Lemma \ref{lemyyx2}.
-\qquad\end{proof}\\
+{\color{red}The proof is based on similar arguments as in the proof of Lemma \ref{lemyyx2}.}
+\qquad\end{proof}
+
 Therefore the following definition is reasonable.
 \begin{definition}\label{statecontrolpair}
 Let $(y,u)$ $\in \tilde Y\times \M$ such that $y(T,\cdot)\in L^2(\Omega)$. They are called a \textit{state-control pair} if they satisfy the equation
@@ -21,7 +22,8 @@ Let $(y,u)$ $\in \tilde Y\times \M$ such that $y(T,\cdot)\in L^2(\Omega)$. They 
 \int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-y\partial_xy,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
 \end{equation}
 for all $(\phi,p_T) \in L^{4/3}(I,L^2(\Omega))\times L^2(\Omega)$, where $p = p(\phi,p_T)\in \mathcal B$ is the mild solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
-\end{definition}\\
+\end{definition}
+
 Next we show that the existence of a control-state pair implies the time-global existence of $y$ in $\mathcal B$.
 \begin{proposition}\label{statecontrolestimate}
  Let $(y,u)$ $\in \tilde Y\times \M$ be a state-control pair. Then $ y\in \mathcal{B} \cap H^{1}(I,\mathcal{V}^{*})$ is a weak solution of \eqref{kdvcontrol1} - \eqref{kdvcontrol3} in the sense of Definition~\ref{defnlkdv} for $\gamma = 0$ and satisfies the global estimate

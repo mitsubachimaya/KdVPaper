@@ -3,8 +3,8 @@
 %\section{Well-posedness of the problem}
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Well-posedness of the state equation}\label{secwellposedness}
-In this section we discuss the well-posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. For the proof of the time-global well-posedness we need to distinguish the viscous case $\gamma>0$ and the non-viscous case $\gamma=0$. In the non-viscous case we are restricted to small data whereas in the viscous case no such constraints on the data are necessary. First we present some necessary results concerning the linear \KdVB equation.
-\subsection{Well-posedness of the linear \KdVB equation for $\gamma\geq 0$}
+In this section we discuss the time-global well-posedness of the state equation for irregular sources from $L^2(I,H^{-1}(\Omega))$ which includes $\M$ according to the last section. {\color{red} For the proof of the time-global well-posedness we need to distinguish the viscous case $\gamma>0$ and the non-viscous case $\gamma=0$. In the non-viscous case we are restricted to small data whereas in the viscous case no such constraints on the data are necessary.} First we present some necessary results concerning the linear \KdVB equation.
+\subsection{Well-posedness of the linear \KdVB equation for {\color{red}$\gamma\geq 0$}}
 First we consider
 \begin{subequations}\label{kdvlinnonhom}
 \begin{numcases}{}
@@ -67,7 +67,8 @@ and there exits a constant $c>0$ such that
 \[
 \|p\|_{\mathcal B}\leq c\,(\|\phi\|_{L^1(I,L^2(\Omega))}+\|p_T\|_{L^2(\Omega)})\]
 holds.
-\end{proposition}\\
+\end{proposition}
+
 Next we introduce a weak formulation of \eqref{kdvlinnonhom} for sources $f\in \Hm1$. %Since we are in a one-dimensional setting, this includes sources in $\M$.
 \begin{definition}
 For $(f,y_0)\in \Hm1\times L^2(\Omega)$ a function $y\in C(\bar I,L^2(\Omega))$ is called a weak solution of \eqref{kdvlinnonhom1}-\eqref{kdvlinnonhom3} if it satisfies the following equation
@@ -117,7 +118,7 @@ The operator
 where $y$ is the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3}, is linear and bounded.
 \end{corollary}
 \subsection{Time-local well-posedness of the \KdVB equation with $\gamma\geq0$}
-We consider in this section the nonlinear \KdVB equation \eqref{kdvcontrol1} - \eqref{kdvcontrol3} with sources from $f\in \Hm1$ and show its time-local wellposedness in the viscous and non-viscous case. First of all we introduce a suitable solution concept for the \KdVB equation
+{\color{red} We consider in this section the nonlinear \KdVB equation \eqref{kdvcontrol1} - \eqref{kdvcontrol3} with sources from $f\in \Hm1$ and show its time-local wellposedness in the viscous and non-viscous case, i.e. $\gamma\geq0$.} First of all we introduce a suitable solution concept for the \KdVB equation
 \begin{subequations}
 \begin{numcases}{}
 \partial_t y +\partial_x y + \partial_{xxx} y + y\partial_x y -\gamma \partial_{xx} y=  f \mbox{ in } I\times\Omega,\label{kdv1}\\
@@ -134,7 +135,8 @@ or in other words
 \int_0^T(y,\phi)_{L^2(\Omega)}~\mathrm dt+(y(T),p_T)_{L^2(\Omega)}=\int_0^T\langle f-y\partial_x y ,p\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}~\mathrm dt+(y_0,p(0))_{L^2(\Omega)}
 \end{equation}
 for all $(\phi,p_T) \in L^1(I,L^2(\Omega))\times L^2(\Omega)$, where $p(\phi,p_T)\in \mathcal B$ is the solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3}.
-\end{definition}\\
+\end{definition}
+
 The last definition makes sense considering the next Lemma which is also needed for the proof of existence of a solution to \eqref{kdv1} - \eqref{kdv3}.
 \begin{lemma}\label{lemyyx2}
  Let $T > 0$, $y \in \B$ and $z \in \B$, then there exists a $c>0$ independent of $T$ such that
@@ -196,12 +198,13 @@ and for all $(y,z) \in B$
 \]
 As a consequence, we can apply the Banach fixed point theorem which implies the existence of a unique fix point $y$ of $\Psi_{f,y_0}(\cdot)$.
 \qquad\end{proof}
-\subsection{Time-global well-posedness of the \KdVB equation with $\gamma=0$ and small data}\label{rmkUad}
-In this section we establish the time-global wellposedness of the \KdVB equation in the non-viscous case $\gamma =0$ and small data. According to the proof of Proposition \ref{localposedness}, an upper bound for $T^{\ast}$ is given by
+According to the proof of Proposition \ref{localposedness}, an upper bound for $T^{\ast}$ is given by
 \[
 T^{\ast}\leq \frac{C(T,L)}{\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)^{4}}.
 \]
-The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the solution. But one can also consider $T$ fixed and shift the constraint on the data
+The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the solution.
+\subsection{Time-global well-posedness of the \KdVB equation {\color{red}with $\gamma=0$ and small data}}\label{rmkUad}
+{\color{red} In this section we establish the time-global wellposedness of the \KdVB equation in the non-viscous case $\gamma =0$ and small data. The inequality \eqref{constraintstheta2} can be also satisfied for a fixed $T$ and small data
 \be
 \norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq \frac{C(T,L)}{T^{1/4}}.
 \ee
@@ -229,9 +232,9 @@ Existence, uniqueness and \eqref{localestimate} are proven by similar arguments 
 &\leq c\left(\|y_0\|_{L^2(\Omega)}+\|y\|_{\mathcal B}^2+\|f\|_{\Hm1}\right)\\
 &\leq \tilde c(T,L,y_0,f)
 \end{align*}
-\qquad\end{proof}
-\subsubsection{Time-global well-posedness of the \KdVB equation with $\gamma>0$ and general data}
-Proposition~\ref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem on $[0,T]$. We will show that such estimates exist in the case $\gamma > 0$.
+\qquad\end{proof}}
+{\color{red}\subsubsection{Time-global well-posedness of the \KdVB equation with $\gamma>0$ and general data}
+In this section we prove time-global wellposedness of the \KdVB equation in the viscous case and with general data. Proposition~\ref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem on $[0,T]$. We will show that such estimates exist in the viscous case $\gamma > 0$.
 \begin{theorem}
 Let $\gamma>0$. For any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ let $y\in\mathcal B_\theta$, $\theta\in (0,T]$, be a time-local solution of \eqref{kdv1}-\eqref{kdv3}, then $y$ satisfies
  \be
@@ -293,7 +296,7 @@ for some $C>0$.
 \end{corollary}
 \begin{proof}
 First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1-y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$. According to Proposition \ref{localposedness} \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of Proposition \ref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}.
-\qquad\end{proof}
+\qquad\end{proof}}
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
 We start by defining the admissible set of controls
 $$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
@@ -340,7 +343,7 @@ Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}
 \[S_{obs}(u_{n_k})\rightharpoonup S_{obs}(\bar u)\quad\text{in}~ L^2(I\times \Omega_{o})\times L^2(\Omega_{o}).\] The tracking functional is weak lower semi-continuous in $ L^2(I\times \Omega_{o})\times L^2(\Omega_{o})$ and the control cost term is weak-$*$ lower semi continuous in $\M$ therefore $(\bar y,\bar u)$ is a solution of \eqref{cost}.\\
 \underline{Case $\gamma = 0$}. In this case we rely on the estimate \eqref{localestimate} and use that the set $U_{ad}$ is weak-$*$ closed.
 \qquad\end{proof}
-\begin{remark}
+\begin{remark}\label{alphaconstraint}
  We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon > 0$ and an $N \in \N $ such that for any $n > N$
  \[
 \norm{u_n}_{L^2(I,H^{-1}(\Omega))} \leq c\norm{u_n}_{\M} \leq \frac{c}{\alpha}\left(J(0,0) + \varepsilon \right).
