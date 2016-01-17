@@ -226,13 +226,14 @@ for some $c(T,L)>0$ independent of $y$ and the data. Moreover, there holds
 for some constant $\tilde c>0$ only depending on $L,T,y_0,f$.
 \end{corollary}
 \begin{proof}
-Existence, uniqueness and \eqref{localestimate} are proven by similar arguments as in the proof of Proposition \ref{localposedness} based on the observation of Remark \ref{rmkUad}. Now we proof the estimate \eqref{estyt} using \eqref{linestimate} and Lemma \ref{lemyyx2}. In particular, we have:
+Existence, uniqueness and \eqref{localestimate} are proven using similar steps as in the proof of Proposition \ref{localposedness}. In particular, the inequality \eqref{constraintstheta2} is satisfied for our choice of data $(u,y_0)$.  Now we proof the estimate \eqref{estyt} using \eqref{linestimate} and Lemma \ref{lemyyx2}. In particular, we have:
 \begin{align*}
 \|y\|_{L^2(I,\mathcal V^\ast)}&\leq c\left(\|y_0\|_{L^2(\Omega)}+\|y\partial_xy\|_{\Hm1}+\|f\|_{\Hm1}\right)\\
 &\leq c\left(\|y_0\|_{L^2(\Omega)}+\|y\|_{\mathcal B}^2+\|f\|_{\Hm1}\right)\\
 &\leq \tilde c(T,L,y_0,f)
 \end{align*}
 \qquad\end{proof}}
+
 {\color{red}\subsubsection{Time-global well-posedness of the \KdVB equation with $\gamma>0$ and general data}
 In this section we prove time-global wellposedness of the \KdVB equation in the viscous case and with general data. Proposition~\ref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem on $[0,T]$. We will show that such estimates exist in the viscous case $\gamma > 0$.
 \begin{theorem}
@@ -295,8 +296,9 @@ for some $c>0$ independent of $y$ and the data. Moreover there holds
 for some $C>0$.
 \end{corollary}
 \begin{proof}
-First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1-y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$. According to Proposition \ref{localposedness} \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of Proposition \ref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}.
+First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1+y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$. According to Proposition \ref{localposedness} equation \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of Proposition \ref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}.
 \qquad\end{proof}}
+
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
 We start by defining the admissible set of controls
 $$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
@@ -343,6 +345,7 @@ Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}
 \[S_{obs}(u_{n_k})\rightharpoonup S_{obs}(\bar u)\quad\text{in}~ L^2(I\times \Omega_{o})\times L^2(\Omega_{o}).\] The tracking functional is weak lower semi-continuous in $ L^2(I\times \Omega_{o})\times L^2(\Omega_{o})$ and the control cost term is weak-$*$ lower semi continuous in $\M$ therefore $(\bar y,\bar u)$ is a solution of \eqref{cost}.\\
 \underline{Case $\gamma = 0$}. In this case we rely on the estimate \eqref{localestimate} and use that the set $U_{ad}$ is weak-$*$ closed.
 \qquad\end{proof}
+
 \begin{remark}\label{alphaconstraint}
  We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon > 0$ and an $N \in \N $ such that for any $n > N$
  \[
