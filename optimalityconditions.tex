@@ -3,7 +3,7 @@
 \section{First order optimality conditions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{secoptconditions}
-First we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}. {\color{red}In order to do that, we introduce the open set
+First we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}. {\color{blue}In order to do that, we introduce the open set
 $$\tilde U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}< c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise.}
  \end{cases}$$}
@@ -218,7 +218,7 @@ This implies the assertion.
 \qquad\end{proof}}
 
 Using Proposition \ref{prop:equivoc} and Lemma \ref{lem:phistar} we can derive the following structural properties of the optimal control.
-{\color{red}
+{\color{blue}
 \begin{proposition}
 Let $\bar u\in U_{ad}$ be an optimal control of \eqref{cost}. Moreover let $|\bar u|\in \mathcal M(\Omega)$ be its total-variation measure and $\bar u'$ its corresponding Radon-Nikodym-derivative. Furthermore let $\bar p$ be the corresponding optimal adjoint state. Then there holds:
 \begin{enumerate}
@@ -241,7 +241,7 @@ with $\bar\lambda =(\|\chi_{\Omega_c}\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \label{propsubgcondition}
 \end{proposition}}
 \begin{proof}
-{\color{red}First we consider the case $\gamma>0$. A proof of \eqref{supp2} and \eqref{Radon2} is given in \cite{pieper2014}.} Then we discuss the case $\gamma>0$ which involves norm-constraints on the control.
+{\color{blue}First we consider the case $\gamma>0$. A proof of \eqref{supp2} and \eqref{Radon2} is given in \cite{pieper2014}.} Then we discuss the case $\gamma>0$ which involves norm-constraints on the control.
 Using $\bar u\in U_{ad}$, $\|\chi_{\Omega_c}\bar p\|_{\C}-\bar\lambda\leq\alpha$ and \eqref{equivoc} we can estimate
 \begin{multline}\label{estoc}
 \alpha\|\bar u\|_{\M}=\int_{\Omega_c}(\bar u',\chi_{\Omega_c}\bar p)_{L^2(I)}~\mathrm d|\bar u|-\hat c\bar\lambda\\
