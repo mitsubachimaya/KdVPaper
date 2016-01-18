@@ -229,13 +229,13 @@ Let $\bar u\in U_{ad}$ be an optimal control of \eqref{cost}. Moreover let $|\ba
 \end{align}
 with $\bar\lambda =(\|\chi_{\Omega_c}\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \be
-\bar u'(x)=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha +\bar\lambda}\quad\text{in}~L^1((\mathring\Omega_c,|\bar u|),L^2(I)).
+\bar u'(x)=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha +\bar\lambda}\quad\text{in}~L^1((\Omega_c,|\bar u|),L^2(I)).
 \label{controlintime}
 \ee
 \item Viscous case $\gamma>0$:
 \begin{align}
 \operatorname{supp}|\bar u|&\subseteq \{x\in \Omega\colon \|\chi_{\Omega_c}\bar p\|_{L^2(I)}=\alpha\}\label{supp2}\\
-\bar u'(x)&=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha}\quad\text{in}~L^1((\mathring\Omega_c,|\bar u|),L^2(I))\label{Radon2}
+\bar u'(x)&=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha}\quad\text{in}~L^1((\Omega_c,|\bar u|),L^2(I))\label{Radon2}
 \end{align}
 \end{enumerate}
 \label{propsubgcondition}
@@ -266,7 +266,7 @@ which then implies \eqref{controlsupp} and \eqref{controlintime}. Equality in \e
 
 {\color{red}
 \begin{remark}
-If the constraint $\|\bar u\|_{\M}\leq \hat c$ is not active there holds $\bar \lambda=0$ and we recover the usual optimality conditions \eqref{supp2} and \eqref{Radon2}. This can be guaranteed for a large enough parameter $\alpha$, cf. Remark \ref{alphaconstraint}.
+If the constraint $\|\bar u\|_{\M}\leq c_{ad}$ is not active there holds $\bar \lambda=0$ and we recover the usual optimality conditions \eqref{supp2} and \eqref{Radon2}. This can be guaranteed for a large enough parameter $\alpha$, cf. Remark \ref{alphaconstraint}.
 \end{remark}}
 
 

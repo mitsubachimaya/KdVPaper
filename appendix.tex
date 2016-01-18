@@ -32,8 +32,8 @@
   \]
   After integration between $0$ and $0<t<T$ we have
   \begin{multline}\label{primitive}
-  \|y(t)\|_{L^2(\Omega)}^2+ \left( 1+2\gamma \right)\int_{0}^{t}{\|y\|_{H^1_0(\Omega)}^2~\mathrm dt}\leq \left(2+L^{2}\right)\int_{0}^{t}{\norm{f}_{H^{-1}(\Omega)}^{2}~\mathrm dt}\\
-  +\|y_{0}\|_{L^2(\Omega)}^2+2\int_0^t{\|y\|_{L^2(\Omega)}^2~\mathrm dt}.
+  \|y(t)\|_{L^2(\Omega)}^2+ \left( 1+2\gamma \right)\int_{0}^{t}{\|y\|_{H^1_0(\Omega)}^2~\mathrm dt}\leq \left(2+L^{2}\right)\int_{0}^{t}{\norm{f(s)}_{H^{-1}(\Omega)}^{2}~\mathrm ds}\\
+  +\|y_{0}\|_{L^2(\Omega)}^2+2\int_0^t{\|y(s)\|_{L^2(\Omega)}^2~\mathrm ds}.
   \end{multline}
   Then the standard Gronwall inequality gives us
   \[
@@ -114,10 +114,11 @@ holds. Then the following inequalities hold
 \|\Psi_{\delta u, \delta y_0,y}(\delta y)\|_{\mathcal B_{\theta}}\leq \frac{2}{3}r,~~\|\Psi_{\delta u, \delta y_0,y}(\delta y_1) - \Psi_{\delta u, \delta y_0,y}(\delta y_2)\|_{\mathcal B_{\theta}}\leq\frac{1}{3}\|\delta y_1-\delta y_2\|_{\mathcal B_{\theta}}
 \]
 which imply that $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping on $B$. So we can apply the Banach fixed point theorem which guarantees the existence of a unique fixed point $\delta y$ of $\Psi_{\delta u, \delta y_0,y}$ which is a solution of \eqref{linkdv1}-\eqref{linkdv3} in $(0,\theta)$ with initial value $\delta y_0$. This strategy is repeated successively using the intermediate values of $y$ as initial data. The final time $T$ can be reached since the length $\theta$ of the existence intervals is independent of initial data, see \eqref{linstatetheta}. The concatenation of all $\delta y$ for is a solution of \eqref{linkdv1} - \eqref{linkdv3}. This strategy generates a time grid $(t_k)_{k=0}^N$ with $t_0=$ and $t_N=T$. Next we prove the estimate \eqref{estimatetangent}. Using the time-grid we get
-\begin{multline*}
-\|\delta y\|_{\mathcal B}\leq c\sum_{k=0}^{N-1}\left(\|\delta y\|_{\mathcal C([t_k,t_{k+1}],L^2(\Omega))}+\|\delta y\|_{L^2((t_k,t_{k+1}),H^1_0(\Omega))}\right)\\
-\leq c\,N\left(\|\delta u\|_{\Hm1}+\|\delta y_0\|_{L^2(\Omega)}\right),
-\end{multline*}
+\begin{align*}
+\|\delta y\|_{\mathcal B}&\leq c\sum_{k=0}^{N-1}\left(\|\delta y\|_{\mathcal C([t_k,t_{k+1}],L^2(\Omega))}+\|\delta y\|_{L^2((t_k,t_{k+1}),H^1_0(\Omega))}\right)\\
+&\leq c\sum_{k=0}^{N-1}\left((k+1)\|\delta u\|_{\Hm1}+\|\delta y_0\|_{L^2(\Omega)}\right)\\
+&\leq c\left(\frac{N(N+1)}{2}\|\delta u\|_{\Hm1}+N\|\delta y_0\|_{L^2(\Omega)}\right).
+\end{align*}
 Then \eqref{linstatetheta} implies that there exists a $c>0$ such that
 \[
 N-1\leq\frac T\theta=cT\|y\|_{\mathcal B}^4
@@ -127,9 +128,10 @@ and accordingly
 \|\delta y\|_{\mathcal B}\leq c(\|y\|_{\mathcal B})\,\left(\|\delta u\|_{\Hm1}+\|\delta y_0\|_{L^2(\Omega)}\right).
 \]
 Finally we discuss uniqueness. Let $\delta y\in \mathcal B$ be a solution of \eqref{linkdv1}--\eqref{linkdv3} for $\delta u=\delta y_0=0$. From \eqref{primitive} we see
-\[
-\|\delta y(t)\|_{L^2(\Omega)}^2\leq c\int_0^t\|\partial_x(y\delta y)(s)\|_{H^{-1}(\Omega)}^2~\mathrm ds\leq \tilde c\int_0^t\|y(s)\|_{H^1_0(\Omega)}^2\|\delta y(s)\|_{L^2(\Omega)}^2~\mathrm ds
-\]
+\begin{multline*}
+\|\delta y(t)\|_{L^2(\Omega)}^2\leq c\int_0^t\|\partial_x(y\delta y)(s)\|_{H^{-1}(\Omega)}^2+\|\delta y(s)\|^2_{L^2(\Omega)}~\mathrm ds\\
+\leq \tilde c\int_0^t\left(\|y(s)\|_{H^1_0(\Omega)}^2+1\right)\|\delta y(s)\|_{L^2(\Omega)}^2~\mathrm ds
+\end{multline*}
 for any $T\geq t\geq 0$. Then Gronwall's Lemma implies $y\equiv0$. Thus existence of a unique solution is proven.}
 
 %Concerning the estimates \eqref{estimatetangent}, the proof is very similar to the non-variable coefficients case (see Appendix~\ref{sec:linear-estimates}). We just mention the main differences.  In the case of  a smooth solution $\delta y \in \mathcal C(\bar I,\mathcal D(A))\cap \,\mathcal C^1(I,L^2(\Omega))$ we multiply \eqref{linkdv1} by $\delta y$ and estimate the term involving $y$ in the following way
