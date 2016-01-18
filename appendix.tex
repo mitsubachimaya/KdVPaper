@@ -31,10 +31,10 @@
   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}~\mathrm dx} +\left(\frac{1}{2}+\gamma\right)\|y\|_{H^1_0(\Omega)}^2\leq \left(1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \|y\|_{L^2(\Omega)}^2.
   \]
   After integration between $0$ and $0<t<T$ we have
-  \begin{multline*}
+  \begin{multline}\label{primitive}
   \|y(t)\|_{L^2(\Omega)}^2+ \left( 1+2\gamma \right)\int_{0}^{t}{\|y\|_{H^1_0(\Omega)}^2~\mathrm dt}\leq \left(2+L^{2}\right)\int_{0}^{t}{\norm{f}_{H^{-1}(\Omega)}^{2}~\mathrm dt}\\
   +\|y_{0}\|_{L^2(\Omega)}^2+2\int_0^t{\|y\|_{L^2(\Omega)}^2~\mathrm dt}.
-  \end{multline*}
+  \end{multline}
   Then the standard Gronwall inequality gives us
   \[
   \|y(t)\|_{L^2(\Omega)}^2  \leq e^{2t}\left(\left(2+L^{2}\right)\norm{f}_{L^{2}(I,H^{-1}(\Omega))}^{2}+\norm{y_{0}}_{L^{2}(\Omega)}\right).
@@ -126,7 +126,7 @@ and accordingly
 \[
 \|\delta y\|_{\mathcal B}\leq c(\|y\|_{\mathcal B})\,\left(\|\delta u\|_{\Hm1}+\|\delta y_0\|_{L^2(\Omega)}\right).
 \]
-Finally we discuss uniqueness. Let $\delta y\in \mathcal B$ be a solution of \eqref{linkdv1}--\eqref{linkdv3} for $\delta u=\delta y_0=0$. From the proof of \eqref{linestimate_regular} we see
+Finally we discuss uniqueness. Let $\delta y\in \mathcal B$ be a solution of \eqref{linkdv1}--\eqref{linkdv3} for $\delta u=\delta y_0=0$. From \eqref{primitive} we see
 \[
 \|\delta y(t)\|_{L^2(\Omega)}^2\leq c\int_0^t\|\partial_x(y\delta y)(s)\|_{H^{-1}(\Omega)}^2~\mathrm ds\leq \tilde c\int_0^t\|y(s)\|_{H^1_0(\Omega)}^2\|\delta y(s)\|_{L^2(\Omega)}^2~\mathrm ds
 \]
