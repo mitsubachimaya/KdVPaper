@@ -4,7 +4,7 @@
 \label{sec:appwp}
 \subsection{Linear estimates: Proof of estimate \eqref{linestimate_regular}}
 \label{sec:linear-estimates}
-  The proof is largely inspired from \cite{rosier1997exact,glass2008some}. Let $y\in \mathcal C(\bar I,\mathcal D(A))\,\cap\,\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth versions of the data $f$ and $y_0$. We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get
+  {\color{red} Here we consider the viscous and and non-viscous case at the same time. Thus we have $\gamma\geq 0$.} The proof is largely inspired from \cite{rosier1997exact,glass2008some}. Let $y\in \mathcal C(\bar I,\mathcal D(A))\,\cap\,\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth versions of the data $f$ and $y_0$. We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get
    \be
   \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x}y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}~\mathrm dx}=  \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
   \ee
@@ -57,7 +57,7 @@ The proof is inspired from \cite[Theorem 2.8]{faminskii2010initial}. Let us cons
 \leq c \,T^{1/4}\norm{y-z}_{\B}\norm{y+z}_{\B}
 \end{multline*}
 \subsection{The tangent equation}\label{appendixtangent}
-Next we analyze the well-posedness of the tangent equation.
+{\color{red} Next we analyze the well-posedness of the tangent equation in both the viscous and the non-viscous case, ie. $\gamma\geq0$.}
 \begin{subequations}
  \begin{numcases}{}
 \partial_t \delta y +\partial_x \delta y + \partial_{xxx} \delta y - \gamma \delta \partial_{xx} y  + \partial_x(y \delta y)=  \delta u \mbox{ in } I\times\Omega,\label{linkdv1}\\
@@ -157,7 +157,7 @@ Next we study the following equation
 p(\cdot,0) = p(\cdot,L) = \partial_x p (\cdot,0) = 0 \mbox{ on } I,\label{adjoint2}\\
 p(T) = p_{T} \mbox{ in } \Omega.\label{adjoint3}
 \eesn
-for any $y\in \mathcal B$.
+for any $y\in \mathcal B$ {\color{red} and $\gamma\geq0$, i.e. in the viscous and non-viscous case.}
 \begin{definition}
 A function $p\in \mathcal B$ is called a solution of \eqref{adjoint1}-\eqref{adjoint3} if it solves the fixed point equation
 \[

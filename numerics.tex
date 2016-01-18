@@ -23,14 +23,14 @@ In the case of bounded domains numerous schemes are available, be it finite diff
 % spectral collocation methods shall be favoured: they indeed allow to represent the variables in terms of their values on a set of points and not only as the coefficients in the spectral expansion. However, for third order equation, the authors show in \cite{merryfield1993properties} that Chebyshev and Legendre collocation methods are unstable. That is why pseudospectral method habe been popular for third order PDEs. Fourier pseudospectral methods have been extensively used \cite{trefethen2000spectral,maday1988error,fornberg1978numerical}. They are in particular very fast when combined with the Fast Fourier Transform to treat the nonlinear term on collocation points. Nevertheless, they are only suited for periodic boundary conditions. Polynomial pseudospectral method on the contrary, which are more adequate for bounded intervals, proved to be stable for the linear third-order differential equation with Chebyshev or Legendre Gauss Lobatto points as collocation points \cite{HuangSloan1992}. They have also demonstrated great performances compared to any other method (see the benchmarking in \cite{skogestad2009boundary}). An interesting hybrid method is proposed in \cite{ma2000legendre}, where the linear term is treated by a Petrov-Galerkin method (better suited for nonsymmetric problems) on Legendre polynomials, while the nonlinear term is treated pseudospectrally using a Chebyshev method. Shortly after, Shen \cite{shen2003new} proposed another dual Petrov-Galerkin method with nearly optimal computational complexity. Moreover, it is also equivalent to a natural weighted spectral-Galerkin formulation. For those reasons, this will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate discretization of the method regarding the time stepping scheme used.
 
 \subsubsection{The dual Petrov-Galerkin method}
-The interesting feature of this method lies in the choice of the test and trial functions bases. They are chosen as a compact combination of Legendre polynomials in such a way that the trial functions satisfy the underlying boundary conditions of the equation and the test functions satisfy the dual boundary conditions \eqref{kdvlinnonhomdual2}. Therefore, most matrices involved in the resolution of the problem are sparse or well-conditioned \cite{shen2003new}. We present the method for some reference domain $[-1,1]$, but it can be extended to any other domain of type $[a,b]$ by scaling the Legendre polynomials and the integrals. We denote by $P_N$ the space of polynomials of degree $\leq N$ and set
+The interesting feature of this method lies in the choice of the test and trial functions bases. They are chosen as a compact combination of Legendre polynomials in such a way that the trial functions satisfy the underlying boundary conditions of the equation and the test functions satisfy the dual boundary conditions \eqref{kdvlinnonhomdual2}. Therefore, most matrices involved in the resolution of the problem are sparse or well-conditioned \cite{shen2003new}. We present the method for some reference domain $[-1,1]$, but it can be extended to any other domain of type $[a,b]$ by scaling the Legendre polynomials and the integrals. {\color{red} Throughout the following sections we assume $\gamma\geq0$, ie. all discussed results apply in the viscous as well as the non-viscous case.} Then we denote by $P_N$ the space of polynomials of degree $\leq N$ and set
 \be
 V_N = \left\{y\in P_N : y(1)=y(-1)=\partial_x y(1)=0\right\},
 \ee
 \be
 V_N^{\ast} = \left\{y\in P_N : y(1) = y(-1) = \partial_x y(-1)=0\right\}.
 \ee
-We consider then the semi-discrete problem: find
+We consider then the semi-discrete problem: Find
 \be\nonumber
 y_N: \quad I \rightarrow V_N,\quad t \mapsto y_N(t,\cdot),
 \ee
@@ -257,6 +257,7 @@ It starts with a projection of the tracking term in the state space into the adj
 \qquad\end{proof}
 
 \subsection{Numerical treatment of the optimization problem}
+{\color{red} In this section we consider the optimal control problem \eqref{cost} in both the viscous and non-viscous case, i.e. $\gamma\geq0$, without additional norm-constraints on the control. Thus we have $U_{ad}=\M$.} 
 \subsubsection{The regularized problem}
 Numerically, the optimization problem is solved via a Newton type method. This requires an additional regularization term which we introduce as follows
 \beal
