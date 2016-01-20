@@ -1,49 +1,51 @@
 %!TEX root = kdv.tex
 \appendix
-\section{Well-posedness of the state equation, tangent equation and adjoint equation}
-\label{sec:appwp}
-\subsection{Linear estimates: Proof of estimate \eqref{linestimate_regular}}
-\label{sec:linear-estimates}
-  {\color{red} Here we consider the viscous and and non-viscous case at the same time. Thus we have $\gamma\geq 0$.} The proof is largely inspired from \cite{rosier1997exact,glass2008some}. Let $y\in \mathcal C(\bar I,\mathcal D(A))\,\cap\,\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth versions of the data $f$ and $y_0$. We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get
-   \be
-  \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x}y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}~\mathrm dx}=  \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
-  \ee
-  Applying the Cauchy-Schwarz followed by Young's inequality to the right-hand side leads to
-  \be \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x}y)^{2}~\mathrm dx}\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
-  \label{1linnhupperbound}.
-  \ee
-  We proceed in the same manner testing with $xy$
-  \be
-  \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{xy^{2}~\mathrm dx}-\frac{1}{2}\int_{0}^{L}{y^{2}~\mathrm dx} +  \frac{3}{2}\int_{0}^{L}{(\partial_{x} y)^{2}~\mathrm dx} +\gamma
-  \int_{0}^{L}{x(\partial_{x} y)^{2}~\mathrm dx}= \langle f,xy \rangle_{H^{1}_{0}(\Omega)}.
-  \label{2linnhupperbound}
-  \ee
-  The right-hand side is treated using the continuity of the duality pairing and Young's inequality
-  {\color{red}\beal\label{qupperbound}
-  \langle f,xy\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)} &\leq \norm{q}_{H^{-1}(\Omega)}\norm{\partial_x(xy)}_{L^2(\Omega)}\\
-  & \leq \norm{f}_{H^{-1}(\Omega)}\norm{y + x\partial_{x}y}_{L^{2}(\Omega)}\\
-  & \leq \norm{f}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + L\norm{\partial_{x}y}_{L^{2}(\Omega)} \right)\\
-  &\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
-  &\leq \frac{1+L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2}+\frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2}+\frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}.
-  \eeal}
-  Adding \eqref{1linnhupperbound}, \eqref{2linnhupperbound} (with the upper bound \eqref{qupperbound}) and omitting $\abs{\partial_{x} y(t,0)}^{2}$ on the left-hand side yields
-  \[
-  \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}~\mathrm dx} +\left(\frac{1}{2}+\gamma\right)\|y\|_{H^1_0(\Omega)}^2\leq \left(1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \|y\|_{L^2(\Omega)}^2.
-  \]
-  After integration between $0$ and $0<t<T$ we have
-  \begin{multline}\label{primitive}
-  \|y(t)\|_{L^2(\Omega)}^2+ \left( 1+2\gamma \right)\int_{0}^{t}{\|y\|_{H^1_0(\Omega)}^2~\mathrm dt}\leq \left(2+L^{2}\right)\int_{0}^{t}{\norm{f(s)}_{H^{-1}(\Omega)}^{2}~\mathrm ds}\\
-  +\|y_{0}\|_{L^2(\Omega)}^2+2\int_0^t{\|y(s)\|_{L^2(\Omega)}^2~\mathrm ds}.
-  \end{multline}
-  Then the standard Gronwall inequality gives us
-  \[
-  \|y(t)\|_{L^2(\Omega)}^2  \leq e^{2t}\left(\left(2+L^{2}\right)\norm{f}_{L^{2}(I,H^{-1}(\Omega))}^{2}+\norm{y_{0}}_{L^{2}(\Omega)}\right).
-  \]
-  This yields
-  \[
-  \|y\|_{\mathcal C(\bar I,L^2(\Omega))}+\|y\|_{L^2(I,H^1_0(\Omega))}\leq c(T,L)\,(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)})
-  \]
-  for some $c(T,L)>0$ independent of $y$, $f$ and $y_o$.
+\section{Well-posedness of the state equation, tangent equation and adjoint equation}\label{sec:appwp}
+\subsection{Linear estimates: Proof of estimate \eqref{linestimate_regular}}\label{sec:linear-estimates}
+{\color{red} Here we consider the viscous and and non-viscous case at the same time. Thus we have $\gamma\geq 0$.} The proof is largely inspired from \cite{rosier1997exact,glass2008some}. Let $y\in \mathcal C(\bar I,\mathcal D(A))\,\cap\,\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth versions of the data $f$ and $y_0$. We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get
+\[
+\frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x}y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}~\mathrm dx}=  \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
+\]
+Applying the Cauchy-Schwarz followed by Young's inequality to the right-hand side leads to
+\be 
+\frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x}y)^{2}~\mathrm dx}\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2}+\frac{1}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
+\label{1linnhupperbound}.
+\ee
+We proceed in the same manner testing with $xy$
+\be
+\frac{1}{2}\frac{d}{dt}\int_{0}^{L}{xy^{2}~\mathrm dx}-\frac{1}{2}\int_{0}^{L}{y^{2}~\mathrm dx} +  \frac{3}{2}\int_{0}^{L}{(\partial_{x} y)^{2}~\mathrm dx} +\gamma
+\int_{0}^{L}{x(\partial_{x} y)^{2}~\mathrm dx}= \langle f,xy \rangle_{H^{1}_{0}(\Omega)}.
+\label{2linnhupperbound}
+\ee
+The right-hand side is treated using the continuity of the duality pairing and thetriangle inequality
+\begin{align*}
+\langle f,xy\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}&\leq \norm{q}_{H^{-1}(\Omega)}\norm{\partial_x(xy)}_{L^2(\Omega)}\\
+& \leq \norm{f}_{H^{-1}(\Omega)}\norm{y + x\partial_{x}y}_{L^{2}(\Omega)}\\
+& \leq \norm{f}_{H^{-1}(\Omega)} \left( \norm{y}_{L^{2}(\Omega)} + L\norm{\partial_{x}y}_{L^{2}(\Omega)} \right)
+\end{align*}
+Now we apply Young's inequality and get
+\begin{multline}\label{qupperbound}
+\frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
+\leq \frac{1+L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2}+\frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2}+\frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}.
+\end{multline}
+Adding \eqref{1linnhupperbound}, \eqref{2linnhupperbound} (with the upper bound \eqref{qupperbound}) and omitting $\abs{\partial_{x} y(t,0)}^{2}$ on the left-hand side yields
+\[
+\frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}~\mathrm dx} +\left(\frac{1}{2}+\gamma\right)\|y\|_{H^1_0(\Omega)}^2\leq \left(1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \|y\|_{L^2(\Omega)}^2.
+\]
+After integration between $0$ and $0<t<T$ we have
+\begin{multline}\label{primitive}
+\|y(t)\|_{L^2(\Omega)}^2+ \left( 1+2\gamma \right)\int_{0}^{t}{\|y\|_{H^1_0(\Omega)}^2~\mathrm dt}\leq \left(2+L^{2}\right)\int_{0}^{t}{\norm{f(s)}_{H^{-1}(\Omega)}^{2}~\mathrm ds}\\
++\|y_{0}\|_{L^2(\Omega)}^2+2\int_0^t{\|y(s)\|_{L^2(\Omega)}^2~\mathrm ds}.
+\end{multline}
+Then the standard Gronwall inequality gives us
+\[
+\|y(t)\|_{L^2(\Omega)}^2  \leq e^{2t}\left(\left(2+L^{2}\right)\norm{f}_{L^{2}(I,H^{-1}(\Omega))}^{2}+\norm{y_{0}}_{L^{2}(\Omega)}\right).
+\]
+This yields
+\[
+\|y\|_{\mathcal C(\bar I,L^2(\Omega))}+\|y\|_{L^2(I,H^1_0(\Omega))}\leq c(T,L)\,(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)})
+\]
+for some $c(T,L)>0$ independent of $y$, $f$ and $y_o$.
 \subsection{Nonlinear estimates: Proof of Lemma~\ref{lemyyx2}}
 \label{sec:nonl-state-equat}
 The proof is inspired from \cite[Theorem 2.8]{faminskii2010initial}. Let us consider $y \in \B$ and $z \in \B$. There holds $\mathcal B\hookrightarrow L^4(I\times \Omega)$ and therefore we can estimate using $\|y\|_{L^\infty(\Omega)}^2\leq c\|y\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}$
