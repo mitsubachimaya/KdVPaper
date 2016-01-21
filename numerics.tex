@@ -258,40 +258,39 @@ It starts with a projection of the tracking term in the state space into the adj
 {\color{red} In this section we consider the optimal control problem \eqref{cost} in both the viscous and non-viscous case, i.e. $\gamma\geq0$, without additional norm-constraints on the control. Thus we have $U_{ad}=\M$.}
 \subsubsection{The regularized problem}
 Numerically, the optimization problem is solved via a Newton type method. This requires an additional regularization term which we introduce as follows
-\beal
-\min_{u \in L^2(\Omega_c\times I), y\in Y}J(y,u)& =\frac{1}{2}\left(\norm{\chi_{\Omega_{o}}y - z_1}_{L^2(I\times \Omega_{o})}^2+\|\chi_{\Omega_{o}}y(T)-z_2\|_{L^2(\Omega_{o})}^2\right)\\
-& \quad \quad +\alpha \norm{u}_{L^1(\Omega_c, L^{2}(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega_c\times I)}^2\\
-& = f(y) + \alpha \norm{u}_{L^1(\Omega_c,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega_c\times I)}^2,
+\begin{multline}
+\min_{u \in L^2(\Omega_c\times I), y\in Y}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{o}}y - z_1}_{L^2(I\times \Omega_{o})}^2+\|\chi_{\Omega_{o}}y(T)-z_2\|_{L^2(\Omega_{o})}^2\right)\\
++\alpha \norm{u}_{L^1(\Omega_c, L^{2}(I))} + \frac{\rg}{2}\norm{u}_{L^2(I\times\Omega_c)}^2\quad\text{s.t.}~\eqref{kdvcontrol1}-\eqref{kdvcontrol3}.
 \label{costreg}
-\eeal
+\end{multline}
 %\beal
 %\min_{u \in \M} J(y) &= \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))}^2 \\
 %& = f(y) + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))}^2,
 %\label{costreg}
 %\eeal
-where $u$ and $y$ are subject to Korteweg-de Vries Burgers equation. This enables us to look for controls in the space $L^2(I\times\Omega)$. Since the embedding $L^1(\Omega,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega,L^2(I))$ will satisfy
+This enables us to look for controls in the space $L^2(I\times\Omega_c)$. Since the embedding $L^1(\Omega_c,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega_c,L^2(I))$ will satisfy
 \be
-\psi(u) = \norm{u}_{\M} = \norm{u}_{L^1(I,L^2(\Omega))} = \int_0^L{\norm{u}_{L^2(I)}dx}.
+\psi(u) = \norm{u}_{\M} = \norm{u}_{L^1(I,L^2(\Omega_c))} = \int_{\Omega_c}{\norm{u}_{L^2(I)}dx}.
 \ee
-In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. To obtain the optimality conditions, one introduces the proximal map (see, e.g. \cite{bauschke2011convex}) of the $L^1(\Omega, L^{2}(I))$ norm:
+In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. To obtain the optimality conditions, one introduces the proximal map (see, e.g. \cite{bauschke2011convex}) of the $L^1(\Omega_c, L^{2}(I))$ norm:
 \be
-\operatorname{Prox}_{\psi/ \rg}(q)(x) = \frac{1}{\rg}\left( \rg - \frac{\alpha}{\norm{q(x)}_{L^{2}(I)}}\right)^{+}q(x) \quad \mbox{ for } q \in L^{2}(\Omega, L^{2}(I)).
+\operatorname{Prox}_{\psi/ \rg}(q)(t,x) = \left(1-\frac{\alpha}{\rg\norm{q(x)}_{L^{2}(I)}}\right)^{+}q(t,x) \quad \mbox{ for } q \in L^{2}(I\times\Omega_c).
 \ee
 We can then express the optimality condition for \eqref{costreg} by the pointwise projection formula
 \be
-\bar u_{\rg} = -\frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{p_{\rg}}_{L^{2}(I)}}\right)^{+}p_{\rg}.
+\bar u_{\rg}(t,x) = \operatorname{Prox}_{\psi/ \rg}\left(-\frac 1\rg \bar p_\rg\right)(t,x)=-\frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{\bar p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}\bar p_{\rg}(t,x).
 \ee
-It is then directly possible to solve via a Newton type method the equation
+with $\bar p_\rg(\bar u_\rg)=S_{obs}'^\star(S_{obs}\bar u_\rg-z)$ with $z=(z_1,z_2)$. It is then directly possible to solve via a Newton type method the equation
 \be
-F(u_{\rg}) = u_{\rg} + \frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{p_{\rg}}_{L^{2}(I)}}\right)^{+}p_{\rg} = 0.
+F(u_{\rg})(t,x) = u_{\rg}(t,x) + \frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}p_{\rg}(t,x) = 0.
 \label{optcondition}
 \ee
 Following \cite{pieperthesis}, one can also reformulate this optimality condition thanks to the "normal map", due to Robinson:
 \be
-\operatorname{G}(q_{\rg}) = \rg q_{\rg} + \nabla f (\operatorname{Prox}_{\psi/ \rg}(q_{\rg})) = 0,
+\operatorname{G}(q_{\rg}) = \rg q_{\rg} + p_{\rg}(\operatorname{Prox}_{\psi/ \rg}(q_{\rg})) = 0,
 \label{normalmap}
 \ee
-for an auxiliary variable $q_{\rg}$ such that $u_{\rg} = \operatorname{Prox}_{\psi/ \rg}(q_{\rg})$. One easily prove in that case that $q_{\rg} = -\frac{1}{\rg} p_{\rg}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
+for the auxiliary variable $q_{\rg}$. %such that $u_{\rg} = \operatorname{Prox}_{\psi/ \rg}(q_{\rg})$ h. %One easily prove in that case that $q_{\rg} = -\frac{1}{\rg} p_{\rg}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
 
 % and we can adapt it to state the following theorem
 % \begin{thm}
@@ -310,13 +309,13 @@ for an auxiliary variable $q_{\rg}$ such that $u_{\rg} = \operatorname{Prox}_{\p
 % F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
- To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $\operatorname{G}$ \cite{ulbrich2002semismooth}. To be more precise, we get
+ To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}. To be more precise, we get
  \be
-  \operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + \nabla^2 f( \operatorname{Prox}_{\psi/ \rg}(q_{\rg}))\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
+  \operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + S_{obs}'^\star S_{obs}'(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
  \ee
  where the general derivative of the proximal operator is given by
 \begin{numcases}{\operatorname{DProx}_{\psi/ \rg}\delta q_{\rg} = }
-\frac{1}{\rg}\left( \rg - \frac{\alpha}{\norm{q_{\rg}(x)}_{L^{2}(I)}}\right)^{+} \delta q_{\rg}(x) + \alpha \frac{\left( q_{\rg}, \delta q_{\rg}\right)_{L^2(I)}}{\norm{q_{\rg}(x)}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
+\left(1-\frac{\alpha}{\rg\norm{q_{\rg}(x)}_{L^{2}(I)}}\right)\delta q_{\rg}(x) + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q_{\rg}\right)_{L^2(I)}}{\norm{q_{\rg}(x)}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
  & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}(x)}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
 0 & \mbox{otherwise.}
 \end{numcases}

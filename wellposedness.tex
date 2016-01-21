@@ -205,10 +205,11 @@ T^{\ast}\leq \frac{C(T,L)}{\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{
 \]
 The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the solution.
 \subsection{Time-global well-posedness of the \KdVB equation {\color{red}with $\gamma=0$ and small data}}\label{rmkUad}
-{\color{blue} In this section we establish the time-global wellposedness of the \KdVB equation in the non-viscous case $\gamma =0$ and small data. The inequality \eqref{constraintstheta2} can be also satisfied for a fixed $T$ and small data
+{\color{blue} In this section we establish the time-global wellposedness of the \KdVB equation in the non-viscous case $\gamma =0$ and with small data. The inequality \eqref{constraintstheta2} can be also satisfied for a fixed $T$ and small data, i.e. if
 \be
 \norm{f}_{L^2(I,H^{-1}(\Omega))}+\|y_0\|_{L^2(\Omega)} \leq \frac{C(T,L)}{T^{1/4}}.
 \ee
+is satisfied.
 %Since we will only be able to prove global well-posedness in the case $\gamma > 0$, we will rather adopt this point of view as far as optimization is concerned for the pure \KdV equation.
 In particular, we have the following result:
 \begin{corollary}\label{existlocal}
@@ -269,7 +270,7 @@ Omitting the term $\frac{\gamma}{2} \|y\|_{H^1_0(\Omega)}^2$ and integration bet
 \norm{y(t,\cdot)}_{L^2(\Omega)}^2 \leq \norm{y_0}_{L^2(\Omega)}^2+\frac 1\gamma \int_0^t\norm{f(s)}_{H^{-1}(\Omega)}^{2}~\mathrm ds\leq \norm{y_0}_{L^2(\Omega)}^2 + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^2.
 \label{C0nonlin}
 \ee
-Similarily integration between $0$ and $\theta$ gives
+Similarity integration between $0$ and $\theta$ gives
 \[
 \norm{y(\theta,.)}_{L^2(\Omega)}^2 +  \gamma \norm{y}_{L^2((0,\theta),H^1_0(\Omega))}^{2} \leq \norm{y_0}_{L^2(\Omega)}^{2} + \frac{1}{\gamma}\norm{f}_{L^2((0,\theta),H^{-1}(\Omega))}^{2},
 \label{H10nonlin}
@@ -295,10 +296,10 @@ for some $c>0$ independent of $y$ and the data. Moreover there holds
 \begin{equation}\label{estytglobal}
 \|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq C(T,L,y_0,f,\gamma).
 \end{equation}
-for some $C>0$.
+for some $C>0$ only depending on $L,T,y_0,f$.
 \end{corollary}
 \begin{proof}
-First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1+y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$. According to Proposition \ref{localposedness} equation \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of Proposition \ref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}.
+First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1+y_2$. Then Proposition \ref{prop:tangent} implies $y_1=y_2$. According to Proposition \ref{localposedness} equation \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of Proposition \ref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}. The estimate \eqref{estytglobal} is proven using \eqref{globalestimate} and similar arguments as in the proof of Corollary \ref{existlocal}. 
 \qquad\end{proof}}
 
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}

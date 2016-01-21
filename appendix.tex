@@ -18,7 +18,8 @@ We proceed in the same manner testing with $xy$
 \int_{0}^{L}{x(\partial_{x} y)^{2}~\mathrm dx}= \langle f,xy \rangle_{H^{1}_{0}(\Omega)}.
 \label{2linnhupperbound}
 \ee
-The right-hand side is treated using the continuity of the duality pairing and thetriangle inequality
+The right-hand side is treated using the continuity of the duality pairing and the triangle inequality
+{\color{red}
 \begin{align*}
 \langle f,xy\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}&\leq \norm{q}_{H^{-1}(\Omega)}\norm{\partial_x(xy)}_{L^2(\Omega)}\\
 & \leq \norm{f}_{H^{-1}(\Omega)}\norm{y + x\partial_{x}y}_{L^{2}(\Omega)}\\
@@ -28,7 +29,7 @@ Now we apply Young's inequality and get
 \begin{multline}\label{qupperbound}
 \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2} + \frac{L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}\\
 \leq \frac{1+L^{2}}{2}\norm{f}_{H^{-1}(\Omega)}^{2}+\frac{1}{2}\norm{y}_{L^{2}(\Omega)}^{2}+\frac{1}{2}\norm{\partial_{x}y}_{L^{2}(\Omega)}^{2}.
-\end{multline}
+\end{multline}}
 Adding \eqref{1linnhupperbound}, \eqref{2linnhupperbound} (with the upper bound \eqref{qupperbound}) and omitting $\abs{\partial_{x} y(t,0)}^{2}$ on the left-hand side yields
 \[
 \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{(1+x)y^{2}~\mathrm dx} +\left(\frac{1}{2}+\gamma\right)\|y\|_{H^1_0(\Omega)}^2\leq \left(1 +\frac{L^{2}}{2}\right)\norm{f}_{H^{-1}(\Omega)}^{2} + \|y\|_{L^2(\Omega)}^2.
