@@ -249,7 +249,7 @@ Let $\gamma>0$. For any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ let $y\in\mathcal 
 \begin{proof}
 We consider first that $y$ is a classical solution $y\in \mathcal C([0,\theta],\mathcal D(A))\cap \mathcal\, C^1([0,\theta],L^2(\Omega))$ for smooth data which exists according to \cite{faminskii2010initial}. Then equation \eqref{kdv1} holds in $L^2(\Omega)$ and we can multiply it with $y$ which yields
 \[
-\frac{1}{2}\frac{d}{dt}\|y(t)\|_{L^2(\Omega)}^2 + \abs{\partial_{x} y(t,0)}^{2} + \gamma \|y(t)\|_{H^1_0(\Omega)}^2= \langle f(t),y(t)\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}
+\frac{1}{2}\frac{d}{dt}\|y(t)\|_{L^2(\Omega)}^2 + \frac 1 2\abs{\partial_{x} y(t,0)}^{2} + \gamma \|y(t)\|_{H^1_0(\Omega)}^2= \langle f(t),y(t)\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}
 \]
 since
 \[
@@ -257,7 +257,7 @@ since
 \]
 Using the continuity of the duality pairing on the righthand side and Young's inequality, we get
 \[
-\frac{1}{2}\frac{d}{dt}\|y\|_{L^2(\Omega)}^2 + \abs{\partial_{x} y(t,0)}^{2} +  \gamma \|y\|_{H^1_0(\Omega)}^2\leq \frac{1}{2\gamma}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{\gamma}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
+\frac{1}{2}\frac{d}{dt}\|y\|_{L^2(\Omega)}^2 + \frac 1 2\abs{\partial_{x} y(t,0)}^{2} +  \gamma \|y\|_{H^1_0(\Omega)}^2\leq \frac{1}{2\gamma}\norm{f}_{H^{-1}(\Omega)}^{2} + \frac{\gamma}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
 \label{linnhupperbound1}.
 \]
 Then we get by omitting the positive term $\abs{\partial_{x} y(t,0)}^{2}$ and by subtraction of $\gamma/2\norm{y}_{H^{1}_{0}(\Omega)}^{2}$ the following inequality

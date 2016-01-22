@@ -6,10 +6,7 @@
 This section is devoted to the discretization of the optimization problem \eqref{cost} - \eqref{kdvcontrol3}, as well as some insights into the numerical optimization process we use.
 \subsection{Discretization of state and adjoint equation}
 %One difficulty arising in the discretization of the \KdVB equation is the variety of temporal scales. While the effects of the nonlinearity are only visible after a long time interval, the linear part involves a wide range of scales: the third order derivative represents in particular a high frequency term.
-In the case of bounded domains numerous schemes are available, be it finite differences \cite{djidjeli1995numerical,zabusky1965interaction}, finite elements \cite{winther1980conservative,arnold1982superconvergent}, finite volumes \cite{dutykh2013finite}, discontinuous Galerkin schemes \cite{Bona1986859,yan2002local}, or polynomial spectral methods \cite{ma2000legendre,ma2001optimal,shen2003new}. One of the most recent and efficient method for the Korteweg-de Vries equation is proposed in \cite{ma2000legendre}. The linear term is treated by a Petrov-Galerkin method on the Legendre polynomials, while the nonlinear term is treated pseudospectrally on the Chebyschev collocation points. Shortly after, Shen \cite{shen2003new} proposed an improvement of this Petrov-Galerkin method with nearly optimal computational complexity. This will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate time discretization which allows the derivation of a consistent adjoint time stepping.
-
-
-
+In the case of bounded domains numerous schemes are available, for example finite difference schemes \cite{djidjeli1995numerical,zabusky1965interaction}, finite element schemes \cite{winther1980conservative,arnold1982superconvergent}, finite volume schemes \cite{dutykh2013finite}, discontinuous Galerkin schemes \cite{Bona1986859,yan2002local}, or polynomial spectral methods \cite{ma2000legendre,ma2001optimal,shen2003new}. One of the most recent and efficient method for the \KdV is proposed in \cite{ma2000legendre}. The linear term is treated by a Petrov-Galerkin method on the Legendre polynomials, whereas the nonlinear term is treated pseudospectrally on the Chebyschev collocation points. Shortly after, Shen \cite{shen2003new} proposed an improvement of this Petrov-Galerkin method with nearly optimal computational complexity. This will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problems, we also discuss an appropriate time discretization which allows the derivation of a consistent adjoint time stepping.
 %Moreover, it is also equivalent to a natural weighted spectral-Galerkin formulation. For those reasons,
 %This will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate discretization of the method regarding the time stepping scheme used.
 
@@ -23,7 +20,7 @@ In the case of bounded domains numerous schemes are available, be it finite diff
 % spectral collocation methods shall be favoured: they indeed allow to represent the variables in terms of their values on a set of points and not only as the coefficients in the spectral expansion. However, for third order equation, the authors show in \cite{merryfield1993properties} that Chebyshev and Legendre collocation methods are unstable. That is why pseudospectral method habe been popular for third order PDEs. Fourier pseudospectral methods have been extensively used \cite{trefethen2000spectral,maday1988error,fornberg1978numerical}. They are in particular very fast when combined with the Fast Fourier Transform to treat the nonlinear term on collocation points. Nevertheless, they are only suited for periodic boundary conditions. Polynomial pseudospectral method on the contrary, which are more adequate for bounded intervals, proved to be stable for the linear third-order differential equation with Chebyshev or Legendre Gauss Lobatto points as collocation points \cite{HuangSloan1992}. They have also demonstrated great performances compared to any other method (see the benchmarking in \cite{skogestad2009boundary}). An interesting hybrid method is proposed in \cite{ma2000legendre}, where the linear term is treated by a Petrov-Galerkin method (better suited for nonsymmetric problems) on Legendre polynomials, while the nonlinear term is treated pseudospectrally using a Chebyshev method. Shortly after, Shen \cite{shen2003new} proposed another dual Petrov-Galerkin method with nearly optimal computational complexity. Moreover, it is also equivalent to a natural weighted spectral-Galerkin formulation. For those reasons, this will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problem, we also discuss an appropriate discretization of the method regarding the time stepping scheme used.
 
 \subsubsection{The dual Petrov-Galerkin method}
-The interesting feature of this method lies in the choice of the test and trial functions bases. They are chosen as a compact combination of Legendre polynomials in such a way that the trial functions satisfy the underlying boundary conditions of the equation and the test functions satisfy the dual boundary conditions \eqref{kdvlinnonhomdual2}. Therefore, most matrices involved in the resolution of the problem are sparse or well-conditioned \cite{shen2003new}. We present the method for some reference domain $[-1,1]$, but it can be extended to any other domain of type $[a,b]$ by scaling the Legendre polynomials and the integrals. {\color{red} Throughout the following sections we assume $\gamma\geq0$, ie. all discussed results apply in the viscous as well as the non-viscous case.} Then we denote by $P_N$ the space of polynomials of degree $\leq N$ and set
+The interesting feature of this method lies in the choice of the test and trial functions bases. They are chosen as a compact combination of Legendre polynomials such that the trial functions satisfy the underlying boundary conditions of \eqref{kdvlinnonhom2} and the test functions satisfy the dual boundary conditions \eqref{kdvlinnonhomdual2}. Therefore, most matrices, i.e. mass matrices and stiffness matrices, involved are sparse or well-conditioned, cf. \cite{shen2003new}. We present the method on some reference domain $[-1,1]$, but it can be extended to any other domain of type $[a,b]$ by scaling the Legendre polynomials and the integrals. {\color{red} Throughout the following sections we assume $\gamma\geq0$, ie. all discussed results apply in the viscous as well as the non-viscous case.} Then we denote by $P_N$ the space of polynomials of degree $\leq N$ and set
 \be
 V_N = \left\{y\in P_N : y(1)=y(-1)=\partial_x y(1)=0\right\},
 \ee
@@ -32,14 +29,14 @@ V_N^{\ast} = \left\{y\in P_N : y(1) = y(-1) = \partial_x y(-1)=0\right\}.
 \ee
 We consider then the semi-discrete problem: Find
 \be\nonumber
-y_N: \quad I \rightarrow V_N,\quad t \mapsto y_N(t,\cdot),
+y_N\colon I \rightarrow V_N,\quad t \mapsto y_N(t,\cdot),
 \ee
 such that for almost every $t\in I$
 \begin{multline}
-(\partial_t y_N , \varphi_N) - \left( y_N, \partial_x \varphi_N \right) + \left(\partial_x y_N, \partial_{xx}\varphi_N \right)  + \\ \gamma \left( \partial_x y_N, \partial_x \varphi_N \right)- \left(\frac{y_N^2}{2}, \partial_x \varphi_N\right)= \langle u, \varphi_N\rangle_{\M,\C}, \quad \forall \varphi_N \in V_N^{\ast},
+(\partial_t y_N , \varphi_N) + \left(\partial_xy_N,\varphi_N \right) + \left(\partial_x y_N, \partial_{xx}\varphi_N \right)  + \\ \gamma \left( \partial_x y_N, \partial_x \varphi_N \right)- \left(\frac{y_N^2}{2}, \partial_x \varphi_N\right)= \langle u, \varphi_N\rangle_{\M,\C}, \quad \forall \varphi_N \in V_N^{\ast},
 \label{petrovgalerkin}
 \end{multline}
-where $\left( \cdot, \cdot \right)$ denotes the usual $L^2(\Omega)$ spatial inner product. %Let us point out that the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3} has $\mathcal{B}\cap H^1(I,\mathcal{V}^*)$ regularity, and therfore also satisfies \eqref{petrovgalerkin} for all test functions in $\mathcal{V}$.
+holds where $\left( \cdot, \cdot \right)$ denotes the usual $L^2(\Omega)$-inner product. %Let us point out that the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3} has $\mathcal{B}\cap H^1(I,\mathcal{V}^*)$ regularity, and therfore also satisfies \eqref{petrovgalerkin} for all test functions in $\mathcal{V}$.
 Denoting by $L_k$ the $k$th Legendre polynomial, we can define the basis functions as follows (see Figure~\ref{basisfunctions})
 \be
 \phi_k(x) = L_k(x) - \frac{2k+3}{2k+5}L_{k+1}(x) - L_{k+2}(x) + \frac{2k+3}{2k+5}L_{k+3}(x),
@@ -59,10 +56,10 @@ Denoting by $L_k$ the $k$th Legendre polynomial, we can define the basis functio
 
 Thus for $N \geq 3$, we have
 \beal
-&V_N = \span \left\{ \phi_0,\phi_1,...,\phi_{N-3}\right\},\\
-&V_N^{\ast} = \span \left\{ \psi_0,\psi_1,...,\psi_{N-3}\right\}.
+&V_N = \operatorname{span} \left\{ \phi_0,\phi_1,...,\phi_{N-3}\right\},\\
+&V_N^{\ast} = \operatorname{span} \left\{ \psi_0,\psi_1,...,\psi_{N-3}\right\}.
 \eeal
-Then, we represent the semi-discrete state variable $y_{N}(t, \cdot)$ on the spectral space and give its vector representation:
+Then, we introduce the semi-discrete state variable $y_{N}(t,\cdot)$ on spectral space and its vector representation:
 \be
 y_N(t,\cdot) = \sum_{k=0}^{N-3}{\hat y_k(t)\phi_k(\cdot)},\quad \mathbf{y}(t) = \left( \hat y_0(t), \hat y_1(t), ..., \hat y_{N-3}(t)\right)^T.
 \ee
@@ -71,27 +68,26 @@ The vector representation of the control is given by:
 \mathbf{u}(t) = \left( \langle u_{N}(t,\cdot), \psi_0(\cdot) \rangle, \langle u_{N}(t,\cdot), \psi_1(\cdot) \rangle, ..., \langle u_{N}(t,\cdot), \psi_{N-3}(\cdot) \rangle\right)^T
 \label{discrcontrol}
 \ee
-where the expression for the semi-discrete control $u_{N}(t, \cdot)$ is given in Section~\ref{secdiscrcontrol}. Afterwards, one builds the matrices $M$, $P$, $Q$ and $S$ of size $(N-2)\times(N-2)$ with coefficients $m_{ij}, p_{ij}, q_{ij}$ and $s_{ij}$ defined as follows:
+where the form of the semi-discrete control $u_{N}(t,\cdot)$ is given in Section~\ref{secdiscrcontrol}. Based on these discrete spaces, we build the matrices $M$, $P$, $Q$ and $S$ of size $(N-2)\times(N-2)$ with the coefficients $m_{ij}, p_{ij}, q_{ij}$ and $s_{ij}$ defined as follows:
 \be
- m_{ij}=(\phi_j, \psi_i),\quad p_{ij}=-(\partial_x\phi_j, \psi_i),\quad q_{ij}=(\partial_x\phi_j, \partial_x\psi_i),\quad s_{ij}=(\partial_x\phi_j,\partial_{xx}\psi_i).
+m_{ij}=(\phi_j, \psi_i),\quad p_{ij}=(\partial_x\phi_j, \psi_i),\quad q_{ij}=(\partial_x\phi_j, \partial_x\psi_i),\quad s_{ij}=(\partial_x\phi_j,\partial_{xx}\psi_i).
 \label{definitionsmatrices}
 \ee
 The variational formulation \eqref{petrovgalerkin} thus yields
 \be
-M\frac{d\mathbf{y}}{dt} + \left( -P +\gamma Q  + S \right)\mathbf{y} + F(\mathbf{y}) = \mathbf{u},
+M\frac{d\mathbf{y}}{dt} + \left(P +\gamma Q  + S \right)\mathbf{y} + F(\mathbf{y}) = \mathbf{u},
 \ee
-where $F(\mathbf{y})$ represents the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. It means that the nonlinearity is evaluated in the spatial domain, that we choose to be the Chebyshev-Gauss-Lobatto (CGL) points, and transferred back in the Legendre spectral space. We therefore need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform (FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we use a simpler and more direct method which is faster and easier to handle, especially when it comes to finding a discrete adjoint (see Section~\ref{numadjoint}). It consists in building beforehand the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points. By construction, those matrices satisfy
+where $F(\mathbf{y})$ is the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. This means that the nonlinearity is evaluated in the spatial domain given by Chebyshev-Gauss-Lobatto (CGL) points, and is transferred back in the Legendre spectral space. Therefore, we need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform (FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we use a simpler and more direct method which is faster and allows for an easier derivation of the discrete adjoint state equation (see Section~\ref{numadjoint}). Beforehand we build the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points. By construction, those matrices satisfy
 \be
 L_1 \mathbf{y}(t) = \mathbf{\tilde{y}}(t) = (y_N(t, x_0), y_N(t, x_2), ...y_N(t, x_{N}))^T,
 \label{spec2spat}
 \ee
-and the same holds with $L_2$ for a variable in the dual space. Thus ehe evaluation of the nonlinear term boils down to solving
+and the same holds true for a variable from $V_N^\ast$ with $L_2$. Thus the evaluation of the nonlinear term is given by
 \be
 L_1 F(\mathbf{y}(t)) = \mathbf{\tilde{y}}^2(t) = (y_N^2(t, x_0), y_N^2(t, x_2), ...y_N^2(t, x_{N}))^T.
 \label{spec2spat2}
 \ee
-Note that the spatial space, in which $\mathbf{\tilde{y}}(t)$ lies and the spectral space, in which $\mathbf{y}(t)$ lies do not apparently have the same dimensions ($N+1$ versus $N-2$). This is only due to the fact that the three boundary conditions are already included in the spectral space and not in the spatial space.
-
+Note that the spatial space, in which $\mathbf{\tilde{y}}(t)$ lies and the spectral space, in which $\mathbf{y}(t)$ lies, do not have the same dimensions, i.e. $N+1$ versus $N-2$. This is only caused by the fact that the three boundary conditions are already included in the spectral space and not in the spatial space.
 % \subsection{Time stepping scheme and adjoint - Crank-Nicolson}
 % We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable, though the resolution of the nonlinear system is computationally demanding. This scheme also has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous trial linear functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian \cite{meidner2007adaptive}. Note that the use of discrete derivatives is important for the convergence of our optimization algorithm. The scheme for the state is
 %
@@ -132,17 +128,17 @@ By $\left\{x_i \right\}, i = 0, 1, \ldots, N$, we denote the grid points of the 
 \be
 u_N(t, \cdot) = \sum_{j=0}^{N}{\hat u_j(t)\delta_{x_j}(\cdot)}
 \ee
-where the functions $\hat u_j(t)$ are the time-dependent coefficients of the control at the grid points and $\delta_{x_j}$ are Dirac functionals located at the grid points. Hence, we clearly have $u_N \in \M$ and can easily define any inner product required in the resolution of the state equation \eqref{discrcontrol}
+where $\delta_{x_j}$ are Dirac functionals located at the grid points $x_j$ and the functions $\hat u_j(t)$ are its time-dependent coefficients. Hence, there holds $u_N \in \M$. Thus the righthand side of \eqref{petrovgalerkin} takes the form
 \be
-\langle u_N(t,\cdot), \psi(\cdot) \rangle = \sum_{j=0}^{N}{\hat u_j(t)\psi(x_j)}.
+\langle u_N(t),\psi\rangle = \sum_{j=0}^{N}{\hat u_j(t)\psi(x_j)}.
 \label{discrpscontrol}
 \ee
-Beside $\mathbf{u}(t)$ defined in \eqref{discrcontrol} we introduce another vectorized representation of the variable $u_{N}(t,\cdot)$ in the space spanned by the Dirac delta functions previously mentioned
+Moreover we introduce another vectorized representation of the variable $u_{N}$ 
 \be
 \mathbf{\hat u}(t) = \left( \hat u_{0}(t), \ldots, \hat u_{N}(t)\right)^{T}.
 \label{discrcontrolindirac}
 \ee
-This one will be useful in the definition of the various norms involved in the optimization process and described in the forthcoming sections.
+This representation of the discrete control will be useful in the definition of the various norms involved in the optimization process.
 %as well as the norm in the objective functional
 %\be
 %\|{u_N}\|_{\M} = \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\tau_i u_{ji}^2}\right)^{1/2}},
@@ -151,46 +147,42 @@ This one will be useful in the definition of the various norms involved in the o
 
 \subsubsection{Time stepping scheme and adjoint - Crank-Nicolson-Leap-Frog}
 \label{numadjoint}
-We have to deal with a problem of high order derivative. Therefore an explicit temporal discretization would lead to excessively small time steps in order to get stability. An implicit method should rather be considered. In \cite{li2000error}, the authors prove convergence of a pseudospectral method with backward Euler scheme for the \KdV equation. However in practice, the first order accuracy in time authorizes only very small time steps. A second order implicit scheme like the Crank-Nicolson scheme should be preferable. This scheme has the advantage of being a method of choice in optimal control: using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one (continuous linear trial functions and discontinuous piecewise constant test functions) allows us to give directly the concrete form of the adjoint, tangent and additional adjoint equations leading to the exact computation of the discrete gradient and Hessian (see, e.g. \cite{meidner2007adaptive}). Note that the use of the correct discrete derivatives is important for the convergence of our optimization algorithm. However, the Crank-Nicolson scheme is computationally demanding. An alternative is then the two-step Crank-Nicolson Leap Frog method. In this setting, the third derivative is treated implicitely and the nonlinear term is treated explicitely. This method has already been extensively used for the \KdV equation \cite{shen2003new,ma2000legendre,ma2001optimal}.
+The \KdVB equation involves a high order derivative. Therefore an explicit temporal discretization would lead to small time steps in order to get stability. Thus an implicit method seems to be more more approriate. In \cite{li2000error}, the authors prove convergence of a pseudospectral method in space combined with a backward Euler scheme for the \KdV equation. Due the first order convergence of this method, small time steps are required to achieve good level of accuracy. Therefore, a second order implicit scheme like the Crank-Nicolson scheme is preferable. This scheme is well studied in the context of optimal control of PDEs. Using the representation of the Crank-Nicolson scheme as a continuous Galerkin method of degree one with continuous linear trial functions and discontinuous piecewise constant test functions determines the form of the discrete adjoint, tangent and additional adjoint equations. The solutions of these discrete equations are used for the exact computation of the discrete gradient and Hessian, e.g. \cite{meidner2007adaptive}. Note that the use of the exact discrete derivatives is important for the convergence of optimization algorithms. However, the Crank-Nicolson scheme is computationally demanding. An alternative is the two-step Crank-Nicolson Leap Frog method in which the third derivative is treated implicitly and the nonlinear term is treated explicitly. This method has already been extensively used for the \KdV equation, cf. \cite{shen2003new,ma2000legendre,ma2001optimal}.
 %showing for instance extended stability intervals with the Fourier spectral method \cite{chan1985fourier}. However, to the authors' knowledge, this has never been used in the context of an optimal control problem.
-Commonly, it is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-step method in order to get a discrete adjoint that is consistent with the continuous adjoint in both the distributed control problem or the terminal observations problem.
-
-
-The time domain is devided into $N_{T}$ intervals $0 = t_0 < t_1....< t_{N_{T}} = T$. While the first and last one have length $\frac{\Delta t}{2}$, the other steps are of equal length $\Delta t$. We denote hereafter the discrete state variable representation
-$$\mathbf{y}_n = \mathbf{y}(t_n) = \left( \hat y_0(t_n), \hat y_1(t_n), ..., \hat y_{N-3}(t_n)\right)^T,  \quad  n=0 \ldots N_{T}$$ and for the control
+Commonly, it is initialized by a semi-implicit step. We suggest also a slight modification of the last step of this two-step method in order to get a discrete adjoint state equation that is consistent with the continuous adjoint state equation.\\
+The time domain is divided into $N_{T}$ intervals, i.e. $0 = t_0 < t_1....< t_{N_{T}} = T$. The first and last one have length $\frac{\Delta t}{2}$ and the other steps are of equal length $\Delta t$. The fully discrete state variable has the form
+$$\mathbf{y}_n = \mathbf{y}(t_n) = \left( \hat y_0(t_n), \hat y_1(t_n), ..., \hat y_{N-3}(t_n)\right)^T,  \quad  n=0 \ldots N_{T}$$ and the control
 \beal
 &\mathbf{u}_n = \mathbf{u}(t_n) = \left( \langle u_{N}(t_n,\cdot), \psi_0(\cdot) \rangle, \langle u_{N}(t_n, \cdot), \psi_1(\cdot) \rangle, ..., \langle u_{N}(t_n, \cdot), \psi_{N-3}(\cdot) \rangle\right)^T, \\
 &\mathbf{\hat u}_n = \mathbf{\hat u}(t_n) = \left( \hat u_{0}(t_{n}), \ldots, \hat u_{N}(t_{n})\right)^{T}, \quad  n=0 \ldots N_{T}
 \eeal
- where the inner products are evaluated according to \eqref{discrpscontrol}. With the help of the matrices defined in \eqref{definitionsmatrices}, the forward scheme is as follows
-\bealn
+where the duality pairing $\langle\cdot,\cdot\rangle$ is evaluated according to \eqref{discrpscontrol}. With the help of the matrices defined in \eqref{definitionsmatrices}, the forward scheme looks as follows
+\bealn\label{forwardscheme}
 & \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 = \frac{1}{2}\left( M + \Delta t \left(P + \gamma  Q \right) \right) \mathbf{y}_0 + \frac{1}{2}\Delta t F(\mathbf{y}_0) + \frac{1}{2}\Delta t \mathbf{u}_0 \\
 & \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{n+1} = \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{n-1} +  \Delta t \left( P + \gamma Q\right)\mathbf{y}_n \\
 & \mbox{\hspace{0.5\textwidth}}+ \Delta t F(\mathbf{y}_n) + \Delta t \mathbf{u}_n,  \, n=1 \ldots N_{T}-1\\
 & M \mathbf{y}_{N_{T}+1} = \frac{1}{2}\left( M \mathbf{y}_{N_{T}} + M \mathbf{y}_{N_{T}-1} \right)+ \frac{1}{2}\Delta t \left(P + \gamma Q \right)\mathbf{y}_{N_{T}} \\
 & \mbox{\hspace{0.5\textwidth}} + \frac{1}{2}\Delta t F(\mathbf{y}_{N_{T}}) - \frac{1}{2}\Delta t S \mathbf{y}_{N_{T}-1}
 \eealn
-The first step is semi-implicit. The interior steps are classical CNLF steps. The last step - due to our modification - is not a regular, well-known step, but it is designed in such a way that the discrete adjoint shall be consistent with a CNLF discretization of the continuous adjoint. Notice that as $\Delta t$ vanishes, it becomes just a mean between the two preceding steps.
-
-As for the resolution of the optimization problem, the objective functional at the discrete level takes the form
+The first step is semi-implicit. The steps $n=1 \ldots N_{T}-1$ are classical CNLF steps. The last step is not a regular step. It is designed in a way such that the discrete adjoint state equation is consistent with a CNLF discretization of the continuous adjoint state equation. Notice, that this step becomes the mean value between the two preceding steps for $\Delta t\downarrow0$.
+The corresponding discrete objective functional has the form
 \begin{multline}
 J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{u}_{N_{T}}) = \frac{1}{2}\sum_{i=1}^{N_{T}}{\Delta t \left(\mathbf{y}_{i} - \mathbf{z}_{1,i}\right)^{t}A \left(\mathbf{y}_{i} - \mathbf{z}_{1,i}\right)} + \\ \frac{1}{2}\left(\mathbf{y}_{N_T} - \mathbf{z}_{2}\right)^{t}A \left(\mathbf{y}_{N_T} - \mathbf{z}_{2}\right)
  + \alpha \sum_{j=1}^N{\left( \sum_{i = 1}^{N_T}{\Delta t \mathbf{\hat u}_{ij}^2}\right)^{1/2}}
 \label{discrobj}
- \end{multline}
-
-This allows also to define a discrete Lagrangian:
- \begin{multline}
- \mathcal{L}_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{\hat u}_{0}, \ldots, \mathbf{\hat u}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{ u}_{N_{T}}, \mathbf{p}_{0}, \ldots, \mathbf{p}_{N_{T}-1}) = \\
- J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{\hat u}_{0}, \ldots, \mathbf{\hat u}_{N_{T}})  +\\
-   \mathbf{p}_0^T\left[ \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \mathbf{y}_0 - \frac{1}{2}\Delta t F(\mathbf{y}_0) - \frac{1}{2}\Delta t \mathbf{u}_0 \right]+\\
-  \sum_{k=1}^{N_T-2}{\mathbf{p}_k^T\left[\frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{k-1} - \Delta t \left( P + \gamma Q\right)y_k \right.}\\
-  \left.- \Delta t F(y_k) - \Delta t \mathbf{u}_k\right] + \\
- \mathbf{p}_{N_T-1}^T\left[ M \mathbf{y}_{N_T} - \frac{1}{2}\left( M \mathbf{y}_{N_T-1} + M \mathbf{y}_{N_T-2} \right)- \frac{1}{2}\Delta t \left(P+ \gamma Q\right) \mathbf{y}_{N_T - 1} \right.\\ \left.- \frac{1}{2}\Delta t F(\mathbf{y}_{N_T-1}) +\frac{1}{2}\Delta t S \mathbf{y}_{N_T-2}\right].
-  \label{discrlag}
- \end{multline}
-
-From \eqref{discrlag}, one can classically derive the discrete adjoint, hereafter written in the case of terminal observations (i.e. we consider only the tracking part depending on $z_{2}$ in \eqref{discrobj}), which will be of particular interest in the numerical examples:
+\end{multline}
+where entries of $A$ are given by $a_{ij}=(\chi_{\Omega_o}\phi_j, \psi_i)$.   
+Then we define the discrete Lagrangian function:
+\begin{multline}
+\mathcal{L}_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}},\mathbf{u}_{0}, \ldots, \mathbf{ u}_{N_{T}}, \mathbf{p}_{0}, \ldots, \mathbf{p}_{N_{T}-1}) = \\
+J_{N,N_{T}}(\mathbf{y}_{0}, \ldots, \mathbf{y}_{N_{T}}, \mathbf{u}_{0}, \ldots, \mathbf{u}_{N_{T}})  +\\
+\mathbf{p}_0^T\left[ \frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_1 - \frac{1}{2}\left( M + \Delta t P + \gamma \Delta t Q \right) \mathbf{y}_0 - \frac{1}{2}\Delta t F(\mathbf{y}_0) - \frac{1}{2}\Delta t \mathbf{u}_0 \right]+\\
+\sum_{k=1}^{N_T-2}{\mathbf{p}_k^T\left[\frac{1}{2}\left( M+\Delta t S\right) \mathbf{y}_{k+1} - \frac{1}{2}\left( M - \Delta t S\right) \mathbf{y}_{k-1} - \Delta t \left( P + \gamma Q\right)y_k \right.}\\
+\left.- \Delta t F(y_k) - \Delta t \mathbf{u}_k\right] + \\
+\mathbf{p}_{N_T-1}^T\left[ M \mathbf{y}_{N_T} - \frac{1}{2}\left( M \mathbf{y}_{N_T-1} + M \mathbf{y}_{N_T-2} \right)- \frac{1}{2}\Delta t \left(P+ \gamma Q\right) \mathbf{y}_{N_T - 1} \right.\\ \left.- \frac{1}{2}\Delta t F(\mathbf{y}_{N_T-1}) +\frac{1}{2}\Delta t S \mathbf{y}_{N_T-2}\right].
+\label{discrlag}
+\end{multline}
+From \eqref{discrlag}, we can derive the discrete adjoint state equation which has the form
  \bealn
  &M^T \mathbf{p}_{N_T-1} = -A(\mathbf{y}_{N_T} - \mathbf{z}_2)\\
  &\frac{1}{2}\left( M^T+\Delta t S^T\right) \mathbf{p}_{N_T-2} = \frac{1}{2}\left( M^T + \Delta t P^T + \gamma \Delta t Q^T \right) \mathbf{p}_{N_T - 1} \\
@@ -199,7 +191,7 @@ From \eqref{discrlag}, one can classically derive the discrete adjoint, hereafte
  &\mbox{\hspace{0.3\textwidth}}+ \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1},\quad n=2 \ldots N_T - 1.
  \label{numschemeadj}
 \eealn
-It starts with a projection of the tracking term in the state space into the adjoint space. This is followed by a single semi-implicit step and regular CNLF steps.
+in the case of terminal observations, which will be of particular interest in the numerical examples. In the first equation the terminal value of the discrete adjoint state is set. This is followed by a single semi-implicit step and regular CNLF steps.
 % The lagrangian of the problem writes at the continuous level.
 % \beal
 %   \mathcal{L}(y,q,p) = \frac{1}{2}\norm{y - y_d}_{\lspace}^2 + \alpha \norm{q}_{\M} + <p, By-q>
@@ -231,33 +223,34 @@ It starts with a projection of the tracking term in the state space into the adj
 % &-\delta y_{N}^t \left( \frac{1}{2}(M^t + \Delta t P^t + \Delta t F^{'}(y_N)^t) \right)p_N.
 % \eeal
 % The discrete adjoint scheme is obtained by imposing $\delta L(\bar y, \bar q, \bar p)\delta \bar y = 0$.
- \begin{remark}
- Without this modification of the last forward step, the discrete adjoint obtained in the case of terminal observation would be
- \bealn
- &\frac{1}{2}(M^T+\Delta t S^T) \mathbf{p}_{N_T-1} = -A(\mathbf{y}_{N_T} - \mathbf{z}_2)\\
- &\frac{1}{2}\left( M^T+\Delta t S^T\right) \mathbf{p}_{N_T-2} =  \left(\Delta t P^T + \gamma \Delta t Q^T \right) \mathbf{p}_{N_T-1} + \Delta t F^{'}(\mathbf{y}_{N_T - 1})^T \mathbf{p}_{N_T - 1} \\
- &\frac{1}{2}\left( M^T + \Delta t S^T\right)\mathbf{p}_{n-2} = \frac{1}{2}\left( M^T - \Delta t S^T\right)\mathbf{p}_{n} + \Delta t \left( P^T + \gamma Q^T\right)\mathbf{p}_{n-1} \\
- &\mbox{\hspace{0.4\textwidth}}+ \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1}, \quad n=2 \ldots N_T-1.
- \eealn
- The major difference lies in the second step. It does not correspond to a consistent discretization of the continuous adjoint equation: the time derivative is not reconstructed. It results in practice in huge oscillations in time of the adjoint variable.
- \end{remark}
-
- \begin{remark}
-  Unlike the other steps, the modification of the last forward step implies the inversion of the matrix $M$, which is typically ill-conditioned. However, this drawback is easily overcome by the use of a regularization term of type $\varepsilon I_d$ with epsilon of order $h^2$, where $h$ is the average space step.
- \end{remark}
-
- The advantage of computing the adjoint lies in the following proposition
- \begin{proposition}
- Following the definition of the discrete objective functional $J_{N,N_T}$ \eqref{discrobj} and discrete lagrangian $\mathcal{L}_{N,N_T}$ \eqref{discrlag}, the discrete derivative of the reduced tracking cost term is given by $\left(-\mathbf{p}_0,\ldots,-\mathbf{p}_{N_T-1}\right)$, where $\mathbf{p}$ is the discrete adjoint state defined by the numerical scheme \eqref{numschemeadj} in the case of terminal observations.
- \end{proposition}
+\begin{remark}
+Without this modification of the last step in \eqref{forwardscheme}, the discrete adjoint state equation obtained in the case of terminal observation would be
+\bealn
+&\frac{1}{2}(M^T+\Delta t S^T) \mathbf{p}_{N_T-1} = -A(\mathbf{y}_{N_T} - \mathbf{z}_2)\\
+&\frac{1}{2}\left( M^T+\Delta t S^T\right) \mathbf{p}_{N_T-2} =  \left(\Delta t P^T + \gamma \Delta t Q^T \right) \mathbf{p}_{N_T-1} + \Delta t F^{'}(\mathbf{y}_{N_T - 1})^T \mathbf{p}_{N_T - 1} \\
+&\frac{1}{2}\left( M^T + \Delta t S^T\right)\mathbf{p}_{n-2} = \frac{1}{2}\left( M^T - \Delta t S^T\right)\mathbf{p}_{n} + \Delta t \left( P^T + \gamma Q^T\right)\mathbf{p}_{n-1} \\
+&\mbox{\hspace{0.4\textwidth}}+ \Delta t F^{'}(\mathbf{y}_{n-1})^T \mathbf{p}_{n-1}, \quad n=2 \ldots N_T-1.
+\eealn
+The major difference is the second step. It does not correspond to a consistent discretization of the continuous adjoint state equation. The time derivative is not reconstructed. In practice this would result in large oscillations in time of the adjoint variable.
+\end{remark}
+\begin{remark}
+Unlike the other steps, the modified last step in \eqref{forwardscheme} involves the inversion of the matrix $M$, which is typically ill-conditioned. Therefore, we invert the matrix $M+\varepsilon Id$ with a $\varepsilon$ of the order $h^2$, where $h$ is the largest space step.
+\end{remark}
+\begin{proposition}
+The directional derivative of 
+\[
+\{\mathbf u_i\}_{i=1}^{N_T}\mapsto\frac{1}{2}\left(\mathbf{y}_{N_T} - \mathbf{z}_{2}\right)^{t}A \left(\mathbf{y}_{N_T} - \mathbf{z}_{2}\right),
+\]
+where $\{\mathbf y_i\}_{i=1}^{N_T}$ is the solution of \eqref{forwardscheme}, is given by $\{-\mathbf{p}_i\}_{i=1}^{N_T}$, where $\{\mathbf{p}_i\}_{i=1}^{N_T}$ is the solution of \eqref{numschemeadj}.
+\end{proposition}
 \begin{proof}
- The proof is done by standard differentiation of the discrete Lagrangian.
+The proof is done by standard differentiation of the discrete Lagrangian.
 \qquad\end{proof}
 
 \subsection{Numerical treatment of the optimization problem}
 {\color{red} In this section we consider the optimal control problem \eqref{cost} in both the viscous and non-viscous case, i.e. $\gamma\geq0$, without additional norm-constraints on the control. Thus we have $U_{ad}=\M$.}
 \subsubsection{The regularized problem}
-Numerically, the optimization problem is solved via a Newton type method. This requires an additional regularization term which we introduce as follows
+In this section, we discuss the solution of the optimal control problem \eqref{cost} by Newton type method and a continuation strategy. We introduce an additional $L^2$ regularization term in \eqref{cost}:
 \begin{multline}
 \min_{u \in L^2(\Omega_c\times I), y\in Y}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{o}}y - z_1}_{L^2(I\times \Omega_{o})}^2+\|\chi_{\Omega_{o}}y(T)-z_2\|_{L^2(\Omega_{o})}^2\right)\\
 +\alpha \norm{u}_{L^1(\Omega_c, L^{2}(I))} + \frac{\rg}{2}\norm{u}_{L^2(I\times\Omega_c)}^2\quad\text{s.t.}~\eqref{kdvcontrol1}-\eqref{kdvcontrol3}.
@@ -268,24 +261,24 @@ Numerically, the optimization problem is solved via a Newton type method. This r
 %& = f(y) + \alpha \norm{u}_{L^1(\Omega,L^2(I))} + \frac{\rg}{2}\norm{u}_{L^2(\Omega,L^2(I))}^2,
 %\label{costreg}
 %\eeal
-This enables us to look for controls in the space $L^2(I\times\Omega_c)$. Since the embedding $L^1(\Omega_c,L^2(I))\hookrightarrow \M$ is isometric, then any $y \in L^1(\Omega_c,L^2(I))$ will satisfy
+This problem is posed in the Hilbert space $L^2(I\times\Omega_c)$. Since the embedding $L^1(\Omega_c,L^2(I))\hookrightarrow \M$ is isometric, we have
 \be
-\psi(u) = \norm{u}_{\M} = \norm{u}_{L^1(I,L^2(\Omega_c))} = \int_{\Omega_c}{\norm{u}_{L^2(I)}dx}.
+\psi(u) = \norm{u}_{\M} = \norm{u}_{L^1(I,L^2(\Omega_c))} = \int_{\Omega_c}{\norm{u(x)}_{L^2(I)}dx}.
 \ee
-In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern}. In the nonlinear case, the development is analogous. To obtain the optimality conditions, one introduces the proximal map (see, e.g. \cite{bauschke2011convex}) of the $L^1(\Omega_c, L^{2}(I))$ norm:
+for any $L^2(I\times \Omega_c)$. In \cite{herzog2012directional}, the authors study this problem in the linear case, and prove that this setting promotes a \textit{striped sparsity pattern} of the optimal control. For derivation of the optimality conditions, we introduce the proximal map of the $L^1(\Omega_c, L^{2}(I))$ norm, e.g. \cite{bauschke2011convex}:
 \be
 \operatorname{Prox}_{\psi/ \rg}(q)(t,x) = \left(1-\frac{\alpha}{\rg\norm{q(x)}_{L^{2}(I)}}\right)^{+}q(t,x) \quad \mbox{ for } q \in L^{2}(I\times\Omega_c).
 \ee
-We can then express the optimality condition for \eqref{costreg} by the pointwise projection formula
+We can then express the optimality condition for \eqref{costreg} by the pointwise formula
 \be
-\bar u_{\rg}(t,x) = \operatorname{Prox}_{\psi/ \rg}\left(-\frac 1\rg \bar p_\rg\right)(t,x)=-\frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{\bar p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}\bar p_{\rg}(t,x).
+\bar u_{\rg}(t,x) = \operatorname{Prox}_{\psi/ \rg}\left(-\frac 1\rg \bar p_\rg\right)(t,x)=-\frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{\bar p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}\bar p_{\rg}(t,x)
 \ee
-with $\bar p_\rg(\bar u_\rg)=S_{obs}'^\star(S_{obs}\bar u_\rg-z)$ with $z=(z_1,z_2)$. It is then directly possible to solve via a Newton type method the equation
+with $\bar p_\rg(\bar u_\rg)=S_{obs}'^\star(S_{obs}\bar u_\rg-z)$ and $z=(z_1,z_2)$. Now a Newton type method can applied for the solution of 
 \be
 F(u_{\rg})(t,x) = u_{\rg}(t,x) + \frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}p_{\rg}(t,x) = 0.
 \label{optcondition}
 \ee
-Following \cite{pieperthesis}, one can also reformulate this optimality condition thanks to the "normal map", due to Robinson:
+However, we follow \cite{pieperthesis} and reformulate the optimality condition \eqref{optcondition} using the "normal map" due to Robinson:
 \be
 \operatorname{G}(q_{\rg}) = \rg q_{\rg} + p_{\rg}(\operatorname{Prox}_{\psi/ \rg}(q_{\rg})) = 0,
 \label{normalmap}
@@ -309,22 +302,20 @@ for the auxiliary variable $q_{\rg}$.  %such that $u_{\rg} = \operatorname{Prox}
 % F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
- To solve problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a general derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}. To be more precise, we get
- \be
-  \operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + S_{obs}'^\star S_{obs}'(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
- \ee
- where the generalized derivative of the proximal operator is given by
+For the solution of problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a generalized derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}. To be more precise, we have
+\be
+\operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + S_{obs}'^\star S_{obs}'\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
+\ee
+where the generalized derivative of the proximal map is given by
 \begin{numcases}{\operatorname{DProx}_{\psi/ \rg}\delta q_{\rg} = }
 \left(1-\frac{\alpha}{\rg\norm{q_{\rg}(x)}_{L^{2}(I)}}\right)\delta q_{\rg}(x) + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q_{\rg}\right)_{L^2(I)}}{\norm{q_{\rg}(x)}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
  & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}(x)}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
 0 & \mbox{otherwise.}
 \end{numcases}
-The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation only a continuation strategy in $\rg$ is sufficient often to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not sufficient for our problem due to the nonlinearity of the state equation. A globalization strategy based on the decrease of the objective functional is required. We implement it based on the truncated conjugate gradient algorithm for trust region problems by Steihaug \cite{pieperthesis,steihaug1983}. A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}.
-
+The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$, cf. \cite{PieperRund2015,pieperthesis}. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation numerical experiments show that only the continuation strategy in $\rg$ is sufficient to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not sufficient for our problem due to the nonlinearity of the state equation. Additional to the continuation strategy in $\rg$ a globalization strategy based on the decrease of the regularized objective functional is required for the solution of each regularized problem. We implement a trust region semi-smooth Newton based on the truncated conjugate gradient algorithm by Steihaug \cite{pieperthesis,steihaug1983}. A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}.
 
 \subsubsection{Discretization of the control and mass lumping}
-In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible anymore as we need a discretization that is compatible with $L^2(\Omega_c \times I)$ functionals. Thus, for this regularized case, one need to find a discretization that should lead to an equivalent problem to \eqref{cost} in the limiting case $\rg \to 0$ (i.e. to obtain a Dirac measure discretization as in Section~\ref{secdiscrcontrol}). We suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear, continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points $(x_n), n=0 \ldots N$ previsously mentioned.
-
+In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible due to $L^2(I\times\Omega_c)$ regularization term. Thus we introduce a discretization of the control which is compatible to the Dirac discretization in the limiting case $\rg \to 0$ and suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear and continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points $(x_n)$, $n=0 \ldots N$ previously mentioned.
 % The finite element space associated with this grid is
 % \be
 % V_h = \left\{ u_h \in \mathcal{C}_0 (\Omega) \,|\, u_{h|K} \in \mathcal{P}_1(K) \mbox{ for all } K \in \mathcal{T}_h \mbox{ and } u_{h|\partial \Omega} = 0 \right\}.
@@ -334,8 +325,7 @@ In the unregularized problem, the controls are discretized as nodal Dirac measur
 % X_\tau^0 (I,V) = \left\{ v_{\tau} \in L^2(I,V) \, | \, v_{\tau|I_m} \in P_0(I_m,V), m=1..N_T\right\},
 % \ee
 % where $I_m = (t_{m-1}, t_m]$ and $0 = t_0 < t_1....< t_m = T$. The time steps are denoted $\tau_m = t_m - t_{m-1}$ and by $\tau$ we designate the maximum of them. The full discrete space for the control is then $X_{\tau}^0(I,V_h)$.
-
-Moreover, the various norms involved in the optimization problem shall be computed via mass lumping, i.e, the trapezoidal rule is used for the evaluation of the spatial integrals for each cell. Therefore, for $u_h = \sum_{j=1}^{N_T}{\chi_{I_j}\sum_{n=0}^{N}{\mathbf{\hat u}_{jn} e_n}}$, where $I_{j} = (t_{j-1}, t_j]$ is the $j^{th}$ time interval considered and $e_{n}$ is the basis vector for piecewise linear, continuous finite elements centered at the grid point $x_{n}$, it holds
+Moreover, all scalar products and norms involving the discrete control are computed using mass lumping, i.e. the trapezoidal rule is used for the evaluation of the spatial integrals for each cell. Therefore, for $u_h = \sum_{j=1}^{N_T}{\chi_{I_j}\sum_{n=0}^{N}{\mathbf{\hat u}_{jn} e_n}}$, where $I_{j} = (t_{j-1}, t_j]$ is the $j^{th}$ time interval considered and $e_{n}$ is the basis vector for piecewise linear, continuous finite elements centered at the grid point $x_{n}$, it holds
 \beal
 &\norm{u_h}_{L^1(\Omega, L^2(I))} = \sum_{n=0}^N{d_n\left(\sum_{j=1}^{N_T}{\Delta t \mathbf{\hat u}_{nj}^2}\right)^{1/2}}, \quad \norm{u_h}_{L^2(\Omega, L^2(I))}^2 = \sum_{n=0}^N{d_n\left(\sum_{j=1}^{N_T}{\Delta t \mathbf{\hat u}_{nj}^2}\right)},\\
 &\langle u_h,\psi \rangle = \sum_{j=1}^{N_T} \chi_{I_j} \sum_{n=0}^N{d_n \mathbf{\hat u}_{jn}\psi_{n}}
