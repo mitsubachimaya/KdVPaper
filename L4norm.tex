@@ -1,15 +1,15 @@
 \section{Well-posedness of the optimal control problem for $\gamma=0$ without norm-constraint on the control}
 \label{wp2}
 %!TEX root = kdv.tex
-This section is based on ideas from \cite{lions1985control}. There the state equation is considered as an equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections. Moreover we add the term $\frac{\eta}{4} \norm{y}_{L^4(I\times \Omega)}^4$ for $\eta >0$ to the cost functional. In the following we will see that the boundedness of the state in the $L^4(I,L^4(\Omega))$-norm makes the state equation a well-defined equality constraint and ensures the time-global existence of $y$ in $\mathcal B$. Thus we consider an optimal control problem of the form
+In this section we prove existence of optimal controls in the non-viscous case $\gamma=0$ without norm-constraints on the optimal control. The proof is based on the knowledge that the boundedness of the state $y$ in the $L^4(I\times\Omega))$-norm implies an a priori estimate of $y$ in $\mathcal B$ and implies $y\partial_xy\in\Hm1$. Therefore, we add the $L^4(I\times\Omega)$-norm as an additional regularization term to objective functional of \eqref{cost} and use the non state reduced approach from \cite{lions1985control}. In \cite{lions1985control}, the state equation is considered as an equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections.\\
+In the following we consider an optimal control problem of the form
 \begin{multline}
 \min_{u \in \M\,,y\in \tilde Y}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{o}}y - z_1}_{L^2(I\times \Omega_{o})}^2+\|\chi_{\Omega_{o}}y(T)-z_2\|_{L^2(\Omega_{o})}^2\right) \\+ \alpha \norm{u}_{\mathcal{M}(\Omega, L^{2}(I))} + \frac{\eta}{4} \norm{y}_{L^4(I\times \Omega)}^4.
 \label{cost2}
 \end{multline}
-subject to \eqref{kdvcontrol1}-\eqref{kdvcontrol3}. The state space is chosen as $\tilde Y = L^4(I,L^4(\Omega))\cap H^1(I,\mathcal V^\ast)$.  The $L^4(I,L^4(\Omega))$-norm is chosen since it guarantees the following regularity of the non-linearity.
-\begin{lemma}
-\label{lemyyxL4}
- Let $y \in L^4(I,L^4(\Omega))$. Then $y \partial_x y \in L^2(I,H^{-1}(\Omega))$.\\
+subject to \eqref{kdvcontrol1}-\eqref{kdvcontrol3} with $\gamma=0$. The state space is chosen as $\tilde Y = L^4(I,L^4(\Omega))\cap H^1(I,\mathcal V^\ast)$.  The $L^4(I,L^4(\Omega))$-norm is chosen since it guarantees the following regularity of the non-linearity.
+\begin{lemma}\label{lemyyxL4}
+Let $y \in L^4(I,L^4(\Omega))$. Then $y \partial_x y \in L^2(I,H^{-1}(\Omega))$.\\
 \end{lemma}
 \begin{proof}
 {\color{red}The proof is based on similar arguments as in the proof of Lemma \ref{lemyyx2}.}
@@ -73,9 +73,6 @@ Next we check that $(\bar y, \bar u)$ is a state-control pair according to Defin
 %\end{multline*}
 Therefore $(\bar y, \bar u)$ is a state-control pair and satisfies the weak formulation \eqref{weakformkdv L4}. The tracking functional (in which we include the $L^4$ part) is weakly lower semi-continuous in $L^4(I\times \Omega)\times L^2(\Omega)$, the control term is weakly-$*$ lower semi-continuous in $\M$. Therefore the state-control pair $(\bar y, \bar u)$ is a minimizer of $J$.
 \qquad\end{proof}
-
-In the next section we proceed with the derivation of the optimality conditions for problem \eqref{cost} posed on $U_{ad}$.
-
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
