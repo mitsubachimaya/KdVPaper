@@ -1,14 +1,14 @@
 %!TEX root = kdv.tex
 \appendix
 \section{Well-posedness of the state equation, tangent equation and adjoint equation}\label{sec:appwp}
-{\color{blue} In this section we prove various estimates from the main part of the paper and establish the wellposedness of the linearized state equation as well as the adjoint linearized state equation.} 
+{\color{blue} In this section we prove various estimates from the main part of the paper and establish the wellposedness of the linearized state equation as well as the adjoint linearized state equation.}
 \subsection{Linear estimates: Proof of estimate \eqref{linestimate_regular}}\label{sec:linear-estimates}
 {\color{red} Here we consider the viscous and and non-viscous case at the same time. Thus we have $\gamma\geq 0$.} The proof is largely inspired from \cite{rosier1997exact,glass2008some}. Let $y\in \mathcal C(\bar I,\mathcal D(A))\,\cap\,\mathcal C^1(\bar I,L^2(\Omega))$ be the classical solution of \eqref{kdvlinnonhom} for smooth versions of the data $f$ and $y_0$. We multiply \eqref{kdvlinnonhom1} which holds in $L^2(\Omega)$ for a.e. $t\in I$ with $y$ and get
 \[
 \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x}y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x} y)^{2}~\mathrm dx}=  \langle f,y\rangle_{H^{-1}(\Omega),H^{1}_{0}(\Omega)}.
 \]
 Applying the Cauchy-Schwarz followed by Young's inequality to the right-hand side leads to
-\be 
+\be
 \frac{1}{2}\frac{d}{dt}\int_{0}^{L}{y^{2}~\mathrm dx} + \abs{\partial_{x} y(t,0)}^{2} + \gamma \int_{0}^{L}{(\partial_{x}y)^{2}~\mathrm dx}\leq \frac{1}{2}\norm{f}_{H^{-1}(\Omega)}^{2}+\frac{1}{2}\norm{y}_{H^{1}_{0}(\Omega)}^{2}
 \label{1linnhupperbound}.
 \ee
@@ -48,7 +48,7 @@ This yields
 \|y\|_{\mathcal C(\bar I,L^2(\Omega))}+\|y\|_{L^2(I,H^1_0(\Omega))}\leq c(T,L)\,(\|f\|_{\Hm1}+\|y_0\|_{L^2(\Omega)})
 \]
 for some $c(T,L)>0$ independent of $y$, $f$ and $y_o$.
-\subsection{Nonlinear estimates: Proof of Lemma~\ref{lemyyx2}}
+\subsection{Nonlinear estimates: Proof of \cref{lemyyx2}}
 \label{sec:nonl-state-equat}
 The proof is inspired from \cite[Theorem 2.8]{faminskii2010initial}. Let us consider $y \in \B$ and $z \in \B$. There holds $\mathcal B\hookrightarrow L^4(I\times \Omega)$ and therefore we can estimate using $\|y\|_{L^\infty(\Omega)}^2\leq c\|y\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}$
 \begin{multline*}
@@ -74,7 +74,7 @@ Let $(\delta u,\delta y_0)\in \Hm1\times L^2(\Omega)$ and $y\in \mathcal B$. A f
 \[
 \delta y=\mathcal L(\delta u-\partial_x(y\delta y),\delta y_0)
 \]
-where $\mathcal L$ is the solution operator from Remark \ref{rmklinearoperator}.
+where $\mathcal L$ is the solution operator from \cref{rmklinearoperator}.
 \end{definition}
 \begin{proposition}\label{prop:tangent}
  Let $(\delta u,\delta y_0) \in \Hm1\times L^2(\Omega)$ and $y\in \mathcal B$. Then, there exists a unique solution $\delta y \in \mathcal{B}$ of \eqref{linkdv1}-\eqref{linkdv3}. Furthermore, there exists a constant $\widetilde C(T,L,\norm{y}_{\mathcal{B}})$ such that the following estimate holds
@@ -88,7 +88,7 @@ We define the linear mapping
 \[
 \Psi_{\delta u, \delta y_0,y}\colon \mathcal B_{\theta}\rightarrow \mathcal B_{\theta},~~\Psi_{\delta u, \delta y_0,y}(\delta y) = \mathcal{L}(\delta u - \partial_x(y\delta y),\delta y_0)
 \]
-with $\mathcal B_{\theta}$ defined as in \eqref{btheta} and \eqref{normbtheta} and $\mathcal{L}$ being the linear \KdV operator described in Remark~\ref{rmklinearoperator}. Our goal is to show that under some constraints on $\theta$, $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping, such that the Banach fixed point theorem can be applied. First we estimate $\partial_x(y \delta y)$ in the $L^2((0,\theta),H^{-1}(\Omega))$-norm
+with $\mathcal B_{\theta}$ defined as in \eqref{btheta} and \eqref{normbtheta} and $\mathcal{L}$ being the linear \KdV operator described in \cref{rmklinearoperator}. Our goal is to show that under some constraints on $\theta$, $\Psi_{\delta u, \delta y_0,y}$ is a contraction mapping, such that the Banach fixed point theorem can be applied. First we estimate $\partial_x(y \delta y)$ in the $L^2((0,\theta),H^{-1}(\Omega))$-norm
 \begin{multline}\label{estimate_variable_coefficient}
 \|\partial_x(y\delta y)\|_{L^2((0,\theta),H^{-1}(\Omega))}=\left(\int_{0}^{\theta}\left(\underset{\|v\|_{H^1_0(\Omega)}=1}{\operatorname{sup}}(y\delta y,\partial_x v)_{L^2(\Omega)}\right)^2~\mathrm dt\right)^{1/2}\\
 \leq\left(\int_{0}^{\theta}\|\delta y\|_{L^2(\Omega)}^2\|y\|_{L^\infty(\Omega)}^2~\mathrm dt\right)^{1/2}\leq c\,\|y\|_{\mathcal C([0,\theta],L^2(\Omega))}\left(\int_{0}^{\theta}\|\delta y\|_{H^1_0(\Omega)}\|\delta y\|_{L^2(\Omega)}~\mathrm dt\right)^{1/2}\\
@@ -194,7 +194,7 @@ Let $(\phi,p_T)\in L^1(I,L^2(\Omega))\times L^2(\Omega)$. Then the equation \eqr
 holds.
 \end{proposition}
 \begin{proof}
-{\color{red} First we change the variables in the adjoint equation by using the transformation $\tilde x=L-x$ and $\tilde t=T-t$. Then uniqueness follows from \cite[Proposition 15]{coron2003exact}. Existence and the estimate \eqref{apriori_adjoint} are proven in the same way as in the proof of Proposition \ref{prop:tangent}. Hereby we rely on Lemma \ref{lemadjoint}.}
+{\color{red} First we change the variables in the adjoint equation by using the transformation $\tilde x=L-x$ and $\tilde t=T-t$. Then uniqueness follows from \cite[Proposition 15]{coron2003exact}. Existence and the estimate \eqref{apriori_adjoint} are proven in the same way as in the proof of \cref{prop:tangent}. Hereby we rely on \cref{lemadjoint}.}
 %The proof uses similar arguments as the proof of Proposition \ref{prop:tangent}. In particular it is based on the Banach fixed theorem and Lemma \eqref{lemadjoint}. The estimate \eqref{apriori_adjoint} follows from
 %\begin{multline*}
 %\left|\int_0^Ly\partial_xpp~\mathrm dx\right|=\left|\frac 1 2\int_0^Lp^2\partial_xy~\mathrm dx\right|\leq c\,\|p\|_{H^1_0(\Omega)}\|p\|_{L^2(\Omega)}\|y\|_{H^1_0(\Omega)}\\

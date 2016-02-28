@@ -37,7 +37,7 @@ such that for almost every $t\in I$
 \label{petrovgalerkin}
 \end{multline}
 holds where $\left( \cdot, \cdot \right)$ denotes the usual $L^2(\Omega)$-inner product. %Let us point out that the weak solution of \eqref{kdvlinnonhom1} - \eqref{kdvlinnonhom3} has $\mathcal{B}\cap H^1(I,\mathcal{V}^*)$ regularity, and therfore also satisfies \eqref{petrovgalerkin} for all test functions in $\mathcal{V}$.
-Denoting by $L_k$ the $k$th Legendre polynomial, we can define the basis functions as follows (see Figure~\ref{basisfunctions})
+Denoting by $L_k$ the $k$th Legendre polynomial, we can define the basis functions as follows (see \cref{basisfunctions})
 \be
 \phi_k(x) = L_k(x) - \frac{2k+3}{2k+5}L_{k+1}(x) - L_{k+2}(x) + \frac{2k+3}{2k+5}L_{k+3}(x),
 \ee
@@ -68,7 +68,7 @@ The vector representation of the control is given by:
 \mathbf{u}(t) = \left( \langle u_{N}(t,\cdot), \psi_0(\cdot) \rangle, \langle u_{N}(t,\cdot), \psi_1(\cdot) \rangle, ..., \langle u_{N}(t,\cdot), \psi_{N-3}(\cdot) \rangle\right)^T
 \label{discrcontrol}
 \ee
-where the form of the semi-discrete control $u_{N}(t,\cdot)$ is given in Section~\ref{secdiscrcontrol}. Based on these discrete spaces, we build the matrices $M$, $P$, $Q$ and $S$ of size $(N-2)\times(N-2)$ with the coefficients $m_{ij}, p_{ij}, q_{ij}$ and $s_{ij}$ defined as follows:
+where the form of the semi-discrete control $u_{N}(t,\cdot)$ is given in \cref{secdiscrcontrol}. Based on these discrete spaces, we build the matrices $M$, $P$, $Q$ and $S$ of size $(N-2)\times(N-2)$ with the coefficients $m_{ij}, p_{ij}, q_{ij}$ and $s_{ij}$ defined as follows:
 \be
 m_{ij}=(\phi_j, \psi_i),\quad p_{ij}=(\partial_x\phi_j, \psi_i),\quad q_{ij}=(\partial_x\phi_j, \partial_x\psi_i),\quad s_{ij}=(\partial_x\phi_j,\partial_{xx}\psi_i).
 \label{definitionsmatrices}
@@ -77,7 +77,7 @@ The variational formulation \eqref{petrovgalerkin} thus yields
 \be
 M\frac{d\mathbf{y}}{dt} + \left(P +\gamma Q  + S \right)\mathbf{y} + F(\mathbf{y}) = \mathbf{u},
 \ee
-where $F(\mathbf{y})$ is the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. This means that the nonlinearity is evaluated in the spatial domain given by Chebyshev-Gauss-Lobatto (CGL) points, and is transferred back in the Legendre spectral space. Therefore, we need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform (FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we use a simpler and more direct method which is faster and allows for an easier derivation of the discrete adjoint state equation (see Section~\ref{numadjoint}). Beforehand we build the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points. By construction, those matrices satisfy
+where $F(\mathbf{y})$ is the nonlinear term and is treated as suggested in \cite{shen2003new} i.e. using the pseudospectral approach. This means that the nonlinearity is evaluated in the spatial domain given by Chebyshev-Gauss-Lobatto (CGL) points, and is transferred back in the Legendre spectral space. Therefore, we need to be able to transform back and forth from the spectral space of Legendre coefficients to the values on the CGL points. This can be done using the fast Fourier transform (FFT) and the Chebyshev-Legendre transform. However, for the polynomial degrees we consider here (between 160 and 512), we use a simpler and more direct method which is faster and allows for an easier derivation of the discrete adjoint state equation (see \cref{numadjoint}). Beforehand we build the matrices  $L_1 =\left(\phi_j(x_i)\right)$ and $L_2 =\left(\psi_j(x_i)\right)$, $i=0 \ldots N$, $j=0 \ldots N-3$, where the points $x_i$ are the CGL points. By construction, those matrices satisfy
 \be
 L_1 \mathbf{y}(t) = \mathbf{\tilde{y}}(t) = (y_N(t, x_0), y_N(t, x_2), ...y_N(t, x_{N}))^T,
 \label{spec2spat}
@@ -315,7 +315,7 @@ where the generalized derivative of the proximal map is given by
 The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$, cf. \cite{PieperRund2015,pieperthesis}. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation numerical experiments show that the continuation strategy in $\rg$ is sufficient to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not case for our problem due to the nonlinearity of the state equation. Additional to the continuation strategy in $\rg$ a globalization strategy based on the decrease of the regularized objective functional is required. We implement a trust region semi-smooth Newton based on the truncated conjugate gradient algorithm by Steihaug \cite{pieperthesis,steihaug1983}. A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}.
 
 \subsubsection{Discretization of the control and mass lumping}
-In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible due to $L^2(I\times\Omega_c)$ regularization term. Thus we introduce a discretization of the control which is compatible to the Dirac discretization in the limiting case $\rg \to 0$ and suggest to follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear and continuous finite elements on a grid whose nodes are the Chebyschev-Gauss-Lobatto points $(x_n)$, $n=0 \ldots N$ previously mentioned.
+In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible due to $L^2(I\times\Omega_c)$ regularization term. Thus we introduce a discretization of the control which is compatible to the Dirac discretization in the limiting case $\rg \to 0$, i.e. we follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear and continuous finite elements on a grid whose nodes are given by the Chebyschev-Gauss-Lobatto points $(x_n)$, $n=0 \ldots N$ previously mentioned.
 % The finite element space associated with this grid is
 % \be
 % V_h = \left\{ u_h \in \mathcal{C}_0 (\Omega) \,|\, u_{h|K} \in \mathcal{P}_1(K) \mbox{ for all } K \in \mathcal{T}_h \mbox{ and } u_{h|\partial \Omega} = 0 \right\}.
@@ -325,97 +325,82 @@ In the unregularized problem, the controls are discretized as nodal Dirac measur
 % X_\tau^0 (I,V) = \left\{ v_{\tau} \in L^2(I,V) \, | \, v_{\tau|I_m} \in P_0(I_m,V), m=1..N_T\right\},
 % \ee
 % where $I_m = (t_{m-1}, t_m]$ and $0 = t_0 < t_1....< t_m = T$. The time steps are denoted $\tau_m = t_m - t_{m-1}$ and by $\tau$ we designate the maximum of them. The full discrete space for the control is then $X_{\tau}^0(I,V_h)$.
-Moreover, all scalar products and norms involving the discrete control are computed using mass lumping, i.e. the trapezoidal rule is used for the evaluation of the spatial integrals for each cell. Therefore, for $u_h = \sum_{j=1}^{N_T}{\chi_{I_j}\sum_{n=0}^{N}{\mathbf{\hat u}_{jn} e_n}}$, where $I_{j} = (t_{j-1}, t_j]$ is the $j^{th}$ time interval considered and $e_{n}$ is the basis vector for piecewise linear, continuous finite elements centered at the grid point $x_{n}$, it holds
+Thus, the discrete control has the form
+\[
+u_h = \sum_{j=1}^{N_T}{\chi_{I_j}\sum_{n=0}^{N}{\mathbf{\hat u}_{jn} e_n}},
+\]
+where $\chi_{I_j}$, $I_{j} = (t_{j-1}, t_j]$ is the characteristic function of the $j^{th}$ time interval, and $e_{n}$ is the finite element basis function centered at the grid point $x_{n}$. All scalar products and norms involving the discrete control are computed using mass lumping, i.e. the trapezoidal rule is used for the evaluation of the spatial integrals on each cell. Therefore, we have
 \beal
 &\norm{u_h}_{L^1(\Omega, L^2(I))} = \sum_{n=0}^N{d_n\left(\sum_{j=1}^{N_T}{\Delta t \mathbf{\hat u}_{nj}^2}\right)^{1/2}}, \quad \norm{u_h}_{L^2(\Omega, L^2(I))}^2 = \sum_{n=0}^N{d_n\left(\sum_{j=1}^{N_T}{\Delta t \mathbf{\hat u}_{nj}^2}\right)},\\
-&\langle u_h,\psi \rangle = \sum_{j=1}^{N_T} \chi_{I_j} \sum_{n=0}^N{d_n \mathbf{\hat u}_{jn}\psi_{n}}
+&\langle u_h,\psi \rangle_{L^2(\Omega)} = \sum_{j=1}^{N_T} \chi_{I_j} \sum_{n=0}^N{d_n \mathbf{\hat u}_{jn}\psi_{n}}
 \label{masslumping}
 \eeal
-for all spectral basis test functions $\psi$ where we have denoted $\psi_n = \psi(x_n)$, where $d_n = \int_{\Omega_c}{e_n~\mathrm{d}x}$.
+for all spectral basis functions $\psi$ where $\psi_n = \psi(x_n)$ and $d_n = \int_{\Omega_c}{e_n~\mathrm{d}x}$.
 %$\varphi_h = \sum_{j=1}^{N_T}{\chi_{I_j}\sum_n{\varphi_{jn} e_n}}$.
 
 \begin{remark}
- With \eqref{masslumping} as expressions for the norms and inner products, all projections formulae involved at the continuous level in the optimization process can be transfered one to one to the (spatial) discrete vector. Therefore, \eqref{optcondition} or \eqref{normalmap} hold at the discrete level.
+Due to the use of \eqref{masslumping}, the formulas \eqref{optcondition} resp. \eqref{normalmap} hold also on the discrete level.
 \end{remark}
 
 
 \subsection{Numerical examples}\label{num_ex}
-The numerical examples illustrate the problem of wave generation. We want to investigate the optimal position and vertical movement of a wavemaker. A similar study has been carried out in a slighty different framework in \cite{nersisyan2014generation}, where one possible application was to design artificial surfing facilities. For that purpose, we use a version of the forced Korteweg-de Vries equation with physical parameters, as the one derived in \cite{milewski2004forced}
+In this section, we investigate an inverse problem involving the flow of water in a narrow channel and the problem of the optimal positioning and vertical movement of a wavemaker. A similar optimal design problem is carried out in \cite{nersisyan2014generation}. A possible application is the design of artificial surfing facilities. For that purpose, we use a version of the forced Korteweg-de Vries equation with physical motivated parameters, as in \cite{milewski2004forced}:
 \be
 \partial_t y + f \partial_x y - \frac{1}{6}\partial_{xxx} y - \frac{3}{2}y \partial_x y = u
 \label{PhysicalKDV}
 \ee
-where the parameter $f$ is proportional to $F-1$ ($F$ is the Froude number). Its value determines if a flow is subcritical ($f\leq 0$) or supercritical ($f> 0 $). The forcing $u$ can be interpreted as the spatial derivative of the bottom topography. In both examples, we consider the minimization problem
+where the parameter $f$ is proportional to $F-1$ ($F$ is the Froude number). Its value determines if a flow is subcritical ($f\leq 0$) or supercritical ($f> 0 $). The forcing $u$ is interpreted as the spatial derivative of the bottom topography. In both examples, we consider the minimization problem
 \be
 \min_{u \in \mathcal{M}(\Omega_c,L^2(I)), y\in Y}J(y,u) =\frac{1}{2}\|\chi_{\Omega_{o}}y(T)-z\|_{L^2(\Omega_{o})}^2 +\alpha \norm{u}_{\mathcal{M}(\Omega_c, L^{2}(I))}
 \ee
-for different $\Omega_c$, $\Omega_o$ and $z$, where $y$ is the solution of \eqref{PhysicalKDV}. In particular, we emphasize that $U_{ad} = \mathcal{M}(\Omega_c,L^2(I))$.
+for different $\Omega_c$, $\Omega_o$ and $z$, where $y$ is the solution of \eqref{PhysicalKDV}. In particular, we emphasize that $U_{ad} = \mathcal{M}(\Omega_c,L^2(I))$ and $\gamma=0$. In all numerical examples, we have never encountered blow ups of $y$. 
 
 \paragraph{\underline{Inverse problem}}
-In the first example, we want to reconstruct the time varying bottom topography which creates waves. These waves are observed at final time T. We generate beforehand a wave with the following source term
+In the first example, we reconstruct the time-varying bottom topography which creates water waves in a narrow channel. These waves are observed at final time T. We generate beforehand a wave with the following source term
 \begin{numcases}
 {u^\dag(t,x) = }
  \nonumber 10\delta_{\{x = 1.5\}}, \mbox{ when } 0 < t\leq 2.5 \\
  0, \mbox{ when } 2.5 \leq t\leq 5
  \label{forcingq}
 \end{numcases}
-in a subcritical configuration ($f = -0.5$). The time horizon is $T = 5$. The space-time grid is parametrized with $N = 256$ and $\Delta t = 0.01$. The generated wave is displayed in Fig~\ref{waveobservation}.
+in a subcritical configuration ($f = -0.5$). The time horizon is $T = 5$. The space-time grid is parametrized with $N = 256$ spatial grid points and a time-step size of $\Delta t = 0.01$. The generated wave is displayed in \cref{waveobservation}.
 \begin{figure}[htb]
-\begin{subfigure}[b]{0.5\textwidth}
-\centering
-\includegraphics[width=\textwidth]{images/ex1yd3D.pdf}
-\end{subfigure}\qquad
-\begin{subfigure}[b]{0.5\textwidth}
-\centering
-\input{images/desired_state_inverse.tex}
-\end{subfigure}
-\caption{Left: Exact wave $y^\dag$ generated by the forcing term $u$, for $f = -0.5$ (i.e. subcritical flow). Right: $z$-profile at terminal time with Gaussian white noise.}
+\subfloat{\includegraphics[width=0.48\textwidth]{images/ex1yd3D.pdf}}\quad
+\subfloat{\input{images/desired_state_inverse.tex}}
+\caption{Left: Exact wave $y^\dag$ generated by the forcing term $u$, Right: $z$-profile at terminal time with Gaussian white noise.}
 \label{waveobservation}
 \end{figure}
-One can see a series of downstream waves - note that the flow enters the domain from the right - generated by the bottom topography induced by $u$ (recall that $u$ is proportional to the derivative of the topography), while a solitary wave is going upstream, at constant speed and constant height, which is typical for the Korteweg-de Vries equation.. Afterwards, a white Gaussian noise is added to the $y$-profile at final time $T$ such that the magnitude of the noise is in average 5 percent of the magnitude of the original signal $\left( \frac{\norm{\hat y - \hat y_{noisy}}_2}{\norm{\hat y}_2} \approx 0.05\right)$.
-At the end of the continuation strategy, the support of the control is, according to Proposition~\ref{propsubgcondition}, included in the domains where $\|p(x)\|_{L^2(I)} = \alpha$. One can see on Fig.~\ref{support} (left) that the final control is a point source, located close to $x=1.5$. The time profile of the control is depicted on Fig.~\ref{support} (right) and it follows the original one quite well.
+One can see a series of downstream waves (note that the flow enters the domain from the right) and a solitary wave going upstream generated by the bottom topography induced by $u$. Then, white Gaussian noise is added to the $y^\dag$ at final time $T$. The magnitude of the noise is in average 5 percent of the magnitude of the original wave \[\frac{\norm{y^\dag - z}_{L^2(I\times \Omega)}}{\norm{y^\dag}_{L^2(I\times \Omega)}} \approx 0.05.\]
+Next, we discuss our numerical results. We see in \cref{support} that the optimal control is a point source, located close to $x=1.5$. The time profile of the point source is also depicted in \cref{support} and it follows the original one quite well.
 \begin{figure}[htb]
-\begin{subfigure}[b]{0.5\textwidth}
 \centering
-\input{images/normp_inverse}
-\end{subfigure}\qquad
-\begin{subfigure}[b]{0.5\textwidth}
-\centering
-\input{images/control_inverse}
-\end{subfigure}
+\subfloat{\input{images/control_inverse}}\quad
+\subfloat{\input{images/normp_inverse}}
 \caption{Left: Spatial support of the control determined by $\norm{\bar p(x)}_{L^2(I)} = \alpha$. Here $\alpha = 0.1$ and $\rg = 10^{-6}$. Right: Recovered intensity $\bar u(t)$ and exact intensity $u^\dag(t)$ }
 \label{support}
 \end{figure}
-We point out that the oscillations are caused by the noise. The noisy observation enters the adjoint equation as initial condition and the time profile of $\bar u$ is proportional to $t\mapsto\bar p(t,\hat x)$, where $\hat x$ is the reconstructed position of the point source. The results  of the optimization process are shown on Fig.\ref{recoveredstate}, for $\alpha = 0.1$.
+The support of the control is subset of the sets where $\|p(x)\|_{L^2(I)} = \alpha$ holds, see \cref{support} and \cref{propsubgcondition}. 
+%We point out that the oscillations are caused by the noise. The noisy observation enters the adjoint equation as initial condition and the time profile of $\bar u$ is proportional to $t\mapsto\bar p(t,\hat x)$, where $\hat x$ is the reconstructed position of the point source. The results of the optimization process are shown on \cref{recoveredstate}, for $\alpha = 0.1$.
 % \begin{figure}[!h]
 %  \includegraphics[width = 0.45\textwidth]{images/ex1recoveredcontrol2.pdf}
 %  \caption{Recovered control for $\rg = 10^{-6}$}
 %  \label{recoveredcontrol}
 % \end{figure}
+In \cref{recoveredstate}, the recovered state on $I\times \Omega$ and on $\{T\}\times\Omega$ is depicted. We have a quite good tracking of $y^\dag(T)$.
 \begin{figure}[htb]
-\begin{subfigure}[b]{0.5\textwidth}
 \centering
-\includegraphics[width =\textwidth]{images/ex1recoveredstate3d.pdf}
-\end{subfigure}\qquad
-\begin{subfigure}[b]{0.5\textwidth}
-\centering
-\input{images/terminal_value_inverse}
-\end{subfigure}
+\subfloat{\includegraphics[width =0.48\textwidth]{images/ex1recoveredstate3d.pdf}}\quad
+\subfloat{\input{images/terminal_value_inverse}}
 \caption{Recovered state $\bar y$ and terminal state $\bar y(T)$}
 \label{recoveredstate}
 \end{figure}
 
 \paragraph{\underline{Control example}}
-The second example is a control example. We divide the domain $\Omega = [-L,L]$, $L=30$ into two subdomains. The domain $\Omega_c = [-L,0]$ is the control domain, while $\Omega_{o} = [0,L]$ is the observation domain. See Fig.~\ref{controlsetup} (left) for the description of the setup. The flow enters the domain from the right and we want to create the wave profile shown on Fig.\ref{controlsetup} (right) on $\Omega_{o}$ at final time $T$, acting only on $\Omega_c$. Here the space-time grid is parametrized with $N = 512$ and $\Delta t = 0.01$.
+ The second example is a control example which is concerned with the optimal placement of bumps on the bottom of a narrow channel for the generation of a desired flow. We divide the domain $\Omega = [-L,L]$, $L=30$ into two subdomains. The domain $\Omega_c = [-L,0]$ is the control domain, while $\Omega_{o} = [0,L]$ is the observation domain, see \cref{controlsetup} for the description of the setup. The flow enters the domain from the right and we want to create the flow profile $z$ shown in \cref{controlsetup} on $\Omega_{o}$ at final time $T$, acting only on $\Omega_c$. Here the space-time grid is parametrized with $N = 512$ spatial grid points and a time-step size of $\Delta t = 0.01$.
 \begin{figure}[htb]
-\begin{subfigure}[b]{0.5\textwidth}
 \centering
-\includegraphics[width=\textwidth, height=3cm]{images/control_setup.png}
-\end{subfigure}\qquad
-\begin{subfigure}[b]{0.5\textwidth}
-\centering
-\input{images/desired_state}
-\end{subfigure}
+\subfloat{\includegraphics[width=0.48\textwidth, height=3cm]{images/control_setup.png}}\quad
+\subfloat{\input{images/desired_state}}
 \caption{Control setup and data}
 \label{controlsetup}
 \end{figure}
@@ -424,38 +409,28 @@ The second example is a control example. We divide the domain $\Omega = [-L,L]$,
 % \caption{Objective wave at final time T.}
 % \label{objectivewave}
 % \end{figure}
-The $L^2(I)$ norm of the adjoint state is depicted on Fig.~\ref{supportIP}.
+Next, we review our numerical results. In \cref{recoveredcontrol2} the optimal control is depicted. We see that it consists of two point sources with intensities which vary smoothly in time.  
+\begin{figure}[htb]
+\centering
+\subfloat{\input{images/control}}\quad
+\subfloat{\input{images/intensities}}
+\caption{Optimal control $\bar u$, $\rg = 10^{-5}$}
+\label{recoveredcontrol2}
+\end{figure}
+The $L^2(I)$ norm of the adjoint state $\bar p$ is shown in \cref{supportIP}.
 \begin{figure}[htb]
 \centering
 \input{images/normp}
-\caption{Spatial support of the control determined by $\|\bar p(x)\|_{L^2(I)}=\alpha$ for $\rg= 10^{-5}$}
+\caption{Spatial support of the control determined by $\|\bar p(x)\|_{L^2(I)}=\alpha$.}
 \label{supportIP}
 \end{figure}
-As in the previous example, we infer from that the support of the control. At the end of the continuation strategy, it boils down to two point sources, the points where $\|p(x)\|_{L^2(I)} = \alpha$. One can see clearly on Fig.~\ref{recoveredcontrol2} that it has smooth variations in time, as induced by the $L^2$ norm in $\|\cdot\|_{\M}$.
+We clearly see that the support of the optimal control correlates with the spatial positions where $\|\bar p(x)\|_{L^2(I)}=\alpha$ holds. The optimal state $\bar y$ is shown in \cref{ex2fullgammadm5}. An upstream soliton is created that matches accurately the objective wave $z$ at terminal time. Naturally, spurious waves are created on the control domain which have no contribution to the cost functional.
 \begin{figure}[htb]
- \begin{subfigure}[b]{0.48\textwidth}
- \centering
- \input{images/control}
- \end{subfigure}\qquad
- \begin{subfigure}[b]{0.48\textwidth}
- \centering
- \input{images/intensities}
- \end{subfigure}
- \caption{Optimal control $\bar u$, $\rg = 10^{-5}$}
- \label{recoveredcontrol2}
-\end{figure}
-The optimized state is shown on Fig.~\ref{ex2fullgammadm5} for $\rg = 10^{-5}$. An upstream going soliton is created that matches accurately at final time the objective wave. Naturally, spurious waves are created on the control domain that which have no contribution to the cost functional.
-\begin{figure}[htb]
- \begin{subfigure}[b]{0.48\textwidth}
- \centering
- \input{images/state}
- \end{subfigure}\qquad
- \begin{subfigure}[b]{0.48\textwidth}
- \centering
- \input{images/terminal_value}
- \end{subfigure}
- \caption{Left: Evolution of the optimal state $\bar y$ for $\rg = 10^{-5}$, Right: Terminal state $\bar y(T)$ compared with $z$}
- \label{ex2fullgammadm5}
+\centering
+\subfloat{\input{images/state}}\quad
+\subfloat{\input{images/terminal_value}}
+\caption{Left: Evolution of the optimal state $\bar y$ for $\rg = 10^{-5}$, Right: Terminal state $\bar y(T)$ compared with $z$}
+\label{ex2fullgammadm5}
 \end{figure}
 
 

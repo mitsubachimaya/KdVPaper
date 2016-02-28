@@ -1,7 +1,7 @@
-\documentclass[final,review]{siamart}
+\documentclass[review]{siamart}
 %\documentclass[a4paper,10pt,reqno]{amsart}
 %\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amsfonts}
+\usepackage{amsfonts}
 %\usepackage{amsmath,amssymb,amsthm,dsfont}
 %\usepackage{dsfont,amssymb}
 %\usepackage[top = 3cm, bottom = 3cm, left = 3.0cm, right = 3.0cm]{geometry}
@@ -10,11 +10,9 @@
 \usepackage{graphicx}
 \usepackage{multirow}
 \usepackage{pgfplots}
+\usepackage[caption=false]{subfig}
 %\usepackage{tikz}
 \pgfplotsset{compat=newest}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{float}
 \usepackage{cases}
 %MACROs
 
@@ -57,7 +55,7 @@
 \def\endmult {\end{multline}}
 \def\rg{\varepsilon}
 \def\SO{S_{obs}}
-\newtheorem{remark}[theorem]{Remark}
+\newsiamremark{remark}{Remark}
 
 % \newtheoremstyle{slplain}% name
 %   {0.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space above
@@ -114,41 +112,34 @@
 
 %Submitted, 09.05.2015
 
-\begin{document}
-
 \title{Sparse optimal control of the Korteweg-de Vries-Burgers equation on a bounded domain}
 
-\author{Anne-Celine Boulanger\footnotemark[3]\ \footnotemark[5]
-\and Philip Trautmann\footnotemark[2]\ \footnotemark[5]}
 
-
-\pagestyle{myheadings}
-\thispagestyle{plain}
-\markboth{A.-C. BOULANGER, P. TRAUTMANN}{SPARSE CONTROLS FOR THE KdV EQUATION}
-
-\maketitle
+\author{Anne-Celine Boulanger\footnotemark[1]\ \footnotemark[3]
+\and Philip Trautmann\footnotemark[2]\ \footnotemark[3]}
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\footnotetext[1]{Chair of Optimal Control, Technische Universit\"at M\"unchen,
+  Boltzmannstra{\ss}e 3, 85748 Garching bei M\"unchen, Germany
+  (boulanger@ma.tum.de).}
 
 \footnotetext[2]{Institute for Mathematics and Scientific Computing, University of Graz,
   Heinrichstrasse 36, A-8010 Graz, Austria, (philip.trautmann@uni-graz.at).}
 
-\footnotetext[3]{Chair of Optimal Control, Technische Universit\"at M\"unchen,
-  Boltzmannstra{\ss}e 3, 85748 Garching bei M\"unchen, Germany
-  (boulanger@ma.tum.de).}
 
-\footnotetext[5]{Both authors gratefully acknowledges support from
+\footnotetext[3]{The author gratefully acknowledges support from
 the International Research Training Group IGDK1754, funded by the DFG and FWF.}
-
-
 \renewcommand{\thefootnote}{\arabic{footnote}}
 
+% Custom SIAM macro to insert headers
+\headers{SPARSE CONTROLS FOR THE KdV EQUATION}
+{A.-C. BOULANGER, and P. TRAUTMANN}
 
-
+\begin{document}
 
 \maketitle
 
-\slugger{sicon}{xxxx}{xx}{x}{x--x}%slugger should be set to mms, siap, sicomp, sicon, sidma, sima, simax, sinum, siopt, sisc, or sirev
+
 
 \begin{abstract}
 In this work we consider measure-valued optimal control problems involving the KdV-Burgers equation as state equation. These optimal control problems are motivated by an inverse problem and a control problem involving the flow of water in a channel over topography. Well-posedness of the optimal control problem is established which involves the investigation of the KdV-Burgers equation for irregular source terms. Moreover optimality conditions for the control problem are derived. Efficient numerical schemes based on spectral methods are proposed for the state and adjoint equation, as well as adequate optimization methods. The work is illustrated by several numerical examples.
