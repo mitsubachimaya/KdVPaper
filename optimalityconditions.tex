@@ -224,10 +224,10 @@ Let $\bar u\in U_{ad}$ be an optimal control of \eqref{cost}. Moreover let $|\ba
 \begin{enumerate}
 \item Non-viscous case $\gamma=0$:
 \begin{align}
-0&=\left(\|\bar u\|_{\M}-\hat c\right)\bar\lambda,\label{scalarlagrange}\\
+0&=\left(\|\bar u\|_{\M}-c_{ad}\right)\bar\lambda,\label{scalarlagrange}\\
 \operatorname{supp}|\bar u|&\subseteq \{x\in \Omega_c\colon \|\bar p\|_{L^2(I)}=\alpha+\bar\lambda\}\label{controlsupp}
 \end{align}
-with $\bar\lambda =(\|\chi_{\Omega_c}\bar p\|_{\C}-\alpha)^+$. Moreover we have
+with $\bar\lambda =(\|\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \be
 \bar u'(x)=-\frac{\chi_{\Omega_c}\bar p(x)}{\alpha +\bar\lambda}\quad\text{in}~L^1((\Omega_c,|\bar u|),L^2(I)).
 \label{controlintime}
@@ -241,26 +241,26 @@ with $\bar\lambda =(\|\chi_{\Omega_c}\bar p\|_{\C}-\alpha)^+$. Moreover we have
 \label{propsubgcondition}
 \end{proposition}}
 \begin{proof}
-{\color{blue}First we consider the case $\gamma>0$. A proof of \eqref{supp2} and \eqref{Radon2} is given in \cite{pieper2014}.} Then we discuss the case $\gamma>0$ which involves norm-constraints on the control.
-Using $\bar u\in U_{ad}$, $\|\chi_{\Omega_c}\bar p\|_{\C}-\bar\lambda\leq\alpha$ and \eqref{equivoc} we can estimate
+{\color{blue}First we consider the case $\gamma>0$. A proof of \eqref{supp2} and \eqref{Radon2} is given in \cite{pieper2014}.} Then we discuss the case $\gamma=0$ which involves norm-constraints on the control.
+Using $\bar u\in U_{ad}$, $\|\bar p\|_{\C}-\bar\lambda\leq\alpha$ and \eqref{equivoc} we can estimate
 \begin{multline}\label{estoc}
-\alpha\|\bar u\|_{\M}=\int_{\Omega_c}(\bar u',\chi_{\Omega_c}\bar p)_{L^2(I)}~\mathrm d|\bar u|-\hat c\bar\lambda\\
-\leq \int_{\Omega_c}(\bar u',\chi_{\Omega_c}\bar p)_{L^2(I)}~\mathrm d|\bar u|-\bar\lambda\|\bar u\|_{\M}\\
-\leq \int_{\Omega_c}\|\bar u'\|_{L^2(I)}\|\chi_{\Omega_c}\bar p\|_{L^2(I)}~\mathrm d|\bar u|-\bar\lambda\|\bar u\|_{\M}\\
-\leq\|\bar u\|_{\M}(\|\chi_{\Omega_c}\bar p\|_{\C}-\bar\lambda)\leq \alpha\|\bar u\|_{\M}.
+\alpha\|\bar u\|_{\M}=\int_{\Omega_c}(\bar u',\bar p)_{L^2(I)}~\mathrm d|\bar u|-c_{ad}\bar\lambda\\
+\leq \int_{\Omega_c}(\bar u',\bar p)_{L^2(I)}~\mathrm d|\bar u|-\bar\lambda\|\bar u\|_{\M}\\
+\leq \int_{\Omega_c}\|\bar u'\|_{L^2(I)}\|\bar p\|_{L^2(I)}~\mathrm d|\bar u|-\bar\lambda\|\bar u\|_{\M}\\
+\leq\|\bar u\|_{\M}(\|\bar p\|_{\C}-\bar\lambda)\leq \alpha\|\bar u\|_{\M}.
 \end{multline}
 Thus the last chain of inequalities holds with equality and therefore we have
 \[
-\int_{\Omega_c}(\bar u',\chi_{\Omega_c}\bar p)_{L^2(I)}-\|\bar u'\|_{L^2(I)}\|\chi_{\Omega_c}\bar p\|_{L^2(I)}~\mathrm d|\bar u|=0
+\int_{\Omega_c}(\bar u',\bar p)_{L^2(I)}-\|\bar u'\|_{L^2(I)}\|\bar p\|_{L^2(I)}~\mathrm d|\bar u|=0
 \]
-which implies \[\bar u'=-\frac 1{\|\chi_{\Omega_c}\bar p\|_{L^2(I)}}\,\chi_{\Omega_c}\bar p\quad\text{in}~ L^1((\Omega_c,|\bar u|),L^2(I)).\]
+which implies \[\bar u'=-\frac 1{\|\bar p\|_{L^2(I)}}\,\chi_{\Omega_c}\bar p\quad\text{in}~ L^1((\Omega_c,|\bar u|),L^2(I)).\]
 Moreover we have
 \[
-\int_{\Omega_c}\|\chi_{\Omega_c}\bar p\|_{L^2(I)}-\bar\lambda-\alpha~\mathrm d|\bar u|=0
+\int_{\Omega_c}\|\bar p\|_{L^2(I)}-\bar\lambda-\alpha~\mathrm d|\bar u|=0
 \]
 which then implies \eqref{controlsupp} and \eqref{controlintime}. Equality in \eqref{estoc} also implies
 \[
-(\hat c-\alpha\|\bar u\|_{\M})\bar\lambda=0.
+(c_{ad}-\alpha\|\bar u\|_{\M})\bar\lambda=0.
 \]
 \qquad\end{proof}
 

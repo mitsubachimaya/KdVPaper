@@ -3,7 +3,7 @@
 \section{Discretization and numerical results}
 %%%%%%%%%%%%%%%%%%%%%%%
 \label{secnum}
-This section is devoted to the discretization of the optimization problem \eqref{cost} - \eqref{kdvcontrol3}, as well as some insights into the numerical optimization process we use.
+This section is devoted to the discretization of the optimization problem \eqref{cost}, as well as some insights into the numerical optimization process we use.
 \subsection{Discretization of state and adjoint equation}
 %One difficulty arising in the discretization of the \KdVB equation is the variety of temporal scales. While the effects of the nonlinearity are only visible after a long time interval, the linear part involves a wide range of scales: the third order derivative represents in particular a high frequency term.
 In the case of bounded domains numerous schemes are available, for example finite difference schemes \cite{djidjeli1995numerical,zabusky1965interaction}, finite element schemes \cite{winther1980conservative,arnold1982superconvergent}, finite volume schemes \cite{dutykh2013finite}, discontinuous Galerkin schemes \cite{Bona1986859,yan2002local}, or polynomial spectral methods \cite{ma2000legendre,ma2001optimal,shen2003new}. One of the most recent and efficient method for the \KdV is proposed in \cite{ma2000legendre}. The linear term is treated by a Petrov-Galerkin method on the Legendre polynomials, whereas the nonlinear term is treated pseudospectrally on the Chebyschev collocation points. Shortly after, Shen \cite{shen2003new} proposed an improvement of this Petrov-Galerkin method with nearly optimal computational complexity. This will be our method of choice and we recall it here briefly. Since it has never been used on optimal control problems, we also discuss an appropriate time discretization which allows the derivation of a consistent adjoint time stepping.
@@ -276,7 +276,7 @@ We can then express the optimality condition for \eqref{costreg} by the pointwis
 \be
 \bar u_{\rg}(t,x) = \operatorname{Prox}_{\psi/ \rg}\left(-\frac 1\rg \bar p_\rg\right)(t,x)=-\frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{\bar p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}\bar p_{\rg}(t,x)
 \ee
-with $\bar p_\rg(\bar u_\rg)=S_{obs}'^\star(S_{obs}\bar u_\rg-z)$ and $z=(z_1,z_2)$. Now a Newton type method can applied for the solution of
+with $\bar p_\rg(\bar u_\rg)=S_{obs}'^\star(\bar u_\rg)(S_{obs}\bar u_\rg-z)$ and $z=(z_1,z_2)$. Now a Newton type method can applied for the solution of
 \be
 F(u_{\rg})(t,x) = \rg u_{\rg}(t,x) + \left( 1 - \frac{\alpha}{\norm{p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}p_{\rg}(t,x) = 0.
 \label{optcondition}
@@ -307,12 +307,12 @@ for the auxiliary variable $q_{\rg}$.  %such that $u_{\rg} = \operatorname{Prox}
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
 For the solution of problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a generalized derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}.  {\color{red}To be more precise, we have
 \be
-\operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + S_{obs}'^\star S_{obs}'\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
+\operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + S_{obs}'^\star(y_\rg)B(q_\rg)S_{obs}'(y_\rg)\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
 \ee
-where the generalized derivative of the proximal map is given by
+where $y_\rg=S_{obs}\operatorname{Prox}_{\psi/ \rg}(q_{\rg})$, $B(p_\rg)=1+\partial_xp_\rg(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))$ and the generalized derivative of the proximal map is given by
 \begin{numcases}{\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q_{\rg} = }
-\left(1-\frac{\alpha}{\rg\norm{q_{\rg}(x)}_{L^{2}(I)}}\right)\delta q_{\rg}(x) + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q_{\rg}\right)_{L^2(I)}}{\norm{q_{\rg}(x)}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
- & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}(x)}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
+\left(1-\frac{\alpha}{\rg\norm{q_{\rg}}_{L^{2}(I)}}\right)\delta q_{\rg}(x) + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q_{\rg}\right)_{L^2(I)}}{\norm{q_{\rg}}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
+ & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
 0 & \mbox{otherwise.}
 \end{numcases}}
 The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$, cf. \cite{PieperRund2015,pieperthesis}. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation numerical experiments show that the continuation strategy in $\rg$ is sufficient to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not the case for our problem due to the nonlinearity of the state equation. Additional to the continuation strategy in $\rg$ a globalization strategy based on the decrease of the regularized objective functional is required. We implement a trust region semi-smooth Newton based on the truncated conjugate gradient algorithm by Steihaug \cite{pieperthesis,steihaug1983}.  {\color{red}A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}}.
