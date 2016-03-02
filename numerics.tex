@@ -307,11 +307,11 @@ for the auxiliary variable $q_{\rg}$.  %such that $u_{\rg} = \operatorname{Prox}
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
 For the solution of problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a generalized derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}.  {\color{red}To be more precise, we have
 \be
-\operatorname{DG}(q_{\rg}) = \rg \operatorname{Id} + S_{obs}'^\star(y_\rg)B(q_\rg)S_{obs}'(y_\rg)\operatorname{DProx}_{\psi/ \rg}(q_{\rg}),
+\operatorname{DG}(q_{\rg})\delta q = \rg\delta q + S_{obs}'^\star(y_\rg)\left(B(q_\rg)\cdot S_{obs}'(y_\rg)\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q\right),\quad \delta q\in L^2(I\times \Omega_c),
 \ee
-where $y_\rg=S_{obs}\operatorname{Prox}_{\psi/ \rg}(q_{\rg})$, $B(p_\rg)=1+\partial_xp_\rg(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))$ and the generalized derivative of the proximal map is given by
-\begin{numcases}{\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q_{\rg} = }
-\left(1-\frac{\alpha}{\rg\norm{q_{\rg}}_{L^{2}(I)}}\right)\delta q_{\rg}(x) + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q_{\rg}\right)_{L^2(I)}}{\norm{q_{\rg}}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
+where $y_\rg=S_{obs}\operatorname{Prox}_{\psi/ \rg}(q_{\rg})$, $B(p_\rg)=1+\partial_xp_\rg(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))$, the operator $\cdot$ is the pointwise multiplication between two functions, and the generalized derivative of the proximal map is given by
+\begin{numcases}{\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q = }
+\left(1-\frac{\alpha}{\rg\norm{q_{\rg}}_{L^{2}(I)}}\right)\delta q + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q\right)_{L^2(I)}}{\norm{q_{\rg}}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
  & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
 0 & \mbox{otherwise.}
 \end{numcases}}
