@@ -22,10 +22,10 @@ In the case of bounded domains numerous schemes are available, for example finit
 \subsubsection{The dual Petrov-Galerkin method}
 The interesting feature of this method lies in the choice of the test and trial functions bases. They are chosen as a compact (adjacent orders) combination of Legendre polynomials such that the trial functions satisfy the underlying boundary conditions of \eqref{kdvlinnonhom2} and the test functions satisfy the dual boundary conditions \eqref{kdvlinnonhomdual2}. Therefore, most matrices, i.e. mass matrices and stiffness matrices, involved are sparse or well-conditioned, cf. \cite{shen2003new}. We present the method on some reference domain $[-1,1]$, but it can be extended to any other domain of type $[a,b]$ by scaling the Legendre polynomials and the integrals. {\color{red} Throughout the following sections we assume $\gamma\geq0$, ie. all discussed results apply in the viscous as well as the non-viscous case.} Then we denote by $P_N$ the space of polynomials of degree $\leq N$ and set
 \be
-V_N = \left\{y\in P_N : y(1)=y(-1)=\partial_x y(1)=0\right\},
+V_N = \operatorname{span}\left\{y\in P_N : y(1)=y(-1)=\partial_x y(1)=0\right\},
 \ee
 \be
-V_N^{\ast} = \left\{y\in P_N : y(1) = y(-1) = \partial_x y(-1)=0\right\}.
+V_N^{\ast} = \operatorname{span}\left\{y\in P_N : y(1) = y(-1) = \partial_x y(-1)=0\right\}.
 \ee
 We consider then the semi-discrete problem: Find
 \be\nonumber
@@ -276,17 +276,17 @@ We can then express the optimality condition for \eqref{costreg} by the pointwis
 \be
 \bar u_{\rg}(t,x) = \operatorname{Prox}_{\psi/ \rg}\left(-\frac 1\rg \bar p_\rg\right)(t,x)=-\frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{\bar p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}\bar p_{\rg}(t,x)
 \ee
-with $\bar p_\rg(\bar u_\rg)=S_{obs}'^\star(\bar u_\rg)(S_{obs}\bar u_\rg-z)$ and $z=(z_1,z_2)$. Now a Newton type method can applied for the solution of
+where $\bar p_\rg$ solves \eqref{adjointKdV1}-\eqref{adjointKdV3} for $\phi=\bar y_\rg-z_1$, $y=\bar y_\rg$ and $p_T=\bar y_\rg(T)-z_2$ and $\bar y_\rg$ solves \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for $\bar u$. Now a Newton type method can applied for the solution of
 \be
 F(u_{\rg})(t,x) = \rg u_{\rg}(t,x) + \left( 1 - \frac{\alpha}{\norm{p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}p_{\rg}(t,x) = 0.
 \label{optcondition}
 \ee
-However, we follow \cite{pieperthesis} and reformulate the optimality condition \eqref{optcondition} using the "normal map" due to Robinson:
+However, we follow \cite{pieperthesis} and reformulate the optimality condition \eqref{optcondition} using the "normal map" due to Robinson and solve instead  
 \be
-\operatorname{G}(q_{\rg}) = \rg q_{\rg} + p_{\rg}(\operatorname{Prox}_{\psi/ \rg}(q_{\rg})) = 0,
+\operatorname{G}(q_{\rg}) = \rg q_{\rg} + p_{\rg}(y_\rg(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))) = 0,
 \label{normalmap}
 \ee
-for the auxiliary variable $q_{\rg}$.  %such that $u_{\rg} = \operatorname{Prox}_{\psi/ \rg}(q_{\rg})$ h. %One easily prove in that case that $q_{\rg} = -\frac{1}{\rg} p_{\rg}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
+for the auxiliary variable $q_{\rg}$. Here $p_\rg$ solves \eqref{adjointKdV1}-\eqref{adjointKdV3} for $\phi=y_\rg-z_1$, $y=y_\rg$ and $p_T=y_\rg(T)-z_2$ and $y_\rg$ solves \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for $u=\operatorname{Prox}_{\psi/ \rg}(q_{\rg})$.  %such that $u_{\rg} = \operatorname{Prox}_{\psi/ \rg}(q_{\rg})$ h. %One easily prove in that case that $q_{\rg} = -\frac{1}{\rg} p_{\rg}$ and equivalence between \eqref{optcondition} and \eqref{normalmap}.
 
 % and we can adapt it to state the following theorem
 % \begin{thm}
@@ -305,17 +305,18 @@ for the auxiliary variable $q_{\rg}$.  %such that $u_{\rg} = \operatorname{Prox}
 % F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
-For the solution of problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a generalized derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}.  {\color{red}To be more precise, we have
+For the solution of problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a generalized derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}. {\color{red}To be more precise, we have
 \be
-\operatorname{DG}(q_{\rg})\delta q = \rg\delta q + S_{obs}'^\star(y_\rg)\left(B(q_\rg)\cdot S_{obs}'(y_\rg)\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q\right),\quad \delta q\in L^2(I\times \Omega_c),
+\operatorname{DG}(q_{\rg})\delta q = \rg\delta q + \delta p(\delta y(\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q)),\quad \delta q\in L^2(I\times \Omega_c),
 \ee
-where $y_\rg=S_{obs}\operatorname{Prox}_{\psi/ \rg}(q_{\rg})$, $B(p_\rg)=1+\partial_xp_\rg(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))$, the operator $\cdot$ is the pointwise multiplication between two functions, and the generalized derivative of the proximal map is given by
+where $\delta p$ solves the equation \eqref{adjointKdV1}-\eqref{adjointKdV3} for $\phi=\delta y(1+\partial_y p_\rg)$, $y=y_\rg$ and $p_T=\delta y(T)$ and $\delta y$ solves \eqref{linearizedkdv1}-\eqref{linearizedkdv3} 
+for $\delta u=\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q$ and $y=y_\rg$. The generalized derivative of the proximal map is given by
 \begin{numcases}{\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q = }
 \left(1-\frac{\alpha}{\rg\norm{q_{\rg}}_{L^{2}(I)}}\right)\delta q + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q\right)_{L^2(I)}}{\norm{q_{\rg}}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
  & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
 0 & \mbox{otherwise.}
 \end{numcases}}
-The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$, cf. \cite{PieperRund2015,pieperthesis}. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation numerical experiments show that the continuation strategy in $\rg$ is sufficient to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not the case for our problem due to the nonlinearity of the state equation. Additional to the continuation strategy in $\rg$ a globalization strategy based on the decrease of the regularized objective functional is required. We implement a trust region semi-smooth Newton based on the truncated conjugate gradient algorithm by Steihaug \cite{pieperthesis,steihaug1983}.  {\color{red}A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}}.
+The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$, cf. \cite{PieperRund2015,pieperthesis}. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation numerical experiments show that the continuation strategy in $\rg$ is sufficient to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not the case for our problem due to the nonlinearity of the state equation. Additional to the continuation strategy in $\rg$ a globalization strategy based on the decrease of the regularized objective functional is required. We implement a trust region semi-smooth Newton based on the truncated conjugate gradient algorithm by Steihaug \cite{pieperthesis,steihaug1983}. {\color{red}A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}}.
 
 \subsubsection{Discretization of the control and mass lumping}
 In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible due to $L^2(I\times\Omega_c)$ regularization term. Thus we introduce a discretization of the control which is compatible to the Dirac discretization in the limiting case $\rg \to 0$, i.e. we follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear and continuous finite elements on a grid whose nodes are given by the CGL-points $(x_n)$, $n=0 \ldots N$ previously mentioned.

@@ -123,7 +123,7 @@ In \cref{appendixadjoint} we show that the fixed point equation \eqref{fixed_poi
 
 Next we derive first order optimality conditions using tools from convex analysis.
 \begin{proposition}
-  Let $(\bar y,\bar u)\in \mathcal B\times U_{ad}$ be a solution of \eqref{cost}. Then $\bar u$ satisfies the following variational variational inequality
+  Let $(\bar y,\bar u)\in \mathcal B\times U_{ad}$ be a local solution of \eqref{cost}. Then $\bar u$ satisfies the following variational variational inequality
   \be
   \langle -\chi_{\Omega_c}\bar p,u-\bar u\rangle_{\C,\M}+\|\bar u\|_{\M}\leq\|u\|_{\M}\quad\forall u\in U_{ad},
   \label{subgradientcond}
@@ -140,26 +140,26 @@ Next we derive first order optimality conditions using tools from convex analysi
   \[
   F(u_1,u_2)=\frac 1 2\left(\|y_1-z_1\|_{L^2(I\times \Omega_{o})}^2+\|y_2-z_2\|_{L^2(\Omega_{o})}^2\right)
   \]
-  for $(y_1,y_2)\in L^2(I\times \Omega_o)\times L^2(\Omega_o)$ and $\psi(u)=\|u\|_{\M}.$
+  for $(y_1,y_2)\in L^2(I\times \Omega_o)\times L^2(\Omega_o)$ and $\psi(u)=\alpha\|u\|_{\M}.$
   Since $F$ and $\SO$ are Fr\'echet differentiable the directional derivative of $F\circ \SO$ at $\bar u$ has the form
   \[
   D(F\circ \SO,\bar u,\delta u) =\langle S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z),\delta u\rangle_{\C,\M},\quad \delta u\in\C.
   \]
-  Then we set $\chi_{\Omega_c}\bar p:=S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z)$. An element $\bar u\in U_{ad}$ is optimal if and only if
+  Then we set $\chi_{\Omega_c}\bar p:=S_{obs}'^\star(\bar u)(S_{obs}(\bar u)-z)$. An element $\bar u\in U_{ad}$ is local optimal if and only if there exists a $\delta>0$ such that
   \[
-  F\circ \SO(\bar u)+\psi(\bar u)\leq F\circ \SO(u)+\psi(u)\quad\forall u\in U_{ad}
+  F\circ \SO(\bar u)+\psi(\bar u)\leq F\circ \SO(u)+\psi(u)\quad\forall u\in U_{ad}\cap B_{\delta}(\bar u).
   \]
-  and in  particular
+  In particular, there holds
   \[
-  F\circ \SO(\bar u)+\psi(\bar u)\leq F\circ \SO(\bar u + \varepsilon(u-\bar u))+\psi(\bar u+ \varepsilon(u-\bar u))
+  F\circ \SO(\bar u)+\psi(\bar u)\leq F\circ \SO(\bar u + \varepsilon(u-\bar u))+\psi(\bar u+ \varepsilon(u-\bar u))\quad \forall u\in U_{ad}
   \]
-  for some $0<\varepsilon$ small enough such that $\bar u + \varepsilon(u-\bar u)\in U_{ad}$ holds. Using the convexity of $\psi$ we get
+  for some $0<\varepsilon$ small enough. Using the convexity of $\psi$ we get
   \[
     \frac{F\circ \SO(\bar u)-F\circ \SO(\bar u + \varepsilon(u-\bar u))}{\varepsilon}+ \psi(\bar u)\leq \psi(u)
   \]
   which implies
   \[
-  \langle-\chi_{\Omega_c}\bar p ,u-\bar u\rangle_{\C,\M} + \psi(\bar u)\leq \psi(u)\quad\forall u\in U_{ad}.
+  \langle-\bar p ,u-\bar u\rangle_{\C,\M} + \psi(\bar u)\leq \psi(u)\quad\forall u\in U_{ad}.
   \]
 \qquad\end{proof}
 
