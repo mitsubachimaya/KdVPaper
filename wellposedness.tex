@@ -101,9 +101,9 @@ of \eqref{kdvlinnonhom} for data $f_n$ and $y_{0,n}$ which satisfies the weak fo
   \|y_n\|_{\mathcal B}\leq C(T,L) \left(\norm{y_{n,0}}_{L^{2}(\Omega)} + \norm{f_n}_{\Hm1}\right).
   \label{linestimate_regular}
 \ee
-For a proof see \cref{sec:linear-estimates}.  This estimate implies that $\{y_n\}_{n\in \mathbb{N}}$ is a Cauchy sequence in $\mathcal B$ and therefore there exists a $y\in \mathcal B$ which satisfies \eqref{weakformlinearkdv} with the data $(f,y_0)$. This means that $y$ is a weak solution of \eqref{kdvlinnonhom}. Its uniqueness can be shown using standard arguments. Furthermore we can  pass to the limit in \eqref{linestimate_regular} and get the first part of \eqref{linestimate}. Next we choose any {\color{blue} $\psi\in \mathcal C_c^{\infty}(I\times \Omega)$} and set $\phi=\partial_t\psi-A^*\psi$ in \eqref{kdvlinnonhomdual}. Therefore $\psi$ is the solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3} and it holds
+For a proof see \cref{sec:linear-estimates}.  This estimate implies that $\{y_n\}_{n\in \mathbb{N}}$ is a Cauchy sequence in $\mathcal B$ and therefore there exists a $y\in \mathcal B$ which satisfies \eqref{weakformlinearkdv} with the data $(f,y_0)$. This means that $y$ is a weak solution of \eqref{kdvlinnonhom}. Its uniqueness can be shown using standard arguments. Furthermore we can  pass to the limit in \eqref{linestimate_regular} and get the first part of \eqref{linestimate}. Next we choose any {\color{blue} $\psi\in \mathcal C_c^{\infty}(I\times \Omega)$} and set $\phi=-\partial_t\psi-A^*\psi$ in \eqref{kdvlinnonhomdual}. Therefore $\psi$ is the solution of \eqref{kdvlinnonhomdual1}-\eqref{kdvlinnonhomdual3} and it holds that
 \begin{multline*}
-\int_0^T(y,\partial_t\psi)_{L^2(\Omega)}~\mathrm dt=\int_0^T(y,A^*\psi)_{L^2(\Omega)}+\langle f,\psi\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}\mathrm dt\\
+\int_0^T(y,-\partial_t\psi)_{L^2(\Omega)}~\mathrm dt=\int_0^T(y,A^*\psi)_{L^2(\Omega)}+\langle f,\psi\rangle_{H^{-1}(\Omega),H^1_0(\Omega)}\mathrm dt\\
 \leq C(T,L)\left(\|y\|_{L^2(I,H^1_0(\Omega))}+\|f\|_{L^2(I,H^{-1}(\Omega))}\right)\|\psi\|_{L^2(I,\mathcal V)}.
 \end{multline*}
 {\color{blue} Due to the density of $\mathcal C_c^\infty(I\times \Omega)$ in $L^2(I,\mathcal V)$, there holds $y\in H^1(I,\mathcal V^*)$ and
@@ -182,26 +182,26 @@ and
 \norm{\Psi_{f,y_0}(y) - \Psi_{f,y_0}(z)}_{\mathcal{B}_{\theta}} \leq C_2 \theta^{1/4} \norm{y+z}_{\mathcal{B}_{\theta}}\norm{y - z}_{\mathcal{B}_{\theta}}.
 \label{diffpsi2}
 \]
-We choose $\theta > 0$ such that
+We choose a $\theta^\ast > 0$ such that
 \begin{subequations}
  \begin{numcases}{}
   r = 3 C_1 \left(\norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^{2}(0,T, H^{-1}(\Omega))}\right)\label{constraintstheta1}\\
-  C_2 \theta^{1/4} r \leq \frac{1}{3} \label{constraintstheta2}
+  C_2 \theta^{\ast 1/4} r \leq \frac{1}{3} \label{constraintstheta2}
  \end{numcases}
 \end{subequations}
-holds. Therefore, by considering the ball $B = \{ y \in \mathcal{B}_{\theta}; \norm{y}_{\mathcal{B}_{\theta}} \leq r\}$ we have
+holds. Therefore, by considering the ball $B = \{ y \in \mathcal{B}_{\theta^\ast}; \norm{y}_{\mathcal{B}_{\theta^\ast}} \leq r\}$ we have
 \[
 \Psi_{f,y_0}(B) \subset B
 \]
 and for all $(y,z) \in B$
 \[
-\|\Psi_{f,y_0}(y) - \Psi_{f,y_0}(z)\|_{\mathcal{B}_{\theta}}\leq \frac{2}{3}\norm{y - z}_{\mathcal{B}_{\theta}}.
+\|\Psi_{f,y_0}(y) - \Psi_{f,y_0}(z)\|_{\mathcal{B}_{\theta^\ast}}\leq \frac{2}{3}\norm{y - z}_{\mathcal{B}_{\theta^\ast}}.
 \]
 As a consequence, we can apply the Banach fixed point theorem which implies the existence of a unique fix point $y$ of $\Psi_{f,y_0}(\cdot)$.
 \qquad\end{proof}
-According to the proof of \cref{localposedness}, an upper bound for $T^{\ast}$ is given by
+According to the proof of \cref{localposedness}, an upper bound for $\theta^{\ast}$ is given by
 \[
-T^{\ast}\leq \frac{C(T,L)}{\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)^{4}}.
+\theta^{\ast}\leq \frac{C(T,L)}{\left( \norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^2(I,H^{-1}(\Omega))}\right)^{4}}.
 \]
 The bigger $\|f\|_{\Hm1}$, the shorter we can ensure the existence of the solution.
 \subsection{Time-global well-posedness of the \KdVB equation {\color{red}with $\gamma=0$ and small data}}\label{rmkUad}
@@ -307,7 +307,7 @@ We start by defining the admissible set of controls
 $$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
-where $c_{ad}< C_{\max}-\norm{y_0}_{L^2(\Omega)}$. The constant $C_{\max}$ comes from \eqref{ineqqnorm} and we assume that
+where $c_{ad}< c_{\max}:=(C_{\max}-\norm{y_0}_{L^2(\Omega)})/\hat c$, where $\hat c$ is the embedding constant of $\M\hookrightarrow\Hm1$. The constant $C_{\max}$ comes from \eqref{ineqqnorm} and we assume that
 \begin{equation}\label{constr y0}
 \norm{y_0}_{L^2(\Omega)}< C_{\max}.
 \end{equation}

@@ -4,10 +4,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{secoptconditions}
 First we discuss the differentiability of the control-to-state operator $S$ defined in \eqref{controltostate}. {\color{blue}In order to do that, we introduce the open set
-$$\tilde U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}< c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
+$$\tilde U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}< \hat c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise.}
- \end{cases}$$}
-The following Lemma concerning the local Lipschitz continuity of $S$ is needed for the proof of its Fr\'echet differentiability.
+\end{cases}$$
+with $c_{ad}<\hat c_{ad}< c_{\max}$.} The following Lemma concerning the local Lipschitz continuity of $S$ is needed for the proof of its Fr\'echet differentiability.
 \begin{lemma}
 The control-to-state operator $S\colon \tilde U_{ad}\rightarrow \mathcal B$ is locally Lipschitz continuous, i.e., for every $u\in \tilde U_{ad}$ there exists a neighbourhood $V\subset \tilde U_{ad}$ and a constant
 $C(T,L,u,\tilde u)>0$ such that
@@ -114,7 +114,7 @@ First of all we mention that $y\partial_x p\in L^1(I,L^2(\Omega))$ holds for $y\
 =\langle \delta u,p\rangle_{\M,\C}
 \label{tangentwf}
 \end{multline}
-for $\delta u\in \M$ and $y=S(u)\in\mathcal B$ where $\chi_{\Omega_o}^\ast$ is the extension operator to $\Omega$. By comparing with \eqref{adjointwf}, we set $S'^\star(u)(\phi,p_T):=\chi_{\Omega_c}p$ where $p$ solves the fixed point equation
+for $\delta u\in \M$ and $y=S(u)\in\mathcal B$ where $\chi_{\Omega_o}^\ast$ is the extension operator to $\Omega$. By comparing with \eqref{adjointwf}, we set $S'^\star_{obs}(u)(\phi,p_T):=\chi_{\Omega_c}p$ where $p$ solves the fixed point equation
 \be\label{fixed_point_equation_adjoint}
 p(t)=W^*(T-t)p_T+\int_t^TW^*(s-t)(\phi(s)-y(s)\partial_xp(s))~\mathrm ds,\quad t\in I.
 \ee
