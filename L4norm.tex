@@ -1,7 +1,7 @@
-\section{Well-posedness of the optimal control problem for $\gamma=0$ without norm-constraint on the control}
+\section{Well-posedness of the optimal control problem for {\color{red} $\gamma=0$ without norm-constraint on the control}}
 \label{wp2}
 %!TEX root = kdv.tex
-In this section we prove existence of optimal controls in the non-viscous case $\gamma=0$ without norm-constraints on the optimal control. The proof is based on the knowledge that the boundedness of the state $y$ in the $L^4(I\times\Omega))$-norm implies an a priori estimate of $y$ in $\mathcal B$. Therefore, we add the $L^4(I\times\Omega)$-norm as an additional regularization term to objective functional of \eqref{cost} and use the non state reduced approach from \cite{lions1985control}. In \cite{lions1985control}, the state equation is considered as an equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections.\\
+{\color{red} In this section we prove existence of optimal controls in the non-viscous case $\gamma=0$ without norm-constraints on the optimal control.} The proof is based on the knowledge that the boundedness of the state $y$ in the $L^4(I\times\Omega))$-norm implies an a priori estimate of $y$ in $\mathcal B$. Therefore, we add the $L^4(I\times\Omega)$-norm as an additional regularization term to objective functional of \eqref{cost} and use the non state reduced approach from \cite{lions1985control}. In \cite{lions1985control}, the state equation is considered as an equality constraint in the pair $(y,u)$ in contrast to the reduced approach from the previous sections.\\
 In the following we consider an optimal control problem of the form
 \begin{multline}
 \min_{u \in \M\,,y\in Y}J(y,u)=\frac{1}{2}\left(\norm{\chi_{\Omega_{o}}y - z_1}_{L^2(I\times \Omega_{o})}^2+\|\chi_{\Omega_{o}}y(T)-z_2\|_{L^2(\Omega_{o})}^2\right) \\+ \alpha \norm{u}_{\mathcal{M}(\Omega, L^{2}(I))} + \frac{\eta}{4} \norm{y}_{L^4(I\times \Omega)}^4.
@@ -62,13 +62,13 @@ Since the cost functional $J$ is positive it has an infimum $\bar J$. Moreover w
 \be
 \varepsilon+J(\hat y,0)\geq \alpha \norm{u_n}_{\M} + \frac{\eta}{4} \norm{y_n}_{L^4(I\times \Omega)}^4
 \ee
-for $n$ large enough and $\hat y$ is the solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for $u=0$. The sequence of control-state pairs satisfies the estimate
+for $n$ large enough and $\hat y$ is the solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for $u=0$. Therefore the sequence $(y_n,u_n)$ is bounded in $L^4(I\times\Omega)\times \M$. Thanks to \eqref{L4est}, {\color{blue} The sequence of control-state pairs satisfies the estimate
 \begin{multline}\label{L4est}
 \|y_n\|_{\mathcal{B}}+\|\partial_{t}y_n\|_{L^2(I,\mathcal{V}^{*})}\leq C(T,L)\,\left(\|u_n\|_{\M}+\|y_0\|_{L^2(\Omega)}\right.\\
 +\left.\|y_n\partial_x y_n\|_{\Hm1}\right)\\
 \leq C(T,L)\,\left(\|u_n\|_{\M}+\|y_0\|_{L^2(\Omega)} + \|y_n\|_{L^4(I\times\Omega)}^2\right).
 \end{multline}
-according to \eqref{linestimate} and the proof of \cref{lemyyx2}. Therefore the sequence $(y_n,u_n)$ is bounded in $L^4(I\times\Omega)\times \M$. Thanks to \eqref{L4est}, we also have $y_n$ is bounded in $Y$. This implies the existence of an element $(\bar y, \bar u)\in Y\times \M$ and a state-control subsequence $(y_{n_k},u_{n_k})$ such that $u_{n_k}$ converges in the weak-$*$ topology of $\M$ towards $\bar u$ and $y_{n_k}$ converges in the weak-$\ast$ topology of $Y$ towards $\bar y$. Moreover the convergence $y_{n_k}(T) \rightharpoonup \bar y(T)$ in $L^2(\Omega)$ is ensured. With the Aubin-Lions lemma, we get also
+according to \eqref{linestimate} and the proof of \cref{lemyyx2}.} Thus we also have that $y_n$ is bounded in $Y$. This implies the existence of an element $(\bar y, \bar u)\in Y\times \M$ and a state-control subsequence $(y_{n_k},u_{n_k})$ such that $u_{n_k}$ converges in the weak-$*$ topology of $\M$ towards $\bar u$ and $y_{n_k}$ converges in the weak-$\ast$ topology of $Y$ towards $\bar y$. Moreover the convergence $y_{n_k}(T) \rightharpoonup \bar y(T)$ in $L^2(\Omega)$ is ensured. With the Aubin-Lions lemma, we get also
 \be
 \nonumber
 y_{n_k} \rightarrow \bar y\quad\text{in}\quad L^2(I,\mathcal C_0(\Omega)).

@@ -237,7 +237,7 @@ Existence, uniqueness and \eqref{localestimate} are proven using similar steps a
 \qquad\end{proof}}
 
 {\color{red}\subsubsection{Time-global well-posedness of the \KdVB equation with $\gamma>0$ and general data}
-In this section we prove time-global wellposedness of the \KdVB equation in the viscous case and with general data. \Cref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem on $[0,T]$. We will show that such estimates exist in the viscous case $\gamma > 0$.
+In this section we prove time-global wellposedness of the \KdVB equation in the viscous case and with general data. \Cref{localposedness} guarantees local well-posedness in time. Therefore, global well-posedness will follow from a priori estimates for the nonlinear problem. We will show that such estimates exist in the viscous case $\gamma > 0$.
 \begin{theorem}
 Let $\gamma>0$. For any  $(f,y_0) \in \Hm1\times L^2(\Omega)$ let $y\in\mathcal B_\theta$, $\theta\in (0,T]$, be a time-local solution of \eqref{kdv1}-\eqref{kdv3}, then $y$ satisfies
  \be
@@ -296,14 +296,14 @@ for some $c>0$ independent of $y$ and the data. Moreover there holds
 \begin{equation}\label{estytglobal}
 \|\partial_t y\|_{L^2(I,\mathcal V^*)}\leq C(T,L,y_0,f,\gamma).
 \end{equation}
-for some $C>0$ only depending on $L,T,y_0,f$.
+for some $C>0$ only depending on $L,T,y_0,f$ and $\gamma$.
 \end{corollary}
 \begin{proof}
 First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1+y_2$. Then \cref{prop:tangent} implies $y_1=y_2$. According to \cref{localposedness} equation \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of \cref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}. The estimate \eqref{estytglobal} is proven using \eqref{globalestimate} and similar arguments as in the proof of \cref{existlocal}.
 \qquad\end{proof}}
 
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
-We start by defining the admissible set of controls
+{\color{red} We start by defining the admissible set of controls
 $$U_{ad} = \begin{cases} \left\{u \in \M\colon \norm{u}_{\M}\leq c_{ad} \right\} &\quad\mbox{if } \gamma = 0 \\
 \M & \quad \mbox{otherwise}
  \end{cases}$$
@@ -311,6 +311,7 @@ where $c_{ad}< c_{\max}:=(C_{\max}-\norm{y_0}_{L^2(\Omega)})/\hat c$, where $\ha
 \begin{equation}\label{constr y0}
 \norm{y_0}_{L^2(\Omega)}< C_{\max}.
 \end{equation}
+}
 Moreover we introduce the non-linear control-to-state operator
 \begin{equation}
  S\colon U_{ad}\rightarrow \mathcal B\cap H^1(I,\mathcal V^\ast),\quad u\mapsto y
@@ -352,7 +353,7 @@ Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3}
 \begin{remark}\label{alphaconstraint}
  We know for a minimizing sequence $(u_n, y_n)\in \M\times \mathcal B$ that there exists an $\varepsilon > 0$ and an $N \in \N $ such that for any $n > N$
  \[
-\norm{u_n}_{L^2(I,H^{-1}(\Omega))} \leq c\norm{u_n}_{\M} \leq \frac{c}{\alpha}\left(J(0,0) + \varepsilon \right).
+\norm{u_n}_{\M} \leq \frac{c}{\alpha}\left(J(S(0),0) + \varepsilon \right).
  \]
  Therefore, we can always find a regularization parameter $\alpha>0$ such that the condition \eqref{ineqqnorm} is satisfied.
 \end{remark}
