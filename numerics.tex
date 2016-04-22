@@ -272,7 +272,7 @@ for any $L^2(I\times \Omega_c)$. In \cite{herzog2012directional}, the authors st
 \be
 \operatorname{Prox}_{\psi/ \rg}(q)(t,x) = \left(1-\frac{\alpha}{\rg\norm{q(x)}_{L^{2}(I)}}\right)^{+}q(t,x) \quad \mbox{ for } q \in L^{2}(I\times\Omega_c).
 \ee
-We can then express the optimality condition for \eqref{costreg} by the pointwise formula
+{\color{red} We can then express the optimality condition for \eqref{costreg} by the pointwise formula
 \be
 \bar u_{\rg}(t,x) = \operatorname{Prox}_{\psi/ \rg}\left(-\frac 1\rg \bar p_\rg\right)(t,x)=-\frac{1}{\rg}\left( 1 - \frac{\alpha}{\norm{\bar p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}\bar p_{\rg}(t,x)
 \ee
@@ -281,7 +281,7 @@ where $\bar p_\rg$ solves \eqref{adjointKdV1}-\eqref{adjointKdV3} for $\phi=\bar
 F(u_{\rg})(t,x) = \rg u_{\rg}(t,x) + \left( 1 - \frac{\alpha}{\norm{p_{\rg}(x)}_{L^{2}(I)}}\right)^{+}p_{\rg}(t,x) = 0.
 \label{optcondition}
 \ee
-However, we follow \cite{pieperthesis} and reformulate the optimality condition \eqref{optcondition} using the "normal map" due to Robinson and solve instead  
+However, we follow \cite{pieperthesis} and reformulate the optimality condition \eqref{optcondition} using the "normal map" due to Robinson and solve instead
 \be
 \operatorname{G}(q_{\rg}) = \rg q_{\rg} + p_{\rg}(y_\rg(\operatorname{Prox}_{\psi/ \rg}(q_{\rg}))) = 0,
 \label{normalmap}
@@ -305,18 +305,18 @@ for the auxiliary variable $q_{\rg}$. Here $p_\rg$ solves \eqref{adjointKdV1}-\e
 % F(q_{\gamma}) = q_{\gamma} - \gamma\max\left(0,1-\frac{\alpha}{\norm{p_{\gamma}}_{L^2(I)}}\right)p_{\gamma}(t,x)
 % \ee
 % In comparison to what is done in \cite{herzog2012directional}, the nonlinearity in our problem requires that we additionally compute the tangent and the second adjoint operators to get the gradient of $F$. Besides, in \cite{pieper2014}, the authors quickly prove that we obtain the original problem in the limiting case for great $\gamma$.
-For the solution of problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a generalized derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}. {\color{red}To be more precise, we have
+For the solution of problem \eqref{normalmap}, we apply a Newton-type method, and since the proximal operator is not differentiable, we use the concept of semismoothness to derive a generalized derivative for $\operatorname{G}$, cf. \cite{ulbrich2002semismooth}. To be more precise, we have
 \be
 \operatorname{DG}(q_{\rg})\delta q = \rg\delta q + \delta p(\delta y(\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q)),\quad \delta q\in L^2(I\times \Omega_c),
 \ee
-where $\delta p$ solves the equation \eqref{adjointKdV1}-\eqref{adjointKdV3} for $\phi=\delta y(1+\partial_x p_\rg)$, $y=y_\rg$ and $p_T=\delta y(T)$ and $\delta y$ solves \eqref{linearizedkdv1}-\eqref{linearizedkdv3} 
+where $\delta p$ solves the equation \eqref{adjointKdV1}-\eqref{adjointKdV3} for $\phi=\delta y(1+\partial_x p_\rg)$, $y=y_\rg$ and $p_T=\delta y(T)$ and $\delta y$ solves \eqref{linearizedkdv1}-\eqref{linearizedkdv3}
 for $\delta u=\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q$ and $y=y_\rg$. The generalized derivative of the proximal map is given by
 \begin{numcases}{\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\delta q = }
 \left(1-\frac{\alpha}{\rg\norm{q_{\rg}}_{L^{2}(I)}}\right)\delta q + \frac\alpha\rg \frac{\left( q_{\rg}, \delta q\right)_{L^2(I)}}{\norm{q_{\rg}}_{L^{2}(I)}^3}q_{\rg} & \nonumber \\
  & \hspace{-1.5cm} \mbox{if   $\norm{q_{\rg}}_{L^{2}(I)} > \frac{\alpha}{\rg} $}\nonumber\\
 0 & \mbox{otherwise.}
-\end{numcases}}
-The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$, cf. \cite{PieperRund2015,pieperthesis}. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation numerical experiments show that the continuation strategy in $\rg$ is sufficient to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not the case for our problem due to the nonlinearity of the state equation. Additional to the continuation strategy in $\rg$ a globalization strategy based on the decrease of the regularized objective functional is required. We implement a trust region semi-smooth Newton based on the truncated conjugate gradient algorithm by Steihaug \cite{pieperthesis,steihaug1983}. {\color{red}A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}}.
+\end{numcases}
+The great advantage of the normal map approach is that the Newton operator $DG(q_{\rg})$ is symmetric with respect to the scalar product $(\cdot,\operatorname{DProx}_{\psi/ \rg}(q_{\rg})\cdot)_{L^2(I\times\Omega_c)}$, cf. \cite{PieperRund2015,pieperthesis}. Therefore the conjugate gradient method can be used to solve the Newton system. The operator $DF(u_\rg)$ is in general not symmetric. In the case of a linear state equation numerical experiments show that the continuation strategy in $\rg$ is sufficient to achieve global convergence, e.g. \cite{ClasonKunisch:2011b}. This is not the case for our problem due to the nonlinearity of the state equation. Additional to the continuation strategy in $\rg$ a globalization strategy based on the decrease of the regularized objective functional is required. We implement a trust region semi-smooth Newton based on the truncated conjugate gradient algorithm by Steihaug \cite{pieperthesis,steihaug1983}. A concise explanation is also available in \cite[Section 6.2 and A.3]{PieperRund2015}}.
 
 \subsubsection{Discretization of the control and mass lumping}
 In the unregularized problem, the controls are discretized as nodal Dirac measures. In the regularized case, this is not possible due to $L^2(I\times\Omega_c)$ regularization term. Thus we introduce a discretization of the control which is compatible to the Dirac discretization in the limiting case $\rg \to 0$, i.e. we follow the strategy in \cite{pieper2014}. The control is discretized in space with piecewise linear and continuous finite elements on a grid whose nodes are given by the CGL-points $(x_n)$, $n=0 \ldots N$ previously mentioned.
@@ -367,7 +367,7 @@ In the first example, we reconstruct the time-varying bottom topography which cr
  0, \mbox{ when } 2.5 \leq t\leq 5
  \label{forcingq}
 \end{numcases}
-in a subcritical configuration ($f = -0.5$). The time horizon is $T = 5$. The space-time grid is parametrized with $N = 256$ spatial grid points and a time-step size of $\Delta t = 0.01$. The generated wave is displayed in \cref{waveobservation}.
+in a subcritical configuration ($f = -0.5$). The spatial domain is $\Omega=(-30,30)$ and the time horizon is $T = 5$. The space-time grid is parametrized with $N = 256$ spatial grid points and a time-step size of $\Delta t = 0.01$. The generated wave is displayed in \cref{waveobservation}.
 \begin{figure}[htb]
 \subfloat{\includegraphics[width=0.48\textwidth]{images/ex1yd3D.pdf}}\quad
 \subfloat{\input{images/desired_state_inverse.tex}}
@@ -399,7 +399,7 @@ In \cref{recoveredstate}, the recovered state on $I\times \Omega$ and on $\{T\}\
 \end{figure}
 
 \paragraph{\underline{Control example}}
- The second example is a control example which is concerned with the optimal placement of bumps on the bottom of a narrow channel for the generation of a desired flow. We divide the domain $\Omega = [-L,L]$, $L=30$ into two subdomains. The domain $\Omega_c = [-L,0]$ is the control domain, while $\Omega_{o} = [0,L]$ is the observation domain, see \cref{controlsetup} for the description of the setup. The flow enters the domain from the right and we want to create the flow profile $z$ shown in \cref{controlsetup} on $\Omega_{o}$ at final time $T$, acting only on $\Omega_c$. Here the space-time grid is parametrized with $N = 512$ spatial grid points and a time-step size of $\Delta t = 0.01$.
+ The second example is a control example which is concerned with the optimal placement of bumps on the bottom of a narrow channel for the generation of a desired flow. We divide the domain $\Omega = (-L,L)$, $L=30$ into two subdomains. The domain $\Omega_c = (-L,0)$ is the control domain, while $\Omega_{o} = (0,L)$ is the observation domain, see \cref{controlsetup} for the description of the setup. The flow enters the domain from the right and we want to create the flow profile $z$ shown in \cref{controlsetup} on $\Omega_{o}$ at final time $T$, acting only on $\Omega_c$. Here the space-time grid is parametrized with $N = 512$ spatial grid points and a time-step size of $\Delta t = 0.01$.
 \begin{figure}[htb]
 \centering
 \subfloat{\includegraphics[width=0.48\textwidth, height=3cm]{images/control_setup.png}}\quad

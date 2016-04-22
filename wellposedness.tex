@@ -182,21 +182,26 @@ and
 \norm{\Psi_{f,y_0}(y) - \Psi_{f,y_0}(z)}_{\mathcal{B}_{\theta}} \leq C_2 \theta^{1/4} \norm{y+z}_{\mathcal{B}_{\theta}}\norm{y - z}_{\mathcal{B}_{\theta}}.
 \label{diffpsi2}
 \]
-We choose a $\theta^\ast > 0$ such that
+{\color{red} We choose a $\theta^\ast > 0$ such that
 \begin{subequations}
  \begin{numcases}{}
   r = 3 C_1 \left(\norm{y_0}_{L^2(\Omega)} + \norm{f}_{L^{2}(0,T, H^{-1}(\Omega))}\right)\label{constraintstheta1}\\
   C_2 \theta^{\ast 1/4} r \leq \frac{1}{3} \label{constraintstheta2}
  \end{numcases}
 \end{subequations}
-holds. Therefore, by considering the ball $B = \{ y \in \mathcal{B}_{\theta^\ast}; \norm{y}_{\mathcal{B}_{\theta^\ast}} \leq r\}$ we have
+holds and consider $B = \{ y \in \mathcal{B}_{\theta^\ast}\colon\norm{y}_{\mathcal{B}_{\theta^\ast}} \leq r\}$. Therefore, we have 
 \[
-\Psi_{f,y_0}(B) \subset B
+\norm{\Psi_{f,y_0}(y)}_{\mathcal{B}_{\theta^\ast}}\leq \frac 1 3 r+\frac 1{3r}r^2=\frac 2 3 r.
 \]
-and for all $(y,z) \in B$
+and get
 \[
-\|\Psi_{f,y_0}(y) - \Psi_{f,y_0}(z)\|_{\mathcal{B}_{\theta^\ast}}\leq \frac{2}{3}\norm{y - z}_{\mathcal{B}_{\theta^\ast}}.
+\Psi_{f,y_0}(B) \subset B.
 \]
+Moreover, we have 
+\[
+\|\Psi_{f,y_0}(y) - \Psi_{f,y_0}(z)\|_{\mathcal{B}_{\theta^\ast}}\leq \frac 1{3r}2r\norm{y - z}_{\mathcal{B}_{\theta^\ast}}\leq \frac{2}{3}\norm{y - z}_{\mathcal{B}_{\theta^\ast}}.
+\]
+for all $(y,z) \in B$.}
 As a consequence, we can apply the Banach fixed point theorem which implies the existence of a unique fix point $y$ of $\Psi_{f,y_0}(\cdot)$.
 \qquad\end{proof}
 According to the proof of \cref{localposedness}, an upper bound for $\theta^{\ast}$ is given by
@@ -253,7 +258,7 @@ We consider first that $y$ is a classical solution $y\in \mathcal C([0,\theta],\
 \]
 since
 \[
-\int_\Omega y\partial_x y~\mathrm dx=\int_\Omega y^2\partial_x y~\mathrm dx=0.
+\int_\Omega y\partial_x y~\mathrm dx=0,\quad\int_\Omega y^2\partial_x y~\mathrm dx=0.
 \]
 Using the continuity of the duality pairing on the righthand side and Young's inequality, we get
 \[
@@ -270,7 +275,7 @@ Omitting the term $\frac{\gamma}{2} \|y\|_{H^1_0(\Omega)}^2$ and integration bet
 \norm{y(t,\cdot)}_{L^2(\Omega)}^2 \leq \norm{y_0}_{L^2(\Omega)}^2+\frac 1\gamma \int_0^t\norm{f(s)}_{H^{-1}(\Omega)}^{2}~\mathrm ds\leq \norm{y_0}_{L^2(\Omega)}^2 + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^2.
 \label{C0nonlin}
 \ee
-Similarity integration between $0$ and $\theta$ gives
+Similarily integration between $0$ and $\theta$ gives
 \[
 \norm{y(\theta,.)}_{L^2(\Omega)}^2 +  \gamma \norm{y}_{L^2((0,\theta),H^1_0(\Omega))}^{2} \leq \norm{y_0}_{L^2(\Omega)}^{2} + \frac{1}{\gamma}\norm{f}_{L^2(I,H^{-1}(\Omega))}^{2},
 \label{H10nonlin}
@@ -299,7 +304,7 @@ for some $c>0$ independent of $y$ and the data. Moreover there holds
 for some $C>0$ only depending on $L,T,y_0,f$ and $\gamma$.
 \end{corollary}
 \begin{proof}
-First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1+y_2$. Then \cref{prop:tangent} implies $y_1=y_2$. According to \cref{localposedness} equation \eqref{linkdv1}--\eqref{linkdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of \cref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}. The estimate \eqref{estytglobal} is proven using \eqref{globalestimate} and similar arguments as in the proof of \cref{existlocal}.
+First, we discuss uniqueness. Let $y_1$ and $y_2$ two solutions of \eqref{kdv1}-\eqref{kdv3}. We define $\delta y=y_1-y_2$. Then $\delta y$ solves equation \eqref{linkdv1}--\eqref{linkdv3} with $y=y_1+y_2$. Then \cref{prop:tangent} implies $y_1=y_2$. According to \cref{localposedness} equation \eqref{kdv1}--\eqref{kdv3} has a unique time-local solution $y\in \mathcal B_{T^\ast}$. Thus we can repeat the procedure of \cref{localposedness} starting from $y(T^\ast)$ until a maximal time of existence $0<t_{\max}\leq T$ is reached. If $t_{\max}<T$ it follows from \cite[Chapter 6, Theorem 2.2]{pazy1983semigroups} that $\lim_{t\uparrow t_{\max}}\|y(t)\|_{L^2(\Omega)}=\infty$ which contradicts \eqref{globalestimate}. The estimate \eqref{estytglobal} is proven using \eqref{globalestimate} and similar arguments as in the proof of \cref{existlocal}.
 \qquad\end{proof}}
 
 \section{Well-posedness of the optimization problem. Existence of an optimum}\label{sec:ex opt}
@@ -334,7 +339,7 @@ There exists a global solution $(\bar y,\bar u) \in \mathcal B\times U_{ad}$ to 
 \begin{proof}
 \underline{Case $\gamma > 0$}. The cost function $J$ is a positive function. Thus its infimum $\bar J$ exists and there exists a minimizing sequence $(u_n,y_n) \in U_{ad} \times \mathcal B$ such that $J(u_n, y_n) \rightarrow \bar J$ as $n \rightarrow \infty$. Furthermore there exists an $\varepsilon>0$ such that
 \be
-\varepsilon+J(0,0)\geq \alpha \norm{u_n}_{\M}
+\varepsilon+J(S(0),0)\geq \alpha \norm{u_n}_{\M}
 \ee
 for $n$ large enough. Therefore $u_n$ is bounded, which implies the existence of an element $\bar u\in\M$ and a subsequence $u_{n_k}$ converging in the weak-$*$ topology of $\M$ towards $\bar u$, cf., \cite[Corollary 3.30]{Brezis11}. For each $u_{n_k}$, we define $y_{n_k}=Su_{n_k}\in \mathcal B\cap H^1(I,\mathcal V^*)$. Thanks to the global estimate \eqref{globalestimate}, there exists a exists a $\bar y\in L^2(I,H^1_0(\Omega))\cap\,L^\infty(I,L^2(\Omega))\cap\,H^1(I,\mathcal V^\ast)$ such that
 \[y_{n_k}\rightharpoonup^\ast\bar y\quad\text{in}\quad L^2(I,H^1_0(\Omega))\cap L^{\infty}(I,L^2(\Omega))\cap H^1(I,\mathcal V^\ast)\]
@@ -347,7 +352,7 @@ It remains to show that the limit $\bar y$ is indeed a weak solution of \eqref{k
 \end{multline*}
 Therefore $\bar y$ is a weak solution of \eqref{kdvcontrol1}-\eqref{kdvcontrol3} for the control $\bar u$ and it holds $\bar y\in \mathcal B\cap H^1(I,\mathcal V^*)$. Moreover there holds
 \[S_{obs}(u_{n_k})\rightharpoonup S_{obs}(\bar u)\quad\text{in}~ L^2(I\times \Omega_{o})\times L^2(\Omega_{o}).\] The tracking functional is weak lower semi-continuous in $ L^2(I\times \Omega_{o})\times L^2(\Omega_{o})$ and the control cost term is weak-$*$ lower semi continuous in $\M$ therefore $(\bar y,\bar u)$ is a solution of \eqref{cost}.\\
-\underline{Case $\gamma = 0$}. In this case we rely on the estimate \eqref{localestimate} and use that the set $U_{ad}$ is weak-$*$ closed.
+\underline{Case $\gamma = 0$}. In this case we rely on the estimate \eqref{localestimate} and use that the set $U_{ad}$ is weak-$*$ closed in $\M$.
 \qquad\end{proof}
 
 \begin{remark}\label{alphaconstraint}
